@@ -70,10 +70,6 @@ foreach ($sites->site as $site)
 	$node->setAttribute('site_url',       $site->homepage);
 	$node->setAttribute('match_is_regex', '1');
 
-	if (isset($site->scrape))
-	{
-	}
-
 	$regexps = [];
 	foreach ($site->extract as $regexp)
 	{
