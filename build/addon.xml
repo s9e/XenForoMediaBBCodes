@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="1" version_string="0.1">
+  <bb_code_media_sites>
+    <site media_site_id="break" site_title="Break" site_url="http://www.break.com/" match_is_regex="1">
+      <match_urls>!break\.com/video/.*-(?'id'[0-9]+)$!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.break.com/embed/{$id}" width="464" height="290" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="collegehumor" site_title="CollegeHumor" site_url="http://www.collegehumor.com/" match_is_regex="1">
+      <match_urls>!collegehumor\.com/(?:video|embed)/(?'id'[0-9]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.collegehumor.com/e/{$id}" width="600" height="369" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="dailymotion" site_title="Dailymotion" site_url="http://www.dailymotion.com/" match_is_regex="1">
+      <match_urls>!dailymotion\.com/(?:video/|user/[^#]+#video=)(?'id'[A-Za-z0-9]+)!</match_urls>
+      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="560" height="315" data="http://www.dailymotion.com/swf/{$id}"><param name="allowFullScreen" value="true"/><embed type="application/x-shockwave-flash" src="http://www.dailymotion.com/swf/{$id}" width="560" height="315" allowfullscreen=""></embed></object>]]></embed_html>
+    </site>
+    <site media_site_id="facebook" site_title="Facebook" site_url="http://www.facebook.com/" match_is_regex="1">
+      <match_urls>!facebook\.com/photo\.php\?v=(?'id'[0-9]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="https://www.facebook.com/video/embed?video_id={$id}" width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="funnyordie" site_title="Funny or Die" site_url="http://www.funnyordie.com/" match_is_regex="1">
+      <match_urls>!funnyordie.com/videos/(?'id'[0-9a-f]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.funnyordie.com/embed/{$id}" width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="indiegogo" site_title="Indiegogo" site_url="http://www.indiegogo.com/" match_is_regex="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchIndiegogo">
+      <match_urls>!indiegogo\.com/projects/(?'id'[0-9]+)$!
+!(?'id')indiegogo\.com/projects/.!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.indiegogo.com/project/{$id}/widget" width="224" height="486" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="liveleak" site_title="LiveLeak" site_url="http://www.liveleak.com/" match_is_regex="1">
+      <match_urls>!liveleak\.com/view\?i=(?'id'[a-f_0-9]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.liveleak.com/e/{$id}" width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="metacafe" site_title="Metacafe" site_url="http://www.metacafe.com/" match_is_regex="1">
+      <match_urls>!metacafe\.com/watch/(?'id'[0-9]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.metacafe.com/embed/{$id}/" width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="slideshare" site_title="SlideShare" site_url="http://www.slideshare.net/" match_is_regex="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSlideshare">
+      <match_urls>!slideshare\.net/[^/]+/[-\w]+-(?'id'[0-9]{6,})$!
+!(?'id')slideshare\.net/[^/]+/\w!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.slideshare.net/slideshow/embed_code/{$id}" width="427" height="356" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="soundcloud" site_title="SoundCloud" site_url="https://soundcloud.com/" match_is_regex="1">
+      <match_urls>!soundcloud\.com(?:%2F|/)tracks(?:%2F|/)(?'id'[0-9]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{$id}" width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="ted" site_title="TED Talks" site_url="http://www.ted.com/" match_is_regex="1">
+      <match_urls>!ted\.com/(?'id'(?:talk|playlist)s/[^\s"]+)!i</match_urls>
+      <embed_html><![CDATA[<iframe src="http://embed.ted.com/{$id}" width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="vimeo" site_title="Vimeo" site_url="http://vimeo.com/" match_is_regex="1">
+      <match_urls>!vimeo\.com/(?:channels/[^/]+/)?(?'id'[0-9]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://player.vimeo.com/video/{$id}" width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="wshh" site_title="WorldStarHipHop" site_url="http://www.worldstarhiphop.com/" match_is_regex="1">
+      <match_urls>!worldstarhiphop\.com/video(?:s/video)?\.php\?v=(?'id'[A-Za-z0-9]+)!</match_urls>
+      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="448" height="374" data="http://www.worldstarhiphop.com/videos/e/16711680/{$id}"><param name="allowFullScreen" value="true"/><embed type="application/x-shockwave-flash" src="http://www.worldstarhiphop.com/videos/e/16711680/{$id}" width="448" height="374" allowfullscreen=""></embed></object>]]></embed_html>
+    </site>
+    <site media_site_id="youtube" site_title="YouTube" site_url="http://www.youtube.com/" match_is_regex="1">
+      <match_urls>!youtube\.com/(?:watch\?.*?v=|v/)(?'id'[-0-9A-Z_a-z]+)!
+!youtu\.be/(?'id'[-0-9A-Z_a-z]+)!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://www.youtube.com/embed/{$id}" width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+  </bb_code_media_sites>
+</addon>
