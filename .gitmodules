@@ -1,0 +1,3 @@
+[submodule "vendor/s9e/TextFormatter"]
+	path = vendor/s9e/TextFormatter
+	url = git@github.com:s9e/TextFormatter.git
