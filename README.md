@@ -1,3 +1,5 @@
+Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com/s9e/TextFormatter)'s [MediaEmbed](https://github.com/s9e/TextFormatter/tree/master/src/s9e/TextFormatter/Plugins/MediaEmbed) plugin's definition.
+
 ## Supported sites
 
 <table>
