@@ -6,7 +6,11 @@
 * @license   http://www.opensource.org/licenses/mit-license.php The MIT License
 */
 
+include __DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/autoloader.php';
+
 $sites = simplexml_load_file(__DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/Plugins/MediaEmbed/Configurator/sites.xml');
+
+$rendererGenerator = new s9e\TextFormatter\Configurator\RendererGenerators\PHP;
 
 $php = '<?php
 
@@ -39,12 +43,18 @@ $addon = $dom->appendChild($dom->createElement('addon'));
 $addon->setAttribute('addon_id',       's9e');
 $addon->setAttribute('title',          's9e Media Pack');
 $addon->setAttribute('url',            'https://github.com/s9e/XenForoMediaBBCodes');
-$addon->setAttribute('version_id',     '1');
-$addon->setAttribute('version_string', '0.1');
+$addon->setAttribute('version_id',     gmdate('Ymd'));
+$addon->setAttribute('version_string', gmdate('Ymd'));
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
 {
+	$node = $parentNode->appendChild($dom->createElement('site'));
+	$node->setAttribute('media_site_id',  $site['id']);
+	$node->setAttribute('site_title',     $site->name);
+	$node->setAttribute('site_url',       $site->homepage);
+	$node->setAttribute('match_is_regex', '1');
+
 	if (isset($site->iframe))
 	{
 		$html = '<iframe'
@@ -59,16 +69,64 @@ foreach ($sites->site as $site)
 	}
 	else
 	{
-		echo 'Skipping ', $site->name, "\n";
+		$xsl = '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="X">' . $site->template . '</xsl:template></xsl:stylesheet>';
 
-		continue;
+		// Normalize whitespace
+		$tmp = new DOMDocument;
+		$tmp->preserveWhiteSpace = false;
+		$tmp->loadXML($xsl);
+		$xsl = $tmp->saveXML();
+
+		// Capture the PHP source for this template
+		$regexp = '(' . preg_quote("if(\$nodeName==='X'){") . '(.*)' . preg_quote('}else $this->at($node);') . ')s';
+		if (!preg_match($regexp, $rendererGenerator->generate($xsl), $m))
+		{
+			echo 'Skipping ', $site->name, "\n";
+			$node->parentNode->removeChild($node);
+
+			continue;
+		}
+
+		$src = "\$html='';" . $m[1];
+		$src = str_replace("\$html='';\$this->out.=", '$html=', $src);
+		$src = preg_replace("#\\\$node->hasAttribute\\(('[^']+')\\)#", '!empty($m[$1])', $src);
+		$src = preg_replace("#\\\$node->getAttribute\\(('[^']+')\\)#", '$m[$1]', $src);
+		$src = str_replace('$this->out', '$html', $src);
+
+		if (strpos($src, '->'))
+		{
+			echo 'Skipping ', $site->name, " (->)\n";
+			$node->parentNode->removeChild($node);
+
+			continue;
+		}
+
+		$methodName = 'embed' . ucfirst($site['id']);
+		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
+		$node->setAttribute('embed_html_callback_method', $methodName);
+
+		$extract = (string) $site->extract;
+
+		$php .= "\n\tpublic static function " . $methodName . '($url, $site)';
+		$php .= "\n\t{";
+		$php .= "\n\t\tif (!preg_match(" . var_export($extract, true) . ', $url, $m))';
+		$php .= "\n\t\t{";
+		$php .= "\n\t\t\treturn '<a href=\"' . htmlspecialchars(\$url) . '\">' . htmlspecialchars(\$url) . '</a>';";
+		$php .= "\n\t\t}";
+		$php .= "\n";
+		$php .= "\n\t\t" . $src;
+		$php .= "\n";
+		$php .= "\n\t\treturn \$html;";
+		$php .= "\n\t}";
+		$php .= "\n";
+
+		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
+
+		// Replace the original extract regexp
+		$extract = preg_replace("#\\(\\?'\\w+'#", '(?:', $extract);
+		$extract = "!(?'id'.*" . substr($extract, 1, -1) . '.*)!';
+		$site->extract = $extract;
 	}
-
-	$node = $parentNode->appendChild($dom->createElement('site'));
-	$node->setAttribute('media_site_id',  $site['id']);
-	$node->setAttribute('site_title',     $site->name);
-	$node->setAttribute('site_url',       $site->homepage);
-	$node->setAttribute('match_is_regex', '1');
 
 	$regexps = [];
 	foreach ($site->extract as $regexp)
