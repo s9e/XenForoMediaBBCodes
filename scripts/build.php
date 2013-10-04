@@ -165,3 +165,8 @@ $dom->save(__DIR__ . '/../build/addon.xml');
 $php .= '}';
 
 file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', $php);
+
+preg_match('#<table>.*</table>#s', file_get_contents(__DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/Plugins/MediaEmbed/README.md'), $m);
+
+$filepath = __DIR__ . '/../README.md';
+file_put_contents($filepath, preg_replace('#<table>.*</table>#s', $m[0], file_get_contents($filepath)));
