@@ -65,7 +65,17 @@ foreach ($sites->site as $site)
 	}
 	elseif (isset($site->flash))
 	{
-		$html = '<object type="application/x-shockwave-flash" typemustmatch="" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" data="' . $site->flash['src'] . '"><param name="allowFullScreen" value="true"/><embed type="application/x-shockwave-flash" src="' . $site->flash['src'] . '" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" allowfullscreen=""></embed></object>';
+		$html = '<object type="application/x-shockwave-flash" typemustmatch="" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" data="' . $site->flash['src'] . '"><param name="allowFullScreen" value="true"/>';
+		if (isset($site->flash['flashvars']))
+		{
+			$html .= '<param name="FlashVars" value="' . htmlspecialchars($site->flash['flashvars']) . '"/>';
+		}
+		$html .= '<embed type="application/x-shockwave-flash" src="' . $site->flash['src'] . '" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" allowfullscreen=""';
+		if (isset($site->flash['flashvars']))
+		{
+			$html .= ' flashvars="' . htmlspecialchars($site->flash['flashvars']) . '"/>';
+		}
+		$html .= '></embed></object>';
 	}
 	elseif (strpos($site->template, 'xsl') === false
 	     && !preg_match('#\\{@(?!id)#', $site->template))
