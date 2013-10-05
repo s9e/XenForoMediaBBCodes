@@ -68,7 +68,7 @@ class s9e_MediaBBCodes
 
 	public static function embedTwitch($url, $site)
 	{
-		if (!preg_match('!twitch\\.tv/(?\'channel\'[A-Za-z0-9]+)(?:/b/(?\'archive_id\'[0-9]+)|/c/(?\'chapter_id\'[0-9]+))?!', $url, $m))
+		if (!preg_match('#twitch\\.tv/(?\'channel\'(?!m/)[A-Za-z0-9]+)(?:/b/(?\'archive_id\'[0-9]+)|/c/(?\'chapter_id\'[0-9]+))?#', $url, $m))
 		{
 			return '<a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($url) . '</a>';
 		}
@@ -76,5 +76,10 @@ class s9e_MediaBBCodes
 		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars(((!empty($m['archive_id'])||!empty($m['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf"><param name="flashvars" value="channel='.htmlspecialchars($m['channel'],2);if(!empty($m['archive_id'])){$html.='&amp;archive_id='.htmlspecialchars($m['archive_id'],2);}if(!empty($m['chapter_id'])){$html.='&amp;chapter_id='.htmlspecialchars($m['chapter_id'],2);}$html.='"/></param><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars(((!empty($m['archive_id'])||!empty($m['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf"/></embed></object>';
 
 		return $html;
+	}
+
+	public static function matchTwitch($url, $id, $site)
+	{
+		return ($id) ? $id : self::scrape($url, '!channel=(?\'channel\'[^&]+)&amp;archive_id=(?\'archive_id\'[0-9]+)!');
 	}
 }

@@ -138,8 +138,9 @@ foreach ($sites->site as $site)
 		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
 
 		// Replace the original extract regexp
+		$delim   = $extract[0];
 		$extract = preg_replace("#\\(\\?'\\w+'#", '(?:', $extract);
-		$extract = "!(?'id'.*" . substr($extract, 1, -1) . '.*)!';
+		$extract = $delim . "(?'id'.*" . substr($extract, 1, -1) . '.*)' . $delim;
 		$site->extract = $extract;
 	}
 
