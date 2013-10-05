@@ -58,14 +58,19 @@ foreach ($sites->site as $site)
 	if (isset($site->iframe))
 	{
 		$html = '<iframe'
-		      . ' src="' . str_replace('@', '$', $site->iframe['src']) . '"'
+		      . ' src="' . $site->iframe['src'] . '"'
 		      . ' width="' . $site->iframe['width'] . '"'
 		      . ' height="' . $site->iframe['height'] . '"'
 		      . ' allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 	}
 	elseif (isset($site->flash))
 	{
-		$html = '<object type="application/x-shockwave-flash" typemustmatch="" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" data="' . str_replace('@', '$', $site->flash['src']) . '"><param name="allowFullScreen" value="true"/><embed type="application/x-shockwave-flash" src="' . str_replace('@', '$', $site->flash['src']) . '" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" allowfullscreen=""></embed></object>';
+		$html = '<object type="application/x-shockwave-flash" typemustmatch="" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" data="' . $site->flash['src'] . '"><param name="allowFullScreen" value="true"/><embed type="application/x-shockwave-flash" src="' . $site->flash['src'] . '" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" allowfullscreen=""></embed></object>';
+	}
+	elseif (strpos($site->template, 'xsl') === false
+	     && !preg_match('#\\{@(?!id)#', $site->template))
+	{
+		$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $site->template);
 	}
 	else
 	{
@@ -156,7 +161,7 @@ foreach ($sites->site as $site)
 	$node->appendChild($dom->createElement('match_urls', implode("\n", $regexps)));
 
 	$node->appendChild($dom->createElement('embed_html'))
-	     ->appendChild($dom->createCDATASection($html));
+	     ->appendChild($dom->createCDATASection(str_replace('{@id}', '{$id}', $html)));
 }
 
 $dom->formatOutput = true;
