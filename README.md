@@ -19,6 +19,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>http://www.collegehumor.com/video/1181601/more-than-friends</td>
 	</tr>
 	<tr>
+		<td><code>comedycentral</code></td>
+		<td>Comedy Central</td>
+		<td>http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats</td>
+	</tr>
+	<tr>
 		<td><code>dailymotion</code></td>
 		<td>Dailymotion</td>
 		<td>http://www.dailymotion.com/video/x222z1<br/>http://www.dailymotion.com/user/Dailymotion/2#video=x222z1</td>

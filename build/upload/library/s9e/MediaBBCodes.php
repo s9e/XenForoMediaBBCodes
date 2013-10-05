@@ -22,6 +22,11 @@ class s9e_MediaBBCodes
 		return (preg_match($regexp, $page, $m)) ? $m["id"] : false;
 	}
 
+	public static function matchComedycentral($url, $id, $site)
+	{
+		return ($id) ? $id : self::scrape($url, '!mgid:arc:video:comedycentral.com:(?\'id\'[-\\w]+)!');
+	}
+
 	public static function matchGamespot($url, $id, $site)
 	{
 		return ($id) ? $id : self::scrape($url, '!og:video.*?id=(?\'id\'[0-9]+)!');

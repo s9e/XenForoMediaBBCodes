@@ -9,6 +9,10 @@
       <match_urls>!collegehumor\.com/(?:video|embed)/(?'id'[0-9]+)!</match_urls>
       <embed_html><![CDATA[<iframe src="http://www.collegehumor.com/e/{$id}" width="600" height="369" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
+    <site media_site_id="comedycentral" site_title="Comedy Central" site_url="http://www.comedycentral.com/funny-videos" match_is_regex="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchComedycentral">
+      <match_urls>!(?'id')comedycentral\.com/video-clips/!</match_urls>
+      <embed_html><![CDATA[<iframe src="http://media.mtvnservices.com/mgid:arc:video:comedycentral.com:{$id}" width="512" height="288" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
     <site media_site_id="dailymotion" site_title="Dailymotion" site_url="http://www.dailymotion.com/" match_is_regex="1">
       <match_urls>!dailymotion\.com/(?:video/|user/[^#]+#video=)(?'id'[A-Za-z0-9]+)!</match_urls>
       <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="560" height="315" data="http://www.dailymotion.com/swf/{$id}"><param name="allowFullScreen" value="true"/><embed type="application/x-shockwave-flash" src="http://www.dailymotion.com/swf/{$id}" width="560" height="315" allowfullscreen=""></embed></object>]]></embed_html>
