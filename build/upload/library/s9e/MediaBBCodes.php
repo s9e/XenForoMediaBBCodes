@@ -22,6 +22,11 @@ class s9e_MediaBBCodes
 		return (preg_match($regexp, $page, $m)) ? $m["id"] : false;
 	}
 
+	public static function matchGamespot($url, $id, $site)
+	{
+		return ($id) ? $id : self::scrape($url, '!og:video.*?id=(?\'id\'[0-9]+)!');
+	}
+
 	public static function embedGist($url, $site)
 	{
 		if (!preg_match('!gist\\.github\\.com/(?\'user\'[^/]+)/(?\'id\'[0-9]+)!', $url, $m))
@@ -46,7 +51,7 @@ class s9e_MediaBBCodes
 			return '<a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($url) . '</a>';
 		}
 
-		$html='';if(!empty($m['video'])){$html.='<iframe width="480" height="360" allowfullscreen="" src="http://www.kickstarter.com/projects/'.htmlspecialchars($m['id'],2).'/widget/video.html"/></iframe>';}else{$html.='<iframe width="220" height="380" src="http://www.kickstarter.com/projects/'.htmlspecialchars($m['id'],2).'/widget/card.html"/></iframe>';}
+		$html='';if(!empty($m['video'])){$html.='<iframe width="480" height="360" src="http://www.kickstarter.com/projects/'.htmlspecialchars($m['id'],2).'/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>';}else{$html.='<iframe width="220" height="380" src="http://www.kickstarter.com/projects/'.htmlspecialchars($m['id'],2).'/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>';}
 
 		return $html;
 	}
