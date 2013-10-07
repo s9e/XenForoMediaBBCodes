@@ -73,7 +73,7 @@ class s9e_MediaBBCodes
 			return '<a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($url) . '</a>';
 		}
 
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars(((!empty($m['archive_id'])||!empty($m['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf"><param name="flashvars" value="channel='.htmlspecialchars($m['channel'],2);if(!empty($m['archive_id'])){$html.='&amp;archive_id='.htmlspecialchars($m['archive_id'],2);}if(!empty($m['chapter_id'])){$html.='&amp;chapter_id='.htmlspecialchars($m['chapter_id'],2);}$html.='"/></param><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars(((!empty($m['archive_id'])||!empty($m['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf"/></embed></object>';
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars(((!empty($m['archive_id'])||!empty($m['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="channel='.htmlspecialchars($m['channel'],2);if(!empty($m['archive_id'])){$html.='&amp;archive_id='.htmlspecialchars($m['archive_id'],2);}if(!empty($m['chapter_id'])){$html.='&amp;chapter_id='.htmlspecialchars($m['chapter_id'],2);}$html.='"/></param><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars(((!empty($m['archive_id'])||!empty($m['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf" allowfullscreen=""/></embed></object>';
 
 		return $html;
 	}

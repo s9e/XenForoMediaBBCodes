@@ -10,7 +10,8 @@ include __DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/autoloader
 
 $sites = simplexml_load_file(__DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/Plugins/MediaEmbed/Configurator/sites.xml');
 
-$rendererGenerator = new s9e\TextFormatter\Configurator\RendererGenerators\PHP;
+$configurator = new s9e\TextFormatter\Configurator;
+$rendererGenerator = $configurator->setRendererGenerator('PHP');
 
 $php = '<?php
 
@@ -49,42 +50,21 @@ $addon->setAttribute('version_string', gmdate('Ymd'));
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
 {
+	$template = (string) $configurator->MediaEmbed->add($site['id'])->defaultTemplate;
+
 	$node = $parentNode->appendChild($dom->createElement('site'));
 	$node->setAttribute('media_site_id',  $site['id']);
 	$node->setAttribute('site_title',     $site->name);
 	$node->setAttribute('site_url',       $site->homepage);
 	$node->setAttribute('match_is_regex', '1');
 
-	if (isset($site->iframe))
+	if (strpos($template, 'xsl') === false && !preg_match('#\\{@(?!id)#', $template))
 	{
-		$html = '<iframe'
-		      . ' src="' . $site->iframe['src'] . '"'
-		      . ' width="' . $site->iframe['width'] . '"'
-		      . ' height="' . $site->iframe['height'] . '"'
-		      . ' allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
-	}
-	elseif (isset($site->flash))
-	{
-		$html = '<object type="application/x-shockwave-flash" typemustmatch="" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" data="' . $site->flash['src'] . '"><param name="allowFullScreen" value="true"/>';
-		if (isset($site->flash['flashvars']))
-		{
-			$html .= '<param name="FlashVars" value="' . htmlspecialchars($site->flash['flashvars']) . '"/>';
-		}
-		$html .= '<embed type="application/x-shockwave-flash" src="' . $site->flash['src'] . '" width="' . $site->flash['width'] . '" height="' . $site->flash['height'] . '" allowfullscreen=""';
-		if (isset($site->flash['flashvars']))
-		{
-			$html .= ' flashvars="' . htmlspecialchars($site->flash['flashvars']) . '"/>';
-		}
-		$html .= '></embed></object>';
-	}
-	elseif (strpos($site->template, 'xsl') === false
-	     && !preg_match('#\\{@(?!id)#', $site->template))
-	{
-		$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $site->template);
+		$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $template);
 	}
 	else
 	{
-		$xsl = '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="X">' . $site->template . '</xsl:template></xsl:stylesheet>';
+		$xsl = '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="X">' . $template . '</xsl:template></xsl:stylesheet>';
 
 		// Normalize whitespace
 		$tmp = new DOMDocument;
