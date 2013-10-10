@@ -68,7 +68,7 @@ class s9e_MediaBBCodes
 
 	public static function embedTwitch($url, $site)
 	{
-		if (!preg_match('#twitch\\.tv/(?\'channel\'(?!m/)[A-Za-z0-9]+)(?:/b/(?\'archive_id\'[0-9]+)|/c/(?\'chapter_id\'[0-9]+))?#', $url, $m))
+		if (!preg_match('#twitch\\.tv/(?\'channel\'(?!m/)\\w+)(?:/b/(?\'archive_id\'[0-9]+)|/c/(?\'chapter_id\'[0-9]+))?#', $url, $m))
 		{
 			return '<a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($url) . '</a>';
 		}
