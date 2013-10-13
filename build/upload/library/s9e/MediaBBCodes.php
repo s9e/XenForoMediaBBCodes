@@ -27,11 +27,6 @@ class s9e_MediaBBCodes
 		return ($id) ? $id : self::scrape($url, '!mgid:arc:video:comedycentral.com:(?\'id\'[-\\w]+)!');
 	}
 
-	public static function matchGamespot($url, $id, $site)
-	{
-		return ($id) ? $id : self::scrape($url, '!og:video.*?id=(?\'id\'[0-9]+)!');
-	}
-
 	public static function embedGist($url, $site)
 	{
 		if (!preg_match('!gist\\.github\\.com/(?\'user\'[^/]+)/(?\'id\'[0-9]+)!', $url, $m))

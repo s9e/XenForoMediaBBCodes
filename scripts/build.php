@@ -47,6 +47,15 @@ $addon->setAttribute('url',            'https://github.com/s9e/XenForoMediaBBCod
 $addon->setAttribute('version_id',     gmdate('Ymd'));
 $addon->setAttribute('version_string', gmdate('Ymd'));
 
+$table = [];
+$table[] = '<table>';
+$table[] = '	<tr>';
+$table[] = '		<th>Include?</th>';
+$table[] = '		<th>Id</th>';
+$table[] = '		<th>Site</th>';
+$table[] = '		<th>Example URLs</th>';
+$table[] = '	</tr>';
+
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
 {
@@ -153,7 +162,17 @@ foreach ($sites->site as $site)
 
 	$node->appendChild($dom->createElement('embed_html'))
 	     ->appendChild($dom->createCDATASection(str_replace('{@id}', '{$id}', $html)));
+
+	// Build the table of sites
+	$table[] = '	<tr>';
+	$table[] = '		<td><input type="checkbox" id="' . $site['id'] . '"></td>';
+	$table[] = '		<td><code>' . $site['id'] . '</code></td>';
+	$table[] = '		<td>' . $site->name . '</td>';
+	$table[] = '		<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
+	$table[] = '	</tr>';
 }
+$table[] = '</table>';
+$table   = implode("\n", $table);
 
 $dom->formatOutput = true;
 $dom->save(__DIR__ . '/../build/addon.xml');
@@ -162,7 +181,9 @@ $php .= '}';
 
 file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', $php);
 
-preg_match('#<table>.*</table>#s', file_get_contents(__DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/Plugins/MediaEmbed/README.md'), $m);
+// Remove the buttons from the table used in README
+$table = preg_replace('#\\s*<td><input.*</td>#', '', $table);
+$table = preg_replace('#\\s*<th>.*</th>#',       '', $table, 1);
 
 $filepath = __DIR__ . '/../README.md';
-file_put_contents($filepath, preg_replace('#<table>.*</table>#s', $m[0], file_get_contents($filepath)));
+file_put_contents($filepath, preg_replace('#<table>.*</table>#s', $table, file_get_contents($filepath)));
