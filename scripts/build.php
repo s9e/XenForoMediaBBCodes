@@ -47,14 +47,13 @@ $addon->setAttribute('url',            'https://github.com/s9e/XenForoMediaBBCod
 $addon->setAttribute('version_id',     gmdate('Ymd'));
 $addon->setAttribute('version_string', gmdate('Ymd'));
 
-$table = [];
-$table[] = '<table>';
-$table[] = '	<tr>';
-$table[] = '		<th>Include?</th>';
-$table[] = '		<th>Id</th>';
-$table[] = '		<th>Site</th>';
-$table[] = '		<th>Example URLs</th>';
-$table[] = '	</tr>';
+$rows = [];
+$rows[] = '<tr>';
+$rows[] = '	<th>Include?</th>';
+$rows[] = '	<th>Id</th>';
+$rows[] = '	<th>Site</th>';
+$rows[] = '	<th>Example URLs</th>';
+$rows[] = '</tr>';
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
@@ -164,26 +163,47 @@ foreach ($sites->site as $site)
 	     ->appendChild($dom->createCDATASection(str_replace('{@id}', '{$id}', $html)));
 
 	// Build the table of sites
-	$table[] = '	<tr>';
-	$table[] = '		<td><input type="checkbox" id="' . $site['id'] . '"></td>';
-	$table[] = '		<td><code>' . $site['id'] . '</code></td>';
-	$table[] = '		<td>' . $site->name . '</td>';
-	$table[] = '		<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
-	$table[] = '	</tr>';
+	$rows[] = '<tr>';
+	$rows[] = '	<td><input type="checkbox" id="' . $site['id'] . '"></td>';
+	$rows[] = '	<td><code>' . $site['id'] . '</code></td>';
+	$rows[] = '	<td>' . $site->name . '</td>';
+	$rows[] = '	<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
+	$rows[] = '</tr>';
 }
-$table[] = '</table>';
-$table   = implode("\n", $table);
 
 $dom->formatOutput = true;
 $dom->save(__DIR__ . '/../build/addon.xml');
 
 $php .= '}';
 
+// Save the pack
 file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', $php);
 
-// Remove the buttons from the table used in README
-$table = preg_replace('#\\s*<td><input.*</td>#', '', $table);
-$table = preg_replace('#\\s*<th>.*</th>#',       '', $table, 1);
+// Coalesce the table's content
+$rows = implode("\n", $rows);
 
+// Update the table used in the configurator
+$filepath = __DIR__ . '/../www/configure.html';
+file_put_contents(
+	$filepath,
+	preg_replace(
+		'#(<table[^>]*>).*</table>#s',
+		"\$1\n\t" . str_replace("\n", "\n\t\t\t", $rows) . "\n</table>",
+		file_get_contents($filepath)
+	)
+);
+
+// Remove the buttons from the table used in README
+$rows = preg_replace('#\\s*<td><input.*</td>#', '', $rows);
+$rows = preg_replace('#\\s*<th>.*</th>#',       '', $rows, 1);
+
+// Update the README
 $filepath = __DIR__ . '/../README.md';
-file_put_contents($filepath, preg_replace('#<table>.*</table>#s', $table, file_get_contents($filepath)));
+file_put_contents(
+	$filepath,
+	preg_replace(
+		'#(<table[^>]*>).*</table>#s',
+		"\$1\n\t" . str_replace("\n", "\n\t", $rows) . "\n</table>",
+		file_get_contents($filepath)
+	)
+);
