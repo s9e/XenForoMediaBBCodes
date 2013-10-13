@@ -188,7 +188,7 @@ file_put_contents(
 	$filepath,
 	preg_replace(
 		'#(<table[^>]*>).*</table>#s',
-		"\$1\n\t" . str_replace("\n", "\n\t\t\t", $rows) . "\n</table>",
+		"\$1\n\t\t\t" . str_replace("\n", "\n\t\t\t", $rows) . "\n\t\t</table>",
 		file_get_contents($filepath)
 	)
 );
@@ -203,7 +203,7 @@ file_put_contents(
 	$filepath,
 	preg_replace(
 		'#(<table[^>]*>).*</table>#s',
-		"\$1\n\t\t\t" . str_replace("\n", "\n\t", $rows) . "\n\t\t</table>",
+		"\$1\n\t" . str_replace("\n", "\n\t", $rows) . "\n</table>",
 		file_get_contents($filepath)
 	)
 );

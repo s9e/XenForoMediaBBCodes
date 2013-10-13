@@ -3,7 +3,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 ## Supported sites
 
 <table>
-			<tr>
+	<tr>
 		<th>Id</th>
 		<th>Site</th>
 		<th>Example URLs</th>
@@ -118,4 +118,4 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>YouTube</td>
 		<td>http://www.youtube.com/watch?v=-cEzsCAzTak<br/>http://youtu.be/-cEzsCAzTak</td>
 	</tr>
-		</table>
+</table>
