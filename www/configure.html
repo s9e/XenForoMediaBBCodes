@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Configure XenForo Media BBCodes pack</title>
+	<style>
+		tr
+		{
+			background-color: #f8f8f8;
+			cursor: pointer;
+		}
+		tr:hover
+		{
+			background-color: #eeeeee;
+		}
+	</style>
+</head>
+<body>
+	<div><a download="addon.xml">Download addon.xml</a>
+	<table>
+		<tr>
+			<th><input type="checkbox" onchange="toggleAll(this)"></th>
+			<th>Id</th>
+			<th>Site</th>
+			<th>Example URLs</th>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="break"></td>
+			<td><code>break</code></td>
+			<td>Break</td>
+			<td>http://www.break.com/video/video-game-playing-frog-wants-more-2278131</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="cbsnews"></td>
+			<td><code>cbsnews</code></td>
+			<td>CBS News Video</td>
+			<td>http://www.cbsnews.com/video/watch/?id=50156501n</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="collegehumor"></td>
+			<td><code>collegehumor</code></td>
+			<td>CollegeHumor</td>
+			<td>http://www.collegehumor.com/video/1181601/more-than-friends</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="comedycentral"></td>
+			<td><code>comedycentral</code></td>
+			<td>Comedy Central</td>
+			<td>http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="dailymotion"></td>
+			<td><code>dailymotion</code></td>
+			<td>Dailymotion</td>
+			<td>http://www.dailymotion.com/video/x222z1<br/>http://www.dailymotion.com/user/Dailymotion/2#video=x222z1</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="facebook"></td>
+			<td><code>facebook</code></td>
+			<td>Facebook</td>
+			<td>https://www.facebook.com/photo.php?v=10100658170103643&amp;set=vb.20531316728&amp;type=3&amp;theater</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="funnyordie"></td>
+			<td><code>funnyordie</code></td>
+			<td>Funny or Die</td>
+			<td>http://www.funnyordie.com/videos/bf313bd8b4/murdock-with-keith-david</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="gamespot"></td>
+			<td><code>gamespot</code></td>
+			<td>Gamespot</td>
+			<td>http://www.gamespot.com/destiny/videos/destiny-the-moon-trailer-6415176/<br/>http://www.gamespot.com/events/game-crib-tsm-snapdragon/gamecrib-extras-cooking-with-dan-dinh-6412922/</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="gist"></td>
+			<td><code>gist</code></td>
+			<td>GitHub Gist</td>
+			<td>https://gist.github.com/s9e/6806305</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="ign"></td>
+			<td><code>ign</code></td>
+			<td>IGN</td>
+			<td>http://www.ign.com/videos/2013/07/12/pokemon-x-version-pokemon-y-version-battle-trailer</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="indiegogo"></td>
+			<td><code>indiegogo</code></td>
+			<td>Indiegogo</td>
+			<td>http://www.indiegogo.com/projects/gameheart-redesigned</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="kickstarter"></td>
+			<td><code>kickstarter</code></td>
+			<td>Kickstarter</td>
+			<td>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="liveleak"></td>
+			<td><code>liveleak</code></td>
+			<td>LiveLeak</td>
+			<td>http://www.liveleak.com/view?i=3dd_1366238099</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="metacafe"></td>
+			<td><code>metacafe</code></td>
+			<td>Metacafe</td>
+			<td>http://www.metacafe.com/watch/10785282/chocolate_treasure_chest_epic_meal_time/</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="slideshare"></td>
+			<td><code>slideshare</code></td>
+			<td>SlideShare</td>
+			<td>http://www.slideshare.net/Slideshare/how-23431564</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="soundcloud"></td>
+			<td><code>soundcloud</code></td>
+			<td>SoundCloud</td>
+			<td>http://api.soundcloud.com/tracks/98282116</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="ted"></td>
+			<td><code>ted</code></td>
+			<td>TED Talks</td>
+			<td>http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html<br/>http://embed.ted.com/playlists/26/our_digital_lives.html</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="twitch"></td>
+			<td><code>twitch</code></td>
+			<td>Twitch</td>
+			<td>http://www.twitch.tv/minigolf2000<br/>http://www.twitch.tv/minigolf2000/c/2475925<br/>http://www.twitch.tv/minigolf2000/b/361358487<br/>http://www.twitch.tv/m/57217</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="vimeo"></td>
+			<td><code>vimeo</code></td>
+			<td>Vimeo</td>
+			<td>http://vimeo.com/67207222<br/>http://vimeo.com/channels/staffpicks/67207222</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="vine"></td>
+			<td><code>vine</code></td>
+			<td>Vine</td>
+			<td>https://vine.co/v/bYwPIluIipH</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="wshh"></td>
+			<td><code>wshh</code></td>
+			<td>WorldStarHipHop</td>
+			<td>http://www.worldstarhiphop.com/videos/video.php?v=wshhZ8F22UtJ8sLHdja0<br/>http://m.worldstarhiphop.com/video.php?v=wshh2SXFFe7W14DqQx61</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" data-id="youtube"></td>
+			<td><code>youtube</code></td>
+			<td>YouTube</td>
+			<td>http://www.youtube.com/watch?v=-cEzsCAzTak<br/>http://youtu.be/-cEzsCAzTak</td>
+		</tr>
+	</table>
+	<textarea cols="80" rows="10"></textarea>
+	<script>
+		var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<addon addon_id=\"s9e\" title=\"s9e Media Pack\" url=\"https:\/\/github.com\/s9e\/XenForoMediaBBCodes\" version_id=\"20131020\" version_string=\"20131020\">\n  <bb_code_media_sites>\n    <site media_site_id=\"break\" site_title=\"Break\" site_url=\"http:\/\/www.break.com\/\" match_is_regex=\"1\">\n      <match_urls>!break\.com\/video\/.*-(?'id'[0-9]+)$!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"464\" height=\"290\" src=\"http:\/\/www.break.com\/embed\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"cbsnews\" site_title=\"CBS News Video\" site_url=\"http:\/\/www.cbsnews.com\/video\/\" match_is_regex=\"1\">\n      <match_urls>!cbsnews\.com\/video\/watch\/\?id=(?'id'[0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<object type=\"application\/x-shockwave-flash\" typemustmatch=\"\" width=\"425\" height=\"279\" data=\"http:\/\/cnettv.cnet.com\/av\/video\/cbsnews\/atlantis2\/cbsnews_player_embed.swf\"><param name=\"allowfullscreen\" value=\"true\"\/><param name=\"flashvars\" value=\"si=254&amp;contentValue={$id}&amp;shareUrl=http:\/\/www.cbsnews.com\/video\/watch\/?id={$id}n\"\/><embed type=\"application\/x-shockwave-flash\" src=\"http:\/\/cnettv.cnet.com\/av\/video\/cbsnews\/atlantis2\/cbsnews_player_embed.swf\" width=\"425\" height=\"279\" allowfullscreen=\"\" flashvars=\"si=254&amp;contentValue={$id}&amp;shareUrl=http:\/\/www.cbsnews.com\/video\/watch\/?id={$id}n\"\/><\/object>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"collegehumor\" site_title=\"CollegeHumor\" site_url=\"http:\/\/www.collegehumor.com\/\" match_is_regex=\"1\">\n      <match_urls>!collegehumor\.com\/(?:video|embed)\/(?'id'[0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"600\" height=\"369\" src=\"http:\/\/www.collegehumor.com\/e\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"comedycentral\" site_title=\"Comedy Central\" site_url=\"http:\/\/www.comedycentral.com\/funny-videos\" match_is_regex=\"1\" match_callback_class=\"s9e_MediaBBCodes\" match_callback_method=\"matchComedycentral\">\n      <match_urls>!(?'id')comedycentral\.com\/video-clips\/!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"512\" height=\"288\" src=\"http:\/\/media.mtvnservices.com\/mgid:arc:video:comedycentral.com:{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"dailymotion\" site_title=\"Dailymotion\" site_url=\"http:\/\/www.dailymotion.com\/\" match_is_regex=\"1\">\n      <match_urls>!dailymotion\.com\/(?:video\/|user\/[^#]+#video=)(?'id'[A-Za-z0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<object type=\"application\/x-shockwave-flash\" typemustmatch=\"\" width=\"560\" height=\"315\" data=\"http:\/\/www.dailymotion.com\/swf\/{$id}\"><param name=\"allowfullscreen\" value=\"true\"\/><embed type=\"application\/x-shockwave-flash\" src=\"http:\/\/www.dailymotion.com\/swf\/{$id}\" width=\"560\" height=\"315\" allowfullscreen=\"\"\/><\/object>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"facebook\" site_title=\"Facebook\" site_url=\"http:\/\/www.facebook.com\/\" match_is_regex=\"1\">\n      <match_urls>!facebook\.com\/photo\.php\?v=(?'id'[0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"560\" height=\"315\" src=\"https:\/\/www.facebook.com\/video\/embed?video_id={$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"funnyordie\" site_title=\"Funny or Die\" site_url=\"http:\/\/www.funnyordie.com\/\" match_is_regex=\"1\">\n      <match_urls>!funnyordie.com\/videos\/(?'id'[0-9a-f]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"640\" height=\"360\" src=\"http:\/\/www.funnyordie.com\/embed\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"gamespot\" site_title=\"Gamespot\" site_url=\"http:\/\/www.gamespot.com\/\" match_is_regex=\"1\">\n      <match_urls>!gamespot\.com\/(?:events\/[^\/]+|[^\/]+\/videos)\/[^\/]+-(?'id'[0-9]+)\/!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"640\" height=\"360\" src=\"http:\/\/www.gamespot.com\/videoembed\/{$id}&amp;mapp=false&amp;ads=0&amp;onsite=0\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"gist\" site_title=\"GitHub Gist\" site_url=\"https:\/\/gist.github.com\/\" match_is_regex=\"1\" embed_html_callback_class=\"s9e_MediaBBCodes\" embed_html_callback_method=\"embedGist\">\n      <match_urls>!(?'id'.*gist\.github\.com\/(?:[^\/]+)\/(?:[0-9]+).*)!<\/match_urls>\n      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::embedGist() -->]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"ign\" site_title=\"IGN\" site_url=\"http:\/\/www.ign.com\/videos\/\" match_is_regex=\"1\">\n      <match_urls>!(?'id'https?:\/\/.*?ign\.com\/videos\/.+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"468\" height=\"263\" src=\"http:\/\/widgets.ign.com\/video\/embed\/content.html?url={$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"indiegogo\" site_title=\"Indiegogo\" site_url=\"http:\/\/www.indiegogo.com\/\" match_is_regex=\"1\" match_callback_class=\"s9e_MediaBBCodes\" match_callback_method=\"matchIndiegogo\">\n      <match_urls>!indiegogo\.com\/projects\/(?'id'[0-9]+)$!\n!(?'id')indiegogo\.com\/projects\/.!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"224\" height=\"486\" src=\"http:\/\/www.indiegogo.com\/project\/{$id}\/widget\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"kickstarter\" site_title=\"Kickstarter\" site_url=\"http:\/\/www.kickstarter.com\/\" match_is_regex=\"1\" embed_html_callback_class=\"s9e_MediaBBCodes\" embed_html_callback_method=\"embedKickstarter\">\n      <match_urls>!(?'id'.*kickstarter.com\/projects\/(?:[^\/]+\/[^\/?]+)(?:\/widget\/(?:(?:card)|(?:video)))?.*)!<\/match_urls>\n      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::embedKickstarter() -->]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"liveleak\" site_title=\"LiveLeak\" site_url=\"http:\/\/www.liveleak.com\/\" match_is_regex=\"1\">\n      <match_urls>!liveleak\.com\/view\?i=(?'id'[a-f_0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"560\" height=\"315\" src=\"http:\/\/www.liveleak.com\/e\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"metacafe\" site_title=\"Metacafe\" site_url=\"http:\/\/www.metacafe.com\/\" match_is_regex=\"1\">\n      <match_urls>!metacafe\.com\/watch\/(?'id'[0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"560\" height=\"315\" src=\"http:\/\/www.metacafe.com\/embed\/{$id}\/\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"slideshare\" site_title=\"SlideShare\" site_url=\"http:\/\/www.slideshare.net\/\" match_is_regex=\"1\" match_callback_class=\"s9e_MediaBBCodes\" match_callback_method=\"matchSlideshare\">\n      <match_urls>!slideshare\.net\/[^\/]+\/[-\w]+-(?'id'[0-9]{6,})$!\n!(?'id')slideshare\.net\/[^\/]+\/\w!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"427\" height=\"356\" src=\"http:\/\/www.slideshare.net\/slideshow\/embed_code\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"soundcloud\" site_title=\"SoundCloud\" site_url=\"https:\/\/soundcloud.com\/\" match_is_regex=\"1\">\n      <match_urls>!soundcloud\.com(?:%2F|\/)tracks(?:%2F|\/)(?'id'[0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"560\" height=\"166\" src=\"https:\/\/w.soundcloud.com\/player\/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"ted\" site_title=\"TED Talks\" site_url=\"http:\/\/www.ted.com\/\" match_is_regex=\"1\">\n      <match_urls>!ted\.com\/(?'id'(?:talk|playlist)s\/[^\s\"]+)!i<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"560\" height=\"315\" src=\"http:\/\/embed.ted.com\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"twitch\" site_title=\"Twitch\" site_url=\"http:\/\/www.twitch.tv\/\" match_is_regex=\"1\" embed_html_callback_class=\"s9e_MediaBBCodes\" embed_html_callback_method=\"embedTwitch\" match_callback_class=\"s9e_MediaBBCodes\" match_callback_method=\"matchTwitch\">\n      <match_urls>#(?'id'.*twitch\.tv\/(?:(?!m\/)\w+)(?:\/b\/(?:[0-9]+)|\/c\/(?:[0-9]+))?.*)#\n!(?'id')twitch\.tv\/m\/[0-9]+!<\/match_urls>\n      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::embedTwitch() -->]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"vimeo\" site_title=\"Vimeo\" site_url=\"http:\/\/vimeo.com\/\" match_is_regex=\"1\">\n      <match_urls>!vimeo\.com\/(?:channels\/[^\/]+\/)?(?'id'[0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"560\" height=\"315\" src=\"http:\/\/player.vimeo.com\/video\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"vine\" site_title=\"Vine\" site_url=\"https:\/\/vine.co\/\" match_is_regex=\"1\">\n      <match_urls>!https:\/\/vine.co\/v\/(?'id'[^\/]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"480\" height=\"480\" src=\"https:\/\/vine.co\/v\/{$id}\/embed\/simple\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe><script async=\"\" src=\"\/\/platform.vine.co\/static\/scripts\/embed.js\" charset=\"utf-8\"><\/script>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"wshh\" site_title=\"WorldStarHipHop\" site_url=\"http:\/\/www.worldstarhiphop.com\/\" match_is_regex=\"1\">\n      <match_urls>!worldstarhiphop\.com\/video(?:s\/video)?\.php\?v=(?'id'[A-Za-z0-9]+)!<\/match_urls>\n      <embed_html><![CDATA[<object type=\"application\/x-shockwave-flash\" typemustmatch=\"\" width=\"448\" height=\"374\" data=\"http:\/\/www.worldstarhiphop.com\/videos\/e\/16711680\/{$id}\"><param name=\"allowfullscreen\" value=\"true\"\/><embed type=\"application\/x-shockwave-flash\" src=\"http:\/\/www.worldstarhiphop.com\/videos\/e\/16711680\/{$id}\" width=\"448\" height=\"374\" allowfullscreen=\"\"\/><\/object>]]><\/embed_html>\n    <\/site>\n    <site media_site_id=\"youtube\" site_title=\"YouTube\" site_url=\"http:\/\/www.youtube.com\/\" match_is_regex=\"1\">\n      <match_urls>!youtube\.com\/(?:watch\?.*?v=|v\/)(?'id'[-0-9A-Z_a-z]+)!\n!youtu\.be\/(?'id'[-0-9A-Z_a-z]+)!<\/match_urls>\n      <embed_html><![CDATA[<iframe width=\"560\" height=\"315\" src=\"http:\/\/www.youtube.com\/embed\/{$id}\" allowfullscreen=\"\" frameborder=\"0\" scrolling=\"no\"><\/iframe>]]><\/embed_html>\n    <\/site>\n  <\/bb_code_media_sites>\n<\/addon>\n";
+
+		function toggleAll(node)
+		{
+			var nodes = document.getElementsByTagName('input'), i = nodes.length;
+			while (--i > 0)
+			{
+				nodes.item(i).checked = node.checked;
+			}
+
+			updateHash();
+			updateUI();
+		}
+
+		function updateHash()
+		{
+			var nodes = document.getElementsByTagName('input'), i = 0, cnt = nodes.length, ids = [];
+			while (++i < cnt)
+			{
+				if (nodes.item(i).checked)
+				{
+					ids.push(nodes.item(i).getAttribute('data-id'));
+				}
+			}
+
+			document.location.replace('#' + ids.join(','));
+		}
+
+		function updateUI()
+		{
+			var nodes = document.getElementsByTagName('input'),
+				i = nodes.length,
+				ids = document.location.hash.replace(/#/g, '').split(','),
+				str = ',' + ids.join(',') + ',';
+
+			while (--i > 0)
+			{
+				nodes.item(i).checked = (str.indexOf(',' + nodes.item(i).getAttribute('data-id') + ',') > -1);
+			}
+
+			var addonXml = xml.replace(
+				new RegExp('\\s*<site media_site_id="(?!' + ids.join('|') + ')[\\s\\S]*?</site>', 'g'),
+				''
+			);
+
+			document.getElementsByTagName('textarea')[0].value = addonXml;
+
+			document.getElementsByTagName('a')[0].href = 'data:application/octet-stream,' + escape(addonXml);
+		}
+		window.onhashchange = updateUI;
+
+		if (document.location.hash)
+		{
+			updateUI();
+		}
+
+		// Yup, it's 2013 and I'm using onclick. Let the hate flow through you
+		document.getElementsByTagName('table')[0].onclick = function(e)
+		{
+			var node = e.target;
+
+			if (/^input$/i.test(node.localName))
+			{
+				return;
+			}
+
+			while (node.parentNode && !/^tr$/i.test(node.localName))
+			{
+				node = node.parentNode;
+			}
+
+			var input = node.getElementsByTagName('input')[0];
+			if (!input)
+			{
+				return;
+			}
+
+			input.checked = !input.checked;
+
+			updateHash();
+			updateUI();
+		}
+	</script>
+</body>
+</html>

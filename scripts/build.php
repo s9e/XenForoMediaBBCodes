@@ -49,7 +49,7 @@ $addon->setAttribute('version_string', gmdate('Ymd'));
 
 $rows = [];
 $rows[] = '<tr>';
-$rows[] = '	<th>Include?</th>';
+$rows[] = '	<th><input type="checkbox" onchange="toggleAll(this)"></th>';
 $rows[] = '	<th>Id</th>';
 $rows[] = '	<th>Site</th>';
 $rows[] = '	<th>Example URLs</th>';
@@ -164,7 +164,7 @@ foreach ($sites->site as $site)
 
 	// Build the table of sites
 	$rows[] = '<tr>';
-	$rows[] = '	<td><input type="checkbox" id="' . $site['id'] . '"></td>';
+	$rows[] = '	<td><input type="checkbox" data-id="' . $site['id'] . '"></td>';
 	$rows[] = '	<td><code>' . $site['id'] . '</code></td>';
 	$rows[] = '	<td>' . $site->name . '</td>';
 	$rows[] = '	<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
@@ -172,7 +172,9 @@ foreach ($sites->site as $site)
 }
 
 $dom->formatOutput = true;
-$dom->save(__DIR__ . '/../build/addon.xml');
+$xml = $dom->saveXML();
+
+file_put_contents(__DIR__ . '/../build/addon.xml', $xml);
 
 $php .= '}';
 
@@ -187,9 +189,13 @@ $filepath = __DIR__ . '/../www/configure.html';
 file_put_contents(
 	$filepath,
 	preg_replace(
-		'#(<table[^>]*>).*</table>#s',
-		"\$1\n\t\t\t" . str_replace("\n", "\n\t\t\t", $rows) . "\n\t\t</table>",
-		file_get_contents($filepath)
+		'#(?<=var xml = ).*?(?=;\\n\\n)#',
+		json_encode($xml),
+		preg_replace(
+			'#(<table[^>]*>).*</table>#s',
+			"\$1\n\t\t" . str_replace("\n", "\n\t\t", $rows) . "\n\t</table>",
+			file_get_contents($filepath)
+		)
 	)
 );
 
