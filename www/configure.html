@@ -218,23 +218,21 @@
 		{
 			var node = e.target;
 
-			if (/^input$/i.test(node.localName))
+			if (!/^input$/i.test(node.localName))
 			{
-				return;
-			}
+				while (node.parentNode && !/^tr$/i.test(node.localName))
+				{
+					node = node.parentNode;
+				}
 
-			while (node.parentNode && !/^tr$/i.test(node.localName))
-			{
-				node = node.parentNode;
-			}
+				var input = node.getElementsByTagName('input')[0];
+				if (!input)
+				{
+					return;
+				}
 
-			var input = node.getElementsByTagName('input')[0];
-			if (!input)
-			{
-				return;
+				input.checked = !input.checked;
 			}
-
-			input.checked = !input.checked;
 
 			updateHash();
 			updateUI();
