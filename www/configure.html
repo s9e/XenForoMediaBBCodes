@@ -211,10 +211,7 @@
 		}
 		window.onhashchange = updateUI;
 
-		if (document.location.hash)
-		{
-			updateUI();
-		}
+		updateUI();
 
 		// Yup, it's 2013 and I'm using onclick. Let the hate flow through you
 		document.getElementsByTagName('table')[0].onclick = function(e)
