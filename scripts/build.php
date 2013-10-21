@@ -221,6 +221,7 @@ file_put_contents(
 	)
 );
 
+copy(__DIR__ . '/../LICENSE', __DIR__ . '/../build/LICENSE');
 exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $versionId . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/*');
 
 $readme =
