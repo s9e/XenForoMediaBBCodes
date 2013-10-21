@@ -41,11 +41,13 @@ class s9e_MediaBBCodes
 $dom = new DOMDocument('1.0', 'utf-8');
 $addon = $dom->appendChild($dom->createElement('addon'));
 
+$versionId = gmdate('Ymd');
+
 $addon->setAttribute('addon_id',       's9e');
 $addon->setAttribute('title',          's9e Media Pack');
 $addon->setAttribute('url',            'https://github.com/s9e/XenForoMediaBBCodes');
-$addon->setAttribute('version_id',     gmdate('Ymd'));
-$addon->setAttribute('version_string', gmdate('Ymd'));
+$addon->setAttribute('version_id',     $versionId);
+$addon->setAttribute('version_string', $versionId);
 
 $rows = [];
 $rows[] = '<tr>';
@@ -54,6 +56,8 @@ $rows[] = '	<th>Id</th>';
 $rows[] = '	<th>Site</th>';
 $rows[] = '	<th>Example URLs</th>';
 $rows[] = '</tr>';
+
+$sitenames = [];
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
@@ -169,6 +173,9 @@ foreach ($sites->site as $site)
 	$rows[] = '	<td>' . $site->name . '</td>';
 	$rows[] = '	<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
 	$rows[] = '</tr>';
+
+	// Record the name of the site
+	$sitenames[] = (string) $site->name;
 }
 
 $dom->formatOutput = true;
@@ -212,4 +219,30 @@ file_put_contents(
 		"\$1\n\t" . str_replace("\n", "\n\t", $rows) . "\n</table>",
 		file_get_contents($filepath)
 	)
+);
+
+exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $versionId . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/*');
+
+$readme =
+'This pack contains the definitions for ' . count($sitenames) . ' media sites: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
+
+The BBCodes definitions is based on and compatible with [url=https://github.com/s9e/TextFormatter]the s9e\TextFormatter library[/url], and more specifically its [url=https://github.com/s9e/TextFormatter/tree/master/src/s9e/TextFormatter/Plugins/MediaEmbed]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
+
+This add-on is released under [url=http://en.wikipedia.org/wiki/MIT_License]The MIT License[/url]. Redistribution is allowed and [b]encouraged[/b].
+
+[size=6][font=Arial]Installation[/font][/size]
+
+Unzip the archive, and upload the content of the [font=monospace]upload[/font] folder to your XenForo installation. Then go to your forum\'s Admin CP and install the add-on via the provided [font=monospace]addon.xml[/font] file.
+
+[size=6][font=Arial]Compatibility and customization[/font][/size]
+
+Most of the definitions found in this pack are compatible with existing definitions, but some of them may not. If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]experimental configurator interface[/url].
+
+[size=6][font=Arial]Requests[/font][/size]
+
+If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion.';
+
+file_put_contents(
+	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $versionId . '.txt',
+	$readme
 );
