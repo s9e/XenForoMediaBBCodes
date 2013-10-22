@@ -24,7 +24,7 @@ class s9e_MediaBBCodes
 
 	public static function matchComedycentral($url, $id, $site)
 	{
-		return ($id) ? $id : self::scrape($url, '!mgid:arc:video:comedycentral.com:(?\'id\'[-\\w]+)!');
+		return ($id) ? $id : self::scrape($url, '!(?\'id\'mgid:arc:video:comedycentral.com:[-\\w]+)!');
 	}
 
 	public static function embedGist($url, $site)
