@@ -66,6 +66,11 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
+	public static function matchRutube($url, $id, $site)
+	{
+		return ($id) ? $id : self::scrape($url, '!rutube\\.ru/video/embed/(?\'id\'[0-9]+)!');
+	}
+
 	public static function matchSlideshare($url, $id, $site)
 	{
 		return ($id) ? $id : self::scrape($url, '!"presentationId":(?\'id\'[0-9]+)!');
