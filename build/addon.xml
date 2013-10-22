@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131022b" version_string="20131022b">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131022" version_string="20131022">
   <bb_code_media_sites>
     <site media_site_id="break" site_title="Break" site_url="http://www.break.com/" match_is_regex="1">
       <match_urls>!break\.com/video/.*-(?'id'[0-9]+)$!</match_urls>
@@ -10,7 +10,7 @@
       <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://cnettv.cnet.com/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf"><param name="allowfullscreen" value="true"/><param name="flashvars" value="si=254&amp;contentValue={$id}&amp;shareUrl=http://www.cbsnews.com/video/watch/?id={$id}n"/><embed type="application/x-shockwave-flash" src="http://cnettv.cnet.com/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf" width="425" height="279" allowfullscreen="" flashvars="si=254&amp;contentValue={$id}&amp;shareUrl=http://www.cbsnews.com/video/watch/?id={$id}n"/></object>]]></embed_html>
     </site>
     <site media_site_id="colbertnation" site_title="Colbert Nation" site_url="http://www.colbertnation.com/" match_is_regex="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchColbertnation">
-      <match_urls>!(?'id')colbertnation\.com/[^/]*(?&gt;collection|video)s/!</match_urls>
+      <match_urls>!(?'id')colbertnation\.com/[^/]*(?:collection|video)s/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="collegehumor" site_title="CollegeHumor" site_url="http://www.collegehumor.com/" match_is_regex="1">
@@ -26,11 +26,11 @@
       <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="560" height="315" data="http://www.dailymotion.com/swf/{$id}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://www.dailymotion.com/swf/{$id}" width="560" height="315" allowfullscreen=""/></object>]]></embed_html>
     </site>
     <site media_site_id="dailyshow" site_title="The Daily Show with Jon Stewart" site_url="http://www.thedailyshow.com/" match_is_regex="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchDailyshow">
-      <match_urls>!(?'id')thedailyshow\.com/(?&gt;collection|watch)/!</match_urls>
+      <match_urls>!(?'id')thedailyshow\.com/(?:collection|watch)/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="facebook" site_title="Facebook" site_url="http://www.facebook.com/" match_is_regex="1">
-      <match_urls>!facebook\.com/(?&gt;photo|video/video)\.php\?v=(?'id'[0-9]+)!</match_urls>
+      <match_urls>!facebook\.com/(?:photo|video/video)\.php\?v=(?'id'[0-9]+)!</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="315" src="https://www.facebook.com/video/embed?video_id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="funnyordie" site_title="Funny or Die" site_url="http://www.funnyordie.com/" match_is_regex="1">
