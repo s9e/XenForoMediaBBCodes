@@ -43,6 +43,11 @@ $addon = $dom->appendChild($dom->createElement('addon'));
 
 $versionId = gmdate('Ymd');
 
+if (isset($_SERVER['argv'][1]))
+{
+	$versionId .= $_SERVER['argv'][1];
+}
+
 $addon->setAttribute('addon_id',       's9e');
 $addon->setAttribute('title',          's9e Media Pack');
 $addon->setAttribute('url',            'https://github.com/s9e/XenForoMediaBBCodes');
