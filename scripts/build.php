@@ -246,7 +246,7 @@ Most of the definitions found in this pack are compatible with existing definiti
 
 [size=6][font=Arial]Requests[/font][/size]
 
-If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion. Selection may depend on the site\'s popularity and Alexa rank. Please post a few links as examples of the kind of links that should be supported.';
+If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion. Selection may depend on the site\'s popularity and Alexa rank. Please post a few links as examples of the kind of links that should be supported. Only links to legal stuff, thanks.';
 
 file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $versionId . '.txt',
