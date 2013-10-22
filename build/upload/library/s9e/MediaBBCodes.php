@@ -22,9 +22,19 @@ class s9e_MediaBBCodes
 		return (preg_match($regexp, $page, $m)) ? $m["id"] : false;
 	}
 
+	public static function matchColbertnation($url, $id, $site)
+	{
+		return ($id) ? $id : self::scrape($url, '!(?\'id\'mgid:cms:video:colbertnation\\.com:[0-9]+)!');
+	}
+
 	public static function matchComedycentral($url, $id, $site)
 	{
-		return ($id) ? $id : self::scrape($url, '!(?\'id\'mgid:arc:video:comedycentral.com:[-\\w]+)!');
+		return ($id) ? $id : self::scrape($url, '!(?\'id\'mgid:arc:video:comedycentral\\.com:[-\\w]+)!');
+	}
+
+	public static function matchDailyshow($url, $id, $site)
+	{
+		return ($id) ? $id : self::scrape($url, '!(?\'id\'mgid:cms:video:thedailyshow\\.com:[0-9]+)!');
 	}
 
 	public static function embedGist($url, $site)
