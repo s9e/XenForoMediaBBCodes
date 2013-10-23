@@ -35,8 +35,8 @@ class s9e_MediaBBCodes
 		);
 
 		return (preg_match($regexp, $page, $m)) ? $m["id"] : false;
-	}
-';
+	}';
+$php = explode("\n", $php);
 
 $dom = new DOMDocument('1.0', 'utf-8');
 $addon = $dom->appendChild($dom->createElement('addon'));
@@ -119,18 +119,18 @@ foreach ($sites->site as $site)
 
 		$extract = (string) $site->extract;
 
-		$php .= "\n\tpublic static function " . $methodName . '($url, $site)';
-		$php .= "\n\t{";
-		$php .= "\n\t\tif (!preg_match(" . var_export($extract, true) . ', $url, $m))';
-		$php .= "\n\t\t{";
-		$php .= "\n\t\t\treturn '<a href=\"' . htmlspecialchars(\$url) . '\">' . htmlspecialchars(\$url) . '</a>';";
-		$php .= "\n\t\t}";
-		$php .= "\n";
-		$php .= "\n\t\t" . $src;
-		$php .= "\n";
-		$php .= "\n\t\treturn \$html;";
-		$php .= "\n\t}";
-		$php .= "\n";
+		$php[] = '';
+		$php[] = '	public static function ' . $methodName . '($url, $site)';
+		$php[] = '	{';
+		$php[] = '		if (!preg_match(' . var_export($extract, true) . ', $url, $m))';
+		$php[] = '		{';
+		$php[] = '			return \'<a href="\' . htmlspecialchars($url) . \'">\' . htmlspecialchars($url) . \'</a>\';';
+		$php[] = '		}';
+		$php[] = '';
+		$php[] = '		' . $src;
+		$php[] = '';
+		$php[] = '		return $html;';
+		$php[] = '	}';
 
 		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
 
@@ -160,11 +160,11 @@ foreach ($sites->site as $site)
 		$node->setAttribute('match_callback_class',  's9e_MediaBBCodes');
 		$node->setAttribute('match_callback_method', $methodName);
 
-		$php .= "\n\tpublic static function " . $methodName . '($url, $id, $site)';
-		$php .= "\n\t{";
-		$php .= "\n\t\treturn (\$id) ? \$id : self::scrape(\$url, " . var_export($extract, true) . ");";
-		$php .= "\n\t}";
-		$php .= "\n";
+		$php[] = '';
+		$php[] = '	public static function ' . $methodName . '($url, $id, $site)';
+		$php[] = '	{';
+		$php[] = '		return ($id) ? $id : self::scrape($url, ' . var_export($extract, true) . ');';
+		$php[] = '	}';
 	}
 	$node->appendChild($dom->createElement('match_urls', implode("\n", $regexps)));
 
@@ -188,10 +188,10 @@ $xml = $dom->saveXML();
 
 file_put_contents(__DIR__ . '/../build/addon.xml', $xml);
 
-$php .= '}';
+$php[] = '}';
 
-// Save the pack
-file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', $php);
+// Save the helper class
+file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', implode("\n", $php));
 
 // Coalesce the table's content
 $rows = implode("\n", $rows);
