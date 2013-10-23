@@ -69,6 +69,11 @@ foreach ($sites->site as $site)
 {
 	$template = (string) $configurator->MediaEmbed->add($site['id'])->defaultTemplate;
 
+	if ($site['id'] == 'vk')
+	{
+		continue;
+	}
+
 	$node = $parentNode->appendChild($dom->createElement('site'));
 	$node->setAttribute('media_site_id',  $site['id']);
 	$node->setAttribute('site_title',     $site->name);
