@@ -12,6 +12,8 @@ $sites = simplexml_load_file(__DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/Tex
 
 $configurator = new s9e\TextFormatter\Configurator;
 $rendererGenerator = $configurator->setRendererGenerator('PHP');
+$rendererGenerator->forceEmptyElements = false;
+$rendererGenerator->useEmptyElements   = false;
 
 $php = '<?php
 
