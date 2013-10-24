@@ -37,18 +37,6 @@ class s9e_MediaBBCodes
 		return ($id) ? $id : self::scrape($url, '!(?\'id\'mgid:cms:video:thedailyshow\\.com:[0-9]+)!');
 	}
 
-	public static function embedGist($url, $site)
-	{
-		if (!preg_match('!gist\\.github\\.com/(?\'user\'[^/]+)/(?\'id\'[0-9]+)!', $url, $m))
-		{
-			return '<a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($url) . '</a>';
-		}
-
-		$html='<script src="https://gist.github.com/'.htmlspecialchars($m['user'],2).'/'.htmlspecialchars($m['id'],2).'.js"/></script>';
-
-		return $html;
-	}
-
 	public static function matchIndiegogo($url, $id, $site)
 	{
 		return ($id) ? $id : self::scrape($url, '!indiegogo\\.com/projects/(?\'id\'[0-9]+)/!');
