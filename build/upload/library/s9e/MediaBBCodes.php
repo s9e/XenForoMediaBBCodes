@@ -186,6 +186,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchGrooveshark($url)
+	{
+		$regexps = array('%grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?\'playlistid\'[0-9]+)%');
+		$scrapes = array(
+			array(
+				'match'   => array('%grooveshark\\.com/s/(?\'path\'[^/]+/\\w+)%'),
+				'extract' => array('%songID=(?\'songid\'[0-9]+)%')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchHulu($url)
 	{
 		$regexps = array();
