@@ -1,5 +1,6 @@
 language: php
 php:
+  - "5.5"
   - "5.3"
 before_script:
   - echo "zend.enable_gc=off" >> ~/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/php.ini
