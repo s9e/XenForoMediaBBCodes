@@ -278,8 +278,8 @@ foreach ($sites->site as $site)
 		$node->setAttribute('embed_html_callback_method', 'embed');
 	}
 
-	// Workaround for mtvnservices.com servers which don't seem to like URL-encoding :(
-	if (preg_match('(mtvnservices)', $html))
+	// Workaround for sites that don't like URL-encoding
+	if (preg_match('(gist|mtvnservices)', $html))
 	{
 		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
 		$node->setAttribute('embed_html_callback_method', 'embed');
