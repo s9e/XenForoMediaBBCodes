@@ -15,7 +15,8 @@ $rendererGenerator = $configurator->setRendererGenerator('PHP');
 $rendererGenerator->forceEmptyElements = false;
 $rendererGenerator->useEmptyElements   = false;
 
-$php = '<?php
+$php = <<<'NOWDOC'
+<?php
 
 /**
 * @copyright Copyright (c) 2013 The s9e Authors
@@ -24,20 +25,147 @@ $php = '<?php
 
 class s9e_MediaBBCodes
 {
-	public static function scrape($url, $regexp)
+	public static function match($url, $regexps, $scrapes)
+	{
+		$vars = array();
+
+		foreach ($scrapes as $scrape)
+		{
+			foreach ($scrape['match'] as $regexp)
+			{
+				if (preg_match($regexp, $url))
+				{
+					$vars = self::scrape($url, $scrape['extract']);
+
+					break;
+				}
+			}
+		}
+
+		if (!empty($regexps))
+		{
+			$vars += self::getNamedCaptures($url, $regexps);
+		}
+
+		// No vars = no match
+		if (empty($vars))
+		{
+			return false;
+		}
+
+		// If there's only one capture named "id", we store its value as-is
+		if (array_keys($vars) === array('id'))
+		{
+			return $vars['id'];
+		}
+
+		// If there are more than one capture, or it's not named "id", we store it as a series of
+		// URL-encoded key=value pairs
+		$pairs = array();
+		ksort($vars);
+		foreach ($vars as $k => $v)
+		{
+			$pairs[] = urlencode($k) . '=' . urlencode($v);
+		}
+
+		// NOTE: XenForo silently nukes the mediaKey if it contains any HTML special characters,
+		//       that's why we use ; rather than the standard &
+		return implode(';', $pairs);
+	}
+
+	public static function embed($mediaKey, $site)
+	{
+		if (preg_match('(^https?://)', $mediaKey))
+		{
+			// If the URL is stored in the media site, reparse it and store the captures
+			$vars = self::getNamedCaptures($mediaKey, $site['regexes']);
+		}
+		elseif (preg_match('(^([-\\w]+=[^;]*)(?>;(?1))*$)', $mediaKey))
+		{
+			// If the URL looks like a series of key=value pairs, add them to $vars
+			$vars = array();
+			foreach (explode(';', $mediaKey) as $pair)
+			{
+				list($k, $v) = explode('=', $pair);
+				$vars[urldecode($k)] = urldecode($v);
+			}
+		}
+		else
+		{
+			$vars = array('id' => $mediaKey);
+		}
+
+		// No vars = no match, return a link to the content, or the BBCode as text
+		if (empty($vars))
+		{
+			$mediaKey = htmlspecialchars($mediaKey);
+
+			return (preg_match('(^https?://)', $mediaKey))
+				? "<a href=\"$mediaKey\">$mediaKey</a>"
+				: "[media={$site['media_site_id']}]{$mediaKey}[/media]";
+		}
+
+		// Test whether this particular site has its own renderer
+		if (preg_match('(' . __CLASS__ . '::(render\\w+))', $site['embed_html'], $m))
+		{
+			$methodName = $m[1];
+
+			if (method_exists(__CLASS__, $methodName))
+			{
+				return self::$methodName($vars);
+			}
+		}
+
+		// Otherwise use the configured template
+		return preg_replace_callback(
+			// Interpolate {$id} and other {$vars}
+			'(\\{\\$([a-z]+)\\})',
+			function ($m) use ($vars)
+			{
+				return (isset($vars[$m[1]])) ? htmlspecialchars($vars[$m[1]]) : '';
+			},
+			$site['embed_html']
+		);
+	}
+
+	protected static function scrape($url, $regexps)
 	{
 		$page = file_get_contents(
-			"compress.zlib://" . $url,
+			'compress.zlib://' . $url,
 			false,
 			stream_context_create(array(
-				"http" => array(
-					"header" => "Accept-Encoding: gzip"
+				'http' => array(
+					'header' => 'Accept-Encoding: gzip'
 				)
 			))
 		);
 
-		return (preg_match($regexp, $page, $m)) ? $m["id"] : false;
-	}';
+		return self::getNamedCaptures($page, $regexps);
+	}
+
+	protected static function getNamedCaptures($string, $regexps)
+	{
+		$vars = array();
+
+		foreach ($regexps as $regexp)
+		{
+			if (preg_match($regexp, $string, $m))
+			{
+				foreach ($m as $k => $v)
+				{
+					// Add named captures to the vars
+					if (!is_numeric($k))
+					{
+						$vars[$k] = $v;
+					}
+				}
+			}
+		}
+
+		return $vars;
+	}
+NOWDOC;
+
 $php = explode("\n", $php);
 
 $dom = new DOMDocument('1.0', 'utf-8');
@@ -65,6 +193,7 @@ $rows[] = '	<th>Example URLs</th>';
 $rows[] = '</tr>';
 
 $sitenames = [];
+$examples  = [];
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
@@ -82,12 +211,25 @@ foreach ($sites->site as $site)
 	$node->setAttribute('site_url',       $site->homepage);
 	$node->setAttribute('match_is_regex', '1');
 
-	if (strpos($template, 'xsl') === false && !preg_match('#\\{@(?!id)#', $template))
+	// Default HTML replacement. Ensure that iframe and script have an end tag
+	$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $template);
+
+	// Temp fix for WorldStarHipHop
+	if ($site['id'] == 'wshh')
 	{
-		$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $template);
+		$html = str_replace(' type="application/x-shockwave-flash" typemustmatch=""', '', $html);
 	}
-	else
+
+	// Test whether the template needs to be rendered in PHP
+	if (strpos($template, 'xsl') !== false)
 	{
+		$methodName = 'render' . ucfirst($site['id']);
+		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
+
+		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
+		$node->setAttribute('embed_html_callback_method', 'embed');
+
+		// Load the template in an XSL stylesheet
 		$xsl = '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="X">' . $template . '</xsl:template></xsl:stylesheet>';
 
 		// Normalize whitespace
@@ -108,8 +250,8 @@ foreach ($sites->site as $site)
 
 		$src = "\$html='';" . $m[1];
 		$src = str_replace("\$html='';\$this->out.=", '$html=', $src);
-		$src = preg_replace("#\\\$node->hasAttribute\\(('[^']+')\\)#", '!empty($m[$1])', $src);
-		$src = preg_replace("#\\\$node->getAttribute\\(('[^']+')\\)#", '$m[$1]', $src);
+		$src = preg_replace("#\\\$node->hasAttribute\\(('[^']+')\\)#", 'isset($vars[$1])', $src);
+		$src = preg_replace("#\\\$node->getAttribute\\(('[^']+')\\)#", '$vars[$1]', $src);
 		$src = str_replace('$this->out', '$html', $src);
 
 		if (strpos($src, '->'))
@@ -120,63 +262,107 @@ foreach ($sites->site as $site)
 			continue;
 		}
 
-		$methodName = 'embed' . ucfirst($site['id']);
-		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
-		$node->setAttribute('embed_html_callback_method', $methodName);
-
-		$extract = (string) $site->extract;
-
 		$php[] = '';
-		$php[] = '	public static function ' . $methodName . '($url, $site)';
+		$php[] = '	public static function ' . $methodName . '($vars)';
 		$php[] = '	{';
-		$php[] = '		if (!preg_match(' . var_export($extract, true) . ', $url, $m))';
-		$php[] = '		{';
-		$php[] = '			return \'<a href="\' . htmlspecialchars($url) . \'">\' . htmlspecialchars($url) . \'</a>\';';
-		$php[] = '		}';
-		$php[] = '';
 		$php[] = '		' . $src;
 		$php[] = '';
 		$php[] = '		return $html;';
 		$php[] = '	}';
-
-		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
-
-		// Replace the original extract regexp
-		$delim   = $extract[0];
-		$extract = preg_replace("#\\(\\?'\\w+'#", '(?:', $extract);
-		$extract = $delim . "(?'id'.*" . substr($extract, 1, -1) . '.*)' . $delim;
-		$site->extract = $extract;
 	}
 
-	$regexps = [];
+	// Test whether the template contains any variables other than $id and if so, render it in PHP
+	if (preg_match('(\\{\\$(?!id\\}))', $html))
+	{
+		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
+		$node->setAttribute('embed_html_callback_method', 'embed');
+	}
+
+	// Workaround for mtvnservices.com servers which don't seem to like URL-encoding :(
+	if (preg_match('(mtvnservices)', $html))
+	{
+		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
+		$node->setAttribute('embed_html_callback_method', 'embed');
+	}
+
+	$regexps          = [];
+	$matchRegexps     = [];
+	$scrapes          = [];
+	$useMatchCallback = false;
+
 	foreach ($site->extract as $regexp)
 	{
-		$regexps[] = (string) $regexp;
+		$regexp = (string) $regexp;
+
+		// Test whether it captures anything else than "id"
+		if (preg_match("(\\(\\?['<](?!id))", $regexp))
+		{
+			$useMatchCallback = true;
+		}
+
+		$regexps[] = $regexp;
+		$matchRegexps[] = var_export($regexp, true);
 	}
 
-	// NOTE: should be changed if there's a site with multiple <scrape>
-	if (isset($site->scrape))
+	foreach ($site->scrape as $scrape)
 	{
-		$match   = (string) $site->scrape->match;
-		$extract = (string) $site->scrape->extract;
+		$entry = [];
 
-		// Add a fake "id" capture
-		$regexps[] = $match[0] . "(?'id')" . substr($match, 1);
+		foreach ($scrape->match as $match)
+		{
+			$match     = (string) $match;
+			$regexps[] = $match;
 
+			$entry['match'][] = var_export($match, true);
+		}
+
+		foreach ($scrape->extract as $extract)
+		{
+			$entry['extract'][] = var_export((string) $extract, true);
+		}
+
+		$scrapes[] = $entry;
+		$useMatchCallback = true;
+	}
+
+	if ($useMatchCallback)
+	{
 		$methodName = 'match' . ucfirst($site['id']);
 		$node->setAttribute('match_callback_class',  's9e_MediaBBCodes');
 		$node->setAttribute('match_callback_method', $methodName);
 
 		$php[] = '';
-		$php[] = '	public static function ' . $methodName . '($url, $id, $site)';
+		$php[] = '	public static function ' . $methodName . '($url)';
 		$php[] = '	{';
-		$php[] = '		return ($id) ? $id : self::scrape($url, ' . var_export($extract, true) . ');';
+		$php[] = '		$regexps = array(' . implode(', ', $matchRegexps) . ');';
+
+		if (empty($scrapes))
+		{
+			$php[] = '		$scrapes = array();';
+		}
+		else
+		{
+			$php[] = '		$scrapes = array(';
+
+			foreach ($scrapes as $k => $scrape)
+			{
+				$php[] = '			array(';
+				$php[] = "				'match'   => array(" . implode(', ', $entry['match']) . '),';
+				$php[] = "				'extract' => array(" . implode(', ', $entry['extract']) . ')';
+				$php[] = '			)' . ((isset($scrapes[++$k])) ? ',' : '');
+			}
+
+			$php[] = '		);';
+		}
+
+		$php[] = '';
+		$php[] = '		return self::match($url, $regexps, $scrapes);';
 		$php[] = '	}';
 	}
 	$node->appendChild($dom->createElement('match_urls', implode("\n", $regexps)));
 
 	$node->appendChild($dom->createElement('embed_html'))
-	     ->appendChild($dom->createCDATASection(str_replace('{@id}', '{$id}', $html)));
+	     ->appendChild($dom->createCDATASection(str_replace('{@', '{$', $html)));
 
 	// Build the table of sites
 	$rows[] = '<tr>';
@@ -188,6 +374,12 @@ foreach ($sites->site as $site)
 
 	// Record the name of the site
 	$sitenames[] = (string) $site->name;
+
+	// Record the example URLs
+	foreach ($site->example as $example)
+	{
+		$examples[] = (string) $example;
+	}
 }
 
 $dom->formatOutput = true;
@@ -258,4 +450,10 @@ If there\'s a media site that you would want to see in this pack, you can reques
 file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $versionId . '.txt',
 	$readme
+);
+
+// Update the test file
+file_put_contents(
+	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $versionId . '-urls.txt',
+	implode("\n", $examples)
 );
