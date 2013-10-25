@@ -25,6 +25,11 @@ $php = <<<'NOWDOC'
 
 class s9e_MediaBBCodes
 {
+	/**
+	* Path to a cache dir, used to cache scraped pages
+	*/
+	public static $cacheDir;
+
 	public static function match($url, $regexps, $scrapes)
 	{
 		$vars = array();
@@ -130,15 +135,34 @@ class s9e_MediaBBCodes
 
 	protected static function scrape($url, $regexps)
 	{
-		$page = file_get_contents(
-			'compress.zlib://' . $url,
-			false,
-			stream_context_create(array(
-				'http' => array(
-					'header' => 'Accept-Encoding: gzip'
-				)
-			))
-		);
+		// Return the content from the cache if applicable
+		if (isset(self::$cacheDir) && file_exists(self::$cacheDir))
+		{
+			$cacheFile = self::$cacheDir . '/http.' . crc32($url) . '.gz';
+
+			if (file_exists($cacheFile))
+			{
+				$page = file_get_contents('compress.zlib://' . $cacheFile);
+			}
+		}
+
+		if (empty($page))
+		{
+			$page = file_get_contents(
+				'compress.zlib://' . $url,
+				false,
+				stream_context_create(array(
+					'http' => array(
+						'header' => 'Accept-Encoding: gzip'
+					)
+				))
+			);
+
+			if (isset($cacheFile))
+			{
+				file_put_contents($cacheFile, gzencode($page, 9));
+			}
+		}
 
 		return self::getNamedCaptures($page, $regexps);
 	}
