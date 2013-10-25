@@ -259,4 +259,17 @@ class s9e_MediaBBCodes
 
 		return self::match($url, $regexps, $scrapes);
 	}
+
+	public static function matchVk($url)
+	{
+		$regexps = array('!vk\\.com/video(?\'oid\'-?[0-9]+)_(?\'vid\'[0-9]+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!vk\\.com/video-?[0-9]+_[0-9]+!'),
+				'extract' => array('!embed_hash=(?\'hash\'[0-9a-f]+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
 }

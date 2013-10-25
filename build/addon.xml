@@ -97,6 +97,11 @@
       <match_urls>!https://vine.co/v/(?'id'[^/]+)!</match_urls>
       <embed_html><![CDATA[<iframe width="480" height="480" src="https://vine.co/v/{$id}/embed/simple" allowfullscreen="" frameborder="0" scrolling="no"></iframe><script async="" src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>]]></embed_html>
     </site>
+    <site media_site_id="vk" site_title="VK" site_url="https://vk.com/" match_is_regex="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchVk">
+      <match_urls>!vk\.com/video(?'oid'-?[0-9]+)_(?'vid'[0-9]+)!
+!vk\.com/video-?[0-9]+_[0-9]+!</match_urls>
+      <embed_html><![CDATA[<iframe width="607" height="360" src="http://vk.com/video_ext.php?oid={$oid}&amp;id={$vid}&amp;hash={$hash}&amp;hd=1" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
     <site media_site_id="wshh" site_title="WorldStarHipHop" site_url="http://www.worldstarhiphop.com/" match_is_regex="1">
       <match_urls>!worldstarhiphop\.com/video(?:s/video)?\.php\?v=(?'id'[A-Za-z0-9]+)!</match_urls>
       <embed_html><![CDATA[<object width="448" height="374" data="http://www.worldstarhiphop.com/videos/e/16711680/{$id}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://www.worldstarhiphop.com/videos/e/16711680/{$id}" width="448" height="374" allowfullscreen=""/></object>]]></embed_html>

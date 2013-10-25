@@ -127,6 +127,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>https://vine.co/v/bYwPIluIipH</td>
 	</tr>
 	<tr>
+		<td><code>vk</code></td>
+		<td>VK</td>
+		<td>http://vk.com/video-7016284_163645555</td>
+	</tr>
+	<tr>
 		<td><code>wshh</code></td>
 		<td>WorldStarHipHop</td>
 		<td>http://www.worldstarhiphop.com/videos/video.php?v=wshhZ8F22UtJ8sLHdja0<br/>http://m.worldstarhiphop.com/video.php?v=wshh2SXFFe7W14DqQx61</td>

@@ -200,11 +200,6 @@ foreach ($sites->site as $site)
 {
 	$template = (string) $configurator->MediaEmbed->add($site['id'])->defaultTemplate;
 
-	if ($site['id'] == 'vk')
-	{
-		continue;
-	}
-
 	$node = $parentNode->appendChild($dom->createElement('site'));
 	$node->setAttribute('media_site_id',  $site['id']);
 	$node->setAttribute('site_title',     $site->name);
@@ -213,6 +208,9 @@ foreach ($sites->site as $site)
 
 	// Default HTML replacement. Ensure that iframe and script have an end tag
 	$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $template);
+
+	// Replace XSL attributes with XenForo's syntax
+	$html = str_replace('{@', '{$', $html);
 
 	// Temp fix for WorldStarHipHop
 	if ($site['id'] == 'wshh')
@@ -362,7 +360,7 @@ foreach ($sites->site as $site)
 	$node->appendChild($dom->createElement('match_urls', implode("\n", $regexps)));
 
 	$node->appendChild($dom->createElement('embed_html'))
-	     ->appendChild($dom->createCDATASection(str_replace('{@', '{$', $html)));
+	     ->appendChild($dom->createCDATASection($html));
 
 	// Build the table of sites
 	$rows[] = '<tr>';
