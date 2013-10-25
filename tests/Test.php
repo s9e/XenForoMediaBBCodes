@@ -12,7 +12,7 @@ class Test extends PHPUnit_Framework_TestCase
 	*/
 	public function testBuild()
 	{
-		$_SERVER['argv'] = ['', '-dev'];
+		$_SERVER['argv'] = array('', '-dev');
 		include __DIR__ . '/../scripts/build.php';
 	}
 
@@ -33,27 +33,27 @@ class Test extends PHPUnit_Framework_TestCase
 
 	public function getMatchCallbackTests()
 	{
-		return [
-			[
+		return array(
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/',
 				'1869987317/wish-i-was-here-1'
-			],
-			[
+			),
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html',
 				'card=card;id=1869987317%2Fwish-i-was-here-1'
-			],
-			[
+			),
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html',
 				'card=;id=1869987317%2Fwish-i-was-here-1;video=video'
-			],
-			[
+			),
+			array(
 				'twitch',
 				'http://www.twitch.tv/minigolf2000/b/361358487',
 				'archive_id=361358487;channel=minigolf2000'
-			],
-		];
+			),
+		);
 	}
 }
