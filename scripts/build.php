@@ -434,7 +434,9 @@ copy(__DIR__ . '/../LICENSE', __DIR__ . '/../build/LICENSE');
 exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $versionId . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/*');
 
 $readme =
-'This pack contains the definitions for ' . count($sitenames) . ' media sites: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
+'[url=https://travis-ci.org/s9e/XenForoMediaBBCodes][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master[/img][/url] [url=https://coveralls.io/r/s9e/XenForoMediaBBCodes][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png[/img][/url]
+
+This pack contains the definitions for ' . count($sitenames) . ' media sites: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
 
 The BBCodes definitions is based on and compatible with [url=https://github.com/s9e/TextFormatter]the s9e\TextFormatter library[/url], and more specifically its [url=https://github.com/s9e/TextFormatter/tree/master/src/s9e/TextFormatter/Plugins/MediaEmbed]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
 
