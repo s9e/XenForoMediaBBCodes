@@ -382,15 +382,22 @@ foreach ($sites->site as $site)
 	}
 }
 
-$dom->formatOutput = true;
-$xml = $dom->saveXML();
-
-file_put_contents(__DIR__ . '/../build/addon.xml', $xml);
-
 $php[] = '}';
 
 // Save the helper class
 file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', implode("\n", $php));
+
+if (!empty($_SERVER['TRAVIS']))
+{
+	// That's all we need to do during testing
+	return;
+}
+
+// Save addon.xml
+$dom->formatOutput = true;
+$xml = $dom->saveXML();
+
+file_put_contents(__DIR__ . '/../build/addon.xml', $xml);
 
 // Coalesce the table's content
 $rows = implode("\n", $rows);
