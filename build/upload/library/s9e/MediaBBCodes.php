@@ -186,6 +186,13 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderGrooveshark($vars)
+	{
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="'.htmlspecialchars((isset($vars['songid'])?40:250),2).'" data="http://grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf" width="250" height="'.htmlspecialchars((isset($vars['songid'])?40:250),2).'" allowfullscreen="" flashvars="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"/></embed></object>';
+
+		return $html;
+	}
+
 	public static function matchGrooveshark($url)
 	{
 		$regexps = array('%grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?\'playlistid\'[0-9]+)%');
@@ -268,7 +275,7 @@ class s9e_MediaBBCodes
 
 	public static function renderTwitch($vars)
 	{
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars(((isset($vars['archive_id'])||isset($vars['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['archive_id'])){$html.='&amp;archive_id='.htmlspecialchars($vars['archive_id'],2);}if(isset($vars['chapter_id'])){$html.='&amp;chapter_id='.htmlspecialchars($vars['chapter_id'],2);}$html.='"/></param><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars(((isset($vars['archive_id'])||isset($vars['chapter_id']))?'arch':'l'),2).'ive_embed_player.swf" allowfullscreen=""/></embed></object>';
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['archive_id'])){$html.='&amp;archive_id='.htmlspecialchars($vars['archive_id'],2);}if(isset($vars['chapter_id'])){$html.='&amp;chapter_id='.htmlspecialchars($vars['chapter_id'],2);}$html.='"/></param><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf" allowfullscreen=""/></embed></object>';
 
 		return $html;
 	}

@@ -219,7 +219,8 @@ foreach ($sites->site as $site)
 	}
 
 	// Test whether the template needs to be rendered in PHP
-	if (strpos($template, 'xsl') !== false)
+	if (strpos($html, '<xsl:') !== false
+	 || strpos($html, '{substring') !== false)
 	{
 		$methodName = 'render' . ucfirst($site['id']);
 		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
