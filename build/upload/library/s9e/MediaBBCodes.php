@@ -186,6 +186,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchHulu($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!hulu\\.com/watch/!'),
+				'extract' => array('!eid=(?\'id\'\\w+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchIndiegogo($url)
 	{
 		$regexps = array('!indiegogo\\.com/projects/(?\'id\'[0-9]+)$!');
