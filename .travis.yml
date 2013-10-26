@@ -4,6 +4,7 @@ php:
   - "5.3"
 before_script:
   - echo "zend.enable_gc=off" >> ~/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/php.ini
+  - mkdir releases
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' ]; then composer install --dev --no-interaction; fi"
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.3' ]; then phpenv config-rm xdebug.ini; fi"
   - php -i
