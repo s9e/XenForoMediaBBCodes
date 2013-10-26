@@ -410,12 +410,6 @@ $php[] = '}';
 // Save the helper class
 file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', implode("\n", $php));
 
-if (!empty($_SERVER['TRAVIS']))
-{
-	// That's all we need to do during testing
-	return;
-}
-
 // Save addon.xml
 $dom->formatOutput = true;
 $xml = $dom->saveXML();
@@ -456,7 +450,7 @@ file_put_contents(
 );
 
 copy(__DIR__ . '/../LICENSE', __DIR__ . '/../build/LICENSE');
-exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $versionId . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/*');
+exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $versionId . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/* 2> /dev/null');
 
 $readme =
 '[url=https://travis-ci.org/s9e/XenForoMediaBBCodes][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master[/img][/url] [url=https://coveralls.io/r/s9e/XenForoMediaBBCodes][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png[/img][/url]
