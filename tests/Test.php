@@ -71,6 +71,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'songid=35292216'
 			),
 			array(
+				'grooveshark',
+				'http://grooveshark.com/#!/s/Soul+Below/4zGL7i?src=5',
+				'songid=35292216'
+			),
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/',
 				'1869987317/wish-i-was-here-1'

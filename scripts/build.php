@@ -34,22 +34,45 @@ class s9e_MediaBBCodes
 	{
 		$vars = array();
 
+		if (!empty($regexps))
+		{
+			$vars = self::getNamedCaptures($url, $regexps);
+		}
+
 		foreach ($scrapes as $scrape)
 		{
 			foreach ($scrape['match'] as $regexp)
 			{
-				if (preg_match($regexp, $url))
+				if (preg_match($regexp, $url, $m))
 				{
-					$vars = self::scrape($url, $scrape['extract']);
+					if (isset($scrape['url']))
+					{
+						// Use the vars extracted from the media URL plus named captures from the
+						// scrape URL
+						$scrapeVars = array_merge($vars, $m);
+
+						// Replace {@var} tokens in the URL
+						$scrapeUrl = preg_replace_callback(
+							'#\\{@(\\w+)\\}#',
+							function ($m) use ($scrapeVars)
+							{
+								return (isset($scrapeVars[$m[1]])) ? $scrapeVars[$m[1]] : '';
+							},
+							$scrape['url']
+						);
+					}
+					else
+					{
+						// Use the same URL for scraping
+						$scrapeUrl = $url;
+					}
+
+					// Overwrite vars extracted from URL with vars extracted from content
+					$vars = array_merge($vars, self::scrape($scrapeUrl, $scrape['extract']));
 
 					break;
 				}
 			}
-		}
-
-		if (!empty($regexps))
-		{
-			$vars += self::getNamedCaptures($url, $regexps);
 		}
 
 		// No vars = no match
@@ -344,6 +367,11 @@ foreach ($sites->site as $site)
 			$entry['extract'][] = var_export((string) $extract, true);
 		}
 
+		if (isset($scrape['url']))
+		{
+			$entry['url'] = (string) $scrape['url'];
+		}
+
 		$scrapes[] = $entry;
 		$useMatchCallback = true;
 	}
@@ -370,6 +398,12 @@ foreach ($sites->site as $site)
 			foreach ($scrapes as $k => $scrape)
 			{
 				$php[] = '			array(';
+
+				if (isset($scrape['url']))
+				{
+					$php[] = "				'url'     => " . var_export($scrape['url'], true) . ',';
+				}
+
 				$php[] = "				'match'   => array(" . implode(', ', $entry['match']) . '),';
 				$php[] = "				'extract' => array(" . implode(', ', $entry['extract']) . ')';
 				$php[] = '			)' . ((isset($scrapes[++$k])) ? ',' : '');
