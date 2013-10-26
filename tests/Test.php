@@ -92,4 +92,46 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 		);
 	}
+
+	/**
+	* @dataProvider getEmbedCallbackTests
+	*/
+	public function testEmbedCallback($mediaKey, $site, $expected)
+	{
+		if (!class_exists('s9e_MediaBBCodes'))
+		{
+			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+		}
+
+		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
+
+		$this->assertSame($expected, s9e_MediaBBCodes::embed($mediaKey, $site));
+	}
+
+	public function getEmbedCallbackTests()
+	{
+		return array(
+			array(
+				'foo',
+				array(
+					'embed_html' => '<b>{$id}</b>'
+				),
+				'<b>foo</b>'
+			),
+			array(
+				'foo&bar',
+				array(
+					'embed_html' => '<b>{$id}</b>'
+				),
+				'<b>foo&amp;bar</b>'
+			),
+			array(
+				'foo=bar;baz=quux',
+				array(
+					'embed_html' => '{$foo} {$baz}'
+				),
+				'bar quux'
+			),
+		);
+	}
 }

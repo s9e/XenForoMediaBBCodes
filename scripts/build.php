@@ -85,7 +85,7 @@ class s9e_MediaBBCodes
 			// If the URL is stored in the media site, reparse it and store the captures
 			$vars = self::getNamedCaptures($mediaKey, $site['regexes']);
 		}
-		elseif (preg_match('(^([-\\w]+=[^;]*)(?>;(?1))*$)', $mediaKey))
+		elseif (preg_match('(^(\\w+=[^;]*)(?>;(?1))*$)', $mediaKey))
 		{
 			// If the URL looks like a series of key=value pairs, add them to $vars
 			$vars = array();
