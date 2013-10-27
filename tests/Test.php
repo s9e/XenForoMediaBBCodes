@@ -41,6 +41,16 @@ class Test extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array(
+				'blip',
+				'http://blip.tv/hilah-cooking/hilah-cooking-vegetable-beef-stew-6663725',
+				'AYOW3REC'
+			),
+			array(
+				'blip',
+				'http://blip.tv/play/g6VTgpjxbQA',
+				'g6VTgpjxbQA'
+			),
+			array(
 				'colbertnation',
 				'http://www.colbertnation.com/the-colbert-report-videos/429637/october-14-2013/5-x-five---colbert-moments--under-the-desk',
 				'mgid:cms:video:colbertnation.com:429637'

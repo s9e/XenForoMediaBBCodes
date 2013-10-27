@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131026" version_string="20131026">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131027" version_string="20131027">
   <bb_code_media_sites>
+    <site media_site_id="blip" site_title="Blip" site_url="http://blip.tv/" match_is_regex="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBlip">
+      <match_urls>!blip\.tv/play/(?'id'[\w+%/_]+)!
+!blip\.tv/[^/]+/[^/]+-\d+$!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="http://blip.tv/play/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
     <site media_site_id="break" site_title="Break" site_url="http://www.break.com/" match_is_regex="1">
       <match_urls>!break\.com/video/.*-(?'id'[0-9]+)$!</match_urls>
       <embed_html><![CDATA[<iframe width="464" height="290" src="http://www.break.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>

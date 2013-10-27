@@ -194,6 +194,19 @@ class s9e_MediaBBCodes
 		return $vars;
 	}
 
+	public static function matchBlip($url)
+	{
+		$regexps = array('!blip\\.tv/play/(?\'id\'[\\w+%/_]+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!blip\\.tv/[^/]+/[^/]+-\\d+$!'),
+				'extract' => array('!blip\\.tv/play/(?\'id\'[\\w%+/_]+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchColbertnation($url)
 	{
 		$regexps = array();

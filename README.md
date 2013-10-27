@@ -12,6 +12,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<th>Example URLs</th>
 	</tr>
 	<tr>
+		<td><code>blip</code></td>
+		<td>Blip</td>
+		<td>http://blip.tv/c18booktracker/full-text-search-quirks-in-google-books-2260037<br/>http://blip.tv/play/g6VTgpjxbQA</td>
+	</tr>
+	<tr>
 		<td><code>break</code></td>
 		<td>Break</td>
 		<td>http://www.break.com/video/video-game-playing-frog-wants-more-2278131</td>
