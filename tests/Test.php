@@ -181,6 +181,20 @@ class Test extends PHPUnit_Framework_TestCase
 				),
 				'<iframe width="400" height="42" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/album=1122163921/size=small/t=7"/></iframe>'
 			),
+			array(
+				'playlistid=74854761',
+				array(
+					'embed_html' => '<!-- s9e_MediaBBCodes::renderGrooveshark -->'
+				),
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="250" data="http://grooveshark.com/widget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID=74854761&amp;songID="/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/widget.swf" width="250" height="250" allowfullscreen="" flashvars="playlistID=74854761&amp;songID="/></embed></object>'
+			),
+			array(
+				'songid=35292216',
+				array(
+					'embed_html' => '<!-- s9e_MediaBBCodes::renderGrooveshark -->'
+				),
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="40" data="http://grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID=&amp;songID=35292216"/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/songWidget.swf" width="250" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"/></embed></object>'
+			),
 		);
 	}
 }

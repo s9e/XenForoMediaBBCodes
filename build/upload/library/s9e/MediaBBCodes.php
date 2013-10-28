@@ -286,6 +286,8 @@ class s9e_MediaBBCodes
 
 	public static function renderGrooveshark($vars)
 	{
+		$vars += array('playlistid' => null, 'songid' => null);
+
 		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="'.htmlspecialchars((isset($vars['songid'])?40:250),2).'" data="http://grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf" width="250" height="'.htmlspecialchars((isset($vars['songid'])?40:250),2).'" allowfullscreen="" flashvars="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"/></embed></object>';
 
 		return $html;
@@ -333,6 +335,8 @@ class s9e_MediaBBCodes
 
 	public static function renderKickstarter($vars)
 	{
+		$vars += array('id' => null);
+
 		$html='';if(isset($vars['video'])){$html.='<iframe width="480" height="360" src="http://www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>';}else{$html.='<iframe width="220" height="380" src="http://www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>';}
 
 		return $html;

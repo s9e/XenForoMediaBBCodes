@@ -322,9 +322,25 @@ foreach ($sites->site as $site)
 			continue;
 		}
 
+		// Collect the name of all vars in use to initialize them with a null value
+		$vars = [];
+		preg_match_all('(\\{@(\\w+)\\})', $template, $matches);
+		foreach ($matches[1] as $varName)
+		{
+			$vars[$varName] = var_export($varName, true) . ' => null';
+		}
+		ksort($vars);
+
 		$php[] = '';
 		$php[] = '	public static function ' . $methodName . '($vars)';
 		$php[] = '	{';
+
+		if (!empty($vars))
+		{
+			$php[] = '		$vars += array(' . implode(', ', $vars) . ');';
+			$php[] = '';
+		}
+
 		$php[] = '		' . $src;
 		$php[] = '';
 		$php[] = '		return $html;';
