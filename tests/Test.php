@@ -96,6 +96,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'songid=35292216'
 			),
 			array(
+				'hulu',
+				'http://www.hulu.com/watch/445716',
+				'lbxMKBY8oOd3pvOBhM8lqQ'
+			),
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/',
 				'1869987317/wish-i-was-here-1'
