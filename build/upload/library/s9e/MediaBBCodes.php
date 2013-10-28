@@ -23,38 +23,52 @@ class s9e_MediaBBCodes
 
 		foreach ($scrapes as $scrape)
 		{
+			$scrapeVars = array();
+
+			$skip = true;
 			foreach ($scrape['match'] as $regexp)
 			{
 				if (preg_match($regexp, $url, $m))
 				{
-					if (isset($scrape['url']))
-					{
-						// Use the vars extracted from the media URL plus named captures from the
-						// scrape URL
-						$scrapeVars = array_merge($vars, $m);
+					// Add the named captures to the available vars
+					$scrapeVars += $m;
 
-						// Replace {@var} tokens in the URL
-						$scrapeUrl = preg_replace_callback(
-							'#\\{@(\\w+)\\}#',
-							function ($m) use ($scrapeVars)
-							{
-								return (isset($scrapeVars[$m[1]])) ? $scrapeVars[$m[1]] : '';
-							},
-							$scrape['url']
-						);
-					}
-					else
-					{
-						// Use the same URL for scraping
-						$scrapeUrl = $url;
-					}
-
-					// Overwrite vars extracted from URL with vars extracted from content
-					$vars = array_merge($vars, self::scrape($scrapeUrl, $scrape['extract']));
-
-					break;
+					$skip = false;
 				}
 			}
+
+			if ($skip)
+			{
+				continue;
+			}
+
+			// Add the vars from non-scrape "extract" regexps
+			$scrapeVars += $vars;
+
+			if (isset($scrape['url']))
+			{
+				// Use the vars extracted from the media URL plus named captures from the
+				// scrape URL
+				$scrapeVars = array_merge($vars, $m);
+
+				// Replace {@var} tokens in the URL
+				$scrapeUrl = preg_replace_callback(
+					'#\\{@(\\w+)\\}#',
+					function ($m) use ($scrapeVars)
+					{
+						return (isset($scrapeVars[$m[1]])) ? $scrapeVars[$m[1]] : '';
+					},
+					$scrape['url']
+				);
+			}
+			else
+			{
+				// Use the same URL for scraping
+				$scrapeUrl = $url;
+			}
+
+			// Overwrite vars extracted from URL with vars extracted from content
+			$vars = array_merge($vars, self::scrape($scrapeUrl, $scrape['extract']));
 		}
 
 		// No vars = no match
@@ -192,6 +206,30 @@ class s9e_MediaBBCodes
 		}
 
 		return $vars;
+	}
+
+	public static function renderBandcamp($vars)
+	{
+		$html='<iframe width="400" height="'.htmlspecialchars((isset($vars['track_num'])?42:120),2).'" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/album='.htmlspecialchars($vars['album_id'],2).'/size=';if(isset($vars['track_num'])){$html.='small/t='.htmlspecialchars($vars['track_num'],2);}else{$html.='medium';}$html.='"/></iframe>';
+
+		return $html;
+	}
+
+	public static function matchBandcamp($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!bandcamp\\.com/album/.!'),
+				'extract' => array('!/album=(?\'album_id\'\\d+)!')
+			),
+			array(
+				'match'   => array('!bandcamp\\.com/track/.!'),
+				'extract' => array('!"album_id":(?\'album_id\'\\d+)!', '!"track_num":(?\'track_num\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
 	}
 
 	public static function matchBlip($url)

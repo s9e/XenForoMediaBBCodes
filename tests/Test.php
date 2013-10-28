@@ -41,6 +41,16 @@ class Test extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array(
+				'bandcamp',
+				'http://proleter.bandcamp.com/album/curses-from-past-times-ep',
+				'album_id=1122163921'
+			),
+			array(
+				'bandcamp',
+				'http://proleter.bandcamp.com/track/april-showers',
+				'album_id=1122163921;track_num=1'
+			),
+			array(
 				'blip',
 				'http://blip.tv/hilah-cooking/hilah-cooking-vegetable-beef-stew-6663725',
 				'AYOW3REC'
