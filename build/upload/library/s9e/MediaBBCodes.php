@@ -372,6 +372,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchTeamcoco($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!teamcoco\\.com/video/.!'),
+				'extract' => array('!teamcoco\\.com/embed/v/(?\'id\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderTwitch($vars)
 	{
 		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['archive_id'])){$html.='&amp;archive_id='.htmlspecialchars($vars['archive_id'],2);}if(isset($vars['chapter_id'])){$html.='&amp;chapter_id='.htmlspecialchars($vars['chapter_id'],2);}$html.='"/></param><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf" allowfullscreen=""/></embed></object>';

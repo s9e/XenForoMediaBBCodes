@@ -1,6 +1,7 @@
 #!/bin/sh
 cd $(dirname $(dirname $(realpath $0)))
 git submodule update --remote
+phpunit || exit
 scripts/build.php "$@"
 git diff
 git commit -a                                               && \

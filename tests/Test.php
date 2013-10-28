@@ -111,6 +111,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'card=;id=1869987317%2Fwish-i-was-here-1;video=video'
 			),
 			array(
+				'teamcoco',
+				'http://teamcoco.com/video/conan-highlight-gigolos-mug-hunt',
+				'54003'
+			),
+			array(
 				'twitch',
 				'http://www.twitch.tv/minigolf2000/b/361358487',
 				'archive_id=361358487;channel=minigolf2000'
