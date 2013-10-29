@@ -531,7 +531,7 @@ Unzip the archive, and upload the content of the [font=monospace]upload[/font] f
 
 [size=6][font=Arial]Compatibility and customization[/font][/size]
 
-Most of the definitions found in this pack are compatible with existing definitions, but some of them may not. If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]experimental configurator interface[/url].
+Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]experimental configurator interface[/url].
 
 [size=6][font=Arial]Requests[/font][/size]
 

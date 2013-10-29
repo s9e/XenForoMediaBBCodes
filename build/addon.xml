@@ -39,6 +39,10 @@
       <match_urls>!thedailyshow\.com/(?:collection|watch)/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
+    <site media_site_id="espn" site_title="ESPN" site_url="http://espn.go.com/" match_is_regex="1">
+      <match_urls>!espn\.go\.com/video/clip\?id=(?'id'[:\w]+)!</match_urls>
+      <embed_html><![CDATA[<script src="http://player.espn.com/player.js?playerBrandingId=4ef8000cbaf34c1687a7d9a26fe0e89e&amp;adSetCode=91cDU6NuXTGKz3OdjOxFdAgJVtQcKJnI&amp;pcode=1kNG061cgaoolOncv54OAO1ceO-I&amp;width=576&amp;height=324&amp;externalId={$id}&amp;thruParam_espn-ui[autoPlay]=false&amp;thruParam_espn-ui[playRelatedExternally]=true"></script>]]></embed_html>
+    </site>
     <site media_site_id="facebook" site_title="Facebook" site_url="http://www.facebook.com/" match_is_regex="1">
       <match_urls>!facebook\.com/(?:photo|video/video)\.php\?v=(?'id'[0-9]+)!</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="315" src="https://www.facebook.com/video/embed?video_id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
@@ -49,7 +53,7 @@
     </site>
     <site media_site_id="gamespot" site_title="Gamespot" site_url="http://www.gamespot.com/" match_is_regex="1">
       <match_urls>!gamespot\.com.*?/(?:events|videos)/.*?-(?'id'\d+)/(?:[#?].*)?$!</match_urls>
-      <embed_html><![CDATA[<iframe width="640" height="360" src="http://www.gamespot.com/videoembed/{$id}&amp;mapp=false&amp;ads=0&amp;onsite=0" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="640" height="400" src="http://www.gamespot.com/videos/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="gist" site_title="GitHub Gist" site_url="https://gist.github.com/" match_is_regex="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed">
       <match_urls>!gist\.github\.com/(?'id'(?:\w+/)?[0-9]+(?:/[0-9a-f]+)?)!</match_urls>
