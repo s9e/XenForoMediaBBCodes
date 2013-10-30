@@ -30,6 +30,14 @@ class s9e_MediaBBCodes
 	*/
 	public static $cacheDir;
 
+	public static function install()
+	{
+		if (version_compare(phpversion(), '5.3', '<'))
+		{
+			throw new RuntimeException('Requires PHP 5.3 or later');
+		}
+	}
+
 	public static function match($url, $regexps, $scrapes)
 	{
 		$vars = array();
@@ -232,18 +240,28 @@ $php = explode("\n", $php);
 $dom = new DOMDocument('1.0', 'utf-8');
 $addon = $dom->appendChild($dom->createElement('addon'));
 
+// The version is simply the current UTC day, optionally followed by the first argument given to
+// this script
 $versionId = gmdate('Ymd');
-
 if (isset($_SERVER['argv'][1]))
 {
 	$versionId .= $_SERVER['argv'][1];
 }
 
-$addon->setAttribute('addon_id',       's9e');
-$addon->setAttribute('title',          's9e Media Pack');
-$addon->setAttribute('url',            'https://github.com/s9e/XenForoMediaBBCodes');
-$addon->setAttribute('version_id',     $versionId);
-$addon->setAttribute('version_string', $versionId);
+// Set the add-on informations
+$attributes = [
+	'addon_id'                => 's9e',
+	'title'                   => 's9e Media Pack',
+	'url'                     => 'https://github.com/s9e/XenForoMediaBBCodes',
+	'version_id'              => $versionId,
+	'version_string'          => $versionId,
+	'install_callback_class'  => 's9e_MediaBBCodes',
+	'install_callback_method' => 'install'
+];
+foreach ($attributes as $attrName => $attrValue)
+{
+	$addon->setAttribute($attrName, $attrValue);
+}
 
 $rows = [];
 $rows[] = '<tr>';

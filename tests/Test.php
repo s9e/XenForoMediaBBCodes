@@ -18,7 +18,35 @@ class Test extends PHPUnit_Framework_TestCase
 
 	public function testLint()
 	{
-		include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+		include_once __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+	}
+
+	public function testInstall()
+	{
+		if (!class_exists('s9e_MediaBBCodes'))
+		{
+			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+		}
+
+		s9e_MediaBBCodes::install();
+	}
+
+	/**
+	* @runInSeparateProcess
+	* @requires extension runkit
+	* @expectedException RuntimeException
+	* @expectedException RuntimeExceptionMessage Requires PHP 5.3 or later
+	*/
+	public function testInstallFailure()
+	{
+		if (!class_exists('s9e_MediaBBCodes'))
+		{
+			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+		}
+
+		runkit_function_redefine('phpversion', '', "return '5.2.5';");
+
+		s9e_MediaBBCodes::install();
 	}
 
 	/**

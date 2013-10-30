@@ -12,6 +12,14 @@ class s9e_MediaBBCodes
 	*/
 	public static $cacheDir;
 
+	public static function install()
+	{
+		if (version_compare(phpversion(), '5.3', '<'))
+		{
+			throw new RuntimeException('Requires PHP 5.3 or later');
+		}
+	}
+
 	public static function match($url, $regexps, $scrapes)
 	{
 		$vars = array();
