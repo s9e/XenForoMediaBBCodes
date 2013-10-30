@@ -344,7 +344,7 @@ class s9e_MediaBBCodes
 
 	public static function matchKickstarter($url)
 	{
-		$regexps = array('!kickstarter.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!');
+		$regexps = array('!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
@@ -418,6 +418,21 @@ class s9e_MediaBBCodes
 				'extract' => array('!embed_hash=(?\'hash\'[0-9a-f]+)!')
 			)
 		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
+	public static function renderYoutube($vars)
+	{
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['t'])){$html.='?start='.htmlspecialchars($vars['t'],2);}$html.='"/></iframe>';
+
+		return $html;
+	}
+
+	public static function matchYoutube($url)
+	{
+		$regexps = array('!youtube\\.com/(?:watch\\?.*?v=|v/)(?\'id\'[-0-9A-Z_a-z]+)!', '!youtu\\.be/(?\'id\'[-0-9A-Z_a-z]+)!', '!youtu(?>\\.be|be\\.com).*?[#&?]t=(?\'t\'\\d+)!');
+		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
 	}

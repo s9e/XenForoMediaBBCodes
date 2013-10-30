@@ -174,6 +174,6 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>youtube</code></td>
 		<td>YouTube</td>
-		<td>http://www.youtube.com/watch?v=-cEzsCAzTak<br/>http://youtu.be/-cEzsCAzTak</td>
+		<td>http://www.youtube.com/watch?v=-cEzsCAzTak<br/>http://youtu.be/-cEzsCAzTak<br/>http://www.youtube.com/watch?feature=player_detailpage&amp;v=9bZkp7q19f0#t=113</td>
 	</tr>
 </table>

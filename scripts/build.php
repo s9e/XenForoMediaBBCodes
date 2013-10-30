@@ -376,6 +376,27 @@ foreach ($sites->site as $site)
 			$useMatchCallback = true;
 		}
 
+		// Test whether this regexp contains the name of at least one host. If not, make it match
+		// any of the host. (CNN being a special case)
+		$hosts     = [];
+		$matchHost = ($site['id'] != 'cnn');
+		foreach ($site->host as $host)
+		{
+			$hosts[] = (string) $host;
+
+			if (strpos($regexp, preg_quote($host)) !== false)
+			{
+				$matchHost = false;
+			}
+		}
+		if ($matchHost)
+		{
+			$regexp = $regexp[0]
+			        . s9e\TextFormatter\Configurator\Helpers\RegexpBuilder::fromList($hosts)
+			        . '.*?'
+			        . substr($regexp, 1);
+		}
+
 		$regexps[] = $regexp;
 		$matchRegexps[] = var_export($regexp, true);
 	}
@@ -446,7 +467,7 @@ foreach ($sites->site as $site)
 		$php[] = '		return self::match($url, $regexps, $scrapes);';
 		$php[] = '	}';
 	}
-	$node->appendChild($dom->createElement('match_urls', implode("\n", $regexps)));
+	$node->appendChild($dom->createElement('match_urls', htmlspecialchars(implode("\n", $regexps))));
 
 	$node->appendChild($dom->createElement('embed_html'))
 	     ->appendChild($dom->createCDATASection($html));
