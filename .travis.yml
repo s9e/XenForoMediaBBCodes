@@ -6,7 +6,6 @@ before_script:
   - echo "zend.enable_gc=off" >> ~/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/php.ini
   - mkdir releases tests/.cache
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' ]; then composer install --dev --no-interaction; fi"
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' ]; then scripts/installRunkit.sh; fi"
   - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.3' ]; then phpenv config-rm xdebug.ini; fi"
   - php -i
 script:
