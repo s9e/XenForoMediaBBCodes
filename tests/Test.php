@@ -151,6 +151,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'54003'
 			),
 			array(
+				'traileraddict',
+				'http://www.traileraddict.com/trailer/watchmen/feature-trailer',
+				'7376'
+			),
+			array(
 				'twitch',
 				'http://www.twitch.tv/minigolf2000/b/361358487',
 				'archive_id=361358487;channel=minigolf2000'
