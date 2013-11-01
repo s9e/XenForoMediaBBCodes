@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131030b" version_string="20131030b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131101" version_string="20131101" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="bandcamp" site_title="Bandcamp" site_url="http://bandcamp.com/" match_is_regex="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBandcamp">
       <match_urls>!bandcamp\.com/album/.!
@@ -106,6 +106,11 @@
     <site media_site_id="soundcloud" site_title="SoundCloud" site_url="https://soundcloud.com/" match_is_regex="1">
       <match_urls>!soundcloud\.com(?:%2F|/)tracks(?:%2F|/)(?'id'[0-9]+)!</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="166" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="spotify" site_title="Spotify" site_url="https://www.spotify.com/" match_is_regex="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSpotify">
+      <match_urls>!(?'uri'spotify:(?:album:artist|user|track(?:set)?):[,:\w]+)!
+!(?:open|play)\.spotify\.com/(?'path'(?:album|artist|track|user)/[/\w]+)!</match_urls>
+      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderSpotify() -->]]></embed_html>
     </site>
     <site media_site_id="teamcoco" site_title="Team Coco" site_url="http://teamcoco.com/" match_is_regex="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchTeamcoco">
       <match_urls>!teamcoco\.com/video/.!</match_urls>

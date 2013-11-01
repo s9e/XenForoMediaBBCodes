@@ -391,9 +391,9 @@ foreach ($sites->site as $site)
 		}
 
 		// Test whether this regexp contains the name of at least one host. If not, make it match
-		// any of the host. (CNN being a special case)
+		// any of the host. (CNN and Spotify excluded)
 		$hosts     = [];
-		$matchHost = ($site['id'] != 'cnn');
+		$matchHost = ($site['id'] != 'cnn' && $site['id'] != 'spotify');
 		foreach ($site->host as $host)
 		{
 			$hosts[] = (string) $host;

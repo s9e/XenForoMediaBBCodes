@@ -380,6 +380,21 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderSpotify($vars)
+	{
+		$html='<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=';if(isset($vars['uri'])){$html.=htmlspecialchars($vars['uri'],2);}else{$html.='spotify:'.htmlspecialchars(strtr($vars['path'],'/',':'),2);}$html.='"/></iframe>';
+
+		return $html;
+	}
+
+	public static function matchSpotify($url)
+	{
+		$regexps = array('!(?\'uri\'spotify:(?:album:artist|user|track(?:set)?):[,:\\w]+)!', '!(?:open|play)\\.spotify\\.com/(?\'path\'(?:album|artist|track|user)/[/\\w]+)!');
+		$scrapes = array();
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchTeamcoco($url)
 	{
 		$regexps = array();
