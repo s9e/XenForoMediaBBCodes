@@ -238,10 +238,12 @@ $addon = $dom->appendChild($dom->createElement('addon'));
 
 // The version is simply the current UTC day, optionally followed by the first argument given to
 // this script
-$versionId = gmdate('Ymd');
+$version   = gmdate('Ymd');
+$versionId = $version * 10;
 if (isset($_SERVER['argv'][1]))
 {
-	$versionId .= $_SERVER['argv'][1];
+	$version   .= $_SERVER['argv'][1];
+	$versionId += ord($_SERVER['argv'][1]) - 97;
 }
 
 // Set the add-on informations
@@ -249,7 +251,7 @@ $attributes = [
 	'addon_id'                => 's9e',
 	'title'                   => 's9e Media Pack',
 	'url'                     => 'https://github.com/s9e/XenForoMediaBBCodes',
-	'version_id'              => $versionId,
+	'version_id'              => $version,
 	'version_string'          => $versionId,
 	'install_callback_class'  => 's9e_MediaBBCodes',
 	'install_callback_method' => 'install'
@@ -280,6 +282,14 @@ foreach ($sites->site as $site)
 	$node->setAttribute('site_title',     $site->name);
 	$node->setAttribute('site_url',       $site->homepage);
 	$node->setAttribute('match_is_regex', '1');
+
+	preg_match_all('/(?<=@)\\w+/', $template, $matches);
+	$attrNames = array_unique($matches[0]);
+
+	if (count($attrNames) === 1 && $attrNames !== ['id'])
+	{
+		die("Remap $site[id]\n");
+	}
 
 	// Default HTML replacement. Ensure that iframe and script have an end tag
 	$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $template);
