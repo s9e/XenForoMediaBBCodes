@@ -561,7 +561,7 @@ file_put_contents(
 );
 
 copy(__DIR__ . '/../LICENSE', __DIR__ . '/../build/LICENSE');
-exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $versionId . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/* 2> /dev/null');
+exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $version . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/* 2> /dev/null');
 
 $readme =
 '[url=https://travis-ci.org/s9e/XenForoMediaBBCodes][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master[/img][/url] [url=https://coveralls.io/r/s9e/XenForoMediaBBCodes][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png[/img][/url]
