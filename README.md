@@ -134,7 +134,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>soundcloud</code></td>
 		<td>SoundCloud</td>
-		<td>http://api.soundcloud.com/tracks/98282116</td>
+		<td>http://api.soundcloud.com/tracks/98282116<br/>https://soundcloud.com/andrewbird/three-white-horses</td>
 	</tr>
 	<tr>
 		<td><code>spotify</code></td>

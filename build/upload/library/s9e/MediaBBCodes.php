@@ -78,7 +78,9 @@ class s9e_MediaBBCodes
 		// No vars = no match
 		if (empty($vars))
 		{
-			return false;
+			// NOTE: we return the URL to sidestep a bug in XenForo that occurs when the match
+			//       callback returns false and there is no "id" capture in the site's regexp
+			return $url;
 		}
 
 		// If there's only one capture named "id", we store its value as-is
