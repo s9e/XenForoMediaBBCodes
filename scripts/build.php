@@ -534,9 +534,12 @@ $rows = implode("\n", $rows);
 $filepath = __DIR__ . '/../www/configure.html';
 file_put_contents(
 	$filepath,
-	preg_replace(
+	preg_replace_callback(
 		'#(?<=var xml = ).*?(?=;\\n\\n)#',
-		addcslashes(json_encode($xml), '$\\'),
+		function () use ($xml)
+		{
+			return json_encode($xml);
+		},
 		preg_replace(
 			'#(<table[^>]*>).*</table>#s',
 			"\$1\n\t\t" . str_replace("\n", "\n\t\t", $rows) . "\n\t</table>",
