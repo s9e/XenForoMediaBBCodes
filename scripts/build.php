@@ -536,7 +536,7 @@ file_put_contents(
 	$filepath,
 	preg_replace(
 		'#(?<=var xml = ).*?(?=;\\n\\n)#',
-		json_encode($xml),
+		addcslashes(json_encode($xml), '$\\'),
 		preg_replace(
 			'#(<table[^>]*>).*</table>#s',
 			"\$1\n\t\t" . str_replace("\n", "\n\t\t", $rows) . "\n\t</table>",
