@@ -344,7 +344,7 @@ foreach ($sites->site as $site)
 		{
 			echo 'Skipping ', $site->name, " (->)\n";
 			$node->parentNode->removeChild($node);
-
+die($src."\n");
 			continue;
 		}
 

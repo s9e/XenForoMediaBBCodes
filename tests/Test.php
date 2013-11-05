@@ -244,17 +244,17 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'uri=spotify%3Atrackset%3APREFEREDTITLE%3A5Z7ygHQo02SUrFmcgpwsKW%2C1x6ACsKV4UdWS2FMuPFUiT%2C4bi73jCM02fMpkI11Lqmfe',
 				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
-				'<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"/></iframe>'
+				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"/></iframe>'
 			),
 			array(
 				'path=user%2Fozmoetr%2Fplaylist%2F4yRrCWNhWOqWZx5lmFqZvt',
 				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
-				'<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt"/></iframe>'
+				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt"/></iframe>'
 			),
 			array(
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
 				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
-				'<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"/></iframe>'
+				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"/></iframe>'
 			),
 			array(
 				'id=9bZkp7q19f0;t=113',

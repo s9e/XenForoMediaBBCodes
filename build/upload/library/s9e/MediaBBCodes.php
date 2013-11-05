@@ -388,7 +388,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('path' => null, 'uri' => null);
 
-		$html='<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=';if(isset($vars['uri'])){$html.=htmlspecialchars($vars['uri'],2);}else{$html.='spotify:'.htmlspecialchars(strtr($vars['path'],'/',':'),2);}$html.='"/></iframe>';
+		$html='<iframe width="300" height="'.htmlspecialchars((strpos($vars['uri'],':track:')!==false||strpos($vars['path'],'/track/')!==false?80:380),2).'" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=';if(isset($vars['uri'])){$html.=htmlspecialchars($vars['uri'],2);}else{$html.='spotify:'.htmlspecialchars(strtr($vars['path'],'/',':'),2);}$html.='"/></iframe>';
 
 		return $html;
 	}
