@@ -216,6 +216,8 @@ class s9e_MediaBBCodes
 
 	public static function renderBandcamp($vars)
 	{
+		$vars += array('album_id' => null, 'track_num' => null);
+
 		$html='<iframe width="400" height="'.htmlspecialchars((isset($vars['track_num'])?42:120),2).'" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/album='.htmlspecialchars($vars['album_id'],2).'/size=';if(isset($vars['track_num'])){$html.='small/t='.htmlspecialchars($vars['track_num'],2);}else{$html.='medium';}$html.='"/></iframe>';
 
 		return $html;
@@ -341,7 +343,7 @@ class s9e_MediaBBCodes
 
 	public static function renderKickstarter($vars)
 	{
-		$vars += array('id' => null);
+		$vars += array('id' => null, 'video' => null);
 
 		$html='';if(isset($vars['video'])){$html.='<iframe width="480" height="360" src="http://www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>';}else{$html.='<iframe width="220" height="380" src="http://www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>';}
 
@@ -384,6 +386,8 @@ class s9e_MediaBBCodes
 
 	public static function renderSpotify($vars)
 	{
+		$vars += array('path' => null, 'uri' => null);
+
 		$html='<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=';if(isset($vars['uri'])){$html.=htmlspecialchars($vars['uri'],2);}else{$html.='spotify:'.htmlspecialchars(strtr($vars['path'],'/',':'),2);}$html.='"/></iframe>';
 
 		return $html;
@@ -425,6 +429,8 @@ class s9e_MediaBBCodes
 
 	public static function renderTwitch($vars)
 	{
+		$vars += array('archive_id' => null, 'channel' => null, 'chapter_id' => null);
+
 		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['archive_id'])){$html.='&amp;archive_id='.htmlspecialchars($vars['archive_id'],2);}if(isset($vars['chapter_id'])){$html.='&amp;chapter_id='.htmlspecialchars($vars['chapter_id'],2);}$html.='"/></param><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf" allowfullscreen=""/></embed></object>';
 
 		return $html;
@@ -458,6 +464,8 @@ class s9e_MediaBBCodes
 
 	public static function renderYoutube($vars)
 	{
+		$vars += array('id' => null, 't' => null);
+
 		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['t'])){$html.='?start='.htmlspecialchars($vars['t'],2);}$html.='"/></iframe>';
 
 		return $html;
