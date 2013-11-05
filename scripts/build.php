@@ -344,7 +344,7 @@ foreach ($sites->site as $site)
 		{
 			echo 'Skipping ', $site->name, " (->)\n";
 			$node->parentNode->removeChild($node);
-die($src."\n");
+
 			continue;
 		}
 
@@ -588,12 +588,12 @@ Most of the definitions found in this pack are compatible with existing definiti
 If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion. Selection may depend on the site\'s popularity and Alexa rank. Please post a few links as examples of the kind of links that should be supported. Only links to legal stuff, thanks.';
 
 file_put_contents(
-	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $versionId . '.txt',
+	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '.txt',
 	$readme
 );
 
 // Update the test file
 file_put_contents(
-	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $versionId . '-urls.txt',
+	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '-urls.txt',
 	implode("\n", $examples)
 );
