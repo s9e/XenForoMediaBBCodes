@@ -321,7 +321,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('!hulu\\.com/watch/!'),
-				'extract' => array('!eid=(?\'id\'\\w+)!')
+				'extract' => array('!eid=(?\'id\'[-\\w]+)!')
 			)
 		);
 
