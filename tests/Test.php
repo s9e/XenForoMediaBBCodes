@@ -107,8 +107,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'hulu',
-				'http://www.hulu.com/watch/445716',
-				'lbxMKBY8oOd3pvOBhM8lqQ'
+				'http://www.hulu.com/watch/484180',
+				'zPFCgxncn97IFkqEnZ-kRA'
 			),
 			array(
 				'kickstarter',
