@@ -493,6 +493,18 @@ foreach ($sites->site as $site)
 		$php[] = '		return self::match($url, $regexps, $scrapes);';
 		$php[] = '	}';
 	}
+
+	// Test whether each regexp has a capture named "id". If not, add an empty capture named "id" to
+	// satisfy XenForo's assumptions that every regexp contains one
+	foreach ($regexps as &$regexp)
+	{
+		if (!preg_match("(\\(\\?['<]id['<])", $regexp))
+		{
+			$regexp = $regexp[0] . "(?'id')" . substr($regexp, 1);
+		}
+	}
+	unset($regexp);
+
 	$node->appendChild($dom->createElement('match_urls', htmlspecialchars(implode("\n", $regexps))));
 
 	$node->appendChild($dom->createElement('embed_html'))
