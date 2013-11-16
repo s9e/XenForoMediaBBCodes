@@ -449,6 +449,28 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderUstream($vars)
+	{
+		$vars += array('cid' => null, 'vid' => null);
+
+		$html='<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/';if(isset($vars['vid'])){$html.='recorded/'.htmlspecialchars($vars['vid'],2);}else{$html.=htmlspecialchars($vars['cid'],2);}$html.='"/></iframe>';
+
+		return $html;
+	}
+
+	public static function matchUstream($url)
+	{
+		$regexps = array('!ustream\\.tv/recorded/(?\'vid\'\\d+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('#ustream\\.tv/(?!explore/|platform/|recorded/|search\\?|upcoming$|user/)(?:channel/)?[-\\w]+#'),
+				'extract' => array('!embed/(?\'cid\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchVk($url)
 	{
 		$regexps = array('!vk\\.com/video(?\'oid\'-?[0-9]+)_(?\'vid\'[0-9]+)!');

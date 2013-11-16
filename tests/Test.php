@@ -161,6 +161,21 @@ class Test extends PHPUnit_Framework_TestCase
 				'archive_id=361358487;channel=minigolf2000'
 			),
 			array(
+				'ustream',
+				'http://www.ustream.tv/channel/ps4-ustream-gameplay',
+				'cid=16234409'
+			),
+			array(
+				'ustream',
+				'http://www.ustream.tv/baja1000tv',
+				'cid=9979779'
+			),
+			array(
+				'ustream',
+				'http://www.ustream.tv/recorded/40688256',
+				'vid=40688256'
+			),
+			array(
 				'youtube',
 				'http://www.youtube.com/watch?v=-cEzsCAzTak',
 				'-cEzsCAzTak'
@@ -255,6 +270,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
 				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
 				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"/></iframe>'
+			),
+			array(
+				'cid=16234409',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderUstream -->'),
+				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/16234409"/></iframe>'
+			),
+			array(
+				'vid=40688256',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderUstream -->'),
+				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/recorded/40688256"/></iframe>'
 			),
 			array(
 				'id=9bZkp7q19f0;t=113',
