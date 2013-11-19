@@ -442,7 +442,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('!twitch\\.tv/m/[0-9]+!'),
-				'extract' => array('!channel=(?\'channel\'[^&]+)&amp;archive_id=(?\'archive_id\'[0-9]+)!')
+				'extract' => array('!channel=(?\'channel\'\\w+)&.*?archive_id=(?\'archive_id\'[0-9]+)!')
 			)
 		);
 

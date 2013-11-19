@@ -284,6 +284,7 @@ foreach ($sites->site as $site)
 	$node->setAttribute('site_title',     $site->name);
 	$node->setAttribute('site_url',       $site->homepage);
 	$node->setAttribute('match_is_regex', '1');
+	$node->setAttribute('supported',      '1');
 
 	preg_match_all('/(?<=@)\\w+/', $template, $matches);
 	$attrNames = array_unique($matches[0]);
