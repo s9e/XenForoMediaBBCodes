@@ -58,7 +58,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'bandcamp',
 				'http://proleter.bandcamp.com/track/april-showers',
-				'album_id=1122163921;track_num=1'
+				'album_id=1122163921;track_id=1048345661;track_num=1'
+			),
+			array(
+				'bandcamp',
+				'http://therunons.bandcamp.com/track/still-feel',
+				'track_id=2146686782'
 			),
 			array(
 				'blip',
