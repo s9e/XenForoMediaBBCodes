@@ -486,16 +486,16 @@ class s9e_MediaBBCodes
 
 	public static function renderYoutube($vars)
 	{
-		$vars += array('id' => null, 't' => null);
+		$vars += array('id' => null, 'list' => null, 't' => null);
 
-		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['t'])){$html.='?start='.htmlspecialchars($vars['t'],2);}$html.='"/></iframe>';
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['list'])||isset($vars['t'])){$html.='?';if(isset($vars['list'])){$html.='list='.htmlspecialchars($vars['list'],2);if(isset($vars['t'])){$html.='&amp;';}}if(isset($vars['t'])){$html.='start='.htmlspecialchars($vars['t'],2);}}$html.='"/></iframe>';
 
 		return $html;
 	}
 
 	public static function matchYoutube($url)
 	{
-		$regexps = array('!youtube\\.com/(?:watch\\?.*?v=|v/)(?\'id\'[-0-9A-Z_a-z]+)!', '!youtu\\.be/(?\'id\'[-0-9A-Z_a-z]+)!', '!youtu(?>\\.be|be\\.com).*?[#&?]t=(?\'t\'\\d+)!');
+		$regexps = array('!youtube\\.com/(?:watch\\?.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!youtu(?>\\.be|be\\.com).*?[#&?]t=(?\'t\'\\d+)!', '!youtu(?>\\.be|be\\.com).*?&list=(?\'list\'[-\\w]+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);

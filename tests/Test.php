@@ -195,6 +195,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://www.youtube.com/watch?feature=player_detailpage&amp;v=9bZkp7q19f0#t=113',
 				'id=9bZkp7q19f0;t=113'
 			),
+			array(
+				'youtube',
+				'http://www.youtube.com/watch?v=pC35x6iIPmo&list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA',
+				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA'
+			),
+			array(
+				'youtube',
+				'http://www.youtube.com/watch?v=pC35x6iIPmo&list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA#t=123',
+				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA;t=123'
+			),
 		);
 	}
 
@@ -290,6 +300,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=9bZkp7q19f0;t=113',
 				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/9bZkp7q19f0?start=113"/></iframe>'
+			),
+			array(
+				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA"/></iframe>'
+			),
+			array(
+				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA;t=123',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA&amp;start=123"/></iframe>'
 			),
 		);
 	}
