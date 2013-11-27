@@ -46,14 +46,16 @@ class s9e_MediaBBCodes
 				continue;
 			}
 
-			// Add the vars from non-scrape "extract" regexps
-			$scrapeVars += $vars;
-
 			if (isset($scrape['url']))
 			{
-				// Use the vars extracted from the media URL plus named captures from the
-				// scrape URL
-				$scrapeVars = array_merge($vars, $m);
+				// Add the vars from non-scrape "extract" regexps
+				$scrapeVars += $vars;
+
+				// Add the original URL
+				if (!isset($scrapeVars['url']))
+				{
+					$scrapeVars['url'] = $url;
+				}
 
 				// Replace {@var} tokens in the URL
 				$scrapeUrl = preg_replace_callback(
@@ -95,7 +97,10 @@ class s9e_MediaBBCodes
 		ksort($vars);
 		foreach ($vars as $k => $v)
 		{
-			$pairs[] = urlencode($k) . '=' . urlencode($v);
+			if ($v !== '')
+			{
+				$pairs[] = urlencode($k) . '=' . urlencode($v);
+			}
 		}
 
 		// NOTE: XenForo silently nukes the mediaKey if it contains any HTML special characters,
@@ -120,9 +125,10 @@ class s9e_MediaBBCodes
 				$vars[urldecode($k)] = urldecode($v);
 			}
 		}
-		else
+
+		if (!isset($vars['id']))
 		{
-			$vars = array('id' => $mediaKey);
+			$vars['id'] = $mediaKey;
 		}
 
 		// No vars = no match, return a link to the content, or the BBCode as text
@@ -378,6 +384,29 @@ class s9e_MediaBBCodes
 			array(
 				'match'   => array('!slideshare\\.net/[^/]+/\\w!'),
 				'extract' => array('!"presentationId":(?\'id\'[0-9]+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
+	public static function renderSoundcloud($vars)
+	{
+		$vars += array('id' => null, 'playlist_id' => null, 'secret_token' => null, 'track_id' => null);
+
+		$html='<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=';if(isset($vars['secret_token'])&&isset($vars['track_id'])){$html.='https://api.soundcloud.com/tracks/'.htmlspecialchars($vars['track_id'],2).'&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);}elseif(isset($vars['secret_token'])&&isset($vars['playlist_id'])){$html.='https://api.soundcloud.com/playlists/'.htmlspecialchars($vars['playlist_id'],2).'&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);}else{$html.=htmlspecialchars($vars['id'],2);if(isset($vars['secret_token'])){$html.='&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);}}$html.='"/></iframe>';
+
+		return $html;
+	}
+
+	public static function matchSoundcloud($url)
+	{
+		$regexps = array('@(?\'id\'https?://(?:(?:api\\.soundcloud\\.com/(?:playlist|track)s/\\d+)|soundcloud\\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\\?secret_token=|/(?=s-))(?\'secret_token\'[-\\w]+))?)@');
+		$scrapes = array(
+			array(
+				'url'     => 'https://api.soundcloud.com/resolve?_status_format=json&client_id=b45b1aa10f1ac2941910a7f0d10f8e28&url={@id}',
+				'match'   => array('@soundcloud\\.com/(?!playlists/|tracks/)[^/]+/[^/]+/s-@'),
+				'extract' => array('@playlists/(?\'playlist_id\'\\d+)@', '@tracks/(?\'track_id\'\\d+)@')
 			)
 		);
 

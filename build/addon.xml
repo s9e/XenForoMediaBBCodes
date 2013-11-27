@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131126" version_string="201311260" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20131127" version_string="201311270" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="bandcamp" site_title="Bandcamp" site_url="http://bandcamp.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBandcamp">
       <match_urls>!(?'id')bandcamp\.com/album/.!
@@ -107,9 +107,10 @@
 !(?'id')slideshare\.net/[^/]+/\w!</match_urls>
       <embed_html><![CDATA[<iframe width="427" height="356" src="http://www.slideshare.net/slideshow/embed_code/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
-    <site media_site_id="soundcloud" site_title="SoundCloud" site_url="https://soundcloud.com/" match_is_regex="1" supported="1">
-      <match_urls>@(?'id'https?://.*?soundcloud\.com/(?!explore/|pages/)[^/]+/[-/\w]+)@</match_urls>
-      <embed_html><![CDATA[<iframe width="560" height="166" src="https://w.soundcloud.com/player/?url={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    <site media_site_id="soundcloud" site_title="SoundCloud" site_url="https://soundcloud.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSoundcloud">
+      <match_urls>@(?'id'https?://(?:(?:api\.soundcloud\.com/(?:playlist|track)s/\d+)|soundcloud\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\?secret_token=|/(?=s-))(?'secret_token'[-\w]+))?)@
+@(?'id')soundcloud\.com/(?!playlists/|tracks/)[^/]+/[^/]+/s-@</match_urls>
+      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderSoundcloud() -->]]></embed_html>
     </site>
     <site media_site_id="spotify" site_title="Spotify" site_url="https://www.spotify.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSpotify">
       <match_urls>!(?'id')(?'uri'spotify:(?:album:artist|user|track(?:set)?):[,:\w]+)!

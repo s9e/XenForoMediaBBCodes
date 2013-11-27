@@ -128,7 +128,27 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html',
-				'card=;id=1869987317%2Fwish-i-was-here-1;video=video'
+				'id=1869987317%2Fwish-i-was-here-1;video=video'
+			),
+			array(
+				'soundcloud',
+				'http://api.soundcloud.com/tracks/98282116',
+				'http://api.soundcloud.com/tracks/98282116'
+			),
+			array(
+				'soundcloud',
+				'https://soundcloud.com/andrewbird/three-white-horses',
+				'https://soundcloud.com/andrewbird/three-white-horses'
+			),
+			array(
+				'soundcloud',
+				'[soundcloud url="https://api.soundcloud.com/tracks/12345?secret_token=s-foobar" width="100%" height="166" iframe="true" /]',
+				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F12345%3Fsecret_token%3Ds-foobar;secret_token=s-foobar'
+			),
+			array(
+				'soundcloud',
+				'https://soundcloud.com/matt0753/iroh-ii-deep-voice/s-UpqTm',
+				'id=https%3A%2F%2Fsoundcloud.com%2Fmatt0753%2Firoh-ii-deep-voice%2Fs-UpqTm;secret_token=s-UpqTm;track_id=51465673'
 			),
 			array(
 				'spotify',
@@ -262,9 +282,22 @@ class Test extends PHPUnit_Framework_TestCase
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="40" data="http://grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID=&amp;songID=35292216"/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/songWidget.swf" width="250" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"/></embed></object>'
 			),
 			array(
-				'-cEzsCAzTak',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"/></iframe>'
+				'http://api.soundcloud.com/tracks/98282116',
+				array(
+					'embed_html' => '<!-- s9e_MediaBBCodes::renderSoundcloud -->',
+					'regexes'    => array()
+				),
+				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116"/></iframe>'
+			),
+			array(
+				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F12345%3Fsecret_token%3Ds-foobar;secret_token=s-foobar',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSoundcloud -->'),
+				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/12345?secret_token=s-foobar&amp;secret_token=s-foobar"/></iframe>'
+			),
+			array(
+				'id=https%3A%2F%2Fsoundcloud.com%2Fmatt0753%2Firoh-ii-deep-voice%2Fs-UpqTm;secret_token=s-UpqTm;track_id=51465673',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSoundcloud -->'),
+				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/51465673&amp;secret_token=s-UpqTm"/></iframe>'
 			),
 			array(
 				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai',
@@ -295,6 +328,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'vid=40688256',
 				array('embed_html' => '<!-- s9e_MediaBBCodes::renderUstream -->'),
 				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/recorded/40688256"/></iframe>'
+			),
+			array(
+				'-cEzsCAzTak',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"/></iframe>'
 			),
 			array(
 				'id=9bZkp7q19f0;t=113',

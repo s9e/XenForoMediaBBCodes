@@ -64,14 +64,16 @@ class s9e_MediaBBCodes
 				continue;
 			}
 
-			// Add the vars from non-scrape "extract" regexps
-			$scrapeVars += $vars;
-
 			if (isset($scrape['url']))
 			{
-				// Use the vars extracted from the media URL plus named captures from the
-				// scrape URL
-				$scrapeVars = array_merge($vars, $m);
+				// Add the vars from non-scrape "extract" regexps
+				$scrapeVars += $vars;
+
+				// Add the original URL
+				if (!isset($scrapeVars['url']))
+				{
+					$scrapeVars['url'] = $url;
+				}
 
 				// Replace {@var} tokens in the URL
 				$scrapeUrl = preg_replace_callback(
@@ -113,7 +115,10 @@ class s9e_MediaBBCodes
 		ksort($vars);
 		foreach ($vars as $k => $v)
 		{
-			$pairs[] = urlencode($k) . '=' . urlencode($v);
+			if ($v !== '')
+			{
+				$pairs[] = urlencode($k) . '=' . urlencode($v);
+			}
 		}
 
 		// NOTE: XenForo silently nukes the mediaKey if it contains any HTML special characters,
@@ -138,9 +143,10 @@ class s9e_MediaBBCodes
 				$vars[urldecode($k)] = urldecode($v);
 			}
 		}
-		else
+
+		if (!isset($vars['id']))
 		{
-			$vars = array('id' => $mediaKey);
+			$vars['id'] = $mediaKey;
 		}
 
 		// No vars = no match, return a link to the content, or the BBCode as text
