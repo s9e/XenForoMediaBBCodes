@@ -130,8 +130,12 @@ class s9e_MediaBBCodes
 	{
 		if (preg_match('(^https?://)', $mediaKey))
 		{
+			$regexps = (isset($site['regexes']) && is_array($site['regexes']))
+			         ? $site['regexes']
+			         : array();
+
 			// If the URL is stored in the media site, reparse it and store the captures
-			$vars = self::getNamedCaptures($mediaKey, $site['regexes']);
+			$vars = self::getNamedCaptures($mediaKey, $regexps);
 		}
 		elseif (preg_match('(^(\\w+=[^;]*)(?>;(?1))*$)', $mediaKey))
 		{
