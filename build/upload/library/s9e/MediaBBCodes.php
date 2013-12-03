@@ -432,7 +432,7 @@ class s9e_MediaBBCodes
 
 	public static function matchTeamcoco($url)
 	{
-		$regexps = array();
+		$regexps = array('!teamcoco\\.com/video/(?\'id\'\\d+)!');
 		$scrapes = array(
 			array(
 				'match'   => array('!teamcoco\\.com/video/.!'),

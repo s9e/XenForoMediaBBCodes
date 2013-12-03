@@ -172,8 +172,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'teamcoco',
-				'http://teamcoco.com/video/conan-highlight-gigolos-mug-hunt',
-				'54003'
+				'http://teamcoco.com/video/serious-jibber-jabber-a-scott-berg-full-episode',
+				'73784'
 			),
 			array(
 				'traileraddict',
