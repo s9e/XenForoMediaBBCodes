@@ -293,6 +293,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchGametrailers($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!gametrailers\\.com/(?:full-episode|review|video)s/!'),
+				'extract' => array('!(?\'id\'mgid:arc:(?:episode|video):gametrailers\\.com:[-\\w]+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderGrooveshark($vars)
 	{
 		$vars += array('playlistid' => null, 'songid' => null);

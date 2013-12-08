@@ -91,6 +91,21 @@ class Test extends PHPUnit_Framework_TestCase
 				'mgid:cms:video:thedailyshow.com:416478'
 			),
 			array(
+				'gametrailers',
+				'http://www.gametrailers.com/videos/jz8rt1/tom-clancy-s-the-division-vgx-2013--world-premiere-featurette',
+				'mgid:arc:video:gametrailers.com:85dee3c3-60f6-4b80-8124-cf3ebd9d2a6c'
+			),
+			array(
+				'gametrailers',
+				'http://www.gametrailers.com/reviews/zalxz0/crimson-dragon-review',
+				'mgid:arc:video:gametrailers.com:31c93ab8-fe77-4db2-bfee-ff37837e6704'
+			),
+			array(
+				'gametrailers',
+				'http://www.gametrailers.com/full-episodes/zdzfok/pop-fiction-episode-40--jak-ii--sandover-village',
+				'mgid:arc:episode:gametrailers.com:1e287a4e-b795-4c7f-9d48-1926eafb5740'
+			),
+			array(
 				'grooveshark',
 				'http://grooveshark.com/playlist/Purity+Ring+Shrines/74854761',
 				'playlistid=74854761'
