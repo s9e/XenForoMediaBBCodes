@@ -240,6 +240,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://www.youtube.com/watch?v=pC35x6iIPmo&list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA#t=123',
 				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA;t=123'
 			),
+			array(
+				'youtube',
+				'http://www.youtube.com/watch_popup?v=qybUFnY7Y8w',
+				'qybUFnY7Y8w'
+			),
 		);
 	}
 

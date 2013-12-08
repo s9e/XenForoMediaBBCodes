@@ -532,7 +532,7 @@ class s9e_MediaBBCodes
 
 	public static function matchYoutube($url)
 	{
-		$regexps = array('!youtube\\.com/(?:watch\\?.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!youtu(?>\\.be|be\\.com).*?[#&?]t=(?\'t\'\\d+)!', '!youtu(?>\\.be|be\\.com).*?&list=(?\'list\'[-\\w]+)!');
+		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!youtu(?>\\.be|be\\.com).*?[#&?]t=(?\'t\'\\d+)!', '!youtu(?>\\.be|be\\.com).*?&list=(?\'list\'[-\\w]+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
