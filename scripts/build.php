@@ -192,7 +192,7 @@ class s9e_MediaBBCodes
 
 		if (empty($page))
 		{
-			$page = file_get_contents(
+			$page = @file_get_contents(
 				'compress.zlib://' . $url,
 				false,
 				stream_context_create(array(
@@ -202,7 +202,7 @@ class s9e_MediaBBCodes
 				))
 			);
 
-			if (isset($cacheFile))
+			if ($page && isset($cacheFile))
 			{
 				file_put_contents($cacheFile, gzencode($page, 9));
 			}
