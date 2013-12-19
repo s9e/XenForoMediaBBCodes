@@ -278,7 +278,7 @@ $examples  = [];
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
 {
-	$template = (string) $configurator->MediaEmbed->add($site['id'])->defaultTemplate;
+	$template = (string) $configurator->MediaEmbed->add($site['id'])->template;
 
 	$node = $parentNode->appendChild($dom->createElement('site'));
 	$node->setAttribute('media_site_id',  $site['id']);
@@ -327,7 +327,7 @@ foreach ($sites->site as $site)
 		$xsl = $tmp->saveXML();
 
 		// Capture the PHP source for this template
-		$regexp = '(' . preg_quote("if(\$nodeName==='X'){") . '(.*)' . preg_quote('}else $this->at($node);') . ')s';
+		$regexp = '(' . preg_quote("if(\$nodeName==='X')") . '\\{?(.*?)\\}?' . preg_quote('else $this->at($node);') . ')s';
 		if (!preg_match($regexp, $rendererGenerator->generate($xsl), $m))
 		{
 			echo 'Skipping ', $site->name, "\n";
