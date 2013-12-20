@@ -302,6 +302,21 @@ class Test extends PHPUnit_Framework_TestCase
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="40" data="http://grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID=&amp;songID=35292216"/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/songWidget.swf" width="250" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"/></embed></object>'
 			),
 			array(
+				'1869987317/wish-i-was-here-1',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderKickstarter -->'),
+				'<iframe width="220" height="380" src="http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>'
+			),
+			array(
+				'card=card;id=1869987317%2Fwish-i-was-here-1',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderKickstarter -->'),
+				'<iframe width="220" height="380" src="http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>'
+			),
+			array(
+				'id=1869987317%2Fwish-i-was-here-1;video=video',
+				array('embed_html' => '<!-- s9e_MediaBBCodes::renderKickstarter -->'),
+				'<iframe width="480" height="360" src="http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>'
+			),
+			array(
 				'http://api.soundcloud.com/tracks/98282116',
 				array(
 					'embed_html' => '<!-- s9e_MediaBBCodes::renderSoundcloud -->',
