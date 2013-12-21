@@ -131,6 +131,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'zPFCgxncn97IFkqEnZ-kRA'
 			),
 			array(
+				'indiegogo',
+				'http://www.indiegogo.com/projects/gameheart-redesigned',
+				'513633'
+			),
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/',
 				'1869987317/wish-i-was-here-1'
