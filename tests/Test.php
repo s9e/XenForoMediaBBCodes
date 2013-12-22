@@ -256,7 +256,7 @@ class Test extends PHPUnit_Framework_TestCase
 	/**
 	* @dataProvider getEmbedCallbackTests
 	*/
-	public function testEmbedCallback($mediaKey, $site, $expected)
+	public function testEmbedCallback($mediaKey, $template, $expected)
 	{
 		if (!class_exists('s9e_MediaBBCodes'))
 		{
@@ -265,6 +265,7 @@ class Test extends PHPUnit_Framework_TestCase
 
 		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
 
+		$site = array('embed_html' => $template);
 		$this->assertSame($expected, s9e_MediaBBCodes::embed($mediaKey, $site));
 	}
 
@@ -273,120 +274,117 @@ class Test extends PHPUnit_Framework_TestCase
 		return array(
 			array(
 				'foo',
-				array('embed_html' => '<b>{$id}</b>'),
+				'<b>{$id}</b>',
 				'<b>foo</b>'
 			),
 			array(
 				'foo&bar',
-				array('embed_html' => '<b>{$id}</b>'),
+				'<b>{$id}</b>',
 				'<b>foo&amp;bar</b>'
 			),
 			array(
 				'foo=bar;baz=quux',
-				array('embed_html' => '{$foo} {$baz}'),
+				'{$foo} {$baz}',
 				'bar quux'
 			),
 			array(
 				'album_id=1122163921',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderBandcamp -->'),
+				'<!-- s9e_MediaBBCodes::renderBandcamp -->',
 				'<iframe width="400" height="120" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/album=1122163921/size=medium"/></iframe>'
 			),
 			array(
 				'album_id=1122163921;track_num=7',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderBandcamp -->'),
+				'<!-- s9e_MediaBBCodes::renderBandcamp -->',
 				'<iframe width="400" height="42" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/album=1122163921/size=small/t=7"/></iframe>'
 			),
 			array(
 				'playlistid=74854761',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderGrooveshark -->'),
+				'<!-- s9e_MediaBBCodes::renderGrooveshark -->',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="250" data="http://grooveshark.com/widget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID=74854761&amp;songID="/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/widget.swf" width="250" height="250" allowfullscreen="" flashvars="playlistID=74854761&amp;songID="/></embed></object>'
 			),
 			array(
 				'songid=35292216',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderGrooveshark -->'),
+				'<!-- s9e_MediaBBCodes::renderGrooveshark -->',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="250" height="40" data="http://grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"/></param><param name="flashvars" value="playlistID=&amp;songID=35292216"/></param><embed type="application/x-shockwave-flash" src="http://grooveshark.com/songWidget.swf" width="250" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"/></embed></object>'
 			),
 			array(
 				'1869987317/wish-i-was-here-1',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderKickstarter -->'),
+				'<!-- s9e_MediaBBCodes::renderKickstarter -->',
 				'<iframe width="220" height="380" src="http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>'
 			),
 			array(
 				'card=card;id=1869987317%2Fwish-i-was-here-1',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderKickstarter -->'),
+				'<!-- s9e_MediaBBCodes::renderKickstarter -->',
 				'<iframe width="220" height="380" src="http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>'
 			),
 			array(
 				'id=1869987317%2Fwish-i-was-here-1;video=video',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderKickstarter -->'),
+				'<!-- s9e_MediaBBCodes::renderKickstarter -->',
 				'<iframe width="480" height="360" src="http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"/></iframe>'
 			),
 			array(
 				'http://api.soundcloud.com/tracks/98282116',
-				array(
-					'embed_html' => '<!-- s9e_MediaBBCodes::renderSoundcloud -->',
-					'regexes'    => array()
-				),
+				'<!-- s9e_MediaBBCodes::renderSoundcloud -->',
 				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116"/></iframe>'
 			),
 			array(
 				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F12345%3Fsecret_token%3Ds-foobar;secret_token=s-foobar',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSoundcloud -->'),
+				'<!-- s9e_MediaBBCodes::renderSoundcloud -->',
 				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/12345?secret_token=s-foobar&amp;secret_token=s-foobar"/></iframe>'
 			),
 			array(
 				'id=https%3A%2F%2Fsoundcloud.com%2Fmatt0753%2Firoh-ii-deep-voice%2Fs-UpqTm;secret_token=s-UpqTm;track_id=51465673',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSoundcloud -->'),
+				'<!-- s9e_MediaBBCodes::renderSoundcloud -->',
 				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/51465673&amp;secret_token=s-UpqTm"/></iframe>'
 			),
 			array(
 				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
+				'<!-- s9e_MediaBBCodes::renderSpotify -->',
 				'<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:track:5JunxkcjfCYcY7xJ29tLai"/></iframe>'
 			),
 			array(
 				'uri=spotify%3Atrackset%3APREFEREDTITLE%3A5Z7ygHQo02SUrFmcgpwsKW%2C1x6ACsKV4UdWS2FMuPFUiT%2C4bi73jCM02fMpkI11Lqmfe',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
+				'<!-- s9e_MediaBBCodes::renderSpotify -->',
 				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"/></iframe>'
 			),
 			array(
 				'path=user%2Fozmoetr%2Fplaylist%2F4yRrCWNhWOqWZx5lmFqZvt',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
+				'<!-- s9e_MediaBBCodes::renderSpotify -->',
 				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt"/></iframe>'
 			),
 			array(
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderSpotify -->'),
+				'<!-- s9e_MediaBBCodes::renderSpotify -->',
 				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"/></iframe>'
 			),
 			array(
 				'cid=16234409',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderUstream -->'),
+				'<!-- s9e_MediaBBCodes::renderUstream -->',
 				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/16234409"/></iframe>'
 			),
 			array(
 				'vid=40688256',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderUstream -->'),
+				'<!-- s9e_MediaBBCodes::renderUstream -->',
 				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/recorded/40688256"/></iframe>'
 			),
 			array(
 				'-cEzsCAzTak',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
+				'<!-- s9e_MediaBBCodes::renderYoutube -->',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"/></iframe>'
 			),
 			array(
 				'id=9bZkp7q19f0;t=113',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
+				'<!-- s9e_MediaBBCodes::renderYoutube -->',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/9bZkp7q19f0?start=113"/></iframe>'
 			),
 			array(
 				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
+				'<!-- s9e_MediaBBCodes::renderYoutube -->',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA"/></iframe>'
 			),
 			array(
 				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA;t=123',
-				array('embed_html' => '<!-- s9e_MediaBBCodes::renderYoutube -->'),
+				'<!-- s9e_MediaBBCodes::renderYoutube -->',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA&amp;start=123"/></iframe>'
 			),
 		);
