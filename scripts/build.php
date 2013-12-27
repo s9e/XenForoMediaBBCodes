@@ -11,9 +11,9 @@ include __DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/autoloader
 $sites = simplexml_load_file(__DIR__ . '/../vendor/s9e/TextFormatter/src/s9e/TextFormatter/Plugins/MediaEmbed/Configurator/sites.xml');
 
 $configurator = new s9e\TextFormatter\Configurator;
-$rendererGenerator = $configurator->setRendererGenerator('PHP');
-$rendererGenerator->forceEmptyElements = false;
-$rendererGenerator->useEmptyElements   = false;
+$configurator->rendering->engine = 'PHP';
+$configurator->rendering->engine->forceEmptyElements = false;
+$configurator->rendering->engine->useEmptyElements   = false;
 
 $php = <<<'NOWDOC'
 <?php
@@ -278,6 +278,7 @@ $examples  = [];
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
 {
+	$configurator->tags->clear();
 	$template = (string) $configurator->MediaEmbed->add($site['id'])->template;
 
 	$node = $parentNode->appendChild($dom->createElement('site'));
@@ -317,18 +318,10 @@ foreach ($sites->site as $site)
 		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
 		$node->setAttribute('embed_html_callback_method', 'embed');
 
-		// Load the template in an XSL stylesheet
-		$xsl = '<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="X">' . $template . '</xsl:template></xsl:stylesheet>';
-
-		// Normalize whitespace
-		$tmp = new DOMDocument;
-		$tmp->preserveWhiteSpace = false;
-		$tmp->loadXML($xsl);
-		$xsl = $tmp->saveXML();
-
 		// Capture the PHP source for this template
-		$regexp = '(' . preg_quote("if(\$nodeName==='X')") . '\\{?(.*?)\\}?' . preg_quote('else $this->at($node);') . ')s';
-		if (!preg_match($regexp, $rendererGenerator->generate($xsl), $m))
+		$regexp = '(if\\(\\$nodeName===\'' . strtoupper($site['id']) . '\'\\)\\{?(.*?)\\}?elseif\\(\\$nodeName===)s';
+
+		if (!preg_match($regexp, $configurator->getRenderer()->source, $m))
 		{
 			echo 'Skipping ', $site->name, "\n";
 			$node->parentNode->removeChild($node);
@@ -439,6 +432,11 @@ foreach ($sites->site as $site)
 			$regexps[] = $match;
 
 			$entry['match'][] = var_export($match, true);
+		}
+
+		if (!isset($entry['match']))
+		{
+			$entry['match'] = ["'//'"];
 		}
 
 		foreach ($scrape->extract as $extract)
