@@ -219,7 +219,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('album_id' => null, 'track_id' => null, 'track_num' => null);
 
-		$html='<iframe width="400" height="'.htmlspecialchars((isset($vars['track_id'])||isset($vars['track_num'])?42:120),2).'" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/';if(isset($vars['album_id'])){$html.='album='.htmlspecialchars($vars['album_id'],2).'/size=';if(isset($vars['track_num']))$html.='small/t='.htmlspecialchars($vars['track_num'],2);else$html.='medium';}else$html.='track='.htmlspecialchars($vars['track_id'],2).'/size=small';$html.='"></iframe>';
+		$html='<iframe width="400" height="'.htmlspecialchars((isset($vars['track_id'])||isset($vars['track_num'])?42:120),2).'" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/';if(isset($vars['album_id'])){$html.='album='.htmlspecialchars($vars['album_id'],2).'/size=';if(isset($vars['track_num']))$html.='small/t='.htmlspecialchars($vars['track_num'],2);else$html.='medium';}else$html.='track='.htmlspecialchars($vars['track_id'],2).'/size=small';$html.='"></iframe>';
 
 		return $html;
 	}

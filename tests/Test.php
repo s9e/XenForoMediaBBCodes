@@ -295,12 +295,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'album_id=1122163921',
 				'<!-- s9e_MediaBBCodes::renderBandcamp -->',
-				'<iframe width="400" height="120" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/album=1122163921/size=medium"></iframe>'
+				'<iframe width="400" height="120" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/album=1122163921/size=medium"></iframe>'
 			),
 			array(
 				'album_id=1122163921;track_num=7',
 				'<!-- s9e_MediaBBCodes::renderBandcamp -->',
-				'<iframe width="400" height="42" allowfullscreen="" frameborder="0" scrolling="no" src="http://bandcamp.com/EmbeddedPlayer/album=1122163921/size=small/t=7"></iframe>'
+				'<iframe width="400" height="42" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/album=1122163921/size=small/t=7"></iframe>'
 			),
 			array(
 				'height=338;id=SereneIllfatedCapybara;width=600',
