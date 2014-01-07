@@ -2,7 +2,7 @@
 <?php
 
 /**
-* @copyright Copyright (c) 2013 The s9e Authors
+* @copyright Copyright (c) 2013-2014 The s9e Authors
 * @license   http://www.opensource.org/licenses/mit-license.php The MIT License
 */
 
@@ -19,7 +19,7 @@ $php = <<<'NOWDOC'
 <?php
 
 /**
-* @copyright Copyright (c) 2013 The s9e Authors
+* @copyright Copyright (c) 2013-2014 The s9e Authors
 * @license   http://www.opensource.org/licenses/mit-license.php The MIT License
 */
 
