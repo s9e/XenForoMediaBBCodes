@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140107b" version_string="201401071" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140119" version_string="201401190" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="bandcamp" site_title="Bandcamp" site_url="http://bandcamp.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBandcamp">
       <match_urls>!(?'id')bandcamp\.com/album/.!
@@ -43,9 +43,11 @@
       <match_urls>!(?'id')thedailyshow\.com/(?:collection|watch)/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
-    <site media_site_id="espn" site_title="ESPN" site_url="http://espn.go.com/" match_is_regex="1" supported="1">
-      <match_urls>!espn\.go\.com/video/clip\?id=(?'id'[:\w]+)!</match_urls>
-      <embed_html><![CDATA[<script src="http://player.espn.com/player.js?playerBrandingId=4ef8000cbaf34c1687a7d9a26fe0e89e&amp;adSetCode=91cDU6NuXTGKz3OdjOxFdAgJVtQcKJnI&amp;pcode=1kNG061cgaoolOncv54OAO1ceO-I&amp;width=576&amp;height=324&amp;externalId={$id}&amp;thruParam_espn-ui%5BautoPlay%5D=false&amp;thruParam_espn-ui%5BplayRelatedExternally%5D=true"></script>]]></embed_html>
+    <site media_site_id="espn" site_title="ESPN" site_url="http://espn.go.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchEspn">
+      <match_urls>#espn\.go\.com.*?\?id=(?'cms'deportes|espn):(?'id'\d+)#
+#espn\.go\.com.*?\?id=(?'id'\d+)#
+#(?'id')espn\.go\.com.*?(?'cms'deportes|espn(?!d))#</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="https://espn.go.com/video/iframe/twitter/?cms={$cms}&amp;id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="facebook" site_title="Facebook" site_url="http://www.facebook.com/" match_is_regex="1" supported="1">
       <match_urls>!facebook\.com/(?:photo|video/video)\.php\?v=(?'id'[0-9]+)!</match_urls>
