@@ -477,8 +477,8 @@ class s9e_MediaBBCodes
 		$regexps = array();
 		$scrapes = array(
 			array(
-				'match'   => array('!traileraddict\\.com/trailer/.!'),
-				'extract' => array('!traileraddict\\.com/emd/(?\'id\'\\d+)!')
+				'match'   => array('@traileraddict\\.com/(?!tags/)[^/]+/.@'),
+				'extract' => array('@v\\.traileraddict\\.com/(?\'id\'\\d+)@')
 			)
 		);
 
