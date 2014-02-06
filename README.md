@@ -174,7 +174,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>traileraddict</code></td>
 		<td>Trailer Addict</td>
-		<td>http://www.traileraddict.com/trailer/watchmen/feature-trailer<br/>http://www.traileraddict.com/the-amazing-spider-man-2/super-bowl-tv-spot</td>
+		<td>http://www.traileraddict.com/the-amazing-spider-man-2/super-bowl-tv-spot</td>
 	</tr>
 	<tr>
 		<td><code>twitch</code></td>
