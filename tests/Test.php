@@ -202,8 +202,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'traileraddict',
-				'http://www.traileraddict.com/trailer/watchmen/feature-trailer',
-				'7376'
+				'http://www.traileraddict.com/muppets-most-wanted/super-bowl-tv-spot',
+				'86191'
 			),
 			array(
 				'twitch',
