@@ -89,7 +89,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>gfycat</code></td>
 		<td>gfycat</td>
-		<td>http://gfycat.com/SereneIllfatedCapybara</td>
+		<td>http://gfycat.com/SereneIllfatedCapybara<br/>http://giant.gfycat.com/SereneIllfatedCapybara.gif</td>
 	</tr>
 	<tr>
 		<td><code>gist</code></td>

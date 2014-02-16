@@ -319,6 +319,7 @@ class s9e_MediaBBCodes
 		$regexps = array('!gfycat\\.com/(?\'id\'\\w+)!');
 		$scrapes = array(
 			array(
+				'url'     => 'http://gfycat.com/{@id}',
 				'match'   => array('//'),
 				'extract' => array('!gfyHeight[ ="]+(?\'height\'\\d+)!', '!gfyWidth[ ="]+(?\'width\'\\d+)!')
 			)
