@@ -454,7 +454,7 @@ class s9e_MediaBBCodes
 
 	public static function matchSpotify($url)
 	{
-		$regexps = array('!(?\'uri\'spotify:(?:album:artist|user|track(?:set)?):[,:\\w]+)!', '!(?:open|play)\\.spotify\\.com/(?\'path\'(?:album|artist|track|user)/[/\\w]+)!');
+		$regexps = array('!(?\'uri\'spotify:(?:album|artist|user|track(?:set)?):[,:\\w]+)!', '!(?:open|play)\\.spotify\\.com/(?\'path\'(?:album|artist|track|user)/[/\\w]+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
