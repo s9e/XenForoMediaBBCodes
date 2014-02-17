@@ -265,12 +265,15 @@ foreach ($attributes as $attrName => $attrValue)
 }
 
 $rows = [];
-$rows[] = '<tr>';
-$rows[] = '	<th><input type="checkbox" onchange="toggleAll(this)"></th>';
-$rows[] = '	<th>Id</th>';
-$rows[] = '	<th>Site</th>';
-$rows[] = '	<th>Example URLs</th>';
-$rows[] = '</tr>';
+$rows[] = '<thead>';
+$rows[] = '	<tr>';
+$rows[] = '		<th><input type="checkbox" onchange="toggleAll(this)"></th>';
+$rows[] = '		<th>Id</th>';
+$rows[] = '		<th>Site</th>';
+$rows[] = '		<th>Example URLs</th>';
+$rows[] = '	</tr>';
+$rows[] = '</thead>';
+$rows[] = '<tbody>';
 
 $sitenames = [];
 $examples  = [];
@@ -511,12 +514,12 @@ foreach ($sites->site as $site)
 	     ->appendChild($dom->createCDATASection($html));
 
 	// Build the table of sites
-	$rows[] = '<tr>';
-	$rows[] = '	<td><input type="checkbox" data-id="' . $site['id'] . '"></td>';
-	$rows[] = '	<td><code>' . $site['id'] . '</code></td>';
-	$rows[] = '	<td>' . $site->name . '</td>';
-	$rows[] = '	<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
-	$rows[] = '</tr>';
+	$rows[] = '	<tr>';
+	$rows[] = '		<td><input type="checkbox" data-id="' . $site['id'] . '"></td>';
+	$rows[] = '		<td><code>' . $site['id'] . '</code></td>';
+	$rows[] = '		<td>' . $site->name . '</td>';
+	$rows[] = '		<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
+	$rows[] = '	</tr>';
 
 	// Record the name of the site
 	$sitenames[] = (string) $site->name;
@@ -538,6 +541,9 @@ $dom->formatOutput = true;
 $xml = $dom->saveXML();
 
 file_put_contents(__DIR__ . '/../build/addon.xml', $xml);
+
+// Close the table body
+$rows[] = '</tbody>';
 
 // Coalesce the table's content
 $rows = implode("\n", $rows);
