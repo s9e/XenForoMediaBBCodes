@@ -138,17 +138,17 @@ class s9e_MediaBBCodes
 
 		// Test whether this particular site has its own renderer
 		$html = preg_replace_callback(
-			'(<!-- ' . __CLASS__ . '::(render\\w+)\\((?:(\\d+), *(\\d+))?\\) -->)',
+			'(<!-- (' . __CLASS__ . '::render\\w+)\\((?:(\\d+), *(\\d+))?\\) -->)',
 			function ($m) use ($vars)
 			{
-				$methodName = $m[1];
+				$callback = $m[1];
 
-				if (!method_exists(__CLASS__, $methodName))
+				if (!is_callable($callback))
 				{
 					return $m[0];
 				}
 
-				$html = self::$methodName($vars);
+				$html = call_user_func($callback, $vars);
 
 				if (isset($m[2], $m[3]))
 				{
