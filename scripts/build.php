@@ -154,14 +154,35 @@ class s9e_MediaBBCodes
 		}
 
 		// Test whether this particular site has its own renderer
-		if (preg_match('(' . __CLASS__ . '::(render\\w+))', $site['embed_html'], $m))
-		{
-			$methodName = $m[1];
-
-			if (method_exists(__CLASS__, $methodName))
+		$html = preg_replace_callback(
+			'(<!-- ' . __CLASS__ . '::(render\\w+)\\((?:(\\d+), *(\\d+))?\\) -->)',
+			function ($m) use ($vars)
 			{
-				return self::$methodName($vars);
-			}
+				$methodName = $m[1];
+
+				if (!method_exists(__CLASS__, $methodName))
+				{
+					return $m[0];
+				}
+
+				$html = self::$methodName($vars);
+
+				if (isset($m[2], $m[3]))
+				{
+					$html = preg_replace('/( width=")[^"]*/',  '${1}' . $m[2], $html);
+					$html = preg_replace('/( height=")[^"]*/', '${1}' . $m[3], $html);
+				}
+
+				return $html;
+			},
+			$site['embed_html'],
+			-1,
+			$cnt
+		);
+
+		if ($cnt)
+		{
+			return $html;
 		}
 
 		// Otherwise use the configured template
