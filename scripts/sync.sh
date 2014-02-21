@@ -3,7 +3,7 @@ cd $(dirname $(dirname $(realpath $0)))
 git submodule update --remote
 phpunit || exit
 rm -f releases/*-dev*
-scripts/build.php "$@"
+php scripts/build.php "$@"
 git diff
 git commit -a                                               && \
 git push                                                    && \
