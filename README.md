@@ -62,7 +62,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>dailyshow</code></td>
 			<td>The Daily Show with Jon Stewart</td>
-			<td>http://www.thedailyshow.com/watch/mon-july-16-2012/louis-c-k-<br/>http://www.thedailyshow.com/collection/429537/shutstorm-2013/429508</td>
+			<td>http://www.thedailyshow.com/watch/mon-july-16-2012/louis-c-k-<br/>http://www.thedailyshow.com/collection/429537/shutstorm-2013/429508<br/>http://thedailyshow.cc.com/videos/elvsf4/what-not-to-buy</td>
 		</tr>
 		<tr>
 			<td><code>espn</code></td>

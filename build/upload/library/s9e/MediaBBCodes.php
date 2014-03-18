@@ -306,8 +306,8 @@ class s9e_MediaBBCodes
 		$regexps = array();
 		$scrapes = array(
 			array(
-				'match'   => array('!thedailyshow\\.com/(?:collection|watch)/!'),
-				'extract' => array('!(?\'id\'mgid:cms:video:thedailyshow\\.com:[0-9]+)!')
+				'match'   => array('!thedailyshow\\.c(?:c\\.c)?om/(?:collection|videos|watch)/!'),
+				'extract' => array('!(?\'id\'mgid:arc:video:thedailyshow\\.com:[-0-9a-f]+)!')
 			)
 		);
 
