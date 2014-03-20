@@ -15,6 +15,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	</thead>
 	<tbody>
 		<tr>
+			<td><code>abcnews</code></td>
+			<td>ABC News</td>
+			<td>http://abcnews.go.com/WNN/video/dog-goes-wild-when-owner-leaves-22936610</td>
+		</tr>
+		<tr>
 			<td><code>bandcamp</code></td>
 			<td>Bandcamp</td>
 			<td>http://proleter.bandcamp.com/album/curses-from-past-times-ep<br/>http://proleter.bandcamp.com/track/april-showers<br/>http://therunons.bandcamp.com/track/still-feel</td>
