@@ -322,19 +322,20 @@ foreach ($sites->site as $site)
 	// Default HTML replacement. Ensure that iframe and script have an end tag
 	$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $template);
 
-	// Replace XSL attributes with XenForo's syntax
-	$html = str_replace('{@', '{$', $html);
-
 	// Temp fix for WorldStarHipHop
 	if ($site['id'] == 'wshh')
 	{
 		$html = str_replace(' type="application/x-shockwave-flash" typemustmatch=""', '', $html);
 	}
 
+	$useEmbedCallback = false;
+
 	// Test whether the template needs to be rendered in PHP
 	if (strpos($html, '<xsl:') !== false
-	 || strpos($html, '{substring') !== false)
+	 || preg_match('/="[^"]*(?<!\\{)\\{(?!@)/', $html))
 	{
+		$useEmbedCallback = true;
+
 		$methodName = 'render' . ucfirst($site['id']);
 		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
 
@@ -390,16 +391,27 @@ foreach ($sites->site as $site)
 		$php[] = '		return $html;';
 		$php[] = '	}';
 	}
-
-	// Test whether the template contains any variables other than $id and if so, render it in PHP
-	if (preg_match('(\\{\\$(?!id\\}))', $html))
+	else
 	{
-		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
-		$node->setAttribute('embed_html_callback_method', 'embed');
+		// Test whether the template contains any variables other than $id and if so, render it in
+		// PHP
+		if (preg_match('(\\{@(?!id\\}))', $html))
+		{
+			$useEmbedCallback = true;
+		}
+
+		// Replace XSL attributes with XenForo's syntax
+		$html = str_replace('{@', '{$', $html);
 	}
 
 	// Workaround for sites that don't like URL-encoding
 	if (preg_match('(gist|mtvnservices)', $html))
+	{
+		$useEmbedCallback = true;
+	}
+
+	// Set the embed callback if applicable
+	if ($useEmbedCallback)
 	{
 		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
 		$node->setAttribute('embed_html_callback_method', 'embed');

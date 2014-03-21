@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140320" version_string="201403200" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140321" version_string="201403210" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -96,7 +96,7 @@
       <embed_html><![CDATA[<iframe width="224" height="486" src="//www.indiegogo.com/project/{$id}/widget" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="instagram" site_title="Instagram" site_url="http://instagram.com/" match_is_regex="1" supported="1">
-      <match_urls>!instagram\.com/p/(?'id'\w+)!</match_urls>
+      <match_urls>!instagram\.com/p/(?'id'[-_\w]+)!</match_urls>
       <embed_html><![CDATA[<iframe width="612" height="710" src="//instagram.com/p/{$id}/embed/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="kickstarter" site_title="Kickstarter" site_url="http://www.kickstarter.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchKickstarter">
@@ -174,6 +174,11 @@
     <site media_site_id="wshh" site_title="WorldStarHipHop" site_url="http://www.worldstarhiphop.com/" match_is_regex="1" supported="1">
       <match_urls>!worldstarhiphop\.com/video(?:s/video)?\.php\?v=(?'id'[A-Za-z0-9]+)!</match_urls>
       <embed_html><![CDATA[<object width="448" height="374" data="http://www.worldstarhiphop.com/videos/e/16711680/{$id}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://www.worldstarhiphop.com/videos/e/16711680/{$id}" width="448" height="374" allowfullscreen=""/></object>]]></embed_html>
+    </site>
+    <site media_site_id="wsj" site_title="The Wall Street Journal Online" site_url="http://live.wsj.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed">
+      <match_urls>@live\.wsj\.com/[^#]*#!(?'id'[-0-9A-F]{36})@
+@live\.wsj\.com/video/[^/]+/(?'id'[-0-9A-F]{36})@</match_urls>
+      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderWsj() -->]]></embed_html>
     </site>
     <site media_site_id="youtube" site_title="YouTube" site_url="http://www.youtube.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchYoutube">
       <match_urls>!youtube\.com/(?:watch.*?v=|v/)(?'id'[-\w]+)!

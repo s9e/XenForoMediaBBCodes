@@ -564,6 +564,15 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderWsj($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<iframe width="512" height="288" src="http://live.wsj.com/public/page/embed-'.htmlspecialchars(strtr($vars['id'],'-','_'),2).'.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
+	}
+
 	public static function renderYoutube($vars)
 	{
 		$vars += array('id' => null, 'list' => null, 't' => null);

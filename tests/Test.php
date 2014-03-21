@@ -388,6 +388,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/recorded/40688256"></iframe>'
 			),
 			array(
+				'09FB2B3B-583E-4284-99D8-FEF6C23BE4E2',
+				'<!-- s9e_MediaBBCodes::renderWsj() -->',
+				'<iframe width="512" height="288" src="http://live.wsj.com/public/page/embed-09FB2B3B_583E_4284_99D8_FEF6C23BE4E2.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+			),
+			array(
 				'-cEzsCAzTak',
 				'<!-- s9e_MediaBBCodes::renderYoutube() -->',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"></iframe>'
