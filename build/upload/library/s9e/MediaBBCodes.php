@@ -281,7 +281,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('!colbertnation\\.com/[^/]*(?:collection|video)s/!'),
-				'extract' => array('!(?\'id\'mgid:cms:video:colbertnation\\.com:[0-9]+)!')
+				'extract' => array('!(?\'id\'mgid:arc:video:colbertnation\\.com:[-0-9a-f]+)!')
 			)
 		);
 
@@ -492,6 +492,15 @@ class s9e_MediaBBCodes
 		);
 
 		return self::match($url, $regexps, $scrapes);
+	}
+
+	public static function renderTed($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="http://embed.ted.com/'.htmlspecialchars($vars['id'],2);if((strpos($vars['id'],'.html')===false))$html.='.html';$html.='"></iframe>';
+
+		return $html;
 	}
 
 	public static function matchTraileraddict($url)

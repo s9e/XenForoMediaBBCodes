@@ -78,7 +78,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'colbertnation',
 				'http://www.colbertnation.com/the-colbert-report-videos/429637/october-14-2013/5-x-five---colbert-moments--under-the-desk',
-				'mgid:cms:video:colbertnation.com:429637'
+				'mgid:arc:video:colbertnation.com:94b7c7d0-dbc8-4e76-8f2b-9dd88b5db1e1'
 			),
 			array(
 				'comedycentral',
@@ -366,6 +366,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
 				'<!-- s9e_MediaBBCodes::renderSpotify() -->',
 				'<iframe width="300" height="380" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"></iframe>'
+			),
+			array(
+				'talks/eli_pariser_beware_online_filter_bubbles.html',
+				'<!-- s9e_MediaBBCodes::renderTed() -->',
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="http://embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
+			),
+			array(
+				'talks/eli_pariser_beware_online_filter_bubbles',
+				'<!-- s9e_MediaBBCodes::renderTed() -->',
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="http://embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
 			),
 			array(
 				'channel=minigolf2000',
