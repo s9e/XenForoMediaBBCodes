@@ -81,6 +81,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'mgid:arc:video:colbertnation.com:94b7c7d0-dbc8-4e76-8f2b-9dd88b5db1e1'
 			),
 			array(
+				'colbertnation',
+				'http://thecolbertreport.cc.com/videos/gh6urb/neil-degrasse-tyson-pt--1',
+				'mgid:arc:video:colbertnation.com:676d3a42-4c19-47e0-9509-f333fa76b4eb'
+			),
+			array(
 				'comedycentral',
 				'http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats',
 				'mgid:arc:video:comedycentral.com:bc275e2f-48e3-46d9-b095-0254381497ea'

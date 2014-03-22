@@ -28,7 +28,7 @@
       <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="416" height="234" data="http://i.cdn.turner.com/cnn/.element/apps/cvp/3.0/swf/cnn_embed_2x_container.swf?site=cnn&amp;profile=desktop&amp;context=embedwww&amp;videoId={$id}&amp;contentId={$id}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://i.cdn.turner.com/cnn/.element/apps/cvp/3.0/swf/cnn_embed_2x_container.swf?site=cnn&amp;profile=desktop&amp;context=embedwww&amp;videoId={$id}&amp;contentId={$id}" width="416" height="234" allowfullscreen=""/></object>]]></embed_html>
     </site>
     <site media_site_id="colbertnation" site_title="Colbert Nation" site_url="http://www.colbertnation.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchColbertnation">
-      <match_urls>!(?'id')colbertnation\.com/[^/]*(?:collection|video)s/!</match_urls>
+      <match_urls>!(?'id')(?:colbertnation|thecolbertreport\.cc)\.com/[^/]*(?:collection|video)s/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="collegehumor" site_title="CollegeHumor" site_url="http://www.collegehumor.com/" match_is_regex="1" supported="1">

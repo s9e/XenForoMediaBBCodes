@@ -280,7 +280,7 @@ class s9e_MediaBBCodes
 		$regexps = array();
 		$scrapes = array(
 			array(
-				'match'   => array('!colbertnation\\.com/[^/]*(?:collection|video)s/!'),
+				'match'   => array('!(?:colbertnation|thecolbertreport\\.cc)\\.com/[^/]*(?:collection|video)s/!'),
 				'extract' => array('!(?\'id\'mgid:arc:video:colbertnation\\.com:[-0-9a-f]+)!')
 			)
 		);
