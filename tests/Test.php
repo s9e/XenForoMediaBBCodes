@@ -353,6 +353,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/51465673&amp;secret_token=s-UpqTm"></iframe>'
 			),
 			array(
+				'nruau/nruau-mix2',
+				'<!-- s9e_MediaBBCodes::renderSoundcloud() -->',
+				'<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/nruau/nruau-mix2"></iframe>'
+			),
+			array(
 				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai',
 				'<!-- s9e_MediaBBCodes::renderSpotify() -->',
 				'<iframe width="300" height="80" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?uri=spotify:track:5JunxkcjfCYcY7xJ29tLai"></iframe>'
