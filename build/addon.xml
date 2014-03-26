@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140322" version_string="201403220" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140326" version_string="201403260" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -122,7 +122,7 @@
       <embed_html><![CDATA[<iframe width="427" height="356" src="//www.slideshare.net/slideshow/embed_code/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="soundcloud" site_title="SoundCloud" site_url="https://soundcloud.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSoundcloud">
-      <match_urls>@(?'id'https?://(?:(?:api\.soundcloud\.com/(?:playlist|track)s/\d+)|soundcloud\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\?secret_token=|/(?=s-))(?'secret_token'[-\w]+))?)@
+      <match_urls>@(?'id'https?://(?:(?:api\.soundcloud\.com/(?:playlist|track)s/\d+)|soundcloud\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\?secret_token=|/(?=s-))(?'secret_token'[-\w]+))?|^[^/]+/[^/]+$)@
 @(?'id')soundcloud\.com/(?!playlists/|tracks/)[^/]+/(?:sets/)?[^/]+/s-@</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderSoundcloud() -->]]></embed_html>
     </site>

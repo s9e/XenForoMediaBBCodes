@@ -445,14 +445,14 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'playlist_id' => null, 'secret_token' => null, 'track_id' => null);
 
-		$html='<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=';if(isset($vars['secret_token'])&&isset($vars['playlist_id']))$html.='https://api.soundcloud.com/playlists/'.htmlspecialchars($vars['playlist_id'],2).'&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);elseif(isset($vars['secret_token'])&&isset($vars['track_id']))$html.='https://api.soundcloud.com/tracks/'.htmlspecialchars($vars['track_id'],2).'&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);else{$html.=htmlspecialchars($vars['id'],2);if(isset($vars['secret_token']))$html.='&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);}$html.='"></iframe>';
+		$html='<iframe width="560" height="166" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=';if(isset($vars['secret_token'])&&isset($vars['playlist_id']))$html.='https://api.soundcloud.com/playlists/'.htmlspecialchars($vars['playlist_id'],2).'&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);elseif(isset($vars['secret_token'])&&isset($vars['track_id']))$html.='https://api.soundcloud.com/tracks/'.htmlspecialchars($vars['track_id'],2).'&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);else{if((strpos($vars['id'],'://')===false))$html.='https://soundcloud.com/';$html.=htmlspecialchars($vars['id'],2);if(isset($vars['secret_token']))$html.='&amp;secret_token='.htmlspecialchars($vars['secret_token'],2);}$html.='"></iframe>';
 
 		return $html;
 	}
 
 	public static function matchSoundcloud($url)
 	{
-		$regexps = array('@(?\'id\'https?://(?:(?:api\\.soundcloud\\.com/(?:playlist|track)s/\\d+)|soundcloud\\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\\?secret_token=|/(?=s-))(?\'secret_token\'[-\\w]+))?)@');
+		$regexps = array('@(?\'id\'https?://(?:(?:api\\.soundcloud\\.com/(?:playlist|track)s/\\d+)|soundcloud\\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\\?secret_token=|/(?=s-))(?\'secret_token\'[-\\w]+))?|^[^/]+/[^/]+$)@');
 		$scrapes = array(
 			array(
 				'url'     => 'https://api.soundcloud.com/resolve?url={@id}&_status_code_map%5B302%5D=200&_status_format=json&client_id=b45b1aa10f1ac2941910a7f0d10f8e28&app_version=7a35847b',
