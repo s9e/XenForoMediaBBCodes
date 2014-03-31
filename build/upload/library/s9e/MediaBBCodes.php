@@ -415,6 +415,20 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchRdio($url)
+	{
+		$regexps = array('!rd\\.io/./(?\'id\'\\w+)!');
+		$scrapes = array(
+			array(
+				'url'     => 'http://www.rdio.com/api/oembed/?url={@url}',
+				'match'   => array('!rdio\\.com/.*?(?:playlist|track)!'),
+				'extract' => array('!rd\\.io/./(?\'id\'\\w+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchRutube($url)
 	{
 		$regexps = array('!rutube\\.ru/tracks/(?\'id\'[0-9]+)!');

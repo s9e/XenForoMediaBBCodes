@@ -161,6 +161,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=1869987317%2Fwish-i-was-here-1;video=video'
 			),
 			array(
+				'rdio',
+				'http://rd.io/x/QcD7oTdeWevg/',
+				'QcD7oTdeWevg'
+			),
+			array(
+				'rdio',
+				'https://www.rdio.com/artist/Hannibal_Buress/album/Animal_Furnace/track/Hands-Free/',
+				'QitDVOn7'
+			),
+			array(
 				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
 				'http://api.soundcloud.com/tracks/98282116'
