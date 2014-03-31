@@ -625,17 +625,21 @@ The BBCodes definitions are based on [url=https://github.com/s9e/TextFormatter]t
 
 This add-on is released under [url=http://en.wikipedia.org/wiki/MIT_License]The MIT License[/url]. Redistribution is allowed and [b]encouraged[/b].
 
-[size=6][font=Arial]Installation[/font][/size]
+[size=6][font=Arial][b]Installation[/b][/font][/size]
 
 Unzip the archive, and upload the content of the [font=monospace]upload[/font] folder to your XenForo installation. Then go to your forum\'s Admin CP and install the add-on via the provided [font=monospace]addon.xml[/font] file.
 
-[size=6][font=Arial]Compatibility and customization[/font][/size]
+[size=6][font=Arial][b]Compatibility and customization[/b][/font][/size]
 
-Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. [b]Note that this add-on replaces the default media sites.[/b] If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]experimental configurator interface[/url].
+Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. [b]Note that this add-on replaces the default media sites.[/b] If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try this [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]experimental configurator interface[/url].
 
-[size=6][font=Arial]Requests[/font][/size]
+[size=6][font=Arial][b]How to support this add-on[/b][/font][/size]
 
-If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion. Selection may depend on the site\'s popularity and Alexa rank. Please post a few links as examples of the kind of links that should be supported. Only links to legal stuff, thanks.';
+Rate and comment in the right sidebar.
+
+[size=6][font=Arial][b]How to request a media site[/b][/font][/size]
+
+If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion. Selection may depend on the site\'s popularity and Alexa rank. [b]Please post a few links as examples[/b] of the kind of links that should be supported. You do not need to post the embed code, only links to content.';
 
 file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '.txt',
