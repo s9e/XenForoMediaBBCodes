@@ -76,6 +76,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'g6VTgpjxbQA'
 			),
 			array(
+				'cbsnews',
+				'http://www.cbsnews.com/video/watch/?id=50156501n',
+				'50156501'
+			),
+			array(
+				'cbsnews',
+				'http://www.cbsnews.com/videos/is-the-us-stock-market-rigged',
+				'pid=W4MVSOaNEYMq'
+			),
+			array(
 				'colbertnation',
 				'http://www.colbertnation.com/the-colbert-report-videos/429637/october-14-2013/5-x-five---colbert-moments--under-the-desk',
 				'mgid:arc:video:colbertnation.com:94b7c7d0-dbc8-4e76-8f2b-9dd88b5db1e1'
@@ -316,6 +326,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'album_id=1122163921;track_num=7',
 				'<!-- s9e_MediaBBCodes::renderBandcamp() -->',
 				'<iframe width="400" height="42" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/album=1122163921/size=small/t=7"></iframe>'
+			),
+			array(
+				'50156501',
+				'<!-- s9e_MediaBBCodes::renderCbsnews() -->',
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="si=254&amp;contentValue=50156501"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="http://i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf" flashvars="si=254&amp;contentValue=50156501"></object>'
+			),
+			array(
+				'pid=W4MVSOaNEYMq',
+				'<!-- s9e_MediaBBCodes::renderCbsnews() -->',
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://www.cbsnews.com/common/video/cbsnews_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="http://www.cbsnews.com/common/video/cbsnews_player.swf" flashvars="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object>'
 			),
 			array(
 				'height=338;id=SereneIllfatedCapybara;width=600',

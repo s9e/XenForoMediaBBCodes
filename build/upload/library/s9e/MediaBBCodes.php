@@ -275,6 +275,28 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderCbsnews($vars)
+	{
+		$vars += array('id' => null, 'pid' => null);
+
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="';if(isset($vars['pid']))$html.='http://www.cbsnews.com/common/video/cbsnews_player.swf';else$html.='http://i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf';$html.='"><param name="allowfullscreen" value="true"><param name="flashvars" value="';if(isset($vars['pid']))$html.='pType=embed&amp;si=254&amp;pid='.htmlspecialchars($vars['pid'],2);else$html.='si=254&amp;contentValue='.htmlspecialchars($vars['id'],2);$html.='"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="';if(isset($vars['pid']))$html.='http://www.cbsnews.com/common/video/cbsnews_player.swf';else$html.='http://i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf';$html.='" flashvars="';if(isset($vars['pid']))$html.='pType=embed&amp;si=254&amp;pid='.htmlspecialchars($vars['pid'],2);else$html.='si=254&amp;contentValue='.htmlspecialchars($vars['id'],2);$html.='"></object>';
+
+		return $html;
+	}
+
+	public static function matchCbsnews($url)
+	{
+		$regexps = array('#cbsnews\\.com/video/watch/\\?id=(?\'id\'[0-9]+)#');
+		$scrapes = array(
+			array(
+				'match'   => array('#cbsnews\\.com/videos/(?!watch/)#'),
+				'extract' => array('#"pid":"(?\'pid\'\\w+)"#')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchColbertnation($url)
 	{
 		$regexps = array();
