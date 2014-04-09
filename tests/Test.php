@@ -106,6 +106,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'mgid:arc:video:thedailyshow.com:627cc3c2-4218-4a78-bf1d-c8258f4db2f8'
 			),
 			array(
+				'dailyshow',
+				'http://thedailyshow.cc.com/extended-interviews/rpgevm/exclusive-matt-taibbi-extended-interview',
+				'mgid:arc:playlist:thedailyshow.com:85ebd39c-9fea-44f3-9da2-f3088cab195d'
+			),
+			array(
 				'gametrailers',
 				'http://www.gametrailers.com/videos/jz8rt1/tom-clancy-s-the-division-vgx-2013--world-premiere-featurette',
 				'mgid:arc:video:gametrailers.com:85dee3c3-60f6-4b80-8124-cf3ebd9d2a6c'
