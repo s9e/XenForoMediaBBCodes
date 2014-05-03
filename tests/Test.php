@@ -111,6 +111,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'mgid:arc:playlist:thedailyshow.com:85ebd39c-9fea-44f3-9da2-f3088cab195d'
 			),
 			array(
+				'ebay',
+				'http://www.ebay.com/itm/Converse-All-Star-Chuck-Taylor-Black-Hi-Canvas-M9160-Men-/251053262701',
+				'itemid=251053262701'
+			),
+			array(
+				'ebay',
+				'http://www.ebay.co.uk/itm/Converse-Classic-Chuck-Taylor-Low-Trainer-Sneaker-All-Star-OX-NEW-sizes-Shoes-/230993099153',
+				'itemid=230993099153;lang=en_GB'
+			),
+			array(
 				'gametrailers',
 				'http://www.gametrailers.com/videos/jz8rt1/tom-clancy-s-the-division-vgx-2013--world-premiere-featurette',
 				'mgid:arc:video:gametrailers.com:85dee3c3-60f6-4b80-8124-cf3ebd9d2a6c'
@@ -341,6 +351,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'pid=W4MVSOaNEYMq',
 				'<!-- s9e_MediaBBCodes::renderCbsnews() -->',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://www.cbsnews.com/common/video/cbsnews_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="http://www.cbsnews.com/common/video/cbsnews_player.swf" flashvars="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object>'
+			),
+			array(
+				'itemid=251053262701',
+				'<!-- s9e_MediaBBCodes::renderEbay() -->',
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"></object>'
+			),
+			array(
+				'itemid=251053262701;lang=en_GB',
+				'<!-- s9e_MediaBBCodes::renderEbay() -->',
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"></object>'
 			),
 			array(
 				'height=338;id=SereneIllfatedCapybara;width=600',

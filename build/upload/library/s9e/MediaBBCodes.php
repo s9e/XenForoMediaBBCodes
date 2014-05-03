@@ -336,9 +336,31 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderEbay($vars)
+	{
+		$vars += array('itemid' => null, 'lang' => null);
+
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"></object>';
+
+		return $html;
+	}
+
+	public static function matchEbay($url)
+	{
+		$regexps = array('#(?=ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/[^/]+/(?\'itemid\'\\d+)#');
+		$scrapes = array(
+			array(
+				'match'   => array('#ebay\\.(?!com/)#'),
+				'extract' => array('#"locale":"(?\'lang\'[\\w_]+)"#')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchEspn($url)
 	{
-		$regexps = array('#espn\\.go\\.com.*?\\?id=(?\'cms\'deportes|espn):(?\'id\'\\d+)#', '#espn\\.go\\.com.*?\\?id=(?\'id\'\\d+)#', '#espn\\.go\\.com.*?(?\'cms\'deportes|espn(?!d))#');
+		$regexps = array('#(?=espn\\.go\\.com).*?\\?id=(?\'cms\'deportes|espn):(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?\\?id=(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d))#');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
@@ -629,7 +651,7 @@ class s9e_MediaBBCodes
 
 	public static function matchYoutube($url)
 	{
-		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!youtu(?>\\.be|be\\.com).*?[#&?]t=(?\'t\'\\d+)!', '!youtu(?>\\.be|be\\.com).*?&list=(?\'list\'[-\\w]+)!');
+		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=youtu(?>\\.be|be\\.com)).*?[#&?]t=(?\'t\'\\d+)!', '!(?=youtu(?>\\.be|be\\.com)).*?&list=(?\'list\'[-\\w]+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);

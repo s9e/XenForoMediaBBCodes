@@ -448,8 +448,9 @@ foreach ($sites->site as $site)
 		if ($matchHost)
 		{
 			$regexp = $regexp[0]
+			        . '(?='
 			        . s9e\TextFormatter\Configurator\Helpers\RegexpBuilder::fromList($hosts)
-			        . '.*?'
+			        . ').*?'
 			        . substr($regexp, 1);
 		}
 
