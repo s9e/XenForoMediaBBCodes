@@ -347,7 +347,7 @@ class s9e_MediaBBCodes
 
 	public static function matchEbay($url)
 	{
-		$regexps = array('#(?=ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/[^/]+/(?\'itemid\'\\d+)#');
+		$regexps = array('#(?=ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'itemid\'\\d+)#');
 		$scrapes = array(
 			array(
 				'match'   => array('#ebay\\.(?!com/)#'),
