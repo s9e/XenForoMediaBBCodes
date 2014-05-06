@@ -574,6 +574,23 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderTweet($vars)
+	{
+		$vars += array('url' => null);
+
+		$html='<iframe width="500" height="186" src="//s9e.github.io/tweetframe.min.html?'.htmlspecialchars($vars['url'],2).'" allowfullscreen="" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
+
+		return $html;
+	}
+
+	public static function matchTweet($url)
+	{
+		$regexps = array('!(?\'url\'https://twitter\\.com/[^/]+/status(?:es)?/\\d+)!');
+		$scrapes = array();
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderTwitch($vars)
 	{
 		$vars += array('archive_id' => null, 'channel' => null, 'chapter_id' => null);

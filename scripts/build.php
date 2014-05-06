@@ -316,7 +316,7 @@ foreach ($sites->site as $site)
 
 	if (count($attrNames) === 1 && $attrNames !== ['id'])
 	{
-		die("Remap $site[id]\n");
+		echo "Remap $site[id]\n";
 	}
 
 	// Default HTML replacement. Ensure that iframe and script have an end tag
