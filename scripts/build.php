@@ -102,10 +102,17 @@ class s9e_MediaBBCodes
 			return $url;
 		}
 
-		// If there's only one capture named "id", we store its value as-is
-		if (array_keys($vars) === array('id'))
+		// If there's only one capture named "id" we store its value as-is
+		$keys = array_keys($vars);
+		if ($keys === array('id'))
 		{
 			return $vars['id'];
+		}
+
+		// If there's only one capture named "url" and it looks like a URL, we store its value as-is
+		if ($keys === array('url') && preg_match('#^\\w+://#', $vars['url']))
+		{
+			return $vars['url'];
 		}
 
 		// If there are more than one capture, or it's not named "id", we store it as a series of
@@ -127,9 +134,15 @@ class s9e_MediaBBCodes
 
 	public static function embed($mediaKey, $site)
 	{
+		// If the value looks like a URL, we copy its value to the "url" var
+		if (preg_match('#^\\w+://#', $mediaKey))
+		{
+			$vars['url'] = $mediaKey;
+		}
+
+		// If the value looks like a series of key=value pairs, add them to $vars
 		if (preg_match('(^(\\w+=[^;]*)(?>;(?1))*$)', $mediaKey))
 		{
-			// If the URL looks like a series of key=value pairs, add them to $vars
 			$vars = array();
 			foreach (explode(';', $mediaKey) as $pair)
 			{
@@ -138,6 +151,7 @@ class s9e_MediaBBCodes
 			}
 		}
 
+		// The value is used as the "id" var if it hasn't been defined already
 		if (!isset($vars['id']))
 		{
 			$vars['id'] = $mediaKey;
