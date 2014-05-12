@@ -106,7 +106,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		</tr>
 		<tr>
 			<td><code>gist</code></td>
-			<td>GitHub Gist</td>
+			<td>GitHub Gist (via custom iframe)</td>
 			<td>https://gist.github.com/s9e/6806305<br/>https://gist.github.com/6806305<br/>https://gist.github.com/s9e/6806305/ad88d904b082c8211afa040162402015aacb8599</td>
 		</tr>
 		<tr>
@@ -202,7 +202,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>tweet</code></td>
 			<td>Twitter (via custom iframe)</td>
-			<td>https://twitter.com/BarackObama/statuses/266031293945503744<br/>https://twitter.com/DerekTVShow/status/463372588690202624</td>
+			<td>https://twitter.com/BarackObama/statuses/266031293945503744<br/>https://twitter.com/DerekTVShow/status/463372588690202624<br/>https://twitter.com/#!/BarackObama/status/266031293945503744</td>
 		</tr>
 		<tr>
 			<td><code>twitch</code></td>

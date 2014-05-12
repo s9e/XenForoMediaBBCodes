@@ -407,6 +407,15 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderGist($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<iframe style="width:100%" src="//s9e.github.io/iframe/gist.min.html?'.htmlspecialchars($vars['id'],2).'" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
+
+		return $html;
+	}
+
 	public static function renderGrooveshark($vars)
 	{
 		$vars += array('playlistid' => null, 'songid' => null);
@@ -592,14 +601,14 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('url' => null);
 
-		$html='<iframe width="500" height="186" src="//s9e.github.io/tweetframe.min.html?'.htmlspecialchars($vars['url'],2).'" allowfullscreen="" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
+		$html='<iframe width="500" height="186" src="//s9e.github.io/iframe/tweet.min.html?'.htmlspecialchars($vars['url'],2).'" allowfullscreen="" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
 
 		return $html;
 	}
 
 	public static function matchTweet($url)
 	{
-		$regexps = array('!(?\'url\'https://twitter\\.com/[^/]+/status(?:es)?/\\d+)!');
+		$regexps = array('@(?\'url\'https://twitter\\.com/(?:#!/)?\\w+/status(?:es)?/\\d+)@');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
