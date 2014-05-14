@@ -77,7 +77,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>espn</code></td>
 			<td>ESPN</td>
-			<td>http://espn.go.com/video/clip?id=10315344<br/>http://espndeportes.espn.go.com/videohub/video/clipDeportes?id=deportes:2001302</td>
+			<td>http://espn.go.com/video/clip?id=10315344<br/>http://m.espn.go.com/general/video?vid=10926479<br/>http://espndeportes.espn.go.com/videohub/video/clipDeportes?id=deportes:2001302</td>
 		</tr>
 		<tr>
 			<td><code>facebook</code></td>

@@ -374,7 +374,7 @@ class s9e_MediaBBCodes
 
 	public static function matchEspn($url)
 	{
-		$regexps = array('#(?=espn\\.go\\.com).*?\\?id=(?\'cms\'deportes|espn):(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?\\?id=(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d))#');
+		$regexps = array('#(?=espn\\.go\\.com).*?\\?id=(?\'cms\'deportes|espn):(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?\\?v?id=(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d))#');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
