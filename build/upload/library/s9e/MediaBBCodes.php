@@ -238,8 +238,8 @@ class s9e_MediaBBCodes
 			{
 				foreach ($m as $k => $v)
 				{
-					// Add named captures to the vars
-					if (!is_numeric($k))
+					// Add named captures to the vars without overwriting existing vars
+					if (!is_numeric($k) && !isset($vars[$k]))
 					{
 						$vars[$k] = $v;
 					}
@@ -261,7 +261,7 @@ class s9e_MediaBBCodes
 
 	public static function matchAmazon($url)
 	{
-		$regexps = array('#(?=amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?\'id\'[A-Z0-9]+)#', '#(?=amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?amazon\\.(?:co\\.)?(?\'tld\'ca|de|fr|it|jp|uk)#');
+		$regexps = array('#(?=.*?amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?\'id\'[A-Z0-9]+)#', '#(?=.*?amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?amazon\\.(?:co\\.)?(?\'tld\'ca|de|fr|it|jp|uk)#');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
@@ -378,7 +378,7 @@ class s9e_MediaBBCodes
 
 	public static function matchEbay($url)
 	{
-		$regexps = array('#(?=ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'itemid\'\\d+)#');
+		$regexps = array('#(?=.*?ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'itemid\'\\d+)#');
 		$scrapes = array(
 			array(
 				'match'   => array('#ebay\\.(?!com/)#'),
@@ -391,7 +391,7 @@ class s9e_MediaBBCodes
 
 	public static function matchEspn($url)
 	{
-		$regexps = array('#(?=espn\\.go\\.com).*?\\?id=(?\'cms\'deportes|espn):(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?\\?v?id=(?\'id\'\\d+)#', '#(?=espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d))#');
+		$regexps = array('#(?=.*?espn\\.go\\.com).*?\\?id=(?\'cms\'deportes|espn):(?\'id\'\\d+)#', '#(?=.*?espn\\.go\\.com).*?\\?v?id=(?\'id\'\\d+)#', '#(?=.*?espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d))#');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
@@ -708,7 +708,7 @@ class s9e_MediaBBCodes
 
 	public static function matchYoutube($url)
 	{
-		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=youtu(?>\\.be|be\\.com)).*?[#&?]t=(?\'t\'\\d+)!', '!(?=youtu(?>\\.be|be\\.com)).*?&list=(?\'list\'[-\\w]+)!');
+		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=.*?youtu(?>\\.be|be\\.com)).*?[#&?]t=(?\'t\'\\d+)!', '!(?=.*?youtu(?>\\.be|be\\.com)).*?&list=(?\'list\'[-\\w]+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);

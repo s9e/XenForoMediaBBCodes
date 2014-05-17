@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140517" version_string="201405170" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140517b" version_string="201405171" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
       <embed_html><![CDATA[<iframe width="640" height="360" src="//abcnews.go.com/video/embed?id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="amazon" site_title="Amazon Product" site_url="http://affiliate-program.amazon.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchAmazon">
-      <match_urls>#(?=amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?'id'[A-Z0-9]+)#
-#(?'id')(?=amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?amazon\.(?:co\.)?(?'tld'ca|de|fr|it|jp|uk)#</match_urls>
+      <match_urls>#(?=.*?amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?'id'[A-Z0-9]+)#
+#(?'id')(?=.*?amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?amazon\.(?:co\.)?(?'tld'ca|de|fr|it|jp|uk)#</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderAmazon() -->]]></embed_html>
     </site>
     <site media_site_id="bandcamp" site_title="Bandcamp" site_url="http://bandcamp.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBandcamp">
@@ -54,14 +54,14 @@
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="ebay" site_title="eBay" site_url="http://www.ebay.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchEbay">
-      <match_urls>#(?'id')(?=ebay\.(?:at|c(?:a|o(?:\.uk|m(?&gt;\.au)?))|de|es|fr|i[nt])).*?ebay.[\w.]+/itm/(?:[-\w]+/)?(?'itemid'\d+)#
+      <match_urls>#(?'id')(?=.*?ebay\.(?:at|c(?:a|o(?:\.uk|m(?&gt;\.au)?))|de|es|fr|i[nt])).*?ebay.[\w.]+/itm/(?:[-\w]+/)?(?'itemid'\d+)#
 #(?'id')ebay\.(?!com/)#</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderEbay() -->]]></embed_html>
     </site>
     <site media_site_id="espn" site_title="ESPN" site_url="http://espn.go.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchEspn">
-      <match_urls>#(?=espn\.go\.com).*?\?id=(?'cms'deportes|espn):(?'id'\d+)#
-#(?=espn\.go\.com).*?\?v?id=(?'id'\d+)#
-#(?'id')(?=espn\.go\.com).*?(?'cms'deportes|espn(?!d))#</match_urls>
+      <match_urls>#(?=.*?espn\.go\.com).*?\?id=(?'cms'deportes|espn):(?'id'\d+)#
+#(?=.*?espn\.go\.com).*?\?v?id=(?'id'\d+)#
+#(?'id')(?=.*?espn\.go\.com).*?(?'cms'deportes|espn(?!d))#</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="315" src="https://espn.go.com/video/iframe/twitter/?cms={$cms}&amp;id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="facebook" site_title="Facebook" site_url="http://www.facebook.com/" match_is_regex="1" supported="1">
@@ -207,8 +207,8 @@
     <site media_site_id="youtube" site_title="YouTube" site_url="http://www.youtube.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchYoutube">
       <match_urls>!youtube\.com/(?:watch.*?v=|v/)(?'id'[-\w]+)!
 !youtu\.be/(?'id'[-\w]+)!
-!(?'id')(?=youtu(?&gt;\.be|be\.com)).*?[#&amp;?]t=(?'t'\d+)!
-!(?'id')(?=youtu(?&gt;\.be|be\.com)).*?&amp;list=(?'list'[-\w]+)!</match_urls>
+!(?'id')(?=.*?youtu(?&gt;\.be|be\.com)).*?[#&amp;?]t=(?'t'\d+)!
+!(?'id')(?=.*?youtu(?&gt;\.be|be\.com)).*?&amp;list=(?'list'[-\w]+)!</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderYoutube() -->]]></embed_html>
     </site>
   </bb_code_media_sites>

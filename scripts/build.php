@@ -255,8 +255,8 @@ class s9e_MediaBBCodes
 			{
 				foreach ($m as $k => $v)
 				{
-					// Add named captures to the vars
-					if (!is_numeric($k))
+					// Add named captures to the vars without overwriting existing vars
+					if (!is_numeric($k) && !isset($vars[$k]))
 					{
 						$vars[$k] = $v;
 					}
@@ -462,7 +462,7 @@ foreach ($sites->site as $site)
 		if ($matchHost)
 		{
 			$regexp = $regexp[0]
-			        . '(?='
+			        . '(?=.*?'
 			        . s9e\TextFormatter\Configurator\Helpers\RegexpBuilder::fromList($hosts)
 			        . ').*?'
 			        . substr($regexp, 1);

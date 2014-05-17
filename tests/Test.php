@@ -166,6 +166,26 @@ class Test extends PHPUnit_Framework_TestCase
 				'itemid=230993099153;lang=en_GB'
 			),
 			array(
+				'espn',
+				'http://espn.go.com/video/clip?id=10936987',
+				'cms=espn;id=10936987'
+			),
+			array(
+				'espn',
+				'http://m.espn.go.com/general/video?vid=10926479',
+				'cms=espn;id=10926479'
+			),
+			array(
+				'espn',
+				'http://espndeportes.espn.go.com/videohub/video/clipDeportes?id=deportes:2001302',
+				'cms=deportes;id=2001302'
+			),
+			array(
+				'espn',
+				'http://espndeportes.espn.go.com/videohub/video/clipDeportes?id=2088955&amp;cc=7586',
+				'cms=deportes;id=2088955'
+			),
+			array(
 				'gametrailers',
 				'http://www.gametrailers.com/videos/jz8rt1/tom-clancy-s-the-division-vgx-2013--world-premiere-featurette',
 				'mgid:arc:video:gametrailers.com:85dee3c3-60f6-4b80-8124-cf3ebd9d2a6c'
