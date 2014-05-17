@@ -51,6 +51,51 @@ class Test extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array(
+				'amazon',
+				'http://www.amazon.ca/gp/product/B00GQT1LNO/',
+				'id=B00GQT1LNO;tld=ca'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.co.jp/gp/product/B003AKZ6I8/',
+				'id=B003AKZ6I8;tld=jp'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.co.uk/gp/product/B00BET0NR6/',
+				'id=B00BET0NR6;tld=uk'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.com/dp/B002MUC0ZY',
+				'B002MUC0ZY'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.com/The-BeerBelly-200-001-80-Ounce-Belly/dp/B001RB2CXY/',
+				'B001RB2CXY'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.com/gp/product/B0094H8H7I',
+				'B0094H8H7I'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.de/Netgear-WN3100RP-100PES-Repeater-integrierte-Steckdose/dp/B00ET2LTE6/',
+				'id=B00ET2LTE6;tld=de'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.fr/Vans-Authentic-Baskets-mixte-adulte/dp/B005NIKPAY/',
+				'id=B005NIKPAY;tld=fr'
+			),
+			array(
+				'amazon',
+				'http://www.amazon.it/gp/product/B00JGOMIP6/',
+				'id=B00JGOMIP6;tld=it'
+			),
+			array(
 				'bandcamp',
 				'http://proleter.bandcamp.com/album/curses-from-past-times-ep',
 				'album_id=1122163921'
@@ -336,6 +381,46 @@ class Test extends PHPUnit_Framework_TestCase
 				'foo=bar;baz=quux',
 				'{$foo} {$baz}',
 				'bar quux'
+			),
+			array(
+				'id=B00GQT1LNO;tld=ca',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-ca.amazon.ca/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00GQT1LNO&amp;o=15"></iframe>'
+			),
+			array(
+				'id=B003AKZ6I8;tld=jp',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-jp.amazon.co.jp/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B003AKZ6I8&amp;o=9"></iframe>'
+			),
+			array(
+				'id=B00BET0NR6;tld=uk',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-uk.amazon.co.uk/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2"></iframe>'
+			),
+			array(
+				'B002MUC0ZY',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1"></iframe>'
+			),
+			array(
+				'id=B00ET2LTE6;tld=de',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-de.amazon.de/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3"></iframe>'
+			),
+			array(
+				'id=B005NIKPAY;tld=fr',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-fr.amazon.fr/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8"></iframe>'
+			),
+			array(
+				'id=B00JGOMIP6;tld=it',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29"></iframe>'
+			),
+			array(
+				'id=B002MUC0ZY;tld=com',
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1"></iframe>'
 			),
 			array(
 				'album_id=1122163921',

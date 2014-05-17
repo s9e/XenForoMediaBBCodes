@@ -250,6 +250,23 @@ class s9e_MediaBBCodes
 		return $vars;
 	}
 
+	public static function renderAmazon($vars)
+	{
+		$vars += array('id' => null, 'tld' => null);
+
+		$html='<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm';if(isset($vars['tld'])&&(strpos('cadefritjpuk',$vars['tld'])!==false))$html.='-'.htmlspecialchars($vars['tld'],2);$html.='.amazon.';if($vars['tld']==='jp'||$vars['tld']==='uk')$html.='co.'.htmlspecialchars($vars['tld'],2);elseif(isset($vars['tld'])&&(strpos('cadefrit',$vars['tld'])!==false))$html.=htmlspecialchars($vars['tld'],2);else$html.='com';$html.='/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins='.htmlspecialchars($vars['id'],2).'&amp;o=';if($vars['tld']==='ca')$html.='15';elseif($vars['tld']==='de')$html.='3';elseif($vars['tld']==='fr')$html.='8';elseif($vars['tld']==='it')$html.='29';elseif($vars['tld']==='jp')$html.='9';elseif($vars['tld']==='uk')$html.='2';else$html.='1';$html.='"></iframe>';
+
+		return $html;
+	}
+
+	public static function matchAmazon($url)
+	{
+		$regexps = array('#(?=amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?\'id\'[A-Z0-9]+)#', '#(?=amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?amazon\\.(?:co\\.)?(?\'tld\'ca|de|fr|it|jp|uk)#');
+		$scrapes = array();
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderBandcamp($vars)
 	{
 		$vars += array('album_id' => null, 'track_id' => null, 'track_num' => null);
