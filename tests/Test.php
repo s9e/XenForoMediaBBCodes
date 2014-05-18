@@ -186,6 +186,21 @@ class Test extends PHPUnit_Framework_TestCase
 				'cms=deportes;id=2088955'
 			),
 			array(
+				'facebook',
+				'https://www.facebook.com/photo.php?v=10100658170103643',
+				'id=10100658170103643;mode=photo'
+			),
+			array(
+				'facebook',
+				'https://www.facebook.com/video/video.php?v=10150451523596807',
+				'id=10150451523596807;mode=video'
+			),
+			array(
+				'facebook',
+				'https://www.facebook.com/FacebookDevelopers/posts/10151471074398553',
+				'id=10151471074398553;mode=post'
+			),
+			array(
 				'gametrailers',
 				'http://www.gametrailers.com/videos/jz8rt1/tom-clancy-s-the-division-vgx-2013--world-premiere-featurette',
 				'mgid:arc:video:gametrailers.com:85dee3c3-60f6-4b80-8124-cf3ebd9d2a6c'
@@ -471,6 +486,26 @@ class Test extends PHPUnit_Framework_TestCase
 				'itemid=251053262701;lang=en_GB',
 				'<!-- s9e_MediaBBCodes::renderEbay() -->',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"></object>'
+			),
+			array(
+				'id=10100658170103643;mode=photo',
+				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="https://www.facebook.com/video/embed?video_id=10100658170103643"></iframe>'
+			),
+			array(
+				'id=10150451523596807;mode=video',
+				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="https://www.facebook.com/video/embed?video_id=10150451523596807"></iframe>'
+			),
+			array(
+				'10150451523596807',
+				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="https://www.facebook.com/video/embed?video_id=10150451523596807"></iframe>'
+			),
+			array(
+				'id=10151471074398553;mode=post',
+				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/facebook.min.html?10151471074398553" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\/\/s9e\.github\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>'
 			),
 			array(
 				'height=338;id=SereneIllfatedCapybara;width=600',

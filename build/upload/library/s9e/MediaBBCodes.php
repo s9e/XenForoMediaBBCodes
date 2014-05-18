@@ -397,6 +397,23 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderFacebook($vars)
+	{
+		$vars += array('id' => null, 'mode' => null);
+
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="';if($vars['mode']==='post')$html.='//s9e.github.io/iframe/facebook.min.html?';else$html.='https://www.facebook.com/video/embed?video_id=';$html.=htmlspecialchars($vars['id'],2).'"';if($vars['mode']==='post')$html.=' onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"';$html.='></iframe>';
+
+		return $html;
+	}
+
+	public static function matchFacebook($url)
+	{
+		$regexps = array('!facebook\\.com/(?\'mode\'photo|video)(?:/video)?\\.php\\?v=(?\'id\'\\d+)!', '!facebook\\.com/[\\w.]+/(?\'mode\'post)s/(?\'id\'\\d+)!');
+		$scrapes = array();
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchGametrailers($url)
 	{
 		$regexps = array();
