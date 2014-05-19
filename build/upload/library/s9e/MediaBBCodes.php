@@ -527,7 +527,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('!rutube\\.ru/video/[0-9a-f]{32}!'),
-				'extract' => array('!rutube\\.ru/video/embed/(?\'id\'[0-9]+)!')
+				'extract' => array('!rutube\\.ru/play/embed/(?\'id\'[0-9]+)!')
 			)
 		);
 
