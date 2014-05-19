@@ -622,14 +622,6 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function matchTweet($url)
-	{
-		$regexps = array('@(?\'url\'https://twitter\\.com/(?:#!/)?\\w+/status(?:es)?/\\d+)@');
-		$scrapes = array();
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
 	public static function renderTwitch($vars)
 	{
 		$vars += array('archive_id' => null, 'channel' => null, 'chapter_id' => null);
