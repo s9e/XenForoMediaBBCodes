@@ -346,7 +346,7 @@ foreach ($sites->site as $site)
 
 	// Test whether the template needs to be rendered in PHP
 	if (strpos($html, '<xsl:') !== false
-	 || preg_match('/="[^"]*(?<!\\{)\\{(?!@)/', $html))
+	 || preg_match('/="[^"]*(?<!\\{)\\{(?![@{])/', $html))
 	{
 		$useEmbedCallback = true;
 
@@ -414,12 +414,12 @@ foreach ($sites->site as $site)
 			$useEmbedCallback = true;
 		}
 
-		// Replace XSL attributes with XenForo's syntax
-		$html = str_replace('{@', '{$', $html);
+		// Replace XSL attributes with XenForo's syntax and unescape brackets
+		$html = strtr($html, ['{@' => '{$', '{{' => '{', '}}' => '}']);
 	}
 
 	// Workaround for sites that don't like URL-encoding
-	if (preg_match('(gist|mtvnservices)', $html))
+	if (strpos($html, 'mtvnservices') !== false)
 	{
 		$useEmbedCallback = true;
 	}
