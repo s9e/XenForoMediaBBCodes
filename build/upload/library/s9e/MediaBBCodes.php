@@ -401,7 +401,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'mode' => null);
 
-		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="';if($vars['mode']==='post')$html.='//s9e.github.io/iframe/facebook.min.html?';else$html.='https://www.facebook.com/video/embed?video_id=';$html.=htmlspecialchars($vars['id'],2).'"';if($vars['mode']==='post')$html.=' onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"';$html.='></iframe>';
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="';if($vars['mode']==='post')$html.='//s9e.github.io/iframe/facebook.min.html#';else$html.='https://www.facebook.com/video/embed?video_id=';$html.=htmlspecialchars($vars['id'],2).'"';if($vars['mode']==='post')$html.=' onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"';$html.='></iframe>';
 
 		return $html;
 	}
@@ -445,7 +445,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null);
 
-		$html='<iframe style="width:100%" src="//s9e.github.io/iframe/gist.min.html?'.htmlspecialchars($vars['id'],2).'" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
+		$html='<iframe style="width:100%" src="//s9e.github.io/iframe/gist.min.html#'.htmlspecialchars($vars['id'],2).'" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
 
 		return $html;
 	}
@@ -635,7 +635,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('url' => null);
 
-		$html='<iframe width="500" height="186" src="//s9e.github.io/iframe/tweet.min.html?'.htmlspecialchars($vars['url'],2).'" allowfullscreen="" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
+		$html='<iframe width="500" height="186" src="//s9e.github.io/iframe/tweet.min.html#'.htmlspecialchars($vars['url'],2).'" allowfullscreen="" frameborder="0" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>';
 
 		return $html;
 	}
