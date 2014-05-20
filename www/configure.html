@@ -25,12 +25,18 @@
 		{
 			background-color: #dddddd;
 		}
+		#params td:first-child
+		{
+			text-align: right;
+		}
 	</style>
 </head>
 <body>
 	<div><a download="addon.xml">Download addon.xml</a> (left-click recommended)</div>
 	<div><a href="https://raw.github.com/s9e/XenForoMediaBBCodes/master/build/upload/library/s9e/MediaBBCodes.php">Download MediaBBCodes.php</a> and upload it to <code>library/s9e/</code></div>
-	<table>
+	<table id="params">
+	</table>
+	<table id="sites">
 		<thead>
 			<tr>
 				<th><input type="checkbox" onchange="toggleAll(this)"></th>
@@ -330,7 +336,7 @@
 
 		function toggleAll(node)
 		{
-			var nodes = document.getElementsByTagName('input'), i = nodes.length;
+			var nodes = document.getElementById('sites').getElementsByTagName('input'), i = nodes.length;
 			while (--i > 0)
 			{
 				nodes.item(i).checked = node.checked;
@@ -342,7 +348,7 @@
 
 		function updateHash()
 		{
-			var nodes = document.getElementsByTagName('input'), i = 0, cnt = nodes.length, ids = [];
+			var nodes = document.getElementById('sites').getElementsByTagName('input'), i = 0, cnt = nodes.length, ids = [];
 			while (++i < cnt)
 			{
 				if (nodes.item(i).checked)
@@ -358,7 +364,7 @@
 		{
 			var ids = document.location.hash.replace('#', '').split(','),
 				str = ',' + ids.join(',') + ',',
-				inputs = document.getElementsByTagName('input'),
+				inputs = document.getElementById('sites').getElementsByTagName('input'),
 				i = inputs.length;
 
 			while (--i > 0)
@@ -392,7 +398,7 @@
 		updateUI();
 
 		// Yup, it's 2013 and I'm using onclick. Let the hate flow through you
-		document.getElementsByTagName('table')[0].onclick = function(e)
+		document.getElementById('sites').onclick = function(e)
 		{
 			var node = e.target;
 
