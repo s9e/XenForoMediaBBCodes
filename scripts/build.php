@@ -171,7 +171,7 @@ class s9e_MediaBBCodes
 		$html = $site['embed_html'];
 
 		// Extract the param declarations from the HTML
-		$params = [];
+		$params = array();
 		$html = preg_replace_callback(
 			'(<!-- (\\w+)=(.*?) -->\\r?\\n?)',
 			function ($m) use (&$params)
