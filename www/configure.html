@@ -405,17 +405,21 @@
 				}
 			}
 
+			var addonXml = xml.replace(
+				new RegExp('\\s*<site media_site_id="(?!' + ids.join('|') + ')[\\s\\S]*?</site>', 'g'),
+				''
+			);
+
 			// Update params
 			var regexp = /(\w+)=([^,]+)/g, m;
 			while (m = regexp.exec(document.location.hash))
 			{
 				document.getElementById('param-' + m[1]).value = m[2];
+				addonXml = addonXml.replace(
+					'<!-- ' + m[1] + '= -->',
+					'<!-- ' + m[1] + '=' + m[2] + ' -->'
+				);
 			}
-
-			var addonXml = xml.replace(
-				new RegExp('\\s*<site media_site_id="(?!' + ids.join('|') + ')[\\s\\S]*?</site>', 'g'),
-				''
-			);
 
 			document.getElementsByTagName('textarea')[0].value = addonXml;
 
