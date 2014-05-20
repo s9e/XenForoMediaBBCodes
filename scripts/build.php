@@ -167,10 +167,26 @@ class s9e_MediaBBCodes
 				: "[media={$site['media_site_id']}]{$mediaKey}[/media]";
 		}
 
+		// Prepare the HTML
+		$html = $site['embed_html'];
+
+		// Extract the param declarations from the HTML
+		$params = [];
+		$html = preg_replace_callback(
+			'(<!-- (\\w+)=(.*?) -->\\r?\\n?)',
+			function ($m) use (&$params)
+			{
+				$params[$m[1]] = $m[2];
+
+				return '';
+			},
+			$html
+		);
+
 		// Test whether this particular site has its own renderer
 		$html = preg_replace_callback(
 			'(<!-- (' . __CLASS__ . '::render\\w+)\\((?:(\\d+), *(\\d+))?\\) -->)',
-			function ($m) use ($vars)
+			function ($m) use ($params, $vars)
 			{
 				$callback = $m[1];
 
@@ -179,7 +195,7 @@ class s9e_MediaBBCodes
 					return $m[0];
 				}
 
-				$html = call_user_func($callback, $vars);
+				$html = call_user_func($callback, $vars, $params);
 
 				if (isset($m[2], $m[3]))
 				{
@@ -189,7 +205,7 @@ class s9e_MediaBBCodes
 
 				return $html;
 			},
-			$site['embed_html'],
+			$html,
 			-1,
 			$cnt
 		);
@@ -309,8 +325,9 @@ $rows[] = '	</tr>';
 $rows[] = '</thead>';
 $rows[] = '<tbody>';
 
-$sitenames = [];
-$examples  = [];
+$sitenames  = [];
+$examples   = [];
+$paramNames = [];
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
@@ -373,6 +390,29 @@ foreach ($sites->site as $site)
 		$src = preg_replace("#\\\$node->getAttribute\\(('[^']+')\\)#", '$vars[$1]', $src);
 		$src = str_replace('$this->out', '$html', $src);
 
+		// Replace the template params
+		$params = [];
+		$src = preg_replace_callback(
+			"#\\\$this->params\\['([^']+)'\\]#",
+			function ($m) use (&$params)
+			{
+				$params[$m[1]] = var_export($m[1], true) . " => ''";
+
+				return '$params[' . var_export($m[1], true) . ']';
+			},
+			$src
+		);
+		ksort($params);
+
+		// Prepend the params to the template
+		foreach (array_reverse(array_keys($params)) as $paramName)
+		{
+			$html = '<!-- ' . $paramName . "= -->\n" . $html;
+
+			// Record the param name in order to inject them in the configurator
+			$paramNames[] = $paramName;
+		}
+
 		if (strpos($src, '->'))
 		{
 			echo 'Skipping ', $site->name, " (->)\n";
@@ -391,12 +431,23 @@ foreach ($sites->site as $site)
 		ksort($vars);
 
 		$php[] = '';
-		$php[] = '	public static function ' . $methodName . '($vars)';
+		$php[] = '	public static function ' . $methodName . '($vars, $params)';
 		$php[] = '	{';
 
-		if (!empty($vars))
+		if (!empty($vars) || !empty($params))
 		{
-			$php[] = '		$vars += array(' . implode(', ', $vars) . ');';
+			if (!empty($vars))
+			{
+				$indent = (empty($params)) ? '' : '  ';
+
+				$php[] = '		$vars' . $indent . ' += array(' . implode(', ', $vars) . ');';
+			}
+
+			if (!empty($params))
+			{
+				$php[] = '		$params += array(' . implode(', ', $params) . ');';
+			}
+
 			$php[] = '';
 		}
 
@@ -595,23 +646,45 @@ $rows[] = '</tbody>';
 // Coalesce the table's content
 $rows = implode("\n", $rows);
 
-// Update the table used in the configurator
+// Update the tables used in the configurator
 $filepath = __DIR__ . '/../www/configure.html';
-file_put_contents(
-	$filepath,
-	preg_replace_callback(
-		'#(?<=var xml = ).*?(?=;\\n\\n)#',
-		function () use ($xml)
-		{
-			return json_encode($xml);
-		},
-		preg_replace(
-			'#(<table[^>]*>).*</table>#s',
-			"\$1\n\t\t" . str_replace("\n", "\n\t\t", $rows) . "\n\t</table>",
-			file_get_contents($filepath)
-		)
+$html     = file_get_contents($filepath);
+
+// Update the sites table
+$html = preg_replace_callback(
+	'#(?<=var xml = ).*?(?=;\\n\\n)#',
+	function () use ($xml)
+	{
+		return json_encode($xml);
+	},
+	preg_replace(
+		'#(<table id="sites">).*?</table>#s',
+		"\$1\n\t\t" . str_replace("\n", "\n\t\t", $rows) . "\n\t</table>",
+		$html
 	)
 );
+
+// Update the params table
+$paramNames = array_unique($paramNames);
+sort($paramNames);
+
+$paramsHtml = '<table id="params">
+		<tbody>';
+foreach ($paramNames as $paramName)
+{
+	$paramsHtml .= '
+			<tr>
+				<td>' . $paramName . '</td>
+				<td><input type="text" id="param-' . $paramName . '" name="' . $paramName . '"></td>
+			</tr>';
+}
+$paramsHtml .= '
+		</tbody>
+	</table>';
+
+$html = preg_replace('#<table id="params">.*?</table>#s', $paramsHtml, $html);
+
+file_put_contents($filepath, $html);
 
 // Remove the buttons from the table used in README
 $rows = preg_replace('#\\s*<td><input.*</td>#', '', $rows);

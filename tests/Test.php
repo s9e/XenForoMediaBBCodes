@@ -415,42 +415,47 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'id=B00GQT1LNO;tld=ca',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-ca.amazon.ca/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00GQT1LNO&amp;o=15"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-ca.amazon.ca/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00GQT1LNO&amp;o=15&amp;t=_"></iframe>'
 			),
 			array(
 				'id=B003AKZ6I8;tld=jp',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-jp.amazon.co.jp/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B003AKZ6I8&amp;o=9"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-jp.amazon.co.jp/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B003AKZ6I8&amp;o=9&amp;t=_"></iframe>'
 			),
 			array(
 				'id=B00BET0NR6;tld=uk',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-uk.amazon.co.uk/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-uk.amazon.co.uk/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2&amp;t=_"></iframe>'
 			),
 			array(
 				'B002MUC0ZY',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe>'
+			),
+			array(
+				'B002MUC0ZY',
+				'<!-- AMAZON_ASSOCIATE_TAG=foo-20 --><!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=foo-20"></iframe>'
 			),
 			array(
 				'id=B00ET2LTE6;tld=de',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-de.amazon.de/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-de.amazon.de/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3&amp;t=_"></iframe>'
 			),
 			array(
 				'id=B005NIKPAY;tld=fr',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-fr.amazon.fr/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-fr.amazon.fr/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8&amp;t=_"></iframe>'
 			),
 			array(
 				'id=B00JGOMIP6;tld=it',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t=_"></iframe>'
 			),
 			array(
 				'id=B002MUC0ZY;tld=com',
 				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe>'
 			),
 			array(
 				'album_id=1122163921',

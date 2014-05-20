@@ -150,10 +150,26 @@ class s9e_MediaBBCodes
 				: "[media={$site['media_site_id']}]{$mediaKey}[/media]";
 		}
 
+		// Prepare the HTML
+		$html = $site['embed_html'];
+
+		// Extract the param declarations from the HTML
+		$params = [];
+		$html = preg_replace_callback(
+			'(<!-- (\\w+)=(.*?) -->\\r?\\n?)',
+			function ($m) use (&$params)
+			{
+				$params[$m[1]] = $m[2];
+
+				return '';
+			},
+			$html
+		);
+
 		// Test whether this particular site has its own renderer
 		$html = preg_replace_callback(
 			'(<!-- (' . __CLASS__ . '::render\\w+)\\((?:(\\d+), *(\\d+))?\\) -->)',
-			function ($m) use ($vars)
+			function ($m) use ($params, $vars)
 			{
 				$callback = $m[1];
 
@@ -162,7 +178,7 @@ class s9e_MediaBBCodes
 					return $m[0];
 				}
 
-				$html = call_user_func($callback, $vars);
+				$html = call_user_func($callback, $vars, $params);
 
 				if (isset($m[2], $m[3]))
 				{
@@ -172,7 +188,7 @@ class s9e_MediaBBCodes
 
 				return $html;
 			},
-			$site['embed_html'],
+			$html,
 			-1,
 			$cnt
 		);
@@ -250,11 +266,12 @@ class s9e_MediaBBCodes
 		return $vars;
 	}
 
-	public static function renderAmazon($vars)
+	public static function renderAmazon($vars, $params)
 	{
-		$vars += array('id' => null, 'tld' => null);
+		$vars   += array('id' => null, 'tld' => null);
+		$params += array('AMAZON_ASSOCIATE_TAG' => '');
 
-		$html='<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm';if(isset($vars['tld'])&&(strpos('cadefritjpuk',$vars['tld'])!==false))$html.='-'.htmlspecialchars($vars['tld'],2);$html.='.amazon.';if($vars['tld']==='jp'||$vars['tld']==='uk')$html.='co.'.htmlspecialchars($vars['tld'],2);elseif(isset($vars['tld'])&&(strpos('cadefrit',$vars['tld'])!==false))$html.=htmlspecialchars($vars['tld'],2);else$html.='com';$html.='/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=_&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins='.htmlspecialchars($vars['id'],2).'&amp;o=';if($vars['tld']==='ca')$html.='15';elseif($vars['tld']==='de')$html.='3';elseif($vars['tld']==='fr')$html.='8';elseif($vars['tld']==='it')$html.='29';elseif($vars['tld']==='jp')$html.='9';elseif($vars['tld']==='uk')$html.='2';else$html.='1';$html.='"></iframe>';
+		$html='<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm';if(isset($vars['tld'])&&(strpos('cadefritjpuk',$vars['tld'])!==false))$html.='-'.htmlspecialchars($vars['tld'],2);$html.='.amazon.';if($vars['tld']==='jp'||$vars['tld']==='uk')$html.='co.'.htmlspecialchars($vars['tld'],2);elseif(isset($vars['tld'])&&(strpos('cadefrit',$vars['tld'])!==false))$html.=htmlspecialchars($vars['tld'],2);else$html.='com';$html.='/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins='.htmlspecialchars($vars['id'],2).'&amp;o=';if($vars['tld']==='ca')$html.='15';elseif($vars['tld']==='de')$html.='3';elseif($vars['tld']==='fr')$html.='8';elseif($vars['tld']==='it')$html.='29';elseif($vars['tld']==='jp')$html.='9';elseif($vars['tld']==='uk')$html.='2';else$html.='1';$html.='&amp;t=';if(!empty($params['AMAZON_ASSOCIATE_TAG']))$html.=htmlspecialchars($params['AMAZON_ASSOCIATE_TAG'],2);else$html.='_';$html.='"></iframe>';
 
 		return $html;
 	}
@@ -267,7 +284,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderBandcamp($vars)
+	public static function renderBandcamp($vars, $params)
 	{
 		$vars += array('album_id' => null, 'track_id' => null, 'track_num' => null);
 
@@ -306,7 +323,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderCbsnews($vars)
+	public static function renderCbsnews($vars, $params)
 	{
 		$vars += array('id' => null, 'pid' => null);
 
@@ -367,7 +384,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderEbay($vars)
+	public static function renderEbay($vars, $params)
 	{
 		$vars += array('itemid' => null, 'lang' => null);
 
@@ -397,7 +414,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderFacebook($vars)
+	public static function renderFacebook($vars, $params)
 	{
 		$vars += array('id' => null, 'mode' => null);
 
@@ -441,7 +458,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderGrooveshark($vars)
+	public static function renderGrooveshark($vars, $params)
 	{
 		$vars += array('playlistid' => null, 'songid' => null);
 
@@ -490,7 +507,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderKickstarter($vars)
+	public static function renderKickstarter($vars, $params)
 	{
 		$vars += array('id' => null, 'video' => null);
 
@@ -547,7 +564,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderSoundcloud($vars)
+	public static function renderSoundcloud($vars, $params)
 	{
 		$vars += array('id' => null, 'playlist_id' => null, 'secret_token' => null, 'track_id' => null);
 
@@ -570,7 +587,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderSpotify($vars)
+	public static function renderSpotify($vars, $params)
 	{
 		$vars += array('path' => null, 'uri' => null);
 
@@ -600,7 +617,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderTed($vars)
+	public static function renderTed($vars, $params)
 	{
 		$vars += array('id' => null);
 
@@ -622,7 +639,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderTwitch($vars)
+	public static function renderTwitch($vars, $params)
 	{
 		$vars += array('archive_id' => null, 'channel' => null, 'chapter_id' => null);
 
@@ -644,7 +661,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderUstream($vars)
+	public static function renderUstream($vars, $params)
 	{
 		$vars += array('cid' => null, 'vid' => null);
 
@@ -679,7 +696,7 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
-	public static function renderWsj($vars)
+	public static function renderWsj($vars, $params)
 	{
 		$vars += array('id' => null);
 
@@ -688,7 +705,7 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function renderYoutube($vars)
+	public static function renderYoutube($vars, $params)
 	{
 		$vars += array('id' => null, 'list' => null, 't' => null);
 
