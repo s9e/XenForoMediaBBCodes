@@ -386,7 +386,8 @@
 			var ids = document.location.hash.replace('#', '').split(','),
 				str = ',' + ids.join(',') + ',',
 				inputs = document.getElementById('sites').getElementsByTagName('input'),
-				i = inputs.length;
+				i = inputs.length,
+				partial = false;
 
 			while (--i > 0)
 			{
@@ -395,6 +396,7 @@
 
 				if (str.indexOf(',' + input.getAttribute('data-id') + ',') > -1)
 				{
+					partial       = true;
 					input.checked = true;
 					tr.className  = 'selected';
 				}
@@ -405,10 +407,11 @@
 				}
 			}
 
-			var addonXml = xml.replace(
-				new RegExp('\\s*<site media_site_id="(?!' + ids.join('|') + ')[\\s\\S]*?</site>', 'g'),
-				''
-			);
+			var addonXml = xml;
+			if (partial)
+			{
+				addonXml = addonXml.replace(new RegExp('\\s*<site media_site_id="(?!' + ids.join('|') + ')[\\s\\S]*?</site>', 'g'), '');
+			}
 
 			// Update params
 			var regexp = /(\w+)=([^,]+)/g, m;
