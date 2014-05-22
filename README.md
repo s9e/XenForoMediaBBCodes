@@ -45,6 +45,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.cbsnews.com/video/watch/?id=50156501n<br/>http://www.cbsnews.com/videos/is-the-us-stock-market-rigged</td>
 		</tr>
 		<tr>
+			<td><code>cnbc</code></td>
+			<td>CNBC</td>
+			<td>http://video.cnbc.com/gallery/?video=3000269279</td>
+		</tr>
+		<tr>
 			<td><code>cnn</code></td>
 			<td>CNN</td>
 			<td>http://edition.cnn.com/video/data/2.0/video/showbiz/2013/10/25/spc-preview-savages-stephen-king-thor.cnn.html<br/>http://us.cnn.com/video/data/2.0/video/bestoftv/2013/10/23/vo-nr-prince-george-christening-arrival.cnn.html</td>
@@ -218,6 +223,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td><code>ustream</code></td>
 			<td>Ustream</td>
 			<td>http://www.ustream.tv/channel/ps4-ustream-gameplay<br/>http://www.ustream.tv/baja1000tv<br/>http://www.ustream.tv/recorded/40688256</td>
+		</tr>
+		<tr>
+			<td><code>vevo</code></td>
+			<td>VEVO</td>
+			<td>http://www.vevo.com/watch/USUV71400682<br/>http://www.vevo.com/watch/eminem/the-monster-explicit/USUV71302925</td>
 		</tr>
 		<tr>
 			<td><code>vimeo</code></td>
