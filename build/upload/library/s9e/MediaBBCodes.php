@@ -709,7 +709,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'list' => null, 't' => null);
 
-		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['list'])||isset($vars['t'])){$html.='?';if(isset($vars['list'])){$html.='list='.htmlspecialchars($vars['list'],2);if(isset($vars['t']))$html.='&amp;';}if(isset($vars['t']))$html.='start='.htmlspecialchars($vars['t'],2);}$html.='"></iframe>';
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2).'?controls=2';if(isset($vars['list']))$html.='&amp;list='.htmlspecialchars($vars['list'],2);if(isset($vars['t']))$html.='&amp;start='.htmlspecialchars($vars['t'],2);$html.='"></iframe>';
 
 		return $html;
 	}
