@@ -34,7 +34,7 @@ class Test extends PHPUnit_Framework_TestCase
 	/**
 	* @dataProvider getMatchCallbackTests
 	*/
-	public function testMatchCallback($id, $url, $expected)
+	public function testMatchCallback($id, $url, $expected, $assertMethod = 'assertSame')
 	{
 		if (!class_exists('s9e_MediaBBCodes'))
 		{
@@ -44,7 +44,7 @@ class Test extends PHPUnit_Framework_TestCase
 		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
 		$methodName = 'match' . ucfirst($id);
 
-		$this->assertSame($expected, s9e_MediaBBCodes::$methodName($url));
+		$this->$assertMethod($expected, s9e_MediaBBCodes::$methodName($url));
 	}
 
 	public function getMatchCallbackTests()
@@ -214,6 +214,18 @@ class Test extends PHPUnit_Framework_TestCase
 				'gametrailers',
 				'http://www.gametrailers.com/full-episodes/zdzfok/pop-fiction-episode-40--jak-ii--sandover-village',
 				'mgid:arc:episode:gametrailers.com:1e287a4e-b795-4c7f-9d48-1926eafb5740'
+			),
+			array(
+				'getty',
+				'http://gty.im/3232182',
+				'(et=[-\\w]{22};height=399;id=3232182;sig=[-\\w]{43}%3D;width=594)',
+				'assertRegexp'
+			),
+			array(
+				'getty',
+				'http://www.gettyimages.co.uk/detail/3232182',
+				'(et=[-\\w]{22};height=399;id=3232182;sig=[-\\w]{43}%3D;width=594)',
+				'assertRegexp'
 			),
 			array(
 				'gfycat',
@@ -506,6 +518,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=10151471074398553;mode=post',
 				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/facebook.min.html#10151471074398553" onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\/\/s9e\.github\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>'
+			),
+			array(
+				'et=0KmkT83GTG1ynPe0_63zHg;height=399;id=3232182;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48%3D;width=594',
+				'<!-- s9e_MediaBBCodes::renderGetty() -->',
+				'<iframe width="594" height="448" src="//embed.gettyimages.com/embed/3232182?et=0KmkT83GTG1ynPe0_63zHg&amp;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48=" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'height=338;id=SereneIllfatedCapybara;width=600',

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140524" version_string="201405240" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140525" version_string="201405250" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -85,6 +85,11 @@
     <site media_site_id="gametrailers" site_title="GameTrailers" site_url="http://www.gametrailers.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchGametrailers">
       <match_urls>!(?'id')gametrailers\.com/(?:full-episode|review|video)s/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="getty" site_title="Getty Images" site_url="http://www.gettyimages.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchGetty">
+      <match_urls>!gty\.im/(?'id'\d+)!
+!(?=.*?g(?:ettyimages\.(?:c(?:n|o(?:\.(?&gt;jp|uk)|m(?&gt;\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\.im)).*?gettyimages\.[.\w]+/detail/(?:[-\w/]+/)?(?'id'\d+)!</match_urls>
+      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderGetty() -->]]></embed_html>
     </site>
     <site media_site_id="gfycat" site_title="gfycat" site_url="http://gfycat.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchGfycat">
       <match_urls>!gfycat\.com/(?'id'\w+)!</match_urls>

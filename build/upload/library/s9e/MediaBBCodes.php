@@ -444,6 +444,29 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderGetty($vars, $params)
+	{
+		$vars += array('et' => null, 'height' => null, 'id' => null, 'sig' => null, 'width' => null);
+
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars((49+$vars['height']),2).'" src="//embed.gettyimages.com/embed/'.htmlspecialchars($vars['id'],2).'?et='.htmlspecialchars($vars['et'],2).'&amp;sig='.htmlspecialchars($vars['sig'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
+	}
+
+	public static function matchGetty($url)
+	{
+		$regexps = array('!gty\\.im/(?\'id\'\\d+)!', '!(?=.*?g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)).*?gettyimages\\.[.\\w]+/detail/(?:[-\\w/]+/)?(?\'id\'\\d+)!');
+		$scrapes = array(
+			array(
+				'url'     => 'http://embed.gettyimages.com/preview/{@id}',
+				'match'   => array('//'),
+				'extract' => array('!"height":[ "]*(?\'height\'\\d+)!', '!"width":[ "]*(?\'width\'\\d+)!', '!et=(?\'et\'[-=\\w]+)!', '!sig=(?\'sig\'[-=\\w]+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchGfycat($url)
 	{
 		$regexps = array('!gfycat\\.com/(?\'id\'\\w+)!');
