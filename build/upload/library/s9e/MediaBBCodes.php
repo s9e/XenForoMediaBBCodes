@@ -455,7 +455,7 @@ class s9e_MediaBBCodes
 
 	public static function matchGetty($url)
 	{
-		$regexps = array('!gty\\.im/(?\'id\'\\d+)!', '!(?=.*?g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)).*?gettyimages\\.[.\\w]+/detail/(?:[-\\w/]+/)?(?\'id\'\\d+)!');
+		$regexps = array('!gty\\.im/(?\'id\'\\d+)!', '!(?=.*?g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?\'id\'\\d+)!');
 		$scrapes = array(
 			array(
 				'url'     => 'http://embed.gettyimages.com/preview/{@id}',
