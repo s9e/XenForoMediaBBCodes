@@ -116,7 +116,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		</tr>
 		<tr>
 			<td><code>gfycat</code></td>
-			<td>gfycat</td>
+			<td>Gfycat</td>
 			<td>http://gfycat.com/SereneIllfatedCapybara<br/>http://giant.gfycat.com/SereneIllfatedCapybara.gif</td>
 		</tr>
 		<tr>
@@ -163,6 +163,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td><code>metacafe</code></td>
 			<td>Metacafe</td>
 			<td>http://www.metacafe.com/watch/10785282/chocolate_treasure_chest_epic_meal_time/</td>
+		</tr>
+		<tr>
+			<td><code>mixcloud</code></td>
+			<td>Mixcloud</td>
+			<td>http://www.mixcloud.com/OneTakeTapes/timsch-one-take-tapes-2/<br/>http://i.mixcloud.com/CH9VU9</td>
 		</tr>
 		<tr>
 			<td><code>rdio</code></td>

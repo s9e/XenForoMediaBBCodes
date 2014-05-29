@@ -547,6 +547,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchMixcloud($url)
+	{
+		$regexps = array('@mixcloud\\.com/(?!categories|tag)(?\'id\'[-\\w]+/[^/&]+)/@');
+		$scrapes = array(
+			array(
+				'match'   => array('@//i\\.mixcloud\\.com/\\w+$@'),
+				'extract' => array('@link rel="canonical" href="https?://[^/]+/(?\'id\'[-\\w]+/[^/&]+)/@')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchRdio($url)
 	{
 		$regexps = array('!rd\\.io/./(?\'id\'\\w+)!');
