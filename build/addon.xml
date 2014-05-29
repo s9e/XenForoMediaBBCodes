@@ -136,7 +136,7 @@
     <site media_site_id="mixcloud" site_title="Mixcloud" site_url="http://www.mixcloud.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchMixcloud">
       <match_urls>@mixcloud\.com/(?!categories|tag)(?'id'[-\w]+/[^/&amp;]+)/@
 @(?'id')//i\.mixcloud\.com/\w+$@</match_urls>
-      <embed_html><![CDATA[<iframe width="660" height="180" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;hide_cover=1&amp;embed_type=widget_standard&amp;hide_tracklist=1" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="300" height="300" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;embed_type=widget_standard" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="rdio" site_title="Rdio" site_url="http://www.rdio.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchRdio">
       <match_urls>!rd\.io/./(?'id'\w+)!
