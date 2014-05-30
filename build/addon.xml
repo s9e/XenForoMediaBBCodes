@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140529" version_string="201405290" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140530" version_string="201405300" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -137,6 +137,11 @@
       <match_urls>@mixcloud\.com/(?!categories|tag)(?'id'[-\w]+/[^/&amp;]+)/@
 @(?'id')//i\.mixcloud\.com/\w+$@</match_urls>
       <embed_html><![CDATA[<iframe width="300" height="300" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;embed_type=widget_standard" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="nytimes" site_title="The New York Times Video" site_url="http://www.nytimes.com/video/" match_is_regex="1" supported="1">
+      <match_urls>!nytimes\.com/video/[a-z]+/[a-z]+/(?'id'\d+)!
+!nytimes\.com/video/\d+/\d+/\d+/[a-z]+/(?'id'\d+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="480" height="373" src="http://graphics8.nytimes.com/bcvideo/1.0/iframe/embed.html?videoId={$id}&amp;playerType=embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="rdio" site_title="Rdio" site_url="http://www.rdio.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchRdio">
       <match_urls>!rd\.io/./(?'id'\w+)!
