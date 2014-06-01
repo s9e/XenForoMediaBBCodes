@@ -263,6 +263,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'513633'
 			),
 			array(
+				'internetarchive',
+				'https://archive.org/details/Olympics2002_2',
+				'height=240;id=Olympics2002_2;width=320'
+			),
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/',
 				'1869987317/wish-i-was-here-1'

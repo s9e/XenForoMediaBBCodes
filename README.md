@@ -150,6 +150,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://instagram.com/p/gbGaIXBQbn/</td>
 		</tr>
 		<tr>
+			<td><code>internetarchive</code></td>
+			<td>Internet Archive</td>
+			<td>https://archive.org/details/BillGate99<br/>https://archive.org/details/DFTS2014-05-30</td>
+		</tr>
+		<tr>
 			<td><code>kickstarter</code></td>
 			<td>Kickstarter</td>
 			<td>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html</td>

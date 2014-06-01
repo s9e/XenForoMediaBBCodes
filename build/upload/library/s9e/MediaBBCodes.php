@@ -530,6 +530,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchInternetarchive($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!archive\\.org/details/!'),
+				'extract' => array('!meta property="twitter:player" content="https://archive.org/embed/(?\'id\'[^/"]+)!', '!meta property="og:video:width" content="(?\'width\'\\d+)!', '!meta property="og:video:height" content="(?\'height\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderKickstarter($vars, $params)
 	{
 		$vars += array('id' => null, 'video' => null);
