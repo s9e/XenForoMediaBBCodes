@@ -283,6 +283,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=1869987317%2Fwish-i-was-here-1;video=video'
 			),
 			array(
+				'podbean',
+				'http://wendyswordsofwisdom.podbean.com/e/tiffany-stevensons-words-of-wisdom/',
+				'5168723'
+			),
+			array(
 				'rdio',
 				'http://rd.io/x/QcD7oTdeWevg/',
 				'QcD7oTdeWevg'

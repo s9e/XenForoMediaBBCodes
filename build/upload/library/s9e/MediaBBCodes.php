@@ -573,6 +573,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchPodbean($url)
+	{
+		$regexps = array('!(?=.*?podbean\\.com).*?podbean.com/site/player/index/pid/\\d+/eid/(?\'id\'\\d+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!podbean.com/e/!'),
+				'extract' => array('!embed/postId/(?\'id\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchRdio($url)
 	{
 		$regexps = array('!rd\\.io/./(?\'id\'\\w+)!');
