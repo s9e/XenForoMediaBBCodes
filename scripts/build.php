@@ -705,9 +705,9 @@ copy(__DIR__ . '/../LICENSE', __DIR__ . '/../build/LICENSE');
 exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $version . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/* 2> /dev/null');
 
 $readme =
-'[url=https://travis-ci.org/s9e/XenForoMediaBBCodes][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master[/img][/url] [url=https://coveralls.io/r/s9e/XenForoMediaBBCodes][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png[/img][/url]
+"[url=https://travis-ci.org/s9e/XenForoMediaBBCodes][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master[/img][/url] [url=https://coveralls.io/r/s9e/XenForoMediaBBCodes][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png[/img][/url] • [color=#fff]This add-on is free and available on GitHub. If you paid for it, you've been scammed.[/color]
 
-This pack contains the definitions for ' . count($sitenames) . ' media sites: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
+This pack contains the definitions for " . count($sitenames) . ' media sites: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
 
 The BBCodes definitions are based on [url=https://github.com/s9e/TextFormatter]the s9e\TextFormatter library[/url], and more specifically its [url=https://github.com/s9e/TextFormatter/tree/master/src/Plugins/MediaEmbed]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
 
@@ -719,7 +719,7 @@ Unzip the archive, and upload the content of the [font=monospace]upload[/font] f
 
 [size=6][font=Arial][b]Compatibility and customization[/b][/font][/size]
 
-Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. [b]Note that this add-on replaces the default media sites.[/b] If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try this [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]experimental configurator interface[/url].
+Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. [b]Note that this add-on replaces the default media sites.[/b] If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]online configurator interface[/url].
 
 [size=6][font=Arial][b]How to support this add-on[/b][/font][/size]
 
@@ -727,7 +727,7 @@ Rate and comment in the right sidebar.
 
 [size=6][font=Arial][b]How to request a media site[/b][/font][/size]
 
-If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion. Selection may depend on the site\'s popularity and Alexa rank. [b]Please post a few links as examples[/b] of the kind of links that should be supported. You do not need to post the embed code, only links to content.';
+If there\'s a media site that you would want to see in this pack, you can request it in this thread and it will be considered for inclusion. Selection may depend on the site\'s popularity, Alexa rank and activity on social sites. [b]Please post a few links as examples[/b] of the kind of links that should be supported. You do not need to post the embed code, only links to the content [i]you[/i] want to embed.';
 
 file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '.txt',
