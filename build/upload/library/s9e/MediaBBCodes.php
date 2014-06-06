@@ -271,7 +271,7 @@ class s9e_MediaBBCodes
 		$vars   += array('id' => null, 'tld' => null);
 		$params += array('AMAZON_ASSOCIATE_TAG' => '');
 
-		$html='<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="http://rcm';if(isset($vars['tld'])&&(strpos('cadefritjpuk',$vars['tld'])!==false))$html.='-'.htmlspecialchars($vars['tld'],2);$html.='.amazon.';if($vars['tld']==='jp'||$vars['tld']==='uk')$html.='co.'.htmlspecialchars($vars['tld'],2);elseif(isset($vars['tld'])&&(strpos('cadefrit',$vars['tld'])!==false))$html.=htmlspecialchars($vars['tld'],2);else$html.='com';$html.='/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins='.htmlspecialchars($vars['id'],2).'&amp;o=';if($vars['tld']==='ca')$html.='15';elseif($vars['tld']==='de')$html.='3';elseif($vars['tld']==='fr')$html.='8';elseif($vars['tld']==='it')$html.='29';elseif($vars['tld']==='jp')$html.='9';elseif($vars['tld']==='uk')$html.='2';else$html.='1';$html.='&amp;t=';if(!empty($params['AMAZON_ASSOCIATE_TAG']))$html.=htmlspecialchars($params['AMAZON_ASSOCIATE_TAG'],2);else$html.='_';$html.='"></iframe>';
+		$html='<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm';if(isset($vars['tld'])&&(strpos('cadefritjpuk',$vars['tld'])!==false))$html.='-'.htmlspecialchars($vars['tld'],2);$html.='.amazon.';if($vars['tld']==='jp'||$vars['tld']==='uk')$html.='co.'.htmlspecialchars($vars['tld'],2);elseif(isset($vars['tld'])&&(strpos('cadefrit',$vars['tld'])!==false))$html.=htmlspecialchars($vars['tld'],2);else$html.='com';$html.='/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins='.htmlspecialchars($vars['id'],2).'&amp;o=';if($vars['tld']==='ca')$html.='15';elseif($vars['tld']==='de')$html.='3';elseif($vars['tld']==='fr')$html.='8';elseif($vars['tld']==='it')$html.='29';elseif($vars['tld']==='jp')$html.='9';elseif($vars['tld']==='uk')$html.='2';else$html.='1';$html.='&amp;t=';if(!empty($params['AMAZON_ASSOCIATE_TAG']))$html.=htmlspecialchars($params['AMAZON_ASSOCIATE_TAG'],2);else$html.='_';$html.='"></iframe>';
 
 		return $html;
 	}
@@ -350,7 +350,7 @@ class s9e_MediaBBCodes
 		$regexps = array();
 		$scrapes = array(
 			array(
-				'match'   => array('!(?:colbertnation|thecolbertreport\\.cc)\\.com/[^/]*(?:collection|video)s/!'),
+				'match'   => array('!thecolbertreport\\.cc\\.com/videos/!'),
 				'extract' => array('!(?\'id\'mgid:arc:video:colbertnation\\.com:[-0-9a-f]+)!')
 			)
 		);
@@ -388,7 +388,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('itemid' => null, 'lang' => null);
 
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"></object>';
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="//togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"><embed type="application/x-shockwave-flash" src="//togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"></object>';
 
 		return $html;
 	}
@@ -705,7 +705,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('archive_id' => null, 'channel' => null, 'chapter_id' => null);
 
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['archive_id']))$html.='&amp;archive_id='.htmlspecialchars($vars['archive_id'],2);if(isset($vars['chapter_id']))$html.='&amp;chapter_id='.htmlspecialchars($vars['chapter_id'],2);$html.='&amp;auto_play=false"><embed type="application/x-shockwave-flash" width="620" height="378" src="http://www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf" allowfullscreen=""></object>';
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="//www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['archive_id']))$html.='&amp;archive_id='.htmlspecialchars($vars['archive_id'],2);if(isset($vars['chapter_id']))$html.='&amp;chapter_id='.htmlspecialchars($vars['chapter_id'],2);$html.='&amp;auto_play=false"><embed type="application/x-shockwave-flash" width="620" height="378" src="//www.twitch.tv/widgets/'.htmlspecialchars((isset($vars['archive_id'])||isset($vars['chapter_id'])?'arch':'l'),2).'ive_embed_player.swf" allowfullscreen=""></object>';
 
 		return $html;
 	}
@@ -727,7 +727,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('cid' => null, 'vid' => null);
 
-		$html='<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="http://www.ustream.tv/embed/';if(isset($vars['vid']))$html.='recorded/'.htmlspecialchars($vars['vid'],2);else$html.=htmlspecialchars($vars['cid'],2);$html.='"></iframe>';
+		$html='<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/';if(isset($vars['vid']))$html.='recorded/'.htmlspecialchars($vars['vid'],2);else$html.=htmlspecialchars($vars['cid'],2);$html.='"></iframe>';
 
 		return $html;
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140603" version_string="201406030" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140606" version_string="201406060" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -32,19 +32,19 @@
     </site>
     <site media_site_id="cnbc" site_title="CNBC" site_url="http://www.cnbc.com/" match_is_regex="1" supported="1">
       <match_urls>!(?=.*?video\.cnbc\.com).*?cnbc\.com/gallery/\?video=(?'id'\d+)!</match_urls>
-      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="380" data="http://plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare" width="400" height="380" allowfullscreen=""/></object>]]></embed_html>
+      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="380" data="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare" width="400" height="380" allowfullscreen=""/></object>]]></embed_html>
     </site>
     <site media_site_id="cnn" site_title="CNN" site_url="http://edition.cnn.com/video/" match_is_regex="1" supported="1">
       <match_urls>!cnn\.com/video/data/2\.0/video/(?'id'.*\.cnn)!</match_urls>
       <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="416" height="234" data="http://i.cdn.turner.com/cnn/.element/apps/cvp/3.0/swf/cnn_embed_2x_container.swf?site=cnn&amp;profile=desktop&amp;context=embedwww&amp;videoId={$id}&amp;contentId={$id}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://i.cdn.turner.com/cnn/.element/apps/cvp/3.0/swf/cnn_embed_2x_container.swf?site=cnn&amp;profile=desktop&amp;context=embedwww&amp;videoId={$id}&amp;contentId={$id}" width="416" height="234" allowfullscreen=""/></object>]]></embed_html>
     </site>
-    <site media_site_id="colbertnation" site_title="Colbert Nation" site_url="http://www.colbertnation.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchColbertnation">
-      <match_urls>!(?'id')(?:colbertnation|thecolbertreport\.cc)\.com/[^/]*(?:collection|video)s/!</match_urls>
+    <site media_site_id="colbertnation" site_title="Colbert Nation" site_url="http://thecolbertreport.cc.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchColbertnation">
+      <match_urls>!(?'id')thecolbertreport\.cc\.com/videos/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="collegehumor" site_title="CollegeHumor" site_url="http://www.collegehumor.com/" match_is_regex="1" supported="1">
       <match_urls>!collegehumor\.com/(?:video|embed)/(?'id'[0-9]+)!</match_urls>
-      <embed_html><![CDATA[<iframe width="600" height="369" src="http://www.collegehumor.com/e/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="600" height="369" src="//www.collegehumor.com/e/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="comedycentral" site_title="Comedy Central" site_url="http://www.comedycentral.com/funny-videos" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchComedycentral">
       <match_urls>!(?'id')comedycentral\.com/video-clips/!</match_urls>
@@ -93,7 +93,7 @@
     </site>
     <site media_site_id="gfycat" site_title="Gfycat" site_url="http://gfycat.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchGfycat">
       <match_urls>!gfycat\.com/(?'id'\w+)!</match_urls>
-      <embed_html><![CDATA[<iframe width="{$width}" height="{$height}" src="http://gfycat.com/iframe/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="{$width}" height="{$height}" src="//gfycat.com/iframe/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="gist" site_title="GitHub Gist (via custom iframe)" site_url="https://gist.github.com/" match_is_regex="1" supported="1">
       <match_urls>!gist\.github\.com/(?'id'(?:\w+/)?\d+(?:/[\da-f]+)?)!</match_urls>
@@ -135,7 +135,7 @@
     </site>
     <site media_site_id="metacafe" site_title="Metacafe" site_url="http://www.metacafe.com/" match_is_regex="1" supported="1">
       <match_urls>!metacafe\.com/watch/(?'id'[0-9]+)!</match_urls>
-      <embed_html><![CDATA[<iframe width="560" height="315" src="http://www.metacafe.com/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="//www.metacafe.com/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="mixcloud" site_title="Mixcloud" site_url="http://www.mixcloud.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchMixcloud">
       <match_urls>@mixcloud\.com/(?!categories|tag)(?'id'[-\w]+/[^/&amp;]+)/@
@@ -196,7 +196,7 @@
     </site>
     <site media_site_id="traileraddict" site_title="Trailer Addict" site_url="http://www.traileraddict.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchTraileraddict">
       <match_urls>@(?'id')traileraddict\.com/(?!tags/)[^/]+/.@</match_urls>
-      <embed_html><![CDATA[<iframe width="560" height="315" src="http://v.traileraddict.com/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="//v.traileraddict.com/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="twitch" site_title="Twitch" site_url="http://www.twitch.tv/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchTwitch">
       <match_urls>#(?'id')twitch\.tv/(?'channel'(?!m/)\w+)(?:/b/(?'archive_id'[0-9]+)|/c/(?'chapter_id'[0-9]+))?#

@@ -57,7 +57,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>colbertnation</code></td>
 			<td>Colbert Nation</td>
-			<td>http://www.colbertnation.com/the-colbert-report-videos/429637/october-14-2013/5-x-five---colbert-moments--under-the-desk<br/>http://www.colbertnation.com/the-colbert-report-collections/429799/sorry--technical-difficulties/<br/>http://thecolbertreport.cc.com/videos/gh6urb/neil-degrasse-tyson-pt--1</td>
+			<td>http://thecolbertreport.cc.com/videos/gh6urb/neil-degrasse-tyson-pt--1</td>
 		</tr>
 		<tr>
 			<td><code>collegehumor</code></td>
