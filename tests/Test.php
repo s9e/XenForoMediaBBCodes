@@ -497,12 +497,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'itemid=251053262701',
 				'<!-- s9e_MediaBBCodes::renderEbay() -->',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="//togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"><embed type="application/x-shockwave-flash" src="//togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"></object>'
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"></object>'
 			),
 			array(
 				'itemid=251053262701;lang=en_GB',
 				'<!-- s9e_MediaBBCodes::renderEbay() -->',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="//togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"><embed type="application/x-shockwave-flash" src="//togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"></object>'
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"></object>'
 			),
 			array(
 				'id=10100658170103643;mode=photo',

@@ -388,14 +388,14 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('itemid' => null, 'lang' => null);
 
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="//togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"><embed type="application/x-shockwave-flash" src="//togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"></object>';
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid='.htmlspecialchars($vars['itemid'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"></object>';
 
 		return $html;
 	}
 
 	public static function matchEbay($url)
 	{
-		$regexps = array('#(?=.*?ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'itemid\'\\d+)#');
+		$regexps = array('#(?=.*?ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'itemid\'\\d+)#', '#(?=.*?ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?[?&]item=(?\'itemid\'\\d+)#');
 		$scrapes = array(
 			array(
 				'match'   => array('#ebay\\.(?!com/)#'),
