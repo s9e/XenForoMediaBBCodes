@@ -4,9 +4,17 @@ namespace s9e\TextFormatter\Tests;
 
 use PHPUnit_Framework_TestCase;
 use s9e_MediaBBCodes;
+use XenForo_Application;
+
+include __DIR__ . '/XenForo_Application.php';
 
 class Test extends PHPUnit_Framework_TestCase
 {
+	public function setUp()
+	{
+		XenForo_Application::$options = [];
+	}
+
 	/**
 	* @requires PHP 5.4
 	*/
@@ -34,11 +42,16 @@ class Test extends PHPUnit_Framework_TestCase
 	/**
 	* @dataProvider getMatchCallbackTests
 	*/
-	public function testMatchCallback($id, $url, $expected, $assertMethod = 'assertSame')
+	public function testMatchCallback($id, $url, $expected, $assertMethod = 'assertSame', $setup = null)
 	{
 		if (!class_exists('s9e_MediaBBCodes'))
 		{
 			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+		}
+
+		if (isset($setup))
+		{
+			$setup();
 		}
 
 		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
@@ -398,17 +411,22 @@ class Test extends PHPUnit_Framework_TestCase
 	/**
 	* @dataProvider getEmbedCallbackTests
 	*/
-	public function testEmbedCallback($mediaKey, $template, $expected)
+	public function testEmbedCallback($mediaKey, $template, $expected, $assertMethod = 'assertSame', $setup = null)
 	{
 		if (!class_exists('s9e_MediaBBCodes'))
 		{
 			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
 		}
 
+		if (isset($setup))
+		{
+			$setup();
+		}
+
 		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
 
 		$site = array('embed_html' => $template);
-		$this->assertSame($expected, s9e_MediaBBCodes::embed($mediaKey, $site));
+		$this->$assertMethod($expected, s9e_MediaBBCodes::embed($mediaKey, $site));
 	}
 
 	public function getEmbedCallbackTests()
@@ -451,8 +469,13 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'B002MUC0ZY',
-				'<!-- AMAZON_ASSOCIATE_TAG=foo-20 --><!-- s9e_MediaBBCodes::renderAmazon() -->',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=foo-20"></iframe>'
+				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=foo-20"></iframe>',
+				'assertSame',
+				function ()
+				{
+					XenForo_Application::$options['s9e_AMAZON_ASSOCIATE_TAG'] = 'foo-20';
+				}
 			),
 			array(
 				'id=B00ET2LTE6;tld=de',

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="20140607" version_string="201406070" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201406028" version_string="20140608-dev" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -8,8 +7,7 @@
     <site media_site_id="amazon" site_title="Amazon Product" site_url="http://affiliate-program.amazon.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchAmazon">
       <match_urls>#(?=.*?amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?'id'[A-Z0-9]+)#
 #(?'id')(?=.*?amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?amazon\.(?:co\.)?(?'tld'ca|de|fr|it|jp|uk)#</match_urls>
-      <embed_html><![CDATA[<!-- AMAZON_ASSOCIATE_TAG= -->
-<!-- s9e_MediaBBCodes::renderAmazon() -->]]></embed_html>
+      <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderAmazon() -->]]></embed_html>
     </site>
     <site media_site_id="bandcamp" site_title="Bandcamp" site_url="http://bandcamp.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBandcamp">
       <match_urls>!(?'id')bandcamp\.com/album/.!
@@ -251,4 +249,16 @@
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderYoutube() -->]]></embed_html>
     </site>
   </bb_code_media_sites>
+  <optiongroups>
+    <group group_id="s9e" display_order="1" debug_only="0"/>
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG" edit_format="textbox" data_type="string" can_backup="1">
+      <relation group_id="s9e" display_order="1"/>
+    </option>
+  </optiongroups>
+  <phrases>
+    <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
+    <phrase title="option_group_s9e_description" version_id="1" version_string="1">Variables used in some embedded media</phrase>
+    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG</phrase>
+    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_explain" version_id="1" version_string="1"/>
+  </phrases>
 </addon>

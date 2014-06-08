@@ -170,23 +170,10 @@ class s9e_MediaBBCodes
 		// Prepare the HTML
 		$html = $site['embed_html'];
 
-		// Extract the param declarations from the HTML
-		$params = array();
-		$html = preg_replace_callback(
-			'(<!-- (\\w+)=(.*?) -->\\r?\\n?)',
-			function ($m) use (&$params)
-			{
-				$params[$m[1]] = $m[2];
-
-				return '';
-			},
-			$html
-		);
-
 		// Test whether this particular site has its own renderer
 		$html = preg_replace_callback(
 			'(<!-- (' . __CLASS__ . '::render\\w+)\\((?:(\\d+), *(\\d+))?\\) -->)',
-			function ($m) use ($params, $vars)
+			function ($m) use ($vars)
 			{
 				$callback = $m[1];
 
@@ -195,7 +182,7 @@ class s9e_MediaBBCodes
 					return $m[0];
 				}
 
-				$html = call_user_func($callback, $vars, $params);
+				$html = call_user_func($callback, $vars);
 
 				if (isset($m[2], $m[3]))
 				{
@@ -284,6 +271,14 @@ class s9e_MediaBBCodes
 	}
 NOWDOC;
 
+function setAttributes(DOMElement $element, array $attributes)
+{
+	foreach ($attributes as $attrName => $attrValue)
+	{
+		$element->setAttribute($attrName, $attrValue);
+	}
+}
+
 $php = explode("\n", $php);
 
 $dom = new DOMDocument('1.0', 'utf-8');
@@ -300,19 +295,18 @@ if (isset($_SERVER['argv'][1]))
 }
 
 // Set the add-on informations
-$attributes = [
-	'addon_id'                => 's9e',
-	'title'                   => 's9e Media Pack',
-	'url'                     => 'https://github.com/s9e/XenForoMediaBBCodes',
-	'version_id'              => $version,
-	'version_string'          => $versionId,
-	'install_callback_class'  => 's9e_MediaBBCodes',
-	'install_callback_method' => 'install'
-];
-foreach ($attributes as $attrName => $attrValue)
-{
-	$addon->setAttribute($attrName, $attrValue);
-}
+setAttributes(
+	$addon,
+	[
+		'addon_id'                => 's9e',
+		'title'                   => 's9e Media Pack',
+		'url'                     => 'https://github.com/s9e/XenForoMediaBBCodes',
+		'version_id'              => $versionId,
+		'version_string'          => $version,
+		'install_callback_class'  => 's9e_MediaBBCodes',
+		'install_callback_method' => 'install'
+	]
+);
 
 $rows = [];
 $rows[] = '<thead>';
@@ -325,9 +319,9 @@ $rows[] = '	</tr>';
 $rows[] = '</thead>';
 $rows[] = '<tbody>';
 
-$sitenames  = [];
-$examples   = [];
-$paramNames = [];
+$sitenames   = [];
+$examples    = [];
+$optionNames = [];
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
 foreach ($sites->site as $site)
@@ -391,29 +385,21 @@ foreach ($sites->site as $site)
 		$src = str_replace('$this->out', '$html', $src);
 
 		// Replace the template params
-		$params = [];
 		$src = preg_replace_callback(
 			"#\\\$this->params\\['([^']+)'\\]#",
-			function ($m) use (&$params)
+			function ($m) use ($addon, &$optionNames)
 			{
-				$params[$m[1]] = var_export($m[1], true) . " => ''";
+				$paramName  = $m[1];
+				$optionName = $addon->getAttribute('addon_id') . '_' . $m[1];
 
-				return '$params[' . var_export($m[1], true) . ']';
+				$optionNames[$paramName] = $optionName;
+
+				return "XenForo_Application::get('options')->" . $optionName;
 			},
 			$src
 		);
-		ksort($params);
 
-		// Prepend the params to the template
-		foreach (array_reverse(array_keys($params)) as $paramName)
-		{
-			$html = '<!-- ' . $paramName . "= -->\n" . $html;
-
-			// Record the param name in order to inject them in the configurator
-			$paramNames[] = $paramName;
-		}
-
-		if (strpos($src, '->'))
+		if (preg_match("((?<!XenForo_Application::get\\('options'\\))->)", $src))
 		{
 			echo 'Skipping ', $site->name, " (->)\n";
 			$node->parentNode->removeChild($node);
@@ -431,23 +417,12 @@ foreach ($sites->site as $site)
 		ksort($vars);
 
 		$php[] = '';
-		$php[] = '	public static function ' . $methodName . '($vars, $params)';
+		$php[] = '	public static function ' . $methodName . '($vars)';
 		$php[] = '	{';
 
-		if (!empty($vars) || !empty($params))
+		if (!empty($vars))
 		{
-			if (!empty($vars))
-			{
-				$indent = (empty($params)) ? '' : '  ';
-
-				$php[] = '		$vars' . $indent . ' += array(' . implode(', ', $vars) . ');';
-			}
-
-			if (!empty($params))
-			{
-				$php[] = '		$params += array(' . implode(', ', $params) . ');';
-			}
-
+			$php[] = '		$vars += array(' . implode(', ', $vars) . ');';
 			$php[] = '';
 		}
 
@@ -631,12 +606,86 @@ foreach ($sites->site as $site)
 
 $php[] = '}';
 
+// Prepare the option group
+$optiongroups = $addon->appendChild($dom->createElement('optiongroups'));
+
+$group = $optiongroups->appendChild($dom->createElement('group'));
+$group->setAttribute('group_id',      $addon->getAttribute('addon_id'));
+$group->setAttribute('display_order', 1);
+$group->setAttribute('debug_only',    0);
+
+// Prepare the phrase nodes
+$phrases = $addon->appendChild($dom->createElement('phrases'));
+
+setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', 's9e Media Pack')),
+	[
+		'title'          => 'option_group_' . $addon->getAttribute('addon_id'),
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+
+setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', 'Variables used in some embedded media')),
+	[
+		'title'          => 'option_group_' . $addon->getAttribute('addon_id') . '_description',
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+
+// Add the params as XenForo options
+ksort($optionNames);
+
+$i = 0;
+foreach ($optionNames as $paramName => $optionName)
+{
+	$option = $optiongroups->appendChild($dom->createElement('option'));
+
+	setAttributes(
+		$option,
+		[
+			'option_id'   => $optionName,
+			'edit_format' => 'textbox',
+			'data_type'   => 'string',
+			'can_backup'  => '1'
+		]
+	);
+
+	setAttributes(
+		$option->appendChild($dom->createElement('relation')),
+		[
+			'group_id'      => $addon->getAttribute('addon_id'),
+			'display_order' => ++$i
+		]
+	);
+
+	setAttributes(
+		$phrases->appendChild($dom->createElement('phrase', $paramName)),
+		[
+			'title'          => 'option_' . $optionName,
+			'version_id'     => '1',
+			'version_string' => '1'
+		]
+	);
+
+	setAttributes(
+		$phrases->appendChild($dom->createElement('phrase')),
+		[
+			'title'          => 'option_' . $optionName . '_explain',
+			'version_id'     => '1',
+			'version_string' => '1'
+		]
+	);
+}
+
 // Save the helper class
 file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', implode("\n", $php));
 
 // Save addon.xml
 $dom->formatOutput = true;
-$xml = $dom->saveXML();
+$xml = $dom->saveXML($addon);
 
 file_put_contents(__DIR__ . '/../build/addon.xml', $xml);
 
@@ -665,17 +714,14 @@ $html = preg_replace_callback(
 );
 
 // Update the params table
-$paramNames = array_unique($paramNames);
-sort($paramNames);
-
 $paramsHtml = '<table id="params">
 		<tbody>';
-foreach ($paramNames as $paramName)
+foreach ($optionNames as $optionName)
 {
 	$paramsHtml .= '
 			<tr>
-				<td>' . $paramName . '</td>
-				<td><input type="text" id="param-' . $paramName . '" name="' . $paramName . '"></td>
+				<td>' . $optionName . '</td>
+				<td><input type="text" id="param-' . $optionName . '" name="' . $optionName . '"></td>
 			</tr>';
 }
 $paramsHtml .= '
