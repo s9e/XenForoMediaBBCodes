@@ -12,7 +12,7 @@ class Test extends PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		XenForo_Application::$options = [];
+		XenForo_Application::$options = array();
 	}
 
 	/**
