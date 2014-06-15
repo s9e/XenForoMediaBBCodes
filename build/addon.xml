@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201406080" version_string="20140608" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201406150" version_string="20140615" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -214,6 +214,10 @@
     <site media_site_id="vevo" site_title="VEVO" site_url="http://vevo.com/" match_is_regex="1" supported="1">
       <match_urls>!vevo\.com/watch/([-\w/]+/)?(?'id'[A-Z0-9]+)!</match_urls>
       <embed_html><![CDATA[<iframe width="575" height="324" src="http://cache.vevo.com/m/html/embed.html?video={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="viagame" site_title="Viagame" site_url="http://vimeo.com/" match_is_regex="1" supported="1">
+      <match_urls>!viagame\.com/channels/[^/]+/(?'id'[0-9]+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="640" height="392" src="//www.viagame.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="vimeo" site_title="Vimeo" site_url="http://vimeo.com/" match_is_regex="1" supported="1">
       <match_urls>!vimeo\.com/(?:channels/[^/]+/)?(?'id'[0-9]+)!</match_urls>
