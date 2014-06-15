@@ -751,7 +751,7 @@ copy(__DIR__ . '/../LICENSE', __DIR__ . '/../build/LICENSE');
 exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $version . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/* 2> /dev/null');
 
 $readme =
-'This pack contains the definitions for ' . count($sitenames) . ' media sites: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
+'This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
 
 The BBCodes definitions are based on [url=https://github.com/s9e/TextFormatter]the s9e\TextFormatter library[/url], and more specifically its [url=https://github.com/s9e/TextFormatter/tree/master/src/Plugins/MediaEmbed]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
 
