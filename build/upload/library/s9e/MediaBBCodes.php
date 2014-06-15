@@ -349,7 +349,7 @@ class s9e_MediaBBCodes
 		$regexps = array();
 		$scrapes = array(
 			array(
-				'match'   => array('!comedycentral\\.com/video-clips/!'),
+				'match'   => array('!c(?:c|omedycentral)\\.com/video-clips/!'),
 				'extract' => array('!(?\'id\'mgid:arc:video:comedycentral\\.com:[-\\w]+)!')
 			)
 		);

@@ -45,7 +45,7 @@
       <embed_html><![CDATA[<iframe width="600" height="369" src="//www.collegehumor.com/e/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="comedycentral" site_title="Comedy Central" site_url="http://www.comedycentral.com/funny-videos" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchComedycentral">
-      <match_urls>!(?'id')comedycentral\.com/video-clips/!</match_urls>
+      <match_urls>!(?'id')c(?:c|omedycentral)\.com/video-clips/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="dailymotion" site_title="Dailymotion" site_url="http://www.dailymotion.com/" match_is_regex="1" supported="1">
