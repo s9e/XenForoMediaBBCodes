@@ -270,6 +270,23 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderAudiomack($vars)
+	{
+		$vars += array('id' => null, 'mode' => null);
+
+		$html='<iframe width="100%" allowfullscreen="" frameborder="0" scrolling="no" height="';if($vars['mode']==='album')$html.='352';else$html.='144';$html.='" src="//www.audiomack.com/embed3';if($vars['mode']==='album')$html.='-album';$html.='/'.htmlspecialchars($vars['id'],2).'"></iframe>';
+
+		return $html;
+	}
+
+	public static function matchAudiomack($url)
+	{
+		$regexps = array('!audiomack\\.com/(?\'mode\'album|song)/(?\'id\'[-\\w]+/[-\\w]+)!');
+		$scrapes = array();
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderBandcamp($vars)
 	{
 		$vars += array('album_id' => null, 'track_id' => null, 'track_num' => null);

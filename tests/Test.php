@@ -498,6 +498,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe>'
 			),
 			array(
+				'id=hz-global/double-a-side-vol3;mode=album',
+				'<!-- s9e_MediaBBCodes::renderAudiomack() -->',
+				'<iframe width="100%" allowfullscreen="" frameborder="0" scrolling="no" height="352" src="//www.audiomack.com/embed3-album/hz-global/double-a-side-vol3"></iframe>'
+			),
+			array(
+				'id=random-2/buy-the-world-final-1;mode=song',
+				'<!-- s9e_MediaBBCodes::renderAudiomack() -->',
+				'<iframe width="100%" allowfullscreen="" frameborder="0" scrolling="no" height="144" src="//www.audiomack.com/embed3/random-2/buy-the-world-final-1"></iframe>'
+			),
+			array(
 				'album_id=1122163921',
 				'<!-- s9e_MediaBBCodes::renderBandcamp() -->',
 				'<iframe width="400" height="120" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/album=1122163921/size=medium"></iframe>'
