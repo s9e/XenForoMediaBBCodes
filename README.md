@@ -277,7 +277,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>vk</code></td>
 			<td>VK</td>
-			<td>http://vk.com/video-7016284_163645555</td>
+			<td>http://vkontakte.ru/video-7016284_163645555<br/>http://vk.com/video226156999_168963041<br/>http://vk.com/newmusicvideos?z=video-13895667_161988074<br/>http://vk.com/video_ext.php?oid=121599878&amp;id=165723901&amp;hash=e06b0878046e1d32</td>
 		</tr>
 		<tr>
 			<td><code>wshh</code></td>

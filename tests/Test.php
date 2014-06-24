@@ -376,6 +376,26 @@ class Test extends PHPUnit_Framework_TestCase
 				'vid=40688256'
 			),
 			array(
+				'vk',
+				'http://vkontakte.ru/video-7016284_163645555',
+				'hash=eb5d7a5e6e1d8b71;oid=-7016284;vid=163645555'
+			),
+			array(
+				'vk',
+				'http://vk.com/video226156999_168963041',
+				'hash=9050a9cce6465c9e;oid=226156999;vid=168963041'
+			),
+			array(
+				'vk',
+				'http://vk.com/newmusicvideos?z=video-13895667_161988074',
+				'hash=de860a8e4fbe45c9;oid=-13895667;vid=161988074'
+			),
+			array(
+				'vk',
+				'http://vk.com/video_ext.php?oid=121599878&id=165723901&hash=e06b0878046e1d32',
+				'hash=e06b0878046e1d32;oid=121599878;vid=165723901'
+			),
+			array(
 				'youtube',
 				'http://www.youtube.com/watch?v=-cEzsCAzTak',
 				'-cEzsCAzTak'

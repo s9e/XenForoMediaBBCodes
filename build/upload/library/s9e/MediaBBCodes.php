@@ -750,10 +750,11 @@ class s9e_MediaBBCodes
 
 	public static function matchVk($url)
 	{
-		$regexps = array('!vk\\.com/video(?\'oid\'-?[0-9]+)_(?\'vid\'[0-9]+)!');
+		$regexps = array('!(?=.*?vk(?>\\.com|ontakte\\.ru)).*?vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?\'oid\'-?[0-9]+)_(?\'vid\'[0-9]+)!', '!(?=.*?vk(?>\\.com|ontakte\\.ru)).*?vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?\'oid\'-?[0-9]+)&id=(?\'vid\'[0-9]+)&hash=(?\'hash\'[0-9a-f]+)!');
 		$scrapes = array(
 			array(
-				'match'   => array('!vk\\.com/video-?[0-9]+_[0-9]+!'),
+				'url'     => 'http://vk.com/video{@oid}_{@vid}',
+				'match'   => array('!vk.*?video-?[0-9]+_[0-9]+!'),
 				'extract' => array('!embed_hash=(?\'hash\'[0-9a-f]+)!')
 			)
 		);
