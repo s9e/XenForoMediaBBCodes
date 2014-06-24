@@ -487,11 +487,13 @@ foreach ($sites->site as $site)
 		}
 		if ($matchHost)
 		{
-			$regexp = $regexp[0]
-			        . '(?=.*?'
-			        . s9e\TextFormatter\Configurator\Helpers\RegexpBuilder::fromList($hosts)
-			        . ').*?'
-			        . substr($regexp, 1);
+			$hostsRegexp = s9e\TextFormatter\Configurator\Helpers\RegexpBuilder::fromList($hosts);
+
+			if (false === strpos($regexp, $hostsRegexp)
+			 && false === strpos($regexp, str_replace('(?>', '(?:', $hostsRegexp)))
+			{
+				$regexp = $regexp[0] . '(?=.*?' . $hostsRegexp . ').*?' . substr($regexp, 1);
+			}
 		}
 
 		$regexps[] = $regexp;

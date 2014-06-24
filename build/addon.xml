@@ -151,8 +151,8 @@
       <embed_html><![CDATA[<iframe width="480" height="373" src="http://graphics8.nytimes.com/bcvideo/1.0/iframe/embed.html?videoId={$id}&amp;playerType=embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="podbean" site_title="Podbean" site_url="http://www.podbean.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchPodbean">
-      <match_urls>!(?=.*?podbean\.com).*?podbean.com/site/player/index/pid/\d+/eid/(?'id'\d+)!
-!(?'id')podbean.com/e/!</match_urls>
+      <match_urls>!podbean\.com/site/player/index/pid/\d+/eid/(?'id'\d+)!
+!(?'id')podbean\.com/e/!</match_urls>
       <embed_html><![CDATA[<iframe width="300" height="100" src="http://www.podbean.com/media/player/audio/postId/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="rdio" site_title="Rdio" site_url="http://www.rdio.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchRdio">
@@ -232,8 +232,8 @@
       <embed_html><![CDATA[<iframe width="480" height="480" src="https://vine.co/v/{$id}/embed/simple" allowfullscreen="" frameborder="0" scrolling="no"></iframe><script async="" src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>]]></embed_html>
     </site>
     <site media_site_id="vk" site_title="VK" site_url="https://vk.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchVk">
-      <match_urls>!(?'id')(?=.*?vk(?&gt;\.com|ontakte\.ru)).*?vk(?:\.com|ontakte\.ru)/(?:[\w.]+\?z=)?video(?'oid'-?[0-9]+)_(?'vid'[0-9]+)!
-!(?'id')(?=.*?vk(?&gt;\.com|ontakte\.ru)).*?vk(?:\.com|ontakte\.ru)/video_ext\.php\?oid=(?'oid'-?[0-9]+)&amp;id=(?'vid'[0-9]+)&amp;hash=(?'hash'[0-9a-f]+)!
+      <match_urls>!(?'id')vk(?:\.com|ontakte\.ru)/(?:[\w.]+\?z=)?video(?'oid'-?[0-9]+)_(?'vid'[0-9]+)!
+!(?'id')vk(?:\.com|ontakte\.ru)/video_ext\.php\?oid=(?'oid'-?[0-9]+)&amp;id=(?'vid'[0-9]+)&amp;hash=(?'hash'[0-9a-f]+)!
 !(?'id')vk.*?video-?[0-9]+_[0-9]+!</match_urls>
       <embed_html><![CDATA[<iframe width="607" height="360" src="//vk.com/video_ext.php?oid={$oid}&amp;id={$vid}&amp;hash={$hash}&amp;hd=1" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>

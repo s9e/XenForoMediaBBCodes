@@ -578,10 +578,10 @@ class s9e_MediaBBCodes
 
 	public static function matchPodbean($url)
 	{
-		$regexps = array('!(?=.*?podbean\\.com).*?podbean.com/site/player/index/pid/\\d+/eid/(?\'id\'\\d+)!');
+		$regexps = array('!podbean\\.com/site/player/index/pid/\\d+/eid/(?\'id\'\\d+)!');
 		$scrapes = array(
 			array(
-				'match'   => array('!podbean.com/e/!'),
+				'match'   => array('!podbean\\.com/e/!'),
 				'extract' => array('!embed/postId/(?\'id\'\\d+)!')
 			)
 		);
@@ -750,7 +750,7 @@ class s9e_MediaBBCodes
 
 	public static function matchVk($url)
 	{
-		$regexps = array('!(?=.*?vk(?>\\.com|ontakte\\.ru)).*?vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?\'oid\'-?[0-9]+)_(?\'vid\'[0-9]+)!', '!(?=.*?vk(?>\\.com|ontakte\\.ru)).*?vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?\'oid\'-?[0-9]+)&id=(?\'vid\'[0-9]+)&hash=(?\'hash\'[0-9a-f]+)!');
+		$regexps = array('!vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?\'oid\'-?[0-9]+)_(?\'vid\'[0-9]+)!', '!vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?\'oid\'-?[0-9]+)&id=(?\'vid\'[0-9]+)&hash=(?\'hash\'[0-9a-f]+)!');
 		$scrapes = array(
 			array(
 				'url'     => 'http://vk.com/video{@oid}_{@vid}',
