@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201406260" version_string="20140626" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201406270" version_string="20140627" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -158,6 +158,10 @@
       <match_urls>!podbean\.com/site/player/index/pid/\d+/eid/(?'id'\d+)!
 !(?'id')podbean\.com/e/!</match_urls>
       <embed_html><![CDATA[<iframe width="300" height="100" src="http://www.podbean.com/media/player/audio/postId/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="prezi" site_title="Prezi" site_url="http://prezi.com/" match_is_regex="1" supported="1">
+      <match_urls>#//prezi\.com/(?!(?:a(?:bout|mbassadors)|c(?:o(?:llaborate|mmunity|ntact)|reate)|exp(?:erts|lore)|ip(?:ad|hone)|jobs|l(?:ear|ogi)n|m(?:ac|obility)|pr(?:es(?:s|ent)|icing)|recommend|support|user|windows|your)/)(?'id'\w+)/#</match_urls>
+      <embed_html><![CDATA[<iframe width="550" height="400" src="//prezi.com/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="rdio" site_title="Rdio" site_url="http://www.rdio.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchRdio">
       <match_urls>!rd\.io/./(?'id'\w+)!
