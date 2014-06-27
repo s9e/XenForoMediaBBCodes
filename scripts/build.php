@@ -749,8 +749,9 @@ file_put_contents(
 	)
 );
 
-copy(__DIR__ . '/../LICENSE', __DIR__ . '/../build/LICENSE');
-exec('7z a -tzip -mx9 ' . realpath(__DIR__ . '/../releases') . '/XenForoMediaBBCodes-' . $version . '.zip' . ' ' . realpath(__DIR__ . '/../build') . '/* 2> /dev/null');
+chdir(__DIR__ . '/..');
+copy('LICENSE', 'build/LICENSE');
+exec('kzip -r -y releases/XenForoMediaBBCodes-' . $version . '.zip build/*');
 
 $readme =
 'This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
