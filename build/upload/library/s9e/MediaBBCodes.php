@@ -421,7 +421,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'mode' => null);
 
-		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="';if($vars['mode']==='post')$html.='//s9e.github.io/iframe/facebook.min.html#';else$html.='https://www.facebook.com/video/embed?video_id=';$html.=htmlspecialchars($vars['id'],2).'"';if($vars['mode']==='post')$html.=' onload="var b=this;window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;b.src==a.data.url&amp;&amp;(b.style.height=a.data.height+\'px\')});b.contentWindow.postMessage(\'s9e:init\',\'*\')"';$html.='></iframe>';
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="';if($vars['mode']==='post')$html.='//s9e.github.io/iframe/facebook.min.html#';else$html.='https://www.facebook.com/video/embed?video_id=';$html.=htmlspecialchars($vars['id'],2).'"';if($vars['mode']==='post')$html.=' onload="window.addEventListener(\'message\',function(a){/^https?:\\/\\/s9e\\.github\\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;src==a.data.url&amp;&amp;(style.height=a.data.height+\'px\')});contentWindow.postMessage(\'s9e:init\',\'*\')"';$html.='></iframe>';
 
 		return $html;
 	}
@@ -478,6 +478,19 @@ class s9e_MediaBBCodes
 				'url'     => 'http://gfycat.com/{@id}',
 				'match'   => array('//'),
 				'extract' => array('!gfyHeight[ ="]+(?\'height\'\\d+)!', '!gfyWidth[ ="]+(?\'width\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
+	public static function matchGoogleplus($url)
+	{
+		$regexps = array('!//plus\\.google\\.com/(?:\\+\\w+|(?\'oid\'\\d+))/posts/(?\'pid\'\\w+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!//plus\\.google\\.com/\\+[^/]+/posts/\\w!'),
+				'extract' => array('!oid="?(?\'oid\'\\d+)!')
 			)
 		);
 
