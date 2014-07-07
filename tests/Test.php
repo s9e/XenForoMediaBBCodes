@@ -580,7 +580,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'id=10151471074398553;mode=post',
 				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/facebook.min.html#10151471074398553" onload="window.addEventListener(\'message\',function(a){/^https?:\/\/s9e\.github\.io$/.test(a.origin)&amp;&amp;a.data.url&amp;&amp;a.data.height&amp;&amp;src==a.data.url&amp;&amp;(style.height=a.data.height+\'px\')});contentWindow.postMessage(\'s9e:init\',\'*\')"></iframe>'
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/facebook.min.html#10151471074398553" onload="var a=Math.random();window.addEventListener(\'message\',function(b){b.data.id==a&amp;&amp;(style.height=b.data.height+\'px\')});contentWindow.postMessage(\'s9e:\'+a,\'*\')"></iframe>'
 			),
 			array(
 				'et=0KmkT83GTG1ynPe0_63zHg;height=399;id=3232182;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48%3D;width=594',
