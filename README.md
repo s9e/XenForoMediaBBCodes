@@ -155,6 +155,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.ign.com/videos/2013/07/12/pokemon-x-version-pokemon-y-version-battle-trailer</td>
 		</tr>
 		<tr>
+			<td><code>imgur</code></td>
+			<td>imgur albums</td>
+			<td>http://imgur.com/a/9UGCL</td>
+		</tr>
+		<tr>
 			<td><code>indiegogo</code></td>
 			<td>Indiegogo</td>
 			<td>http://www.indiegogo.com/projects/gameheart-redesigned</td>
@@ -168,6 +173,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td><code>internetarchive</code></td>
 			<td>Internet Archive</td>
 			<td>https://archive.org/details/BillGate99<br/>https://archive.org/details/DFTS2014-05-30</td>
+		</tr>
+		<tr>
+			<td><code>izlesene</code></td>
+			<td>İzlesene</td>
+			<td>http://www.izlesene.com/video/lily-allen-url-badman/7600704</td>
 		</tr>
 		<tr>
 			<td><code>kickstarter</code></td>
