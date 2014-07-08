@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407081" version_string="20140708b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407082" version_string="20140708c" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -65,6 +65,11 @@
 #(?=.*?ebay\.(?:at|c(?:a|o(?:\.uk|m(?&gt;\.au)?))|de|es|fr|i[nt])).*?[?&amp;]item=(?'id'\d+)#
 #(?'id')ebay\.(?!com/)#</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderEbay() -->]]></embed_html>
+    </site>
+    <site media_site_id="eighttracks" site_title="8tracks" site_url="http://8tracks.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchEighttracks">
+      <match_urls>!8tracks\.com/[-\w]+/(?'id'\d+)(?=#|$)!
+!(?'id')8tracks\.com/[-\w]+/[-\w]+!</match_urls>
+      <embed_html><![CDATA[<iframe width="400" height="400" src="//8tracks.com/mixes/{$id}/player_v3_universal" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="espn" site_title="ESPN" site_url="http://espn.go.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchEspn">
       <match_urls>#(?=.*?espn\.go\.com).*?\?id=(?'cms'deportes|espn):(?'id'\d+)#

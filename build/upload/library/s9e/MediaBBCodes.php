@@ -409,6 +409,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchEighttracks($url)
+	{
+		$regexps = array('!8tracks\\.com/[-\\w]+/(?\'id\'\\d+)(?=#|$)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!8tracks\\.com/[-\\w]+/[-\\w]+!'),
+				'extract' => array('!eighttracks://mix/(?\'id\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchEspn($url)
 	{
 		$regexps = array('#(?=.*?espn\\.go\\.com).*?\\?id=(?\'cms\'deportes|espn):(?\'id\'\\d+)#', '#(?=.*?espn\\.go\\.com).*?\\?v?id=(?\'id\'\\d+)#', '#(?=.*?espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d))#');

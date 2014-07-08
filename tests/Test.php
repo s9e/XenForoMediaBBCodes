@@ -174,6 +174,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=230993099153;lang=en_GB'
 			),
 			array(
+				'eighttracks',
+				'http://8tracks.com/mc_raw/canadian-flavored-indie-rock-grilled-cheese',
+				'1007987'
+			),
+			array(
 				'espn',
 				'http://espn.go.com/video/clip?id=10936987',
 				'cms=espn;id=10936987'
