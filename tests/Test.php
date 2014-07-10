@@ -199,6 +199,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'cms=deportes;id=2088955'
 			),
 			array(
+				'espn',
+				'http://espn.go.com/new-york/nba/story/_/id/11196159/carmelo-anthony-agent-says-made-decision',
+				'http://espn.go.com/new-york/nba/story/_/id/11196159/carmelo-anthony-agent-says-made-decision'
+			),
+			array(
 				'facebook',
 				'https://www.facebook.com/photo.php?v=10100658170103643',
 				'id=10100658170103643;mode=photo'
