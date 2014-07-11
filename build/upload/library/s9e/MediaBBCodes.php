@@ -434,14 +434,14 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'mode' => null);
 
-		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="';if($vars['mode']==='post')$html.='//s9e.github.io/iframe/facebook.min.html#';else$html.='https://www.facebook.com/video/embed?video_id=';$html.=htmlspecialchars($vars['id'],2).'"';if($vars['mode']==='post')$html.=' onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))"';$html.='></iframe>';
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="';if($vars['mode']==='video')$html.='https://www.facebook.com/video/embed?video_id=';else$html.='//s9e.github.io/iframe/facebook.min.html#';$html.=htmlspecialchars($vars['id'],2).'"';if($vars['mode']!=='video')$html.=' onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))"';$html.='></iframe>';
 
 		return $html;
 	}
 
 	public static function matchFacebook($url)
 	{
-		$regexps = array('!facebook\\.com/(?\'mode\'photo|video)(?:/video)?\\.php\\?v=(?\'id\'\\d+)!', '!facebook\\.com/[\\w.]+/(?\'mode\'post)s/(?\'id\'\\d+)!');
+		$regexps = array('!facebook\\.com/(?\'mode\'photo|video)(?:/video)?\\.php\\?(?:fbid|v)=(?\'id\'\\d+)!', '!facebook\\.com/[\\w.]+/(?\'mode\'post)s/(?\'id\'\\d+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);

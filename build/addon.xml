@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407100" version_string="20140710" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407110" version_string="20140711" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -76,7 +76,7 @@
       <embed_html><![CDATA[<iframe width="560" height="315" src="https://espn.go.com/video/iframe/twitter/?cms={$cms}&amp;id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="facebook" site_title="Facebook" site_url="http://www.facebook.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchFacebook">
-      <match_urls>!facebook\.com/(?'mode'photo|video)(?:/video)?\.php\?v=(?'id'\d+)!
+      <match_urls>!facebook\.com/(?'mode'photo|video)(?:/video)?\.php\?(?:fbid|v)=(?'id'\d+)!
 !facebook\.com/[\w.]+/(?'mode'post)s/(?'id'\d+)!</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderFacebook() -->]]></embed_html>
     </site>

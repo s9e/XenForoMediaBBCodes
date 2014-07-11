@@ -102,7 +102,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>facebook</code></td>
 			<td>Facebook</td>
-			<td>https://www.facebook.com/photo.php?v=10100658170103643&amp;set=vb.20531316728&amp;type=3&amp;theater<br/>https://www.facebook.com/video/video.php?v=10150451523596807<br/>https://www.facebook.com/FacebookDevelopers/posts/10151471074398553</td>
+			<td>https://www.facebook.com/photo.php?v=10100658170103643&amp;set=vb.20531316728&amp;type=3&amp;theater<br/>https://www.facebook.com/video/video.php?v=10150451523596807<br/>https://www.facebook.com/FacebookDevelopers/posts/10151471074398553<br/>https://www.facebook.com/photo.php?fbid=10152476416772631</td>
 		</tr>
 		<tr>
 			<td><code>funnyordie</code></td>
