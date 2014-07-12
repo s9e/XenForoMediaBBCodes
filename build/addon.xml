@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407110" version_string="20140711" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407120" version_string="20140712" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -51,6 +51,10 @@
     <site media_site_id="comedycentral" site_title="Comedy Central" site_url="http://www.comedycentral.com/funny-videos" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchComedycentral">
       <match_urls>!(?'id')c(?:c|omedycentral)\.com/video-clips/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="http://media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="coub" site_title="Coub" site_url="http://coub.com/" match_is_regex="1" supported="1">
+      <match_urls>!coub\.com/view/(?'id'\w+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="//coub.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="dailymotion" site_title="Dailymotion" site_url="http://www.dailymotion.com/" match_is_regex="1" supported="1">
       <match_urls>!dailymotion\.com/(?:video/|user/[^#]+#video=)(?'id'[A-Za-z0-9]+)!</match_urls>

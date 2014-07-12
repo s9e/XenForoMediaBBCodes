@@ -75,6 +75,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.cc.com/video-clips/uu5qz4/key-and-peele-dueling-hats<br/>http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats</td>
 		</tr>
 		<tr>
+			<td><code>coub</code></td>
+			<td>Coub</td>
+			<td>http://coub.com/view/6veusoty</td>
+		</tr>
+		<tr>
 			<td><code>dailymotion</code></td>
 			<td>Dailymotion</td>
 			<td>http://www.dailymotion.com/video/x222z1<br/>http://www.dailymotion.com/user/Dailymotion/2#video=x222z1</td>
