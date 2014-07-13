@@ -727,23 +727,6 @@ $html = preg_replace_callback(
 	)
 );
 
-// Update the params table
-$paramsHtml = '<table id="params">
-		<tbody>';
-foreach ($optionNames as $optionName)
-{
-	$paramsHtml .= '
-			<tr>
-				<td>' . $optionName . '</td>
-				<td><input type="text" id="param-' . $optionName . '" name="' . $optionName . '"></td>
-			</tr>';
-}
-$paramsHtml .= '
-		</tbody>
-	</table>';
-
-$html = preg_replace('#<table id="params">.*?</table>#s', $paramsHtml, $html);
-
 file_put_contents($filepath, $html);
 
 // Remove the buttons from the table used in README
