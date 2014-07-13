@@ -215,6 +215,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.nytimes.com/video/technology/personaltech/100000002907606/soylent-taste-test.html<br/>http://www.nytimes.com/video/2012/12/17/business/100000001950744/how-wal-mart-conquered-teotihuacan.html</td>
 		</tr>
 		<tr>
+			<td><code>pastebin</code></td>
+			<td>Pastebin</td>
+			<td>http://pastebin.com/9jEf44nc</td>
+		</tr>
+		<tr>
 			<td><code>podbean</code></td>
 			<td>Podbean</td>
 			<td>http://dialhforheroclix.podbean.com/e/dial-h-for-heroclix-episode-46-all-ya-need-is-love/</td>
