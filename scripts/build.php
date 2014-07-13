@@ -462,6 +462,14 @@ foreach ($sites->site as $site)
 	$scrapes          = [];
 	$useMatchCallback = false;
 
+	// Collect this site's hosts and build a regexp that matches all of them
+	$hosts = [];
+	foreach ($site->host as $host)
+	{
+		$hosts[] = (string) $host;
+	}
+	$hostsRegexp = s9e\TextFormatter\Configurator\Helpers\RegexpBuilder::fromList($hosts);
+
 	foreach ($site->extract as $regexp)
 	{
 		$regexp = (string) $regexp;
@@ -472,32 +480,8 @@ foreach ($sites->site as $site)
 			$useMatchCallback = true;
 		}
 
-		// Test whether this regexp contains the name of at least one host. If not, make it match
-		// any of the host. (CNN and Spotify excluded)
-		$hosts     = [];
-		$matchHost = ($site['id'] != 'cnn' && $site['id'] != 'spotify');
-		foreach ($site->host as $host)
-		{
-			$hosts[] = (string) $host;
-
-			if (strpos($regexp, preg_quote($host)) !== false)
-			{
-				$matchHost = false;
-			}
-		}
-		if ($matchHost)
-		{
-			$hostsRegexp = s9e\TextFormatter\Configurator\Helpers\RegexpBuilder::fromList($hosts);
-
-			if (false === strpos($regexp, $hostsRegexp)
-			 && false === strpos($regexp, str_replace('(?>', '(?:', $hostsRegexp)))
-			{
-				$regexp = $regexp[0] . '(?=.*?' . $hostsRegexp . ').*?' . substr($regexp, 1);
-			}
-		}
-
 		$regexps[] = $regexp;
-		$matchRegexps[] = var_export($regexp, true);
+		$matchRegexps[$regexp] = var_export($regexp, true);
 	}
 
 	foreach ($site->scrape as $scrape)
@@ -529,6 +513,34 @@ foreach ($sites->site as $site)
 
 		$scrapes[] = $entry;
 		$useMatchCallback = true;
+	}
+
+	foreach ($regexps as $k => $regexp)
+	{
+		// Test whether this regexp contains the name of at least one host. If not, make it match
+		// any of the host. (CNN and Spotify excluded)
+		$matchHost = ($site['id'] != 'cnn' && $site['id'] != 'spotify');
+		foreach ($hosts as $host)
+		{
+			if (strpos($regexp, preg_quote($host)) !== false)
+			{
+				$matchHost = false;
+			}
+		}
+
+		if ($matchHost)
+		{
+			if (false === strpos($regexp, $hostsRegexp)
+			 && false === strpos($regexp, str_replace('(?>', '(?:', $hostsRegexp)))
+			{
+				$regexps[$k] = $regexp[0] . '(?=.*?[./]' . $hostsRegexp . ').*?' . substr($regexp, 1);
+
+				if (isset($matchRegexps[$regexp]))
+				{
+					$matchRegexps[$regexp] = var_export($regexps[$k], true);
+				}
+			}
+		}
 	}
 
 	if ($useMatchCallback)

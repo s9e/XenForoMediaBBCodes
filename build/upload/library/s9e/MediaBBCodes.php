@@ -264,7 +264,7 @@ class s9e_MediaBBCodes
 
 	public static function matchAmazon($url)
 	{
-		$regexps = array('#(?=.*?amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?\'id\'[A-Z0-9]+)#', '#(?=.*?amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?amazon\\.(?:co\\.)?(?\'tld\'ca|de|fr|it|jp|uk)#');
+		$regexps = array('#(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?\'id\'[A-Z0-9]+)#', '#(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)).*?amazon\\.(?:co\\.)?(?\'tld\'ca|de|fr|it|jp|uk)#');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
@@ -398,7 +398,7 @@ class s9e_MediaBBCodes
 
 	public static function matchEbay($url)
 	{
-		$regexps = array('#(?=.*?ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'id\'\\d+)#', '#(?=.*?ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?[?&]item=(?\'id\'\\d+)#');
+		$regexps = array('#(?=.*?[./]ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'id\'\\d+)#', '#(?=.*?[./]ebay\\.(?:at|c(?:a|o(?:\\.uk|m(?>\\.au)?))|de|es|fr|i[nt])).*?[?&]item=(?\'id\'\\d+)#');
 		$scrapes = array(
 			array(
 				'match'   => array('#ebay\\.(?!com/)#'),
@@ -424,7 +424,7 @@ class s9e_MediaBBCodes
 
 	public static function matchEspn($url)
 	{
-		$regexps = array('#(?=.*?espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?id=|video\\?vid=|clipDeportes\\?id=(?:deportes:)?)(?\'id\'\\d+)#');
+		$regexps = array('#(?=.*?[./]espn\\.go\\.com).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?id=|video\\?vid=|clipDeportes\\?id=(?:deportes:)?)(?\'id\'\\d+)#');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
@@ -454,7 +454,7 @@ class s9e_MediaBBCodes
 
 	public static function matchGetty($url)
 	{
-		$regexps = array('!gty\\.im/(?\'id\'\\d+)!', '!(?=.*?g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?\'id\'\\d+)!');
+		$regexps = array('!gty\\.im/(?\'id\'\\d+)!', '!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?\'id\'\\d+)!');
 		$scrapes = array(
 			array(
 				'url'     => 'http://embed.gettyimages.com/preview/{@id}',
@@ -804,7 +804,7 @@ class s9e_MediaBBCodes
 
 	public static function matchYoutube($url)
 	{
-		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=.*?youtu(?>\\.be|be\\.com)).*?[#&?]t=(?\'t\'\\d+)!', '!(?=.*?youtu(?>\\.be|be\\.com)).*?&list=(?\'list\'[-\\w]+)!');
+		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)).*?[#&?]t=(?\'t\'\\d+)!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)).*?&list=(?\'list\'[-\\w]+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
