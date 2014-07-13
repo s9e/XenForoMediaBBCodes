@@ -585,6 +585,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchMsnbc($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('@msnbc\\.com/[-\\w]+/watch/@'),
+				'extract' => array('@guid="?(?\'id\'\\w+)@')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchPodbean($url)
 	{
 		$regexps = array('!podbean\\.com/site/player/index/pid/\\d+/eid/(?\'id\'\\d+)!');
