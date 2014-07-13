@@ -204,26 +204,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://espn.go.com/new-york/nba/story/_/id/11196159/carmelo-anthony-agent-says-made-decision'
 			),
 			array(
-				'facebook',
-				'https://www.facebook.com/photo.php?v=10100658170103643',
-				'id=10100658170103643;mode=photo'
-			),
-			array(
-				'facebook',
-				'https://www.facebook.com/video/video.php?v=10150451523596807',
-				'id=10150451523596807;mode=video'
-			),
-			array(
-				'facebook',
-				'https://www.facebook.com/FacebookDevelopers/posts/10151471074398553',
-				'id=10151471074398553;mode=post'
-			),
-			array(
-				'facebook',
-				'https://www.facebook.com/photo.php?fbid=10152476416772631',
-				'id=10152476416772631;mode=photo'
-			),
-			array(
 				'gametrailers',
 				'http://www.gametrailers.com/videos/jz8rt1/tom-clancy-s-the-division-vgx-2013--world-premiere-featurette',
 				'mgid:arc:video:gametrailers.com:85dee3c3-60f6-4b80-8124-cf3ebd9d2a6c'
@@ -576,26 +556,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'itemid=251053262701;lang=en_GB',
 				'<!-- s9e_MediaBBCodes::renderEbay() -->',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"></object>'
-			),
-			array(
-				'id=10100658170103643;mode=photo',
-				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/facebook.min.html#10100658170103643" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))"></iframe>'
-			),
-			array(
-				'id=10150451523596807;mode=video',
-				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="https://www.facebook.com/video/embed?video_id=10150451523596807"></iframe>'
-			),
-			array(
-				'10150451523596807',
-				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/facebook.min.html#10150451523596807" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))"></iframe>'
-			),
-			array(
-				'id=10151471074398553;mode=post',
-				'<!-- s9e_MediaBBCodes::renderFacebook() -->',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/facebook.min.html#10151471074398553" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))"></iframe>'
 			),
 			array(
 				'et=0KmkT83GTG1ynPe0_63zHg;height=399;id=3232182;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48%3D;width=594',
