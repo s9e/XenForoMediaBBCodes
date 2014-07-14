@@ -369,12 +369,6 @@ foreach ($sites->site as $site)
 	// Default HTML replacement. Ensure that iframe and script have an end tag
 	$html = preg_replace('#(<(iframe|script)[^>]+)/>#', '$1></$2>', $template);
 
-	// Temp fix for WorldStarHipHop
-	if ($site['id'] == 'wshh')
-	{
-		$html = str_replace(' type="application/x-shockwave-flash" typemustmatch=""', '', $html);
-	}
-
 	$useEmbedCallback = false;
 
 	// Test whether the template needs to be rendered in PHP
