@@ -18,7 +18,7 @@ class s9e_MediaBBCodes
 
 		if ($exclude)
 		{
-			$exclude = array_flip(preg_split('/\\W+/', $exclude));
+			$exclude = array_flip(preg_split('/\\W+/', $exclude, -1, PREG_SPLIT_NO_EMPTY));
 			$nodes   = array();
 
 			foreach ($addon->bb_code_media_sites->site as $site)

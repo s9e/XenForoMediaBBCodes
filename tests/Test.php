@@ -65,6 +65,71 @@ class Test extends PHPUnit_Framework_TestCase
 		);
 	}
 
+	public function testBlacklistNoEmpty()
+	{
+		if (!class_exists('s9e_MediaBBCodes'))
+		{
+			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+		}
+
+		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = '';
+
+		$addon = simplexml_load_string(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="one"/>
+					<site media_site_id="two"/>
+					<site media_site_id="three"/>
+				</bb_code_media_sites>
+			</addon>'
+		);
+
+		s9e_MediaBBCodes::install(null, null, $addon);
+
+		$this->assertXmlStringEqualsXmlString(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="one"/>
+					<site media_site_id="two"/>
+					<site media_site_id="three"/>
+				</bb_code_media_sites>
+			</addon>',
+			$addon->asXML()
+		);
+	}
+
+	public function testBlacklistWithSurroundingSpace()
+	{
+		if (!class_exists('s9e_MediaBBCodes'))
+		{
+			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+		}
+
+		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = ' two ';
+
+		$addon = simplexml_load_string(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="one"/>
+					<site media_site_id="two"/>
+					<site media_site_id="three"/>
+				</bb_code_media_sites>
+			</addon>'
+		);
+
+		s9e_MediaBBCodes::install(null, null, $addon);
+
+		$this->assertXmlStringEqualsXmlString(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="one"/>
+					<site media_site_id="three"/>
+				</bb_code_media_sites>
+			</addon>',
+			$addon->asXML()
+		);
+	}
+
 	/**
 	* @dataProvider getMatchCallbackTests
 	*/
