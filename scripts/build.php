@@ -29,8 +29,30 @@ class s9e_MediaBBCodes
 	*/
 	public static $cacheDir;
 
-	public static function install()
+	public static function install($old, $new, $addon)
 	{
+		$exclude = XenForo_Application::get('options')->s9e_EXCLUDE_SITES;
+
+		if ($exclude)
+		{
+			$exclude = array_flip(preg_split('/\\W+/', $exclude));
+			$nodes   = array();
+
+			foreach ($addon->bb_code_media_sites->site as $site)
+			{
+				$id = (string) $site['media_site_id'];
+
+				if (isset($exclude[$id]))
+				{
+					$nodes[] = dom_import_simplexml($site);
+				}
+			}
+
+			foreach ($nodes as $node)
+			{
+				$node->parentNode->removeChild($node);
+			}
+		}
 	}
 
 	public static function match($url, $regexps, $scrapes)
@@ -648,6 +670,9 @@ setAttributes(
 		'version_string' => '1'
 	]
 );
+
+// Add the blacklist param
+$optionNames['EXCLUDE_SITES'] = 's9e_EXCLUDE_SITES';
 
 // Add the params as XenForo options
 ksort($optionNames);
