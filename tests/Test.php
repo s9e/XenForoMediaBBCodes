@@ -442,11 +442,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'73784'
 			),
 			array(
-				'theonion',
-				'http://www.theonion.com/video/nation-successfully-completes-mothers-day-by-918-a,35998/',
-				'2040'
-			),
-			array(
 				'traileraddict',
 				'http://www.traileraddict.com/muppets-most-wanted/super-bowl-tv-spot',
 				'86191'
