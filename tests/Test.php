@@ -29,14 +29,40 @@ class Test extends PHPUnit_Framework_TestCase
 		include_once __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
 	}
 
-	public function testInstall()
+	public function testBlacklist()
 	{
 		if (!class_exists('s9e_MediaBBCodes'))
 		{
 			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
 		}
 
-		s9e_MediaBBCodes::install();
+		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = 'two, three, five';
+
+		$addon = simplexml_load_string(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="one"/>
+					<site media_site_id="two"/>
+					<site media_site_id="three"/>
+					<site media_site_id="four"/>
+					<site media_site_id="five"/>
+					<site media_site_id="six"/>
+				</bb_code_media_sites>
+			</addon>'
+		);
+
+		s9e_MediaBBCodes::install(null, null, $addon);
+
+		$this->assertXmlStringEqualsXmlString(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="one"/>
+					<site media_site_id="four"/>
+					<site media_site_id="six"/>
+				</bb_code_media_sites>
+			</addon>',
+			$addon->asXML()
+		);
 	}
 
 	/**
@@ -550,17 +576,17 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'251053262701',
 				'<!-- s9e_MediaBBCodes::renderEbay() -->',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"></object>'
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=251053262701"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=251053262701"></object>'
 			),
 			array(
 				'itemid=251053262701',
 				'<!-- s9e_MediaBBCodes::renderEbay() -->',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701"></object>'
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=251053262701"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=251053262701"></object>'
 			),
 			array(
 				'itemid=251053262701;lang=en_GB',
 				'<!-- s9e_MediaBBCodes::renderEbay() -->',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;query=server&amp;itemid=251053262701&amp;lang=en-GB"></object>'
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=251053262701&amp;lang=en-GB"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=251053262701&amp;lang=en-GB"></object>'
 			),
 			array(
 				'et=0KmkT83GTG1ynPe0_63zHg;height=399;id=3232182;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48%3D;width=594',
