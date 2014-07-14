@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407140" version_string="20140714" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407141" version_string="20140714b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -231,6 +231,10 @@
     <site media_site_id="theatlantic" site_title="The Atlantic Video" site_url="http://www.theatlantic.com/video/" match_is_regex="1" supported="1">
       <match_urls>!theatlantic\.com/video/index/(?'id'\d+)!</match_urls>
       <embed_html><![CDATA[<iframe width="640" height="360" src="http://www.theatlantic.com/video/iframe/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="theonion" site_title="The Onion" site_url="http://www.theonion.com/video/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchTheonion">
+      <match_urls>!(?'id')theonion\.com/video/[-\w]+,\d+!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="http://www.theonion.com/video_embed/?id={$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="traileraddict" site_title="Trailer Addict" site_url="http://www.traileraddict.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchTraileraddict">
       <match_urls>@(?'id')traileraddict\.com/(?!tags/)[^/]+/.@</match_urls>

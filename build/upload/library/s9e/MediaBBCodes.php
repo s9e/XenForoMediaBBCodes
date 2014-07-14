@@ -735,6 +735,19 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
+	public static function matchTheonion($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!theonion\\.com/video/[-\\w]+,\\d+!'),
+				'extract' => array('!data-id="(?\'id\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchTraileraddict($url)
 	{
 		$regexps = array();
