@@ -806,6 +806,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchWshh($url)
+	{
+		$regexps = array('!worldstarhiphop\\.com/featured/(?\'id\'\\d+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!worldstarhiphop\\.com/(?:\\w+/)?video\\.php\\?v=\\w+!'),
+				'extract' => array('!disqus_identifier[ =\']+(?\'id\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderWsj($vars)
 	{
 		$vars += array('id' => null);

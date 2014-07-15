@@ -487,6 +487,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'hash=e06b0878046e1d32;oid=121599878;vid=165723901'
 			),
 			array(
+				'wshh',
+				'http://m.worldstarhiphop.com/video.php?v=wshh2SXFFe7W14DqQx61',
+				'63175'
+			),
+			array(
 				'youtube',
 				'http://www.youtube.com/watch?v=-cEzsCAzTak',
 				'-cEzsCAzTak'
