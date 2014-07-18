@@ -671,12 +671,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'playlistid=74854761',
 				'<!-- s9e_MediaBBCodes::renderGrooveshark() -->',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="280" height="280" data="//grooveshark.com/widget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=74854761&amp;songID="><embed type="application/x-shockwave-flash" src="//grooveshark.com/widget.swf" width="280" height="280" allowfullscreen="" flashvars="playlistID=74854761&amp;songID="></object>'
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="400" data="//grooveshark.com/widget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=74854761&amp;songID="><embed type="application/x-shockwave-flash" src="//grooveshark.com/widget.swf" width="400" height="400" allowfullscreen="" flashvars="playlistID=74854761&amp;songID="></object>'
 			),
 			array(
 				'songid=35292216',
 				'<!-- s9e_MediaBBCodes::renderGrooveshark() -->',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="280" height="40" data="//grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=&amp;songID=35292216"><embed type="application/x-shockwave-flash" src="//grooveshark.com/songWidget.swf" width="280" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"></object>'
+				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="40" data="//grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=&amp;songID=35292216"><embed type="application/x-shockwave-flash" src="//grooveshark.com/songWidget.swf" width="400" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"></object>'
 			),
 			array(
 				'1869987317/wish-i-was-here-1',

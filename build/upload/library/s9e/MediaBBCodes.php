@@ -519,7 +519,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('playlistid' => null, 'songid' => null);
 
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="280" height="'.htmlspecialchars((isset($vars['songid'])?40:280),2).'" data="//grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"><embed type="application/x-shockwave-flash" src="//grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf" width="280" height="'.htmlspecialchars((isset($vars['songid'])?40:280),2).'" allowfullscreen="" flashvars="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"></object>';
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="'.htmlspecialchars((isset($vars['songid'])?40:400),2).'" data="//grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"><embed type="application/x-shockwave-flash" src="//grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf" width="400" height="'.htmlspecialchars((isset($vars['songid'])?40:400),2).'" allowfullscreen="" flashvars="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"></object>';
 
 		return $html;
 	}
