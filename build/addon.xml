@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407150" version_string="20140715" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407180" version_string="20140718" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -166,7 +166,7 @@
     <site media_site_id="mixcloud" site_title="Mixcloud" site_url="http://www.mixcloud.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchMixcloud">
       <match_urls>@mixcloud\.com/(?!categories|tag)(?'id'[-\w]+/[^/&amp;]+)/@
 @(?'id')//i\.mixcloud\.com/\w+$@</match_urls>
-      <embed_html><![CDATA[<iframe width="300" height="300" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;embed_type=widget_standard" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="400" height="400" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;embed_type=widget_standard" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="msnbc" site_title="MSNBC" site_url="http://www.msnbc.com/watch" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchMsnbc">
       <match_urls>@(?'id')msnbc\.com/[-\w]+/watch/@</match_urls>
@@ -193,7 +193,7 @@
     <site media_site_id="rdio" site_title="Rdio" site_url="http://www.rdio.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchRdio">
       <match_urls>!rd\.io/./(?'id'\w+)!
 !(?'id')rdio\.com/.*?(?:playlist|track)!</match_urls>
-      <embed_html><![CDATA[<iframe width="400" height="80" src="https://rd.io/i/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="400" height="400" src="https://rd.io/i/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="rutube" site_title="Rutube" site_url="http://rutube.ru/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchRutube">
       <match_urls>!rutube\.ru/tracks/(?'id'[0-9]+)!
