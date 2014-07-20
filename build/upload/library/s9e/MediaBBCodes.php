@@ -469,7 +469,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('et' => null, 'height' => null, 'id' => null, 'sig' => null, 'width' => null);
 
-		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars((49+$vars['height']),2).'" src="//embed.gettyimages.com/embed/'.htmlspecialchars($vars['id'],2).'?et='.htmlspecialchars($vars['et'],2).'&amp;sig='.htmlspecialchars($vars['sig'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars(49+$vars['height'],2).'" src="//embed.gettyimages.com/embed/'.htmlspecialchars($vars['id'],2).'?et='.htmlspecialchars($vars['et'],2).'&amp;sig='.htmlspecialchars($vars['sig'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
 		return $html;
 	}
@@ -830,16 +830,16 @@ class s9e_MediaBBCodes
 
 	public static function renderYoutube($vars)
 	{
-		$vars += array('id' => null, 'list' => null, 't' => null);
+		$vars += array('h' => null, 'id' => null, 'list' => null, 'm' => null, 's' => null, 't' => null);
 
-		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2).'?controls=2';if(isset($vars['list']))$html.='&amp;list='.htmlspecialchars($vars['list'],2);if(isset($vars['t']))$html.='&amp;start='.htmlspecialchars($vars['t'],2);$html.='"></iframe>';
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2).'?controls=2';if(isset($vars['list']))$html.='&amp;list='.htmlspecialchars($vars['list'],2);if(isset($vars['t'])||isset($vars['m'])){$html.='&amp;start=';if(isset($vars['t']))$html.=htmlspecialchars($vars['t'],2);elseif(isset($vars['h']))$html.=htmlspecialchars($vars['h']*3600+$vars['m']*60+$vars['s'],2);else$html.=htmlspecialchars($vars['m']*60+$vars['s'],2);}$html.='"></iframe>';
 
 		return $html;
 	}
 
 	public static function matchYoutube($url)
 	{
-		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)).*?[#&?]t=(?\'t\'\\d+)!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)).*?&list=(?\'list\'[-\\w]+)!');
+		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)).*?[#&?]t=(?:(?:(?\'h\'\\d+)h)?(?\'m\'\\d+)m(?\'s\'\\d+)|(?\'t\'\\d+))!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)).*?&list=(?\'list\'[-\\w]+)!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
