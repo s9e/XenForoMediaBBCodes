@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use s9e_MediaBBCodes;
 use XenForo_Application;
 
+include __DIR__ . '/Custom.php';
 include __DIR__ . '/XenForo_Application.php';
 
 class Test extends PHPUnit_Framework_TestCase
@@ -124,6 +125,35 @@ class Test extends PHPUnit_Framework_TestCase
 				<bb_code_media_sites>
 					<site media_site_id="one"/>
 					<site media_site_id="three"/>
+				</bb_code_media_sites>
+			</addon>',
+			$addon->asXML()
+		);
+	}
+
+	public function testCustomInstall()
+	{
+		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = null;
+
+		$addon = simplexml_load_string(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="foobar">
+						<embed_html><![CDATA[foobar]]></embed_html>
+					</site>
+				</bb_code_media_sites>
+			</addon>'
+		);
+
+		s9e_MediaBBCodes::install(null, null, $addon);
+
+		$this->assertXmlStringEqualsXmlString(
+			'<addon>
+				<bb_code_media_sites>
+					<site media_site_id="foobar">
+						<embed_html><![CDATA[<!-- s9e_Custom::foobar() -->
+foobar]]></embed_html>
+					</site>
 				</bb_code_media_sites>
 			</addon>',
 			$addon->asXML()
@@ -567,6 +597,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'foo=bar;baz=quux',
 				'{$foo} {$baz}',
 				'bar quux'
+			),
+			array(
+				'abc123',
+				'<!-- s9e_Custom::foobar() --><i>{$id}</i>',
+				's:13:"<i>abc123</i>";'
+			),
+			array(
+				'abc123',
+				'<!-- s9e_Custom::invalid() --><i>{$id}</i>',
+				'<i>abc123</i>'
 			),
 			array(
 				'id=B00GQT1LNO;tld=ca',

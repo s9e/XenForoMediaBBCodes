@@ -15,26 +15,37 @@ class s9e_MediaBBCodes
 	public static function install($old, $new, $addon)
 	{
 		$exclude = XenForo_Application::get('options')->s9e_EXCLUDE_SITES;
+		$custom  = class_exists('s9e_Custom');
 
-		if ($exclude)
+		if (!$exclude && !$custom)
 		{
-			$exclude = array_flip(preg_split('/\\W+/', $exclude, -1, PREG_SPLIT_NO_EMPTY));
-			$nodes   = array();
+			return;
+		}
 
-			foreach ($addon->bb_code_media_sites->site as $site)
+		$exclude = array_flip(preg_split('/\\W+/', $exclude, -1, PREG_SPLIT_NO_EMPTY));
+		$nodes   = array();
+
+		foreach ($addon->bb_code_media_sites->site as $site)
+		{
+			$id = (string) $site['media_site_id'];
+
+			if (isset($exclude[$id]))
 			{
-				$id = (string) $site['media_site_id'];
-
-				if (isset($exclude[$id]))
-				{
-					$nodes[] = dom_import_simplexml($site);
-				}
+				$nodes[] = dom_import_simplexml($site);
+				continue;
 			}
 
-			foreach ($nodes as $node)
+			$callback = 's9e_Custom::' . $id;
+
+			if ($custom && is_callable($callback))
 			{
-				$node->parentNode->removeChild($node);
+				$site->embed_html = '<!-- ' . $callback . "() -->\n" . $site->embed_html;
 			}
+		}
+
+		foreach ($nodes as $node)
+		{
+			$node->parentNode->removeChild($node);
 		}
 	}
 
@@ -202,21 +213,32 @@ class s9e_MediaBBCodes
 			$cnt
 		);
 
-		if ($cnt)
+		// Otherwise use the configured template
+		if (!$cnt)
 		{
-			return $html;
+			$html = preg_replace_callback(
+				// Interpolate {$id} and other {$vars}
+				'(\\{\\$([a-z]+)\\})',
+				function ($m) use ($vars)
+				{
+					return (isset($vars[$m[1]])) ? htmlspecialchars($vars[$m[1]]) : '';
+				},
+				$site['embed_html']
+			);
 		}
 
-		// Otherwise use the configured template
-		return preg_replace_callback(
-			// Interpolate {$id} and other {$vars}
-			'(\\{\\$([a-z]+)\\})',
-			function ($m) use ($vars)
+		// Test for custom modifications
+		if (preg_match('(^<!-- (s9e_Custom::\w+)\\(\\) -->\\s*)', $html, $m))
+		{
+			$html = substr($html, strlen($m[0]));
+
+			if (is_callable($m[1]))
 			{
-				return (isset($vars[$m[1]])) ? htmlspecialchars($vars[$m[1]]) : '';
-			},
-			$site['embed_html']
-		);
+				$html = call_user_func($m[1], $html);
+			}
+		}
+
+		return $html;
 	}
 
 	protected static function scrape($url, $regexps)
