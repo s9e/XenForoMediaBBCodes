@@ -150,7 +150,7 @@ class Test extends PHPUnit_Framework_TestCase
 		$this->assertXmlStringEqualsXmlString(
 			'<addon>
 				<bb_code_media_sites>
-					<site media_site_id="foobar">
+					<site embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" media_site_id="foobar">
 						<embed_html><![CDATA[<!-- s9e_Custom::foobar() -->
 foobar]]></embed_html>
 					</site>

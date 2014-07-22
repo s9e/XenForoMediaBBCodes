@@ -57,6 +57,9 @@ class s9e_MediaBBCodes
 			if ($custom && is_callable($callback))
 			{
 				$site->embed_html = '<!-- ' . $callback . "() -->\n" . $site->embed_html;
+
+				$site['embed_html_callback_class']  = 's9e_MediaBBCodes';
+				$site['embed_html_callback_method'] = 'embed';
 			}
 		}
 
