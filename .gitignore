@@ -1,3 +1,4 @@
+build/upload/library/s9e/Custom.php
 phpunit.xml
 releases
 tests/.cache
