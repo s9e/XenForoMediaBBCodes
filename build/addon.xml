@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201407240" version_string="20140724" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408040" version_string="20140804" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -273,6 +273,10 @@
     <site media_site_id="vine" site_title="Vine" site_url="https://vine.co/" match_is_regex="1" supported="1">
       <match_urls>!vine\.co/v/(?'id'[^/]+)!</match_urls>
       <embed_html><![CDATA[<iframe width="480" height="480" src="https://vine.co/v/{$id}/embed/simple" allowfullscreen="" frameborder="0" scrolling="no"></iframe><script async="" src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>]]></embed_html>
+    </site>
+    <site media_site_id="vocaroo" site_title="Vocaroo" site_url="http://vocaroo.com/" match_is_regex="1" supported="1">
+      <match_urls>!(?=.*?[./]vocaroo\.com).*?vocaroo.com/i/(?'id'\w+)!</match_urls>
+      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="148" height="44" data="//vocaroo.com/player.swf?playMediaID={$id}&amp;autoplay=0"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="//vocaroo.com/player.swf?playMediaID={$id}&amp;autoplay=0" width="148" height="44" allowfullscreen=""/></object>]]></embed_html>
     </site>
     <site media_site_id="vk" site_title="VK" site_url="https://vk.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchVk">
       <match_urls>!(?'id')vk(?:\.com|ontakte\.ru)/(?:[\w.]+\?z=)?video(?'oid'-?[0-9]+)_(?'vid'[0-9]+)!
