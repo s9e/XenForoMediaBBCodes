@@ -5,7 +5,7 @@ $url = 'http://www.reddit.com/domain/' . $_SERVER['argv'][1] . '/';
 
 if (isset($_SERVER['argv'][2]))
 {
-	$url .= 'search.json?q=url%3Avideos&sort=new&restrict_sr=on&';
+	$url .= 'search.json?q=url%3A' . urlencode($_SERVER['argv'][2]) . '&sort=new&restrict_sr=on&';
 }
 else
 {
