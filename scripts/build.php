@@ -409,7 +409,7 @@ foreach ($sites->site as $site)
 		$node->setAttribute('embed_html_callback_method', 'embed');
 
 		// Capture the PHP source for this template
-		$regexp = '(if\\(\\$nodeName===\'' . strtoupper($site['id']) . '\'\\)\\{?(.*?)\\}?elseif\\(\\$nodeName===)s';
+		$regexp = '(if\\(\\$tb===0\\)\\{?(.*?)\\}?elseif\\(\\$tb===)s';
 
 		if (!preg_match($regexp, $configurator->getRenderer()->source, $m))
 		{
