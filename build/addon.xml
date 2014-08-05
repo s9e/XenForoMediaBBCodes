@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408040" version_string="20140804" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408050" version_string="20140805" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -82,6 +82,10 @@
     <site media_site_id="facebook" site_title="Facebook" site_url="http://www.facebook.com/" match_is_regex="1" supported="1">
       <match_urls>@www\.facebook\.com/(?!pages/).*?(?:/|\?fbid=|\?v=)(?'id'\d+)(?=$|[/?&amp;#])@</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="315" src="//s9e.github.io/iframe/facebook.min.html#{$id}" onload="var a=Math.random();window.addEventListener('message',function(b){if(b.data.id==a)style.height=b.data.height+'px'});contentWindow.postMessage('s9e:'+a,src.substr(0,src.indexOf('/',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="foxnews" site_title="Fox News" site_url="http://www.foxnews.com/" match_is_regex="1" supported="1">
+      <match_urls>!video\.foxnews\.com/v/(?'id'\d+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="//video.foxnews.com/v/video-embed.html?video_id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="funnyordie" site_title="Funny or Die" site_url="http://www.funnyordie.com/" match_is_regex="1" supported="1">
       <match_urls>!funnyordie\.com/videos/(?'id'[0-9a-f]+)!</match_urls>
@@ -275,7 +279,7 @@
       <embed_html><![CDATA[<iframe width="480" height="480" src="https://vine.co/v/{$id}/embed/simple" allowfullscreen="" frameborder="0" scrolling="no"></iframe><script async="" src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>]]></embed_html>
     </site>
     <site media_site_id="vocaroo" site_title="Vocaroo" site_url="http://vocaroo.com/" match_is_regex="1" supported="1">
-      <match_urls>!(?=.*?[./]vocaroo\.com).*?vocaroo.com/i/(?'id'\w+)!</match_urls>
+      <match_urls>!vocaroo\.com/i/(?'id'\w+)!</match_urls>
       <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="148" height="44" data="//vocaroo.com/player.swf?playMediaID={$id}&amp;autoplay=0"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="//vocaroo.com/player.swf?playMediaID={$id}&amp;autoplay=0" width="148" height="44" allowfullscreen=""/></object>]]></embed_html>
     </site>
     <site media_site_id="vk" site_title="VK" site_url="https://vk.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchVk">
