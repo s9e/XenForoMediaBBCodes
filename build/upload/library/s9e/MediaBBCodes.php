@@ -760,6 +760,14 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
+	public static function matchTinypic($url)
+	{
+		$regexps = array('!tinypic\\.com/player\\.php\\?v=(?\'id\'\\w+)&s=(?\'s\'\\d+)!');
+		$scrapes = array();
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchTraileraddict($url)
 	{
 		$regexps = array();
