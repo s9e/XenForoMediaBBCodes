@@ -246,7 +246,7 @@
     </site>
     <site media_site_id="tinypic" site_title="TinyPic videos" site_url="http://tinypic.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchTinypic">
       <match_urls>!tinypic\.com/player\.php\?v=(?'id'\w+)&amp;s=(?'s'\d+)!</match_urls>
-      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="560" height="315" data="http://tinypic.com/player.swf?file={$id}&amp;s={$s}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://tinypic.com/player.swf?file={$id}&amp;s={$s}" width="560" height="315" allowfullscreen=""/></object>]]></embed_html>
+      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="560" height="345" data="http://tinypic.com/player.swf?file={$id}&amp;s={$s}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://tinypic.com/player.swf?file={$id}&amp;s={$s}" width="560" height="345" allowfullscreen=""/></object>]]></embed_html>
     </site>
     <site media_site_id="traileraddict" site_title="Trailer Addict" site_url="http://www.traileraddict.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchTraileraddict">
       <match_urls>@(?'id')traileraddict\.com/(?!tags/)[^/]+/.@</match_urls>
