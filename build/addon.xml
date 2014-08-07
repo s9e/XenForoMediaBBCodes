@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408060" version_string="20140806" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408070" version_string="20140807" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -38,7 +38,7 @@
     </site>
     <site media_site_id="cnn" site_title="CNN" site_url="http://edition.cnn.com/video/" match_is_regex="1" supported="1">
       <match_urls>!cnn\.com/video/data/2\.0/video/(?'id'.*\.cnn)!</match_urls>
-      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="416" height="234" data="http://i.cdn.turner.com/cnn/.element/apps/cvp/3.0/swf/cnn_embed_2x_container.swf?site=cnn&amp;profile=desktop&amp;context=embedwww&amp;videoId={$id}&amp;contentId={$id}"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="http://i.cdn.turner.com/cnn/.element/apps/cvp/3.0/swf/cnn_embed_2x_container.swf?site=cnn&amp;profile=desktop&amp;context=embedwww&amp;videoId={$id}&amp;contentId={$id}" width="416" height="234" allowfullscreen=""/></object>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="http://edition.cnn.com/.element/widget/video/videoapi/html/embed.html#/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="colbertnation" site_title="Colbert Nation" site_url="http://thecolbertreport.cc.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchColbertnation">
       <match_urls>!(?'id')thecolbertreport\.cc\.com/videos/!</match_urls>
@@ -133,6 +133,10 @@
     <site media_site_id="ign" site_title="IGN" site_url="http://www.ign.com/videos/" match_is_regex="1" supported="1">
       <match_urls>!(?'id'https?://.*?ign\.com/videos/.+)!</match_urls>
       <embed_html><![CDATA[<iframe width="468" height="263" src="http://widgets.ign.com/video/embed/content.html?url={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="imdb" site_title="IMDb" site_url="http://www.imdb.com/" match_is_regex="1" supported="1">
+      <match_urls>!imdb\.com/video/\w+/vi(?'id'\d+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="http://www.imdb.com/video/imdb/vi{$id}/imdb/embed?autoplay=false&amp;width=560" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="imgur" site_title="imgur albums" site_url="http://imgur.com/" match_is_regex="1" supported="1">
       <match_urls>!imgur\.com/a/(?'id'\w+)!</match_urls>

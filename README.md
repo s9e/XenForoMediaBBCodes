@@ -170,6 +170,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.ign.com/videos/2013/07/12/pokemon-x-version-pokemon-y-version-battle-trailer</td>
 		</tr>
 		<tr>
+			<td><code>imdb</code></td>
+			<td>IMDb</td>
+			<td>http://www.imdb.com/video/imdb/vi2482677785/<br/>http://www.imdb.com/video/epk/vi387296537/</td>
+		</tr>
+		<tr>
 			<td><code>imgur</code></td>
 			<td>imgur albums</td>
 			<td>http://imgur.com/a/9UGCL</td>
