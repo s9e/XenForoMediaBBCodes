@@ -60,6 +60,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://edition.cnn.com/video/data/2.0/video/showbiz/2013/10/25/spc-preview-savages-stephen-king-thor.cnn.html<br/>http://us.cnn.com/video/data/2.0/video/bestoftv/2013/10/23/vo-nr-prince-george-christening-arrival.cnn.html</td>
 		</tr>
 		<tr>
+			<td><code>cnnmoney</code></td>
+			<td>CNNMoney</td>
+			<td>http://money.cnn.com/video/technology/2014/05/20/t-twitch-vp-on-future.cnnmoney/</td>
+		</tr>
+		<tr>
 			<td><code>colbertnation</code></td>
 			<td>Colbert Nation</td>
 			<td>http://thecolbertreport.cc.com/videos/gh6urb/neil-degrasse-tyson-pt--1</td>
