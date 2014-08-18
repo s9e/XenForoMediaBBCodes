@@ -606,7 +606,7 @@ foobar]]></embed_html>
 			array(
 				'abc123',
 				'<!-- s9e_Custom::foobar() --><i>{$id}</i>',
-				's:13:"<i>abc123</i>";'
+				'a:2:{i:0;s:13:"<i>abc123</i>";i:1;a:1:{s:2:"id";s:6:"abc123";}}'
 			),
 			array(
 				'abc123',

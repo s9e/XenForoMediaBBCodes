@@ -237,7 +237,7 @@ class s9e_MediaBBCodes
 
 			if (is_callable($m[1]))
 			{
-				$html = call_user_func($m[1], $html);
+				$html = call_user_func($m[1], $html, $vars);
 			}
 		}
 
@@ -384,7 +384,7 @@ class s9e_MediaBBCodes
 
 	public static function matchCbsnews($url)
 	{
-		$regexps = array('#cbsnews\\.com/video/watch/\\?id=(?\'id\'[0-9]+)#');
+		$regexps = array('#cbsnews\\.com/video/watch/\\?id=(?\'id\'\\d+)#');
 		$scrapes = array(
 			array(
 				'match'   => array('#cbsnews\\.com/videos/(?!watch/)#'),
@@ -551,12 +551,12 @@ class s9e_MediaBBCodes
 
 	public static function matchGrooveshark($url)
 	{
-		$regexps = array('%grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?\'playlistid\'[0-9]+)%');
+		$regexps = array('%grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?\'playlistid\'\\d+)%');
 		$scrapes = array(
 			array(
 				'url'     => 'http://grooveshark.com/s/{@path}',
 				'match'   => array('%grooveshark\\.com(?:/#!?)?/s/(?\'path\'[^/]+/.+)%'),
-				'extract' => array('%songID=(?\'songid\'[0-9]+)%')
+				'extract' => array('%songID=(?\'songid\'\\d+)%')
 			)
 		);
 
@@ -578,11 +578,11 @@ class s9e_MediaBBCodes
 
 	public static function matchIndiegogo($url)
 	{
-		$regexps = array('!indiegogo\\.com/projects/(?\'id\'[0-9]+)$!');
+		$regexps = array('!indiegogo\\.com/projects/(?\'id\'\\d+)$!');
 		$scrapes = array(
 			array(
 				'match'   => array('!indiegogo\\.com/projects/.!'),
-				'extract' => array('!indiegogo\\.com/projects/(?\'id\'[0-9]+)/!')
+				'extract' => array('!indiegogo\\.com/projects/(?\'id\'\\d+)/!')
 			)
 		);
 
@@ -674,11 +674,11 @@ class s9e_MediaBBCodes
 
 	public static function matchRutube($url)
 	{
-		$regexps = array('!rutube\\.ru/tracks/(?\'id\'[0-9]+)!');
+		$regexps = array('!rutube\\.ru/tracks/(?\'id\'\\d+)!');
 		$scrapes = array(
 			array(
 				'match'   => array('!rutube\\.ru/video/[0-9a-f]{32}!'),
-				'extract' => array('!rutube\\.ru/play/embed/(?\'id\'[0-9]+)!')
+				'extract' => array('!rutube\\.ru/play/embed/(?\'id\'\\d+)!')
 			)
 		);
 
@@ -687,11 +687,11 @@ class s9e_MediaBBCodes
 
 	public static function matchSlideshare($url)
 	{
-		$regexps = array('!slideshare\\.net/[^/]+/[-\\w]+-(?\'id\'[0-9]{6,})$!');
+		$regexps = array('!slideshare\\.net/[^/]+/[-\\w]+-(?\'id\'\\d{6,})$!');
 		$scrapes = array(
 			array(
 				'match'   => array('!slideshare\\.net/[^/]+/\\w!'),
-				'extract' => array('!"presentationId":(?\'id\'[0-9]+)!')
+				'extract' => array('!"presentationId":(?\'id\'\\d+)!')
 			)
 		);
 
@@ -792,11 +792,11 @@ class s9e_MediaBBCodes
 
 	public static function matchTwitch($url)
 	{
-		$regexps = array('#twitch\\.tv/(?\'channel\'(?!m/)\\w+)(?:/b/(?\'archive_id\'[0-9]+)|/c/(?\'chapter_id\'[0-9]+))?#');
+		$regexps = array('#twitch\\.tv/(?\'channel\'(?!m/)\\w+)(?:/b/(?\'archive_id\'\\d+)|/c/(?\'chapter_id\'\\d+))?#');
 		$scrapes = array(
 			array(
-				'match'   => array('!twitch\\.tv/m/[0-9]+!'),
-				'extract' => array('!channel=(?\'channel\'\\w+)&.*?archive_id=(?\'archive_id\'[0-9]+)!')
+				'match'   => array('!twitch\\.tv/m/\\d+!'),
+				'extract' => array('!channel=(?\'channel\'\\w+)&.*?archive_id=(?\'archive_id\'\\d+)!')
 			)
 		);
 
@@ -827,11 +827,11 @@ class s9e_MediaBBCodes
 
 	public static function matchVk($url)
 	{
-		$regexps = array('!vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?\'oid\'-?[0-9]+)_(?\'vid\'[0-9]+)!', '!vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?\'oid\'-?[0-9]+)&id=(?\'vid\'[0-9]+)&hash=(?\'hash\'[0-9a-f]+)!');
+		$regexps = array('!vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?\'oid\'-?\\d+)_(?\'vid\'\\d+)!', '!vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?\'oid\'-?\\d+)&id=(?\'vid\'\\d+)&hash=(?\'hash\'[0-9a-f]+)!');
 		$scrapes = array(
 			array(
 				'url'     => 'http://vk.com/video{@oid}_{@vid}',
-				'match'   => array('!vk.*?video-?[0-9]+_[0-9]+!'),
+				'match'   => array('!vk.*?video-?\\d+_\\d+!'),
 				'extract' => array('!embed_hash=(?\'hash\'[0-9a-f]+)!')
 			)
 		);

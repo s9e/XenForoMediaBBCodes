@@ -254,7 +254,7 @@ class s9e_MediaBBCodes
 
 			if (is_callable($m[1]))
 			{
-				$html = call_user_func($m[1], $html);
+				$html = call_user_func($m[1], $html, $vars);
 			}
 		}
 
