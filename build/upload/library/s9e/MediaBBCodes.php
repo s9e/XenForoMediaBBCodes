@@ -540,6 +540,14 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchGooglesheets($url)
+	{
+		$regexps = array('!docs\\.google\\.com/spreadsheets?/(?:ccc\\?key=|d/)(?\'id\'\\w+)[^#]*(?:#gid=(?\'gid\'\\d+))?!');
+		$scrapes = array();
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderGrooveshark($vars)
 	{
 		$vars += array('playlistid' => null, 'songid' => null);

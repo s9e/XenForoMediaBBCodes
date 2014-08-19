@@ -357,6 +357,16 @@ foobar]]></embed_html>
 				'height=338;id=SereneIllfatedCapybara;width=600'
 			),
 			array(
+				'googlesheets',
+				'https://docs.google.com/spreadsheets/d/1f988o68HDvk335xXllJD16vxLBuRcmm3vg6U9lVaYpA',
+				'1f988o68HDvk335xXllJD16vxLBuRcmm3vg6U9lVaYpA'
+			),
+			array(
+				'googlesheets',
+				'https://docs.google.com/spreadsheet/ccc?key=0An1aCHqyU7FqdGtBUDc1S1NNSWhqY3NidndIa1JuQWc#gid=70',
+				'gid=70;id=0An1aCHqyU7FqdGtBUDc1S1NNSWhqY3NidndIa1JuQWc'
+			),
+			array(
 				'grooveshark',
 				'http://grooveshark.com/playlist/Purity+Ring+Shrines/74854761',
 				'playlistid=74854761'
