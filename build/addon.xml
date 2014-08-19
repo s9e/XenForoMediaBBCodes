@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408180" version_string="20140818" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408190" version_string="20140819" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -122,7 +122,7 @@
       <embed_html><![CDATA[<iframe width="450" height="240" src="//s9e.github.io/iframe/googleplus.min.html#{$oid}/posts/{$pid}" onload="var a=Math.random();window.addEventListener('message',function(b){if(b.data.id==a)style.height=b.data.height+'px'});contentWindow.postMessage('s9e:'+a,src.substr(0,src.indexOf('/',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="googlesheets" site_title="Google Sheets" site_url="http://www.google.com/sheets/about/" match_is_regex="1" supported="1">
-      <match_urls>!docs\.google\.com/spreadsheets/d/(?'id'\w+)!</match_urls>
+      <match_urls>!docs\.google\.com/spreadsheets?/(?:ccc\?key=|d/)(?'id'\w+)!</match_urls>
       <embed_html><![CDATA[<iframe width="100%" height="500" style="resize:both" src="https://docs.google.com/spreadsheets/d/{$id}?widget=true&amp;headers=false&amp;rm=minimal" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="grooveshark" site_title="Grooveshark" site_url="http://grooveshark.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchGrooveshark">
