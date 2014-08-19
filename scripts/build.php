@@ -788,6 +788,11 @@ file_put_contents(
 	)
 );
 
+if (!file_exists(__DIR__ . '/../releases'))
+{
+	return;
+}
+
 chdir(__DIR__ . '/../build');
 copy('../LICENSE', 'LICENSE');
 exec('kzip -r -y ../releases/XenForoMediaBBCodes-' . $version . '.zip addon.xml LICENSE upload/library/s9e/MediaBBCodes.php');
