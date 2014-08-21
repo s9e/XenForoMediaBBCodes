@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408210" version_string="20140821" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408211" version_string="20140821b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -214,7 +214,7 @@
     </site>
     <site media_site_id="scribd" site_title="Scribd" site_url="http://www.scribd.com/" match_is_regex="1" supported="1">
       <match_urls>!scribd\.com/doc/(?'id'\d+)!</match_urls>
-      <embed_html><![CDATA[<iframe width="500" height="500" style="resize:both" src="//www.scribd.com/embeds/{$id}/content?view_mode=slideshow&amp;show_recommendations=false" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="100%" height="500" style="resize:both" src="//www.scribd.com/embeds/{$id}/content?view_mode=scroll&amp;show_recommendations=false" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="slideshare" site_title="SlideShare" site_url="http://www.slideshare.net/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSlideshare">
       <match_urls>!slideshare\.net/[^/]+/[-\w]+-(?'id'\d{6,})$!
