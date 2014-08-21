@@ -414,7 +414,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('!c(?:c|omedycentral)\\.com/video-clips/!'),
-				'extract' => array('!(?\'id\'mgid:arc:video:comedycentral\\.com:[-\\w]+)!')
+				'extract' => array('!(?\'id\'mgid:arc:video:[.\\w]+:[-\\w]+)!')
 			)
 		);
 
@@ -542,7 +542,7 @@ class s9e_MediaBBCodes
 
 	public static function matchGooglesheets($url)
 	{
-		$regexps = array('!docs\\.google\\.com/spreadsheets?/(?:ccc\\?key=|d/)(?\'id\'\\w+)[^#]*(?:#gid=(?\'gid\'\\d+))?!');
+		$regexps = array('!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'\\w+)[^#]*(?:#gid=(?\'gid\'\\d+))?!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);

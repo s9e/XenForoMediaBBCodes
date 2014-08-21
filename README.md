@@ -77,7 +77,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>comedycentral</code></td>
 			<td>Comedy Central</td>
-			<td>http://www.cc.com/video-clips/uu5qz4/key-and-peele-dueling-hats<br/>http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats</td>
+			<td>http://www.cc.com/video-clips/uu5qz4/key-and-peele-dueling-hats<br/>http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats<br/>http://tosh.cc.com/video-clips/aet4lh/rc-car-crash</td>
 		</tr>
 		<tr>
 			<td><code>coub</code></td>
