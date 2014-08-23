@@ -584,6 +584,20 @@ foreach ($sites->site as $site)
 		}
 	}
 
+	$hasFilters = false;
+	if (isset($site->attributes))
+	{
+		foreach ($site->attributes as $attribute)
+		{
+			if (isset($attribute['preFilter']) || isset($attribute['postFilter']))
+			{
+				$hasFilters = true;
+				$useMatchCallback = true;
+				break;
+			}
+		}
+	}
+
 	if ($useMatchCallback)
 	{
 		$methodName = 'match' . ucfirst($site['id']);
@@ -621,7 +635,42 @@ foreach ($sites->site as $site)
 		}
 
 		$php[] = '';
-		$php[] = '		return self::match($url, $regexps, $scrapes);';
+
+		if ($hasFilters)
+		{
+			$php[] = '		$vars = self::match($url, $regexps, $scrapes);';
+			$php[] = '';
+
+			foreach ($site->attributes as $attribute)
+			{
+				if (!isset($attribute['preFilter']) && !isset($attribute['postFilter']))
+				{
+					continue;
+				}
+
+				$varName = "\$vars['" . $attribute->getName() . "']";
+
+				$php[] = '		if (isset(' . $varName . '))';
+				$php[] = '		{';
+
+				if (isset($attribute['preFilter']))
+				{
+					$php[] = '			' . $varName . ' = ' . $attribute['preFilter'] . '(' . $varName . ');';
+				}
+
+				if (isset($attribute['postFilter']))
+				{
+					$php[] = '			' . $varName . ' = ' . $attribute['postFilter'] . '(' . $varName . ');';
+				}
+			}
+
+			$php[] = '';
+		}
+		else
+		{
+			$php[] = '		return self::match($url, $regexps, $scrapes);';
+		}
+
 		$php[] = '	}';
 	}
 
