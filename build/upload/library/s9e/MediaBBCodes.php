@@ -52,7 +52,7 @@ class s9e_MediaBBCodes
 		}
 	}
 
-	public static function match($url, $regexps, $scrapes)
+	public static function match($url, $regexps, $scrapes, $filters = array())
 	{
 		$vars = array();
 
@@ -116,9 +116,21 @@ class s9e_MediaBBCodes
 		// No vars = no match
 		if (empty($vars))
 		{
-			// NOTE: we return the URL to sidestep a bug in XenForo that occurs when the match
-			//       callback returns false and there is no "id" capture in the site's regexp
-			return $url;
+			return false;
+		}
+
+		// Apply filters
+		foreach ($filters as $varName => $callbacks)
+		{
+			if (!isset($vars[$varName]))
+			{
+				continue;
+			}
+
+			foreach ($callbacks as $callback)
+			{
+				$vars[$varName] = $callback($vars[$varName]);
+			}
 		}
 
 		// If there's only one capture named "id" we store its value as-is

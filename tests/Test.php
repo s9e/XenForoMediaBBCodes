@@ -322,7 +322,7 @@ foobar]]></embed_html>
 			array(
 				'espn',
 				'http://espn.go.com/new-york/nba/story/_/id/11196159/carmelo-anthony-agent-says-made-decision',
-				'http://espn.go.com/new-york/nba/story/_/id/11196159/carmelo-anthony-agent-says-made-decision'
+				false
 			),
 			array(
 				'gametrailers',
