@@ -5,14 +5,29 @@
 * @license   http://www.opensource.org/licenses/mit-license.php The MIT License
 */
 
-include __DIR__ . '/../vendor/s9e/TextFormatter/src/autoloader.php';
+include_once __DIR__ . '/../vendor/s9e/TextFormatter/src/autoloader.php';
 
-$sites = simplexml_load_file(__DIR__ . '/../vendor/s9e/TextFormatter/src/Plugins/MediaEmbed/Configurator/sites.xml');
+if (!isset($addonId))
+{
+	$sitesFile  = __DIR__ . '/../vendor/s9e/TextFormatter/src/Plugins/MediaEmbed/Configurator/sites.xml';
+	$classFile  = __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+	$addonFile  = __DIR__ . '/../build/addon-s9e.xml';
+	$addonId    = 's9e';
+	$className  = 's9e_MediaBBCodes';
+	$addonTitle = 's9e Media Pack';
+	$addonUrl   = 'https://github.com/s9e/XenForoMediaBBCodes';
+}
 
-$configurator = new s9e\TextFormatter\Configurator;
+$sites = simplexml_load_file($sitesFile);
+
+if (!isset($configurator))
+{
+	$configurator = new s9e\TextFormatter\Configurator;
+}
 $configurator->rendering->engine = 'PHP';
 $configurator->rendering->engine->forceEmptyElements = false;
 $configurator->rendering->engine->useEmptyElements   = false;
+
 
 $php = <<<'NOWDOC'
 <?php
@@ -326,6 +341,7 @@ function setAttributes(DOMElement $element, array $attributes)
 	}
 }
 
+$php = str_replace('class s9e_MediaBBCodes', "class $className", $php);
 $php = explode("\n", $php);
 
 $dom = new DOMDocument('1.0', 'utf-8');
@@ -345,12 +361,12 @@ if (isset($_SERVER['argv'][1]))
 setAttributes(
 	$addon,
 	[
-		'addon_id'                => 's9e',
-		'title'                   => 's9e Media Pack',
-		'url'                     => 'https://github.com/s9e/XenForoMediaBBCodes',
+		'addon_id'                => $addonId,
+		'title'                   => $addonTitle,
+		'url'                     => $addonUrl,
 		'version_id'              => $versionId,
 		'version_string'          => $version,
-		'install_callback_class'  => 's9e_MediaBBCodes',
+		'install_callback_class'  => $className,
 		'install_callback_method' => 'install'
 	]
 );
@@ -403,7 +419,7 @@ foreach ($sites->site as $site)
 		$useEmbedCallback = true;
 
 		$methodName = 'render' . ucfirst($site['id']);
-		$html = '<!-- s9e_MediaBBCodes::' . $methodName . '() -->';
+		$html = '<!-- ' . $className . '::' . $methodName . '() -->';
 
 		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
 		$node->setAttribute('embed_html_callback_method', 'embed');
@@ -494,7 +510,7 @@ foreach ($sites->site as $site)
 	// Set the embed callback if applicable
 	if ($useEmbedCallback)
 	{
-		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
+		$node->setAttribute('embed_html_callback_class',  $className);
 		$node->setAttribute('embed_html_callback_method', 'embed');
 	}
 
@@ -601,7 +617,7 @@ foreach ($sites->site as $site)
 	if ($useMatchCallback)
 	{
 		$methodName = 'match' . ucfirst($site['id']);
-		$node->setAttribute('match_callback_class',  's9e_MediaBBCodes');
+		$node->setAttribute('match_callback_class',  $className);
 		$node->setAttribute('match_callback_method', $methodName);
 
 		$php[] = '';
@@ -707,8 +723,10 @@ foreach ($sites->site as $site)
 		$examples[] = (string) $example;
 	}
 }
-
 $php[] = '}';
+
+// Remove temp files
+array_map('unlink', glob(sys_get_temp_dir() . '/Renderer_*'));
 
 // Prepare the option group
 $optiongroups = $addon->appendChild($dom->createElement('optiongroups'));
@@ -788,13 +806,18 @@ foreach ($optionNames as $paramName => $optionName)
 }
 
 // Save the helper class
-file_put_contents(__DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php', implode("\n", $php));
+file_put_contents($classFile, implode("\n", $php));
 
 // Save addon.xml
 $dom->formatOutput = true;
 $xml = $dom->saveXML($addon);
 
-file_put_contents(__DIR__ . '/../build/addon.xml', $xml);
+file_put_contents($addonFile, $xml);
+
+if ($addonId !== 's9e')
+{
+	return;
+}
 
 // Close the table body
 $rows[] = '</tbody>';
