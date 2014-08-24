@@ -603,7 +603,7 @@ foreach ($sites->site as $site)
 	$hasFilters = false;
 	if (isset($site->attributes))
 	{
-		foreach ($site->attributes as $attribute)
+		foreach ($site->attributes->children() as $attribute)
 		{
 			if (isset($attribute['preFilter']) || isset($attribute['postFilter']))
 			{
@@ -657,7 +657,7 @@ foreach ($sites->site as $site)
 			$php[] = '		$vars = self::match($url, $regexps, $scrapes);';
 			$php[] = '';
 
-			foreach ($site->attributes as $attribute)
+			foreach ($site->attributes->children() as $attribute)
 			{
 				if (!isset($attribute['preFilter']) && !isset($attribute['postFilter']))
 				{
@@ -678,9 +678,12 @@ foreach ($sites->site as $site)
 				{
 					$php[] = '			' . $varName . ' = ' . $attribute['postFilter'] . '(' . $varName . ');';
 				}
+
+				$php[] = '		}';
 			}
 
 			$php[] = '';
+			$php[] = '		return $vars;';
 		}
 		else
 		{
