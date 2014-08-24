@@ -84,7 +84,7 @@ class s9e_MediaBBCodes
 		}
 	}
 
-	public static function match($url, $regexps, $scrapes)
+	public static function match($url, $regexps, $scrapes, $filters = array())
 	{
 		$vars = array();
 
@@ -148,9 +148,21 @@ class s9e_MediaBBCodes
 		// No vars = no match
 		if (empty($vars))
 		{
-			// NOTE: we return the URL to sidestep a bug in XenForo that occurs when the match
-			//       callback returns false and there is no "id" capture in the site's regexp
-			return $url;
+			return false;
+		}
+
+		// Apply filters
+		foreach ($filters as $varName => $callbacks)
+		{
+			if (!isset($vars[$varName]))
+			{
+				continue;
+			}
+
+			foreach ($callbacks as $callback)
+			{
+				$vars[$varName] = $callback($vars[$varName]);
+			}
 		}
 
 		// If there's only one capture named "id" we store its value as-is
@@ -600,17 +612,24 @@ foreach ($sites->site as $site)
 		}
 	}
 
-	$hasFilters = false;
+	$filters = array();
 	if (isset($site->attributes))
 	{
 		foreach ($site->attributes->children() as $attribute)
 		{
-			if (isset($attribute['preFilter']) || isset($attribute['postFilter']))
+			if (isset($attribute['preFilter']))
 			{
-				$hasFilters = true;
-				$useMatchCallback = true;
-				break;
+				$filters[$attribute->getName()][] = (string) $attribute['preFilter'];
 			}
+			if (isset($attribute['postFilter']))
+			{
+				$filters[$attribute->getName()][] = (string) $attribute['postFilter'];
+			}
+		}
+
+		if (!empty($filters))
+		{
+			$useMatchCallback = true;
 		}
 	}
 
@@ -650,45 +669,27 @@ foreach ($sites->site as $site)
 			$php[] = '		);';
 		}
 
-		$php[] = '';
-
-		if ($hasFilters)
+		if (!empty($filters))
 		{
-			$php[] = '		$vars = self::match($url, $regexps, $scrapes);';
-			$php[] = '';
+			$php[] = '		$filters = array(';
 
-			foreach ($site->attributes->children() as $attribute)
+			foreach ($filters as $varName => $callbacks)
 			{
-				if (!isset($attribute['preFilter']) && !isset($attribute['postFilter']))
+				$str = '			' . var_export($varName, true) . ' => array(';
+				foreach ($callbacks as $i => $callback)
 				{
-					continue;
+					$str .= (($i) ? ', ' : '') . var_export($callback, true);
 				}
+				$str .= '),';
 
-				$varName = "\$vars['" . $attribute->getName() . "']";
-
-				$php[] = '		if (isset(' . $varName . '))';
-				$php[] = '		{';
-
-				if (isset($attribute['preFilter']))
-				{
-					$php[] = '			' . $varName . ' = ' . $attribute['preFilter'] . '(' . $varName . ');';
-				}
-
-				if (isset($attribute['postFilter']))
-				{
-					$php[] = '			' . $varName . ' = ' . $attribute['postFilter'] . '(' . $varName . ');';
-				}
-
-				$php[] = '		}';
+				$php[] = $str;
 			}
 
-			$php[] = '';
-			$php[] = '		return $vars;';
+			$php[] = '		);';
 		}
-		else
-		{
-			$php[] = '		return self::match($url, $regexps, $scrapes);';
-		}
+
+		$php[] = '';
+		$php[] = '		return self::match($url, $regexps, $scrapes' . (($filters) ? ', $filters' : '') . ');';
 
 		$php[] = '	}';
 	}
