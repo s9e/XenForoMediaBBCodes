@@ -847,6 +847,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchVube($url)
+	{
+		$regexps = array('!vube\\.com/[^/]+/[^/]+/(?\'id\'\\w+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!vube\\.com/s/\\w+!'),
+				'extract' => array('!vube\\.com/[^/]+/[^/]+/(?\'id\'\\w+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchWshh($url)
 	{
 		$regexps = array('!worldstarhiphop\\.com/featured/(?\'id\'\\d+)!');
