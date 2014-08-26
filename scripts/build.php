@@ -13,6 +13,7 @@ if (!isset($addonId))
 	$classFile  = __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
 	$addonFile  = __DIR__ . '/../build/addon-s9e.xml';
 	$addonId    = 's9e';
+	$namespace  = 's9e';
 	$className  = 's9e_MediaBBCodes';
 	$addonTitle = 's9e Media Pack';
 	$addonUrl   = 'https://github.com/s9e/XenForoMediaBBCodes';
@@ -288,7 +289,7 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	protected static function scrape($url, $regexps)
+	public static function wget($url)
 	{
 		// Return the content from the cache if applicable
 		if (isset(self::$cacheDir) && file_exists(self::$cacheDir))
@@ -297,29 +298,31 @@ class s9e_MediaBBCodes
 
 			if (file_exists($cacheFile))
 			{
-				$page = file_get_contents('compress.zlib://' . $cacheFile);
+				return file_get_contents('compress.zlib://' . $cacheFile);
 			}
 		}
 
-		if (empty($page))
+		$page = @file_get_contents(
+			'compress.zlib://' . $url,
+			false,
+			stream_context_create(array(
+				'http' => array(
+					'header' => 'Accept-Encoding: gzip'
+				)
+			))
+		);
+
+		if ($page && isset($cacheFile))
 		{
-			$page = @file_get_contents(
-				'compress.zlib://' . $url,
-				false,
-				stream_context_create(array(
-					'http' => array(
-						'header' => 'Accept-Encoding: gzip'
-					)
-				))
-			);
-
-			if ($page && isset($cacheFile))
-			{
-				file_put_contents($cacheFile, gzencode($page, 9));
-			}
+			file_put_contents($cacheFile, gzencode($page, 9));
 		}
 
-		return self::getNamedCaptures($page, $regexps);
+		return $page;
+	}
+
+	protected static function scrape($url, $regexps)
+	{
+		return self::getNamedCaptures(self::wget($url), $regexps);
 	}
 
 	protected static function getNamedCaptures($string, $regexps)
@@ -353,7 +356,13 @@ function setAttributes(DOMElement $element, array $attributes)
 	}
 }
 
-$php = str_replace('class s9e_MediaBBCodes', "class $className", $php);
+if ($addonId !== 's9e')
+{
+	$php = str_replace('s9e_MediaBBCodes', $className, $php);
+	$php = str_replace('s9e_Custom', $namespace . '_Custom', $php);
+	$php = str_replace('s9e_', $addonId . '_', $php);
+}
+
 $php = explode("\n", $php);
 
 $dom = new DOMDocument('1.0', 'utf-8');
@@ -744,9 +753,9 @@ $group->setAttribute('debug_only',    0);
 $phrases = $addon->appendChild($dom->createElement('phrases'));
 
 setAttributes(
-	$phrases->appendChild($dom->createElement('phrase', 's9e Media Pack')),
+	$phrases->appendChild($dom->createElement('phrase', $addonTitle)),
 	[
-		'title'          => 'option_group_' . $addon->getAttribute('addon_id'),
+		'title'          => 'option_group_' . $addonId,
 		'version_id'     => '1',
 		'version_string' => '1'
 	]
@@ -755,14 +764,14 @@ setAttributes(
 setAttributes(
 	$phrases->appendChild($dom->createElement('phrase', 'Variables used in some embedded media')),
 	[
-		'title'          => 'option_group_' . $addon->getAttribute('addon_id') . '_description',
+		'title'          => 'option_group_' . $addonId . '_description',
 		'version_id'     => '1',
 		'version_string' => '1'
 	]
 );
 
 // Add the blacklist param
-$optionNames['EXCLUDE_SITES'] = 's9e_EXCLUDE_SITES';
+$optionNames['EXCLUDE_SITES'] = $addonId . '_EXCLUDE_SITES';
 
 // Add the params as XenForo options
 ksort($optionNames);
