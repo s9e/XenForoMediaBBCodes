@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408240" version_string="20140824" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201408310" version_string="20140831" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -115,6 +115,10 @@
     <site media_site_id="gist" site_title="GitHub Gist (via custom iframe)" site_url="https://gist.github.com/" match_is_regex="1" supported="1">
       <match_urls>!gist\.github\.com/(?'id'(?:\w+/)?\d+(?:/[\da-f]+)?)!</match_urls>
       <embed_html><![CDATA[<iframe style="width:100%" src="//s9e.github.io/iframe/gist.min.html#{$id}" frameborder="0" onload="var a=Math.random();window.addEventListener('message',function(b){if(b.data.id==a)style.height=b.data.height+'px'});contentWindow.postMessage('s9e:'+a,src.substr(0,src.indexOf('/',8)))"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="gofundme" site_title="GoFundMe" site_url="http://www.gofundme.com/" match_is_regex="1" supported="1">
+      <match_urls>@gofundme\.com/(?'id'\w+)(?![^#?])@</match_urls>
+      <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="258" height="338" data="//funds.gofundme.com/Widgetflex.swf"><param name="allowfullscreen" value="true"/><param name="flashvars" value="page={$id}"/><embed type="application/x-shockwave-flash" src="//funds.gofundme.com/Widgetflex.swf" width="258" height="338" allowfullscreen="" flashvars="page={$id}"/></object>]]></embed_html>
     </site>
     <site media_site_id="googleplus" site_title="Google+" site_url="https://plus.google.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchGoogleplus">
       <match_urls>!(?'id')//plus\.google\.com/(?:\+\w+|(?'oid'\d+))/posts/(?'pid'\w+)!

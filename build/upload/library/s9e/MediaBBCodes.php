@@ -256,7 +256,7 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	protected static function scrape($url, $regexps)
+	public static function wget($url)
 	{
 		// Return the content from the cache if applicable
 		if (isset(self::$cacheDir) && file_exists(self::$cacheDir))
@@ -265,29 +265,31 @@ class s9e_MediaBBCodes
 
 			if (file_exists($cacheFile))
 			{
-				$page = file_get_contents('compress.zlib://' . $cacheFile);
+				return file_get_contents('compress.zlib://' . $cacheFile);
 			}
 		}
 
-		if (empty($page))
+		$page = @file_get_contents(
+			'compress.zlib://' . $url,
+			false,
+			stream_context_create(array(
+				'http' => array(
+					'header' => 'Accept-Encoding: gzip'
+				)
+			))
+		);
+
+		if ($page && isset($cacheFile))
 		{
-			$page = @file_get_contents(
-				'compress.zlib://' . $url,
-				false,
-				stream_context_create(array(
-					'http' => array(
-						'header' => 'Accept-Encoding: gzip'
-					)
-				))
-			);
-
-			if ($page && isset($cacheFile))
-			{
-				file_put_contents($cacheFile, gzencode($page, 9));
-			}
+			file_put_contents($cacheFile, gzencode($page, 9));
 		}
 
-		return self::getNamedCaptures($page, $regexps);
+		return $page;
+	}
+
+	protected static function scrape($url, $regexps)
+	{
+		return self::getNamedCaptures(self::wget($url), $regexps);
 	}
 
 	protected static function getNamedCaptures($string, $regexps)
