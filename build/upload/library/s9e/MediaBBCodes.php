@@ -463,7 +463,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('#ebay\\.(?!com/)#'),
-				'extract' => array('#"locale":"(?\'lang\'[\\w_]+)"#')
+				'extract' => array('#"locale":"(?\'lang\'\\w+)"#')
 			)
 		);
 
