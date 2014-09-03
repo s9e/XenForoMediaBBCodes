@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409030" version_string="20140903" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409031" version_string="20140903b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -8,6 +8,10 @@
       <match_urls>#(?=.*?[./]amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?/(?:dp|gp/product)/(?'id'[A-Z0-9]+)#
 #(?'id')(?=.*?[./]amazon\.(?&gt;c(?&gt;a|o(?&gt;m|\.(?&gt;jp|uk)))|de|fr|it)).*?amazon\.(?:co\.)?(?'tld'ca|de|fr|it|jp|uk)#</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderAmazon() -->]]></embed_html>
+    </site>
+    <site media_site_id="audioboo" site_title="Audioboo" site_url="https://audioboo.fm/" match_is_regex="1" supported="1">
+      <match_urls>!audioboo\.fm/boos/(?'id'\d+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="100%" height="150" src="//audioboo.fm/boos/{$id}/embed/v2" style="max-width:700px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="audiomack" site_title="Audiomack" site_url="http://www.audiomack.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchAudiomack">
       <match_urls>!audiomack\.com/(?'mode'album|song)/(?'id'[-\w]+/[-\w]+)!</match_urls>
