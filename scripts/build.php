@@ -880,7 +880,7 @@ if (!file_exists(__DIR__ . '/../releases'))
 
 chdir(__DIR__ . '/../build');
 copy('../LICENSE', 'LICENSE');
-exec('kzip -r -y ../releases/XenForoMediaBBCodes-' . $version . '.zip addon.xml LICENSE upload/library/s9e/MediaBBCodes.php');
+exec('kzip -r -y ../releases/XenForoMediaBBCodes-' . $version . '.zip addon-s9e.xml LICENSE upload/library/s9e/MediaBBCodes.php');
 
 $readme =
 'This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
