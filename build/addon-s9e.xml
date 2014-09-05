@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409031" version_string="20140903b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409050" version_string="20140905" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -41,8 +41,8 @@
       <embed_html><![CDATA[<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="380" data="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare" width="400" height="380" allowfullscreen=""/></object>]]></embed_html>
     </site>
     <site media_site_id="cnn" site_title="CNN" site_url="http://edition.cnn.com/video/" match_is_regex="1" supported="1">
-      <match_urls>!(?=.*?[./](?&gt;edition|us)\.cnn\.com).*?cnn\.com/video/data/2\.0/video/(?'id'.*\.cnn)!</match_urls>
-      <embed_html><![CDATA[<iframe width="560" height="315" src="http://edition.cnn.com/.element/widget/video/videoapi/html/embed.html#/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <match_urls>!cnn\.com/video/data/2\.0/video/(?'id'.*\.cnn)!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="http://edition.cnn.com/video/api/embed.html#/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="cnnmoney" site_title="CNNMoney" site_url="http://money.cnn.com/video/" match_is_regex="1" supported="1">
       <match_urls>!money\.cnn\.com/video/(?'id'.*\.cnnmoney)!</match_urls>
