@@ -9,7 +9,7 @@ include_once __DIR__ . '/../vendor/s9e/TextFormatter/src/autoloader.php';
 
 if (!isset($addonId))
 {
-	$sitesFile  = __DIR__ . '/../vendor/s9e/TextFormatter/src/Plugins/MediaEmbed/Configurator/sites.xml';
+	$sitesDir   = __DIR__ . '/../vendor/s9e/TextFormatter/src/Plugins/MediaEmbed/Configurator/sites';
 	$classFile  = __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
 	$addonFile  = __DIR__ . '/../build/addon-s9e.xml';
 	$addonId    = 's9e';
@@ -18,8 +18,6 @@ if (!isset($addonId))
 	$addonTitle = 's9e Media Pack';
 	$addonUrl   = 'https://github.com/s9e/XenForoMediaBBCodes';
 }
-
-$sites = simplexml_load_file($sitesFile);
 
 if (!isset($configurator))
 {
@@ -408,15 +406,18 @@ $examples    = [];
 $optionNames = [];
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
-foreach ($sites->site as $site)
+foreach (glob($sitesDir . '/*.xml') as $siteFile)
 {
+	$site   = simplexml_load_file($siteFile);
+	$siteId = basename($siteFile, '.xml');
+
 	$configurator->tags->clear();
-	$template = (string) $configurator->MediaEmbed->add($site['id'])->template;
+	$template = (string) $configurator->MediaEmbed->add($siteId)->template;
 
 	$node = $parentNode->appendChild($dom->createElement('site'));
-	$node->setAttribute('media_site_id',  $site['id']);
-	$node->setAttribute('site_title',     $site->name);
-	$node->setAttribute('site_url',       $site->homepage);
+	$node->setAttribute('media_site_id',  $siteId);
+	$node->setAttribute('site_title',     $site['name']);
+	$node->setAttribute('site_url',       $site['homepage']);
 	$node->setAttribute('match_is_regex', '1');
 	$node->setAttribute('supported',      '1');
 
@@ -439,7 +440,7 @@ foreach ($sites->site as $site)
 	{
 		$useEmbedCallback = true;
 
-		$methodName = 'render' . ucfirst($site['id']);
+		$methodName = 'render' . ucfirst($siteId);
 		$html = '<!-- ' . $className . '::' . $methodName . '() -->';
 
 		$node->setAttribute('embed_html_callback_class',  's9e_MediaBBCodes');
@@ -450,7 +451,7 @@ foreach ($sites->site as $site)
 
 		if (!preg_match($regexp, $configurator->getRenderer()->source, $m))
 		{
-			echo 'Skipping ', $site->name, "\n";
+			echo 'Skipping ', $site['name'], "\n";
 			$node->parentNode->removeChild($node);
 
 			continue;
@@ -479,7 +480,7 @@ foreach ($sites->site as $site)
 
 		if (preg_match("((?<!XenForo_Application::get\\('options'\\))->)", $src))
 		{
-			echo 'Skipping ', $site->name, " (->)\n";
+			echo 'Skipping ', $site['name'], " (->)\n";
 			$node->parentNode->removeChild($node);
 
 			continue;
@@ -597,7 +598,7 @@ foreach ($sites->site as $site)
 	{
 		// Test whether this regexp contains the name of at least one host. If not, make it match
 		// any of the host. (Spotify excluded)
-		$matchHost = ($site['id'] != 'spotify');
+		$matchHost = ($siteId != 'spotify');
 		foreach ($hosts as $host)
 		{
 			if (strpos($regexp, preg_quote($host)) !== false)
@@ -644,7 +645,7 @@ foreach ($sites->site as $site)
 
 	if ($useMatchCallback)
 	{
-		$methodName = 'match' . ucfirst($site['id']);
+		$methodName = 'match' . ucfirst($siteId);
 		$node->setAttribute('match_callback_class',  $className);
 		$node->setAttribute('match_callback_method', $methodName);
 
@@ -721,14 +722,14 @@ foreach ($sites->site as $site)
 
 	// Build the table of sites
 	$rows[] = '	<tr>';
-	$rows[] = '		<td><input type="checkbox" data-id="' . $site['id'] . '"></td>';
-	$rows[] = '		<td><code>' . $site['id'] . '</code></td>';
-	$rows[] = '		<td>' . $site->name . '</td>';
+	$rows[] = '		<td><input type="checkbox" data-id="' . $siteId . '"></td>';
+	$rows[] = '		<td><code>' . $siteId . '</code></td>';
+	$rows[] = '		<td>' . $site['name'] . '</td>';
 	$rows[] = '		<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
 	$rows[] = '	</tr>';
 
 	// Record the name of the site
-	$sitenames[] = (string) $site->name;
+	$sitenames[] = (string) $site['name'];
 
 	// Record the example URLs
 	foreach ($site->example as $example)
