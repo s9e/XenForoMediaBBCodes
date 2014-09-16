@@ -882,6 +882,7 @@ if (!file_exists(__DIR__ . '/../releases') || !empty($_SERVER['TRAVIS']))
 	return;
 }
 
+// @codeCoverageIgnoreStart
 chdir(__DIR__ . '/../build');
 copy('../LICENSE', 'LICENSE');
 exec('kzip -r -y ../releases/XenForoMediaBBCodes-' . $version . '.zip addon-s9e.xml LICENSE upload/library/s9e/MediaBBCodes.php');
@@ -922,3 +923,4 @@ file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '-urls.txt',
 	implode("\n", $examples)
 );
+// @codeCoverageIgnoreEnd
