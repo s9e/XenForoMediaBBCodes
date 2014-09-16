@@ -457,6 +457,11 @@ foobar]]></embed_html>
 				'id=https%3A%2F%2Fsoundcloud.com%2Fmatt0753%2Firoh-ii-deep-voice%2Fs-UpqTm;secret_token=s-UpqTm;track_id=51465673'
 			),
 			array(
+				'sportsnet',
+				'http://www.sportsnet.ca/football/cfl/milanovich-argos-allowed-second-half-to-snowball/',
+				'3783955076001'
+			),
+			array(
 				'spotify',
 				'spotify:track:5JunxkcjfCYcY7xJ29tLai',
 				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai'

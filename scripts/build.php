@@ -887,12 +887,12 @@ copy('../LICENSE', 'LICENSE');
 exec('kzip -r -y ../releases/XenForoMediaBBCodes-' . $version . '.zip addon-s9e.xml LICENSE upload/library/s9e/MediaBBCodes.php');
 
 $readme =
-'This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url=https://github.com/s9e/XenForoMediaBBCodes]its GitHub page[/url].
+'This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url="https://github.com/s9e/XenForoMediaBBCodes"]its GitHub page[/url].
 
-The BBCodes definitions are based on [url=https://github.com/s9e/TextFormatter]the s9e\TextFormatter library[/url], and more specifically its [url=https://github.com/s9e/TextFormatter/tree/master/src/Plugins/MediaEmbed]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
+The BBCodes definitions are based on [url="https://github.com/s9e/TextFormatter"]the s9e\TextFormatter library[/url], and more specifically its [url="https://github.com/s9e/TextFormatter/tree/master/src/Plugins/MediaEmbed"]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
 
-This add-on is released under [url=http://en.wikipedia.org/wiki/MIT_License]The MIT License[/url]. Redistribution is allowed and [b]encouraged[/b]. [color=#fff]This add-on is free and available on GitHub. If you paid for it, you\'ve been swindled.[/color]
-[url=https://travis-ci.org/s9e/XenForoMediaBBCodes][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master&' . $version . '[/img][/url] [url=https://coveralls.io/r/s9e/XenForoMediaBBCodes][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png?' . $version . '[/img][/url]
+This add-on is released under [url="http://en.wikipedia.org/wiki/MIT_License"]The MIT License[/url]. Redistribution is allowed and [b]encouraged[/b]. [color=#fff]This add-on is free and available on GitHub. If you paid for it, you\'ve been swindled.[/color]
+[url="https://travis-ci.org/s9e/XenForoMediaBBCodes"][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master&' . $version . '[/img][/url] [url="https://coveralls.io/r/s9e/XenForoMediaBBCodes"][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png?' . $version . '[/img][/url]
 
 [size=6][font=Arial][b]Installation[/b][/font][/size]
 
@@ -900,7 +900,7 @@ Unzip the archive, and upload the content of the [font=monospace]upload[/font] f
 
 [size=6][font=Arial][b]Compatibility and customization[/b][/font][/size]
 
-Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. [b]Note that this add-on replaces the default media sites.[/b] If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url=http://s9e.github.io/XenForoMediaBBCodes/configure.html]online configurator interface[/url].
+Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. [b]Note that this add-on replaces the default media sites.[/b] If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url="http://s9e.github.io/XenForoMediaBBCodes/configure.html"]online configurator interface[/url].
 
 [size=6][font=Arial][b]How to request a media site[/b][/font][/size]
 
@@ -910,7 +910,7 @@ If there\'s a media site that you would want to see in this pack, you can reques
 
 You can donate any amount of your hard earned money in USD or EUR using either of the following links.
 
-[url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url]';
+[url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url]';
 
 file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '.txt',
