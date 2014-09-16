@@ -235,7 +235,7 @@
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderSoundcloud() -->]]></embed_html>
     </site>
     <site media_site_id="sportsnet" site_title="Sportsnet" site_url="http://www.sportsnet.ca/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSportsnet">
-      <match_urls>(sportsnet\.ca/)</match_urls>
+      <match_urls>((?'id')sportsnet\.ca/)</match_urls>
       <embed_html><![CDATA[<iframe width="480" height="270" src="https://images.rogersdigitalmedia.com/video_service.php?videoId={$id}&amp;playerKey=AQ~~,AAAAAGWRwLc~,cRCmKE8Utf7OFWP38XQcokFZ80fR-u_y&amp;autoStart=false" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="spotify" site_title="Spotify" site_url="https://www.spotify.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSpotify">

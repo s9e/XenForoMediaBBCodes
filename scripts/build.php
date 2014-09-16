@@ -716,7 +716,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	unset($regexp);
 
 	$matchUrls = (empty($regexps))
-	           ? '(' . $hostsRegexp . '/)'
+	           ? "((?'id')" . $hostsRegexp . '/)'
 	           : htmlspecialchars(implode("\n", $regexps));
 	$node->appendChild($dom->createElement('match_urls', $matchUrls));
 
