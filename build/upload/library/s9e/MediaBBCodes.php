@@ -743,6 +743,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchSportsnet($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('//'),
+				'extract' => array('@videoId=(?\'id\'\\d+)@')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderSpotify($vars)
 	{
 		$vars += array('path' => null, 'uri' => null);

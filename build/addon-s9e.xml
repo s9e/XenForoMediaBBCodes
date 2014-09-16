@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409070" version_string="20140907" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409160" version_string="20140916" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -233,6 +233,10 @@
       <match_urls>@(?'id'https?://(?:(?:api\.soundcloud\.com/(?:playlist|track)s/\d+)|soundcloud\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\?secret_token=|/(?=s-))(?'secret_token'[-\w]+))?|^[^/]+/[^/]+$)@
 @(?'id')soundcloud\.com/(?!playlists/|tracks/)[^/]+/(?:sets/)?[^/]+/s-@</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderSoundcloud() -->]]></embed_html>
+    </site>
+    <site media_site_id="sportsnet" site_title="Sportsnet" site_url="http://www.sportsnet.ca/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSportsnet">
+      <match_urls/>
+      <embed_html><![CDATA[<iframe width="480" height="270" src="https://images.rogersdigitalmedia.com/video_service.php?videoId={$id}&amp;playerKey=AQ~~,AAAAAGWRwLc~,cRCmKE8Utf7OFWP38XQcokFZ80fR-u_y&amp;autoStart=false" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="spotify" site_title="Spotify" site_url="https://www.spotify.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchSpotify">
       <match_urls>!(?'id')(?'uri'spotify:(?:album|artist|user|track(?:set)?):[,:\w]+)!
