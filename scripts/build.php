@@ -715,7 +715,10 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	}
 	unset($regexp);
 
-	$node->appendChild($dom->createElement('match_urls', htmlspecialchars(implode("\n", $regexps))));
+	$matchUrls = (empty($regexps))
+	           ? '(' . $hostsRegexp . '/)'
+	           : htmlspecialchars(implode("\n", $regexps));
+	$node->appendChild($dom->createElement('match_urls', $matchUrls));
 
 	$node->appendChild($dom->createElement('embed_html'))
 	     ->appendChild($dom->createCDATASection($html));
