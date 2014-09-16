@@ -874,7 +874,7 @@ file_put_contents(
 	)
 );
 
-if (!file_exists(__DIR__ . '/../releases'))
+if (!file_exists(__DIR__ . '/../releases') || !empty($_SERVER['TRAVIS']))
 {
 	return;
 }
