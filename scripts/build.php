@@ -19,14 +19,11 @@ if (!isset($addonId))
 	$addonUrl   = 'https://github.com/s9e/XenForoMediaBBCodes';
 }
 
-if (!isset($configurator))
-{
-	$configurator = new s9e\TextFormatter\Configurator;
-}
+$configurator = new s9e\TextFormatter\Configurator;
 $configurator->rendering->engine = 'PHP';
 $configurator->rendering->engine->forceEmptyElements = false;
 $configurator->rendering->engine->useEmptyElements   = false;
-
+$configurator->MediaEmbed->sitesDir = $sitesDir;
 
 $php = <<<'NOWDOC'
 <?php
