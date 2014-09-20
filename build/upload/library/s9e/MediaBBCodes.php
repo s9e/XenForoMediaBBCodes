@@ -762,7 +762,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('//'),
-				'extract' => array('@videoId=(?\'id\'\\d+)@')
+				'extract' => array('@vid(?:eoId)?=(?\'id\'\\d+)@')
 			)
 		);
 
