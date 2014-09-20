@@ -245,6 +245,11 @@ foobar]]></embed_html>
 				'track_id=2146686782'
 			),
 			array(
+				'bbcnews',
+				'http://www.bbc.com/news/business-29149086',
+				'ad_site=%2Fnews%2Fbusiness%2F;playlist=%2Fnews%2Fbusiness-29149086A;poster=%2Fmedia%2Fimages%2F77537000%2Fjpg%2F_77537408_mapopgetty.jpg'
+			),
+			array(
 				'blip',
 				'http://blip.tv/hilah-cooking/hilah-cooking-vegetable-beef-stew-6663725',
 				'AYOW3REC'

@@ -40,6 +40,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://proleter.bandcamp.com/album/curses-from-past-times-ep<br/>http://proleter.bandcamp.com/track/downtown-irony<br/>http://therunons.bandcamp.com/track/still-feel</td>
 		</tr>
 		<tr>
+			<td><code>bbcnews</code></td>
+			<td>BBC News</td>
+			<td>http://www.bbc.com/news/science-environment-29232523</td>
+		</tr>
+		<tr>
 			<td><code>blip</code></td>
 			<td>Blip</td>
 			<td>http://blip.tv/blip-on-blip/damian-bruno-and-vinyl-rewind-blip-on-blip-58-5226104<br/>http://blip.tv/play/g6VTgpjxbQA</td>

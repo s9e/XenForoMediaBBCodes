@@ -374,6 +374,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchBbcnews($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!bbc\\.com/news/\\w+!'),
+				'extract' => array('!meta name="twitter:player".*?playlist=(?\'playlist\'[-/\\w]+)(?:&poster=(?\'poster\'[-/.\\w]+))?(?:&ad_site=(?\'ad_site\'[/\\w]+))?!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchBlip($url)
 	{
 		$regexps = array('!blip\\.tv/play/(?\'id\'[\\w+%/_]+)!');

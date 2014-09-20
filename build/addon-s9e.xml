@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409170" version_string="20140917" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409200" version_string="20140920" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -21,6 +21,10 @@
       <match_urls>!(?'id')bandcamp\.com/album/.!
 !(?'id')bandcamp\.com/track/.!</match_urls>
       <embed_html><![CDATA[<!-- s9e_MediaBBCodes::renderBandcamp() -->]]></embed_html>
+    </site>
+    <site media_site_id="bbcnews" site_title="BBC News" site_url="http://www.bbc.com/news/video_and_audio/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBbcnews">
+      <match_urls>!(?'id')bbc\.com/news/\w+!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="https://ssl.bbc.co.uk/wwscripts/embed_player#playlist={$playlist}&amp;poster={$poster}&amp;ad_site={$ad_site}&amp;ad_keyword=&amp;source=twitter" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="blip" site_title="Blip" site_url="http://blip.tv/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchBlip">
       <match_urls>!blip\.tv/play/(?'id'[\w+%/_]+)!
