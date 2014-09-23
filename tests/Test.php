@@ -427,6 +427,11 @@ foobar]]></embed_html>
 				'n_farrow_moon_140709_257794'
 			),
 			array(
+				'natgeovideo',
+				'http://video.nationalgeographic.com/video/news/140916-bison-smithsonian-zoo-vin?source=featuredvideo',
+				'00000148-7a7d-d0bf-a3ff-7f7d480e0001'
+			),
+			array(
 				'podbean',
 				'http://wendyswordsofwisdom.podbean.com/e/tiffany-stevensons-words-of-wisdom/',
 				'5168723'

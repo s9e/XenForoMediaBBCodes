@@ -680,6 +680,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchNatgeovideo($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('@video\\.nationalgeographic\\.com/video/\\w@'),
+				'extract' => array('@guid="(?\'id\'[-\\w]+)"@')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchPodbean($url)
 	{
 		$regexps = array('!podbean\\.com/site/player/index/pid/\\d+/eid/(?\'id\'\\d+)!');
