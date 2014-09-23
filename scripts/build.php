@@ -894,7 +894,7 @@ This add-on is released under [url="http://en.wikipedia.org/wiki/MIT_License"]Th
 
 [size=6][font=Arial][b]Installation[/b][/font][/size]
 
-Unzip the archive, and upload the content of the [font=monospace]upload[/font] folder to your XenForo installation. Then go to your forum\'s Admin CP and install the add-on via the provided [font=monospace]addon.xml[/font] file.
+Unzip the archive, and upload the content of the [font=monospace]upload[/font] folder to your XenForo installation. Then go to your forum\'s Admin CP and install the add-on via the provided [font=monospace]addon-s9e.xml[/font] file.
 
 [size=6][font=Arial][b]Compatibility and customization[/b][/font][/size]
 
@@ -906,9 +906,9 @@ If there\'s a media site that you would want to see in this pack, you can reques
 
 [size=6][font=Arial][b]How to support this add-on[/b][/font][/size]
 
-You can donate any amount of your hard earned money in USD or EUR using either of the following links.
+You can donate any amount of your hard earned money in USD or EUR using either of the following links. Reviewing and rating the add-on helps improve its visibility too.
 
-[url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url]';
+[center][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][/center]';
 
 file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '.txt',
