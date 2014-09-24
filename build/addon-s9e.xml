@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409230" version_string="20140923" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201409240" version_string="20140924" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -201,7 +201,7 @@
       <embed_html><![CDATA[<iframe width="560" height="315" src="//channel.nationalgeographic.com/{$id}/embed/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="natgeovideo" site_title="National Geographic Video" site_url="http://video.nationalgeographic.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchNatgeovideo">
-      <match_urls>@(?'id')video\.nationalgeographic\.com/video/\w@</match_urls>
+      <match_urls>@(?'id')video\.nationalgeographic\.com/(?:tv|video)/\w@</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="315" src="//player.d.nationalgeographic.com/players/ngsvideo/share/?guid={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="nytimes" site_title="The New York Times Video" site_url="http://www.nytimes.com/video/" match_is_regex="1" supported="1">

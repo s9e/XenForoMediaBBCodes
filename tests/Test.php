@@ -428,6 +428,11 @@ foobar]]></embed_html>
 			),
 			array(
 				'natgeovideo',
+				'http://video.nationalgeographic.com/tv/changing-earth',
+				'ngc-4MlzV_K8XoTPdXPLx2NOWq2IH410IzpO'
+			),
+			array(
+				'natgeovideo',
 				'http://video.nationalgeographic.com/video/news/140916-bison-smithsonian-zoo-vin?source=featuredvideo',
 				'00000148-7a7d-d0bf-a3ff-7f7d480e0001'
 			),

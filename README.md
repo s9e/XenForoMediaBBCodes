@@ -252,7 +252,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>natgeovideo</code></td>
 			<td>National Geographic Video</td>
-			<td>http://video.nationalgeographic.com/video/weirdest-superb-lyrebird</td>
+			<td>http://video.nationalgeographic.com/tv/changing-earth<br/>http://video.nationalgeographic.com/video/weirdest-superb-lyrebird</td>
 		</tr>
 		<tr>
 			<td><code>nytimes</code></td>

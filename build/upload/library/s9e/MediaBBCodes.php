@@ -685,7 +685,7 @@ class s9e_MediaBBCodes
 		$regexps = array();
 		$scrapes = array(
 			array(
-				'match'   => array('@video\\.nationalgeographic\\.com/video/\\w@'),
+				'match'   => array('@video\\.nationalgeographic\\.com/(?:tv|video)/\\w@'),
 				'extract' => array('@guid="(?\'id\'[-\\w]+)"@')
 			)
 		);
