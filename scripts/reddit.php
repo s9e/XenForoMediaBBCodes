@@ -21,5 +21,5 @@ foreach ($response['data']['children'] as $child)
 
 	echo date('Y-m-d', $data['created']), ' ';
 	printf('% 3d', $data['score']);
-	echo ' ', $data['url'], "\n";
+	echo ' ', htmlspecialchars_decode($data['url']), "\n";
 }
