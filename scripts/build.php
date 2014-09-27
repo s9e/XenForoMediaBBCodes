@@ -609,7 +609,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 			if (false === strpos($regexp, $hostsRegexp)
 			 && false === strpos($regexp, str_replace('(?>', '(?:', $hostsRegexp)))
 			{
-				$regexps[$k] = $regexp[0] . '(?=.*?[./]' . $hostsRegexp . ').*?' . substr($regexp, 1);
+				$regexps[$k] = $regexp[0] . '(?=.*?[./]' . $hostsRegexp . '[:/]).*?' . substr($regexp, 1);
 
 				if (isset($matchRegexps[$regexp]))
 				{
