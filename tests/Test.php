@@ -532,6 +532,11 @@ foobar]]></embed_html>
 				'vid=40688256'
 			),
 			array(
+				'vidme',
+				'https://vid.me/Ogt',
+				'height=1280;id=Ogt;width=720'
+			),
+			array(
 				'vk',
 				'http://vkontakte.ru/video-7016284_163645555',
 				'hash=eb5d7a5e6e1d8b71;oid=-7016284;vid=163645555'

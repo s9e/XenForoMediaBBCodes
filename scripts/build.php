@@ -80,6 +80,13 @@ class s9e_MediaBBCodes
 		}
 	}
 
+	public static function reinstall()
+	{
+		$model = XenForo_Model::create('XenForo_Model_BbCode');
+		$model->deleteBbCodeMediaSitesForAddOn('s9e');
+		$model->rebuildBbCodeCache();
+	}
+
 	public static function match($url, $regexps, $scrapes, $filters = array())
 	{
 		$vars = array();
@@ -356,6 +363,7 @@ if ($addonId !== 's9e')
 	$php = str_replace('s9e_MediaBBCodes', $className, $php);
 	$php = str_replace('s9e_Custom', $namespace . '_Custom', $php);
 	$php = str_replace('s9e_', $addonId . '_', $php);
+	$php = str_replace("'s9e'", "'$addonId'", $php);
 }
 
 $php = explode("\n", $php);

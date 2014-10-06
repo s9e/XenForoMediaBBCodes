@@ -375,6 +375,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.viagame.com/channels/hearthstone-championship/405177</td>
 		</tr>
 		<tr>
+			<td><code>vidme</code></td>
+			<td>vidme</td>
+			<td>https://vid.me/8Vr</td>
+		</tr>
+		<tr>
 			<td><code>vimeo</code></td>
 			<td>Vimeo</td>
 			<td>http://vimeo.com/67207222<br/>http://vimeo.com/channels/staffpicks/67207222</td>

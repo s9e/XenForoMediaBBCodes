@@ -52,6 +52,13 @@ class s9e_MediaBBCodes
 		}
 	}
 
+	public static function reinstall()
+	{
+		$model = XenForo_Model::create('XenForo_Model_BbCode');
+		$model->deleteBbCodeMediaSitesForAddOn('s9e');
+		$model->rebuildBbCodeCache();
+	}
+
 	public static function match($url, $regexps, $scrapes, $filters = array())
 	{
 		$vars = array();
@@ -880,6 +887,19 @@ class s9e_MediaBBCodes
 			array(
 				'match'   => array('#ustream\\.tv/(?!explore/|platform/|recorded/|search\\?|upcoming$|user/)(?:channel/)?[-\\w]+#'),
 				'extract' => array('!embed/(?\'cid\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
+	public static function matchVidme($url)
+	{
+		$regexps = array('!vid\\.me/(?\'id\'\\w+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('//'),
+				'extract' => array('!meta property="og:video:type" content="video/\\w+">\\s*<meta property="og:video:height" content="(?\'height\'\\d+)">\\s*<meta property="og:video:width" content="(?\'width\'\\d+)!')
 			)
 		);
 
