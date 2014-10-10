@@ -618,6 +618,32 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderImgur($vars)
+	{
+		$vars += array('height' => null, 'id' => null, 'type' => null, 'width' => null);
+
+		$html='<iframe allowfullscreen="" frameborder="0" scrolling="no" width="';if($vars['type']==='gifv'&&isset($vars['width']))$html.=htmlspecialchars($vars['width'],2);else$html.='100%';$html.='" height="';if($vars['type']==='gifv'&&isset($vars['height']))$html.=htmlspecialchars($vars['height'],2);else$html.='550';$html.='" src="';if($vars['type']==='gifv')$html.='//i.imgur.com/'.htmlspecialchars($vars['id'],2).'.gifv#embed';else$html.='//imgur.com/a/'.htmlspecialchars($vars['id'],2).'/embed';$html.='"></iframe>';
+
+		return $html;
+	}
+
+	public static function matchImgur($url)
+	{
+		$regexps = array('!imgur\\.com/a/(?\'id\'\\w+)!', '!imgur\\.com/(?\'id\'\\w+)\\.(?\'type\'gifv)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!imgur\\.com/a/\\w!'),
+				'extract' => array('!<a class="(?\'type\'album)-embed-link!')
+			),
+			array(
+				'match'   => array('!imgur\\.com/\\w+\\.gifv!'),
+				'extract' => array('!width:\\s*(?\'width\'\\d+)!', '!height:\\s*(?\'height\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchIndiegogo($url)
 	{
 		$regexps = array('!indiegogo\\.com/projects/(?\'id\'\\d+)$!');

@@ -397,6 +397,16 @@ foobar]]></embed_html>
 				'zPFCgxncn97IFkqEnZ-kRA'
 			),
 			array(
+				'imgur',
+				'http://imgur.com/a/9UGCL',
+				'id=9UGCL;type=album'
+			),
+			array(
+				'imgur',
+				'http://i.imgur.com/u7Yo0Vy.gifv',
+				'height=389;id=u7Yo0Vy;type=gifv;width=915'
+			),
+			array(
 				'indiegogo',
 				'http://www.indiegogo.com/projects/gameheart-redesigned',
 				'513633'
@@ -762,6 +772,21 @@ foobar]]></embed_html>
 				'songid=35292216',
 				'<!-- s9e_MediaBBCodes::renderGrooveshark() -->',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="40" data="//grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=&amp;songID=35292216"><embed type="application/x-shockwave-flash" src="//grooveshark.com/songWidget.swf" width="400" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"></object>'
+			),
+			array(
+				'9UGCL',
+				'<!-- s9e_MediaBBCodes::renderImgur() -->',
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed"></iframe>'
+			),
+			array(
+				'id=9UGCL;type=album',
+				'<!-- s9e_MediaBBCodes::renderImgur() -->',
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed"></iframe>'
+			),
+			array(
+				'height=389;id=u7Yo0Vy;type=gifv;width=915',
+				'<!-- s9e_MediaBBCodes::renderImgur() -->',
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="915" height="389" src="//i.imgur.com/u7Yo0Vy.gifv#embed"></iframe>'
 			),
 			array(
 				'1869987317/wish-i-was-here-1',
