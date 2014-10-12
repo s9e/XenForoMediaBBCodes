@@ -1,6 +1,6 @@
 <?php
 
-namespace s9e\TextFormatter\Tests;
+namespace s9e\XenForoMediaBBCodes\Tests;
 
 use PHPUnit_Framework_TestCase;
 use s9e_MediaBBCodes;
