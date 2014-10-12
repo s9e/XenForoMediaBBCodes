@@ -257,7 +257,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>nytimes</code></td>
 			<td>The New York Times Video</td>
-			<td>http://www.nytimes.com/video/technology/personaltech/100000002907606/soylent-taste-test.html<br/>http://www.nytimes.com/video/2012/12/17/business/100000001950744/how-wal-mart-conquered-teotihuacan.html</td>
+			<td>http://www.nytimes.com/video/magazine/100000003166834/small-plates.html<br/>http://www.nytimes.com/video/technology/personaltech/100000002907606/soylent-taste-test.html<br/>http://www.nytimes.com/video/2012/12/17/business/100000001950744/how-wal-mart-conquered-teotihuacan.html</td>
 		</tr>
 		<tr>
 			<td><code>pastebin</code></td>
