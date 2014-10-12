@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
 
-$url = 'http://www.reddit.com/domain/' . $_SERVER['argv'][1] . '/';
+$host = trim(preg_replace('(^\\w+://)', '', $_SERVER['argv'][1]), '/');
+$url  = 'http://www.reddit.com/domain/' . $host . '/';
 
 if (isset($_SERVER['argv'][2]))
 {
