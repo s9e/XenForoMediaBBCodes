@@ -17,6 +17,7 @@ if (!isset($addonId))
 	$className  = 's9e_MediaBBCodes';
 	$addonTitle = 's9e Media Pack';
 	$addonUrl   = 'https://github.com/s9e/XenForoMediaBBCodes';
+//	$linkText   = 'Media embeds powered by s9e';
 }
 
 $configurator = new s9e\TextFormatter\Configurator;
@@ -825,6 +826,32 @@ foreach ($optionNames as $paramName => $optionName)
 			'version_string' => '1'
 		]
 	);
+}
+
+// Add the attribution link
+if (isset($linkText))
+{
+	$modifications = $addon->appendChild($dom->createElement('public_template_modifications'));
+	$modification  = $modifications->appendChild($dom->createElement('modification'));
+	setAttributes(
+		$modification,
+		[
+			'action'           => 'str_replace',
+			'description'      => 'Adds a link back to ' . $addonTitle,
+			'enabled'          => 1,
+			'execution_order'  => 10,
+			'modification_key' => $addonId . '_footer',
+			'template'         => 'footer'
+		]
+	);
+	$modification->appendChild($dom->createElement(
+		'find',
+		'{xen:phrase extra_copyright}'
+	));
+	$modification->appendChild($dom->createElement(
+		'replace',
+		' | <a class="concealed" href="' . $addonUrl . '" title="' . $addonTitle . ' ' . $version . '">' . $linkText . '</a>$0'
+	));
 }
 
 // Save the helper class
