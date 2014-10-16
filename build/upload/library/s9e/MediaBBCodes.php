@@ -472,7 +472,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'itemid' => null, 'lang' => null);
 
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="355" height="300" data="http://togo.ebay.com/togo/togo.swf?2008013100"><param name="allowfullscreen" value="true"><param name="flashvars" value="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=';if(isset($vars['itemid']))$html.=htmlspecialchars($vars['itemid'],2);else$html.=htmlspecialchars($vars['id'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"><embed type="application/x-shockwave-flash" src="http://togo.ebay.com/togo/togo.swf?2008013100" width="355" height="300" allowfullscreen="" flashvars="base=http://togo.ebay.com/togo/&amp;mode=normal&amp;itemid=';if(isset($vars['itemid']))$html.=htmlspecialchars($vars['itemid'],2);else$html.=htmlspecialchars($vars['id'],2);if(isset($vars['lang']))$html.='&amp;lang='.htmlspecialchars(strtr($vars['lang'],'_','-'),2);$html.='"></object>';
+		$html='<a href="http://www.ebay.';if($vars['lang']==='de_AT')$html.='at';elseif($vars['lang']==='en_GB')$html.='co.uk';elseif($vars['lang']==='de_DE')$html.='de';elseif($vars['lang']==='fr_FR')$html.='fr';elseif($vars['lang']==='it_IT')$html.='it';else$html.='com';$html.='/itm/';if(isset($vars['itemid']))$html.=htmlspecialchars($vars['itemid'],2);else$html.=htmlspecialchars($vars['id'],2);$html.='">eBay item #';if(isset($vars['itemid']))$html.=htmlspecialchars($vars['itemid'],0);else$html.=htmlspecialchars($vars['id'],0);$html.='</a>';
 
 		return $html;
 	}
@@ -985,7 +985,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('h' => null, 'id' => null, 'list' => null, 'm' => null, 's' => null, 't' => null);
 
-		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2).'?controls=2';if(isset($vars['list']))$html.='&amp;list='.htmlspecialchars($vars['list'],2);if(isset($vars['t'])||isset($vars['m'])){$html.='&amp;start=';if(isset($vars['t']))$html.=htmlspecialchars($vars['t'],2);elseif(isset($vars['h']))$html.=htmlspecialchars($vars['h']*3600+$vars['m']*60+$vars['s'],2);else$html.=htmlspecialchars($vars['m']*60+$vars['s'],2);}$html.='"></iframe>';
+		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['list']))$html.='?list='.htmlspecialchars($vars['list'],2);if(isset($vars['t'])||isset($vars['m'])){if(isset($vars['list']))$html.='&amp;';else$html.='?';$html.='start=';if(isset($vars['t']))$html.=htmlspecialchars($vars['t'],2);elseif(isset($vars['h']))$html.=htmlspecialchars($vars['h']*3600+$vars['m']*60+$vars['s'],2);else$html.=htmlspecialchars($vars['m']*60+$vars['s'],2);}$html.='"></iframe>';
 
 		return $html;
 	}
