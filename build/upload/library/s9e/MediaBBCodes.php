@@ -629,15 +629,16 @@ class s9e_MediaBBCodes
 
 	public static function matchImgur($url)
 	{
-		$regexps = array('!imgur\\.com/a/(?\'id\'\\w+)!', '!imgur\\.com/(?\'id\'\\w+)\\.(?\'type\'gifv)!');
+		$regexps = array('!imgur\\.com/a/(?\'id\'\\w+)!', '!imgur\\.com/(?\'id\'\\w+)\\.(?:gifv|mp4)!');
 		$scrapes = array(
 			array(
 				'match'   => array('!imgur\\.com/a/\\w!'),
 				'extract' => array('!<a class="(?\'type\'album)-embed-link!')
 			),
 			array(
-				'match'   => array('!imgur\\.com/\\w+\\.gifv!'),
-				'extract' => array('!width:\\s*(?\'width\'\\d+)!', '!height:\\s*(?\'height\'\\d+)!')
+				'url'     => 'http://i.imgur.com/{@id}.gifv',
+				'match'   => array('!imgur\\.com/\\w+\\.(?:gifv|mp4)!'),
+				'extract' => array('!width:\\s*(?\'width\'\\d+)!', '!height:\\s*(?\'height\'\\d+)!', '!(?\'type\'gifv)!')
 			)
 		);
 
