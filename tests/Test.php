@@ -756,7 +756,7 @@ foobar]]></embed_html>
 			array(
 				'et=0KmkT83GTG1ynPe0_63zHg;height=399;id=3232182;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48%3D;width=594',
 				'<!-- s9e_MediaBBCodes::renderGetty() -->',
-				'<iframe width="594" height="448" src="//embed.gettyimages.com/embed/3232182?et=0KmkT83GTG1ynPe0_63zHg&amp;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48=" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe width="594" height="448" src="//embed.gettyimages.com/embed/3232182?et=0KmkT83GTG1ynPe0_63zHg&amp;similar=on&amp;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48=" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'height=338;id=SereneIllfatedCapybara;width=600',

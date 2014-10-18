@@ -112,7 +112,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>eighttracks</code></td>
 			<td>8tracks</td>
-			<td>http://8tracks.com/fingerlickengood/just-nujabes<br/>http://8tracks.com/midna/2242699</td>
+			<td>http://8tracks.com/lovinq/headphones-in-world-out<br/>http://8tracks.com/midna/2242699</td>
 		</tr>
 		<tr>
 			<td><code>espn</code></td>

@@ -528,7 +528,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('et' => null, 'height' => null, 'id' => null, 'sig' => null, 'width' => null);
 
-		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars(49+$vars['height'],2).'" src="//embed.gettyimages.com/embed/'.htmlspecialchars($vars['id'],2).'?et='.htmlspecialchars($vars['et'],2).'&amp;sig='.htmlspecialchars($vars['sig'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars(49+$vars['height'],2).'" src="//embed.gettyimages.com/embed/'.htmlspecialchars($vars['id'],2).'?et='.htmlspecialchars($vars['et'],2).'&amp;similar=on&amp;sig='.htmlspecialchars($vars['sig'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
 		return $html;
 	}
