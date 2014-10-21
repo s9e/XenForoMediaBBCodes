@@ -671,6 +671,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchKhl($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!video\\.khl\\.ru/(?:event|quote)s/\\d!'),
+				'extract' => array('!//video\\.khl\\.ru/iframe/feed/start/(?\'id\'[\\w/]+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderKickstarter($vars)
 	{
 		$vars += array('id' => null, 'video' => null);

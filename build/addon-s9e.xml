@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201410180" version_string="20141018" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201410210" version_string="20141021" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -177,6 +177,10 @@
     <site media_site_id="izlesene" site_title="İzlesene" site_url="http://www.izlesene.com/" match_is_regex="1" supported="1">
       <match_urls>!izlesene\.com/video/[-\w]+/(?'id'\d+)!</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="315" src="//www.izlesene.com/embedplayer/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="khl" site_title="Kontinental Hockey League (КХЛ)" site_url="http://www.khl.ru/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchKhl">
+      <match_urls>!(?'id')video\.khl\.ru/(?:event|quote)s/\d!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="//video.khl.ru/iframe/feed/start/{$id}?type_id=18&amp;width=560&amp;height=315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="kickstarter" site_title="Kickstarter" site_url="http://www.kickstarter.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchKickstarter">
       <match_urls>!kickstarter\.com/projects/(?'id'[^/]+/[^/?]+)(?:/widget/(?:(?'card'card)|(?'video'video)))?!</match_urls>

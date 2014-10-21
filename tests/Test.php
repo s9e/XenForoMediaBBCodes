@@ -417,6 +417,12 @@ foobar]]></embed_html>
 				'height=240;id=Olympics2002_2;width=320'
 			),
 			array(
+				'khl',
+				'http://video.khl.ru/quotes/251257',
+				'(^free_\\w+_hd/q251257/\\w+/\\d+$)',
+				'assertRegexp'
+			),
+			array(
 				'kickstarter',
 				'http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/',
 				'1869987317/wish-i-was-here-1'

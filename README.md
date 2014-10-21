@@ -220,6 +220,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.izlesene.com/video/lily-allen-url-badman/7600704</td>
 		</tr>
 		<tr>
+			<td><code>khl</code></td>
+			<td>Kontinental Hockey League (КХЛ)</td>
+			<td>http://video.khl.ru/events/233677<br/>http://video.khl.ru/quotes/251237</td>
+		</tr>
+		<tr>
 			<td><code>kickstarter</code></td>
 			<td>Kickstarter</td>
 			<td>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html</td>
