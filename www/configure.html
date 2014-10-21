@@ -28,7 +28,7 @@
 	</style>
 </head>
 <body>
-	<div style="font-weight:bold;background:red;padding:2px"><a style="color:#fff" href="https://xenforo.com/community/threads/s9e-media-bbcodes-pack.61883/">This configurator will be discontinued soon. If you're still using it, please report to this thread.</a></div>
+	<div><a style="display:block;text-align:center;text-decoration:none;font-weight:bold;background:red;padding:5px;border:solid 1px red;border-radius:5px;color:#fff" href="https://xenforo.com/community/threads/s9e-media-bbcodes-pack.61883/">This configurator will be discontinued soon. If you're still using it, please report to this thread.</a></div>
 	<div><a download="addon.xml">Download addon.xml</a> (left-click recommended)</div>
 	<div><a href="https://raw.github.com/s9e/XenForoMediaBBCodes/master/build/upload/library/s9e/MediaBBCodes.php">Download MediaBBCodes.php</a> and upload it to <code>library/s9e/</code></div>
 	<table id="sites">
@@ -620,7 +620,7 @@
 
 			document.getElementsByTagName('textarea')[0].value = addonXml;
 
-			document.getElementsByTagName('a')[0].href = 'data:application/octet-stream,' + escape(addonXml);
+			document.getElementsByTagName('a')[1].href = 'data:application/octet-stream,' + escape(addonXml);
 		}
 		window.onhashchange = updateUI;
 
