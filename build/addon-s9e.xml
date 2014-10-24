@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201410210" version_string="20141021" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201410240" version_string="20141024" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -76,6 +76,10 @@
       <match_urls>!(?'id')thedailyshow\.c(?:c\.c)?om/(?:collection|extended-interviews|videos|watch)/!</match_urls>
       <embed_html><![CDATA[<iframe width="512" height="288" src="//media.mtvnservices.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
+    <site media_site_id="dumpert" site_title="dumpert" site_url="http://www.dumpert.nl/" match_is_regex="1" supported="1">
+      <match_urls>!dumpert\.nl/mediabase/(?'id'\d+/\w+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="http://www.dumpert.nl/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
     <site media_site_id="ebay" site_title="eBay" site_url="http://www.ebay.com/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchEbay">
       <match_urls>#(?=.*?[./]ebay\.(?&gt;co(?&gt;m|\.uk)|de|fr|[ai]t)[:/]).*?ebay.[\w.]+/itm/(?:[-\w]+/)?(?'id'\d+)#
 #(?=.*?[./]ebay\.(?&gt;co(?&gt;m|\.uk)|de|fr|[ai]t)[:/]).*?[?&amp;]item=(?'id'\d+)#
@@ -145,6 +149,10 @@
     <site media_site_id="hulu" site_title="Hulu" site_url="http://www.hulu.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchHulu">
       <match_urls>!(?'id')hulu\.com/watch/!</match_urls>
       <embed_html><![CDATA[<iframe width="640" height="360" src="https://secure.hulu.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="humortvnl" site_title="HumorTV" site_url="http://humortv.vara.nl/pg.2.pg-home.html" match_is_regex="1" supported="1">
+      <match_urls>!humortv\.vara\.nl/\w+\.(?'id'[-.\w]+)\.html!</match_urls>
+      <embed_html><![CDATA[<iframe width="560" height="315" src="http://humortv.vara.nl/embed.{$id}.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="ign" site_title="IGN" site_url="http://www.ign.com/videos/" match_is_regex="1" supported="1">
       <match_urls>!(?'id'https?://.*?ign\.com/videos/.+)!</match_urls>
