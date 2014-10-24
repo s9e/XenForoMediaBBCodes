@@ -468,6 +468,28 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function renderDumpert($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<iframe width="560" height="315" src="http://www.dumpert.nl/embed/'.htmlspecialchars(strtr($vars['id'],'_','/'),2).'/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
+	}
+
+	public static function matchDumpert($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!dumpert\\.nl/mediabase/\\d+/\\w+!'),
+				'extract' => array('!data-itemid="(?\'id\'\\w+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function renderEbay($vars)
 	{
 		$vars += array('id' => null, 'itemid' => null, 'lang' => null);

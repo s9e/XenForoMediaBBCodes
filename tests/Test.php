@@ -290,6 +290,11 @@ foobar]]></embed_html>
 				'mgid:arc:playlist:thedailyshow.com:85ebd39c-9fea-44f3-9da2-f3088cab195d'
 			),
 			array(
+				'dumpert',
+				'http://www.dumpert.nl/mediabase/6622635/f6d1e0fd/lompe_boer_op_zuidlaardermarkt_doet_shetlandpony_pijn.html',
+				'6622635_f6d1e0fd'
+			),
+			array(
 				'ebay',
 				'http://www.ebay.com/itm/Converse-All-Star-Chuck-Taylor-Black-Hi-Canvas-M9160-Men-/251053262701',
 				'251053262701'
@@ -743,6 +748,11 @@ foobar]]></embed_html>
 				'pid=W4MVSOaNEYMq',
 				'<!-- s9e_MediaBBCodes::renderCbsnews() -->',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://www.cbsnews.com/common/video/cbsnews_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="http://www.cbsnews.com/common/video/cbsnews_player.swf" flashvars="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object>'
+			),
+			array(
+				'6622635_f6d1e0fd',
+				'<!-- s9e_MediaBBCodes::renderDumpert() -->',
+				'<iframe width="560" height="315" src="http://www.dumpert.nl/embed/6622635/f6d1e0fd/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'251053262701',
