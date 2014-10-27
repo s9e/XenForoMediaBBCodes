@@ -372,7 +372,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>twitter</code></td>
 			<td>Twitter (via custom iframe)</td>
-			<td>https://twitter.com/BarackObama/statuses/266031293945503744<br/>https://twitter.com/DerekTVShow/status/463372588690202624<br/>https://twitter.com/#!/BarackObama/status/266031293945503744</td>
+			<td>https://twitter.com/IJasonAlexander/statuses/526635414338023424<br/>https://mobile.twitter.com/DerekTVShow/status/463372588690202624<br/>https://twitter.com/#!/IJasonAlexander/status/526635414338023424</td>
 		</tr>
 		<tr>
 			<td><code>ustream</code></td>
