@@ -530,7 +530,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	}
 
 	// Workaround for sites that don't like URL-encoding
-	if (strpos($html, 'mtvnservices') !== false)
+	if (strpos($html, 'mtvnservices') !== false || $siteId === 'mailru')
 	{
 		$useEmbedCallback = true;
 	}

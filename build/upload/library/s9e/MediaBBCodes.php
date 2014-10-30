@@ -723,6 +723,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchMailru($url)
+	{
+		$regexps = array();
+		$scrapes = array(
+			array(
+				'match'   => array('!my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!'),
+				'extract' => array('!mail\\.ru/videos/embed/(?\'id\'[\\w/]+)\\.html!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchMixcloud($url)
 	{
 		$regexps = array('@mixcloud\\.com/(?!categories|tag)(?\'id\'[-\\w]+/[^/&]+)/@');
