@@ -408,7 +408,6 @@ $rows[] = '</thead>';
 $rows[] = '<tbody>';
 
 $sitenames   = [];
-$examples    = [];
 $optionNames = [];
 
 $parentNode = $addon->appendChild($dom->createElement('bb_code_media_sites'));
@@ -729,21 +728,18 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	$node->appendChild($dom->createElement('embed_html'))
 	     ->appendChild($dom->createCDATASection($html));
 
-	// Build the table of sites
-	$rows[] = '	<tr>';
-	$rows[] = '		<td><input type="checkbox" data-id="' . $siteId . '"></td>';
-	$rows[] = '		<td><code>' . $siteId . '</code></td>';
-	$rows[] = '		<td>' . $site['name'] . '</td>';
-	$rows[] = '		<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
-	$rows[] = '	</tr>';
-
-	// Record the name of the site
-	$sitenames[] = (string) $site['name'];
-
-	// Record the example URLs
-	foreach ($site->example as $example)
+	if ($siteId !== 'ebay')
 	{
-		$examples[] = (string) $example;
+		// Build the table of sites
+		$rows[] = '	<tr>';
+		$rows[] = '		<td><input type="checkbox" data-id="' . $siteId . '"></td>';
+		$rows[] = '		<td><code>' . $siteId . '</code></td>';
+		$rows[] = '		<td>' . $site['name'] . '</td>';
+		$rows[] = '		<td>' . str_replace('&', '&amp;', implode('<br/>', (array) $site->example)) . '</td>';
+		$rows[] = '	</tr>';
+
+		// Record the name of the site
+		$sitenames[] = (string) $site['name'];
 	}
 }
 $php[] = '}';
@@ -950,11 +946,5 @@ You can donate any amount of your hard earned money in USD or EUR using either o
 file_put_contents(
 	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '.txt',
 	$readme
-);
-
-// Update the test file
-file_put_contents(
-	__DIR__ . '/../releases/XenForoMediaBBCodes-' . $version . '-urls.txt',
-	implode("\n", $examples)
 );
 // @codeCoverageIgnoreEnd
