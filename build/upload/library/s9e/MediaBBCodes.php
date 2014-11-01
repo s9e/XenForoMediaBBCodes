@@ -736,6 +736,20 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchMediacrush($url)
+	{
+		$regexps = array('!mediacru\\.sh/(?\'id\'\\w+)!');
+		$scrapes = array(
+			array(
+				'url'     => 'https://mediacru.sh/api/{@id}',
+				'match'   => array('//'),
+				'extract' => array('!"height":\\s*(?\'height\'\\d+)!', '!"width":\\s*(?\'width\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchMixcloud($url)
 	{
 		$regexps = array('@mixcloud\\.com/(?!categories|tag)(?\'id\'[-\\w]+/[^/&]+)/@');

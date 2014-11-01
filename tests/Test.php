@@ -443,6 +443,11 @@ foobar]]></embed_html>
 				'id=1869987317%2Fwish-i-was-here-1;video=video'
 			),
 			array(
+				'mediacrush',
+				'https://cdn.mediacru.sh/Sl5mn6Id29Yg.gif',
+				'height=275;id=Sl5mn6Id29Yg;width=430'
+			),
+			array(
 				'msnbc',
 				'http://www.msnbc.com/ronan-farrow-daily/watch/thats-no-moon--300512323725',
 				'n_farrow_moon_140709_257794'

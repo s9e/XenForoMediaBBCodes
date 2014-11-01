@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201410300" version_string="20141030" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201411010" version_string="20141101" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -201,6 +201,10 @@
     <site media_site_id="mailru" site_title="Mail.Ru" site_url="http://my.mail.ru/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchMailru">
       <match_urls>!(?'id')my\.mail\.ru/\w+/\w+/video/\w+/\d!</match_urls>
       <embed_html><![CDATA[<iframe width="560" height="342" src="http://videoapi.my.mail.ru/videos/embed/{$id}.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+    </site>
+    <site media_site_id="mediacrush" site_title="MediaCrush" site_url="https://mediacru.sh/" match_is_regex="1" supported="1" embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchMediacrush">
+      <match_urls>!mediacru\.sh/(?'id'\w+)!</match_urls>
+      <embed_html><![CDATA[<iframe width="{$width}" height="{$height}" src="https://mediacru.sh/{$id}/frame" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="metacafe" site_title="Metacafe" site_url="http://www.metacafe.com/" match_is_regex="1" supported="1">
       <match_urls>!metacafe\.com/watch/(?'id'\d+)!</match_urls>
