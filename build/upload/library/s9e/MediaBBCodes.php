@@ -533,6 +533,19 @@ class s9e_MediaBBCodes
 		return self::match($url, $regexps, $scrapes);
 	}
 
+	public static function matchFlickr($url)
+	{
+		$regexps = array('!flickr\\.com/photos/[^/]+/(?\'id\'\\d+)!');
+		$scrapes = array(
+			array(
+				'match'   => array('!flickr\\.com/photos/[^/]+/\\d!'),
+				'extract' => array('!<meta property="og:image:width" content="(?\'width\'\\d+)!', '!<meta property="og:image:height" content="(?\'height\'\\d+)!')
+			)
+		);
+
+		return self::match($url, $regexps, $scrapes);
+	}
+
 	public static function matchGametrailers($url)
 	{
 		$regexps = array();
