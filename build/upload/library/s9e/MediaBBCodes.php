@@ -8,116 +8,450 @@
 class s9e_MediaBBCodes
 {
 	/**
-	* Path to a cache dir, used to cache scraped pages
+	* Index at which attribute filters are stored in the sites config
+	*/
+	const KEY_FILTERS = 8;
+
+	/**
+	* Index at which a site's embed HTML is stored in the sites config
+	*/
+	const KEY_HTML = 7;
+
+	/**
+	* Index at which the regexps used to extract vars from the URL are stored in the sites config
+	*/
+	const KEY_EXTRACT_REGEXPS = 4;
+
+	/**
+	* Index at which the "match_urls" value for the media site is stored
+	*/
+	const KEY_MATCH_URLS = 3;
+
+	/**
+	* Index at which a site's scrape config is stored in the sites config
+	*/
+	const KEY_SCRAPES = 6;
+
+	/**
+	* Index at which a site's tags are stored in the sites config
+	*/
+	const KEY_TAGS = 2;
+
+	/**
+	* Index at which a site's title is stored in the sites config
+	*/
+	const KEY_TITLE = 0;
+
+	/**
+	* Index at which a site's homepage URL is stored in the sites config
+	*/
+	const KEY_URL = 1;
+
+	/**
+	* Index at which the flag that indicates whether the site has a match callback is stored
+	*/
+	const KEY_USE_MATCH_CALLBACK = 5;
+
+	/**
+	* @var string Path to a cache dir, used to cache scraped pages
 	*/
 	public static $cacheDir;
 
-	public static function install($old, $new, $addon)
+	/**
+	* @var array Associative array using site IDs as key, callbacks as values
+	*/
+	public static $customCallbacks;
+
+	/**
+	* @var string Comma-separated list of sites that should not be installed
+	*/
+	public static $excludedSites;
+
+	/**
+	* @var array Associative array using site IDs as keys, sites' config arrays as values
+	*/
+	public static $sites = array(
+		'abcnews'=>array('ABC News','http://abcnews.go.com/',array('news'=>1),'!abcnews\\.go\\.com/[^/]+/video/[^/]+-(?\'id\'\\d+)!',array('!abcnews\\.go\\.com/[^/]+/video/[^/]+-(?\'id\'\\d+)!'),7=>'<iframe width="640" height="360" src="//abcnews.go.com/video/embed?id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'amazon'=>array('Amazon Product','http://affiliate-program.amazon.com/',array('misc'=>1),"#(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)[:/]).*?/(?:dp|gp/product)/(?'id'[A-Z0-9]+)#\n#(?'id')(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)[:/]).*?amazon\\.(?:co\\.)?(?'tld'ca|de|fr|it|jp|uk)#",array('#(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)[:/]).*?/(?:dp|gp/product)/(?\'id\'[A-Z0-9]+)#','#(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)[:/]).*?amazon\\.(?:co\\.)?(?\'tld\'ca|de|fr|it|jp|uk)#'),true),
+		'audioboom'=>array('audioBoom','https://audioboom.com/',array('podcasts'=>1),'!audioboo(?:\\.f|m\\.co)m/boos/(?\'id\'\\d+)!',array('!audioboo(?:\\.f|m\\.co)m/boos/(?\'id\'\\d+)!'),7=>'<iframe width="100%" height="150" src="//audioboom.com/boos/{$id}/embed/v3" style="max-width:700px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'audiomack'=>array('Audiomack','http://www.audiomack.com/',array('music'=>1),'!audiomack\\.com/(?\'mode\'album|song)/(?\'id\'[-\\w]+/[-\\w]+)!',array('!audiomack\\.com/(?\'mode\'album|song)/(?\'id\'[-\\w]+/[-\\w]+)!'),true),
+		'bandcamp'=>array('Bandcamp','http://bandcamp.com/',array('music'=>1),"!(?'id')bandcamp\\.com/album/.!\n!(?'id')bandcamp\\.com/track/.!",array(),true,array(array('extract'=>array('!/album=(?\'album_id\'\\d+)!'),'match'=>array('!bandcamp\\.com/album/.!')),array('extract'=>array('!"album_id":(?\'album_id\'\\d+)!','!"track_num":(?\'track_num\'\\d+)!','!/track=(?\'track_id\'\\d+)!'),'match'=>array('!bandcamp\\.com/track/.!')))),
+		'bbcnews'=>array('BBC News','http://www.bbc.com/news/video_and_audio/',array('news'=>1),'!(?\'id\')bbc\\.com/news/\\w+!',array(),true,array(array('extract'=>array('!meta name="twitter:player".*?playlist=(?\'playlist\'[-/\\w]+)(?:&poster=(?\'poster\'[-/.\\w]+))?(?:&ad_site=(?\'ad_site\'[/\\w]+))?!'),'match'=>array('!bbc\\.com/news/\\w+!')))),
+		'blip'=>array('Blip','http://blip.tv/',array('misc'=>1),"!blip\\.tv/play/(?'id'[\\w+%/_]+)!\n!(?'id')blip\\.tv/[^/]+/[^/]+-\\d+$!",array('!blip\\.tv/play/(?\'id\'[\\w+%/_]+)!'),true,array(array('extract'=>array('!blip\\.tv/play/(?\'id\'[\\w%+/_]+)!'),'match'=>array('!blip\\.tv/[^/]+/[^/]+-\\d+$!'))),'<iframe width="560" height="315" src="//blip.tv/play/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'break'=>array('Break','http://www.break.com/',array('entertainment'=>1),'!break\\.com/video/.*-(?\'id\'\\d+)$!',array('!break\\.com/video/.*-(?\'id\'\\d+)$!'),7=>'<iframe width="464" height="280" src="//break.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'cbsnews'=>array('CBS News Video','http://www.cbsnews.com/video/',array('news'=>1),"#cbsnews\\.com/video/watch/\\?id=(?'id'\\d+)#\n#(?'id')cbsnews\\.com/videos/(?!watch/)#",array('#cbsnews\\.com/video/watch/\\?id=(?\'id\'\\d+)#'),true,array(array('extract'=>array('#"pid":"(?\'pid\'\\w+)"#'),'match'=>array('#cbsnews\\.com/videos/(?!watch/)#')))),
+		'cnbc'=>array('CNBC','http://www.cnbc.com/',array('news'=>1),'!(?=.*?[./]video\\.cnbc\\.com[:/]).*?cnbc\\.com/gallery/\\?video=(?\'id\'\\d+)!',array('!(?=.*?[./]video\\.cnbc\\.com[:/]).*?cnbc\\.com/gallery/\\?video=(?\'id\'\\d+)!'),7=>'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="380" data="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare" width="400" height="380" allowfullscreen=""/></object>'),
+		'cnn'=>array('CNN','http://edition.cnn.com/video/',array('news'=>1),'!cnn\\.com/video/data/2\\.0/video/(?\'id\'.*\\.cnn)!',array('!cnn\\.com/video/data/2\\.0/video/(?\'id\'.*\\.cnn)!'),7=>'<iframe width="560" height="315" src="http://edition.cnn.com/video/api/embed.html#/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'cnnmoney'=>array('CNNMoney','http://money.cnn.com/video/',array('news'=>1),'!money\\.cnn\\.com/video/(?\'id\'.*\\.cnnmoney)!',array('!money\\.cnn\\.com/video/(?\'id\'.*\\.cnnmoney)!'),7=>'<iframe width="560" height="360" src="http://money.cnn.com/.element/ssi/video/7.0/players/embed.player.html?videoid=video/{$id}&amp;width=560&amp;height=360" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'colbertnation'=>array('Colbert Nation','http://thecolbertreport.cc.com/',array('entertainment'=>1),'!(?\'id\')thecolbertreport\\.cc\\.com/videos/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:video:colbertnation\\.com:[-0-9a-f]+)!'),'match'=>array('!thecolbertreport\\.cc\\.com/videos/!')))),
+		'collegehumor'=>array('CollegeHumor','http://www.collegehumor.com/',array('entertainment'=>1),'!collegehumor\\.com/(?:video|embed)/(?\'id\'\\d+)!',array('!collegehumor\\.com/(?:video|embed)/(?\'id\'\\d+)!'),7=>'<iframe width="600" height="369" src="//www.collegehumor.com/e/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'comedycentral'=>array('Comedy Central','http://www.comedycentral.com/funny-videos',array('entertainment'=>1),'!(?\'id\')c(?:c|omedycentral)\\.com/video-clips/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:video:[.\\w]+:[-\\w]+)!'),'match'=>array('!c(?:c|omedycentral)\\.com/video-clips/!')))),
+		'coub'=>array('Coub','http://coub.com/',array('misc'=>1),'!coub\\.com/view/(?\'id\'\\w+)!',array('!coub\\.com/view/(?\'id\'\\w+)!'),7=>'<iframe width="560" height="315" src="//coub.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'dailymotion'=>array('Dailymotion','http://www.dailymotion.com/',array('misc'=>1),'!dailymotion\\.com/(?:video/|user/[^#]+#video=)(?\'id\'[A-Za-z0-9]+)!',array('!dailymotion\\.com/(?:video/|user/[^#]+#video=)(?\'id\'[A-Za-z0-9]+)!'),7=>'<iframe width="560" height="315" src="//www.dailymotion.com/embed/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'dailyshow'=>array('The Daily Show with Jon Stewart','http://www.thedailyshow.com/',array('entertainment'=>1),'!(?\'id\')thedailyshow\\.c(?:c\\.c)?om/(?:collection|extended-interviews|videos|watch)/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:(?:playlist|video):thedailyshow\\.com:[-0-9a-f]+)!'),'match'=>array('!thedailyshow\\.c(?:c\\.c)?om/(?:collection|extended-interviews|videos|watch)/!')))),
+		'dumpert'=>array('dumpert','http://www.dumpert.nl/',array('.nl'=>1,'entertainment'=>1),'!(?\'id\')dumpert\\.nl/mediabase/\\d+/\\w+!',array(),true,array(array('extract'=>array('!data-itemid="(?\'id\'\\w+)!'),'match'=>array('!dumpert\\.nl/mediabase/\\d+/\\w+!')))),
+		'ebay'=>array('eBay','http://www.ebay.com/',array('misc'=>1),"#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?'id'\\d+)#\n#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?[?&]item=(?'id'\\d+)#\n#(?'id')(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?ebay\\.(?!com/)#",array('#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'id\'\\d+)#','#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?[?&]item=(?\'id\'\\d+)#'),true,array(array('extract'=>array('#"locale":"(?\'lang\'\\w+)"#'),'match'=>array('#ebay\\.(?!com/)#')))),
+		'eighttracks'=>array('8tracks','http://8tracks.com/',array('music'=>1),"!8tracks\\.com/[-\\w]+/(?'id'\\d+)(?=#|$)!\n!(?'id')8tracks\\.com/[-\\w]+/[-\\w]+!",array('!8tracks\\.com/[-\\w]+/(?\'id\'\\d+)(?=#|$)!'),true,array(array('extract'=>array('!eighttracks://mix/(?\'id\'\\d+)!'),'match'=>array('!8tracks\\.com/[-\\w]+/[-\\w]+!'))),'<iframe width="400" height="400" src="//8tracks.com/mixes/{$id}/player_v3_universal" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'espn'=>array('ESPN','http://espn.go.com/',array('sports'=>1),'#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#',array('#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#'),true),
+		'facebook'=>array('Facebook','http://www.facebook.com/',array('social'=>1),'@www\\.facebook\\.com/(?:[\\w/]+/permalink|(?!pages/|groups/).*?)(?:/|fbid=|\\?v=)(?\'id\'\\d+)(?=$|[/?&#])@',array('@www\\.facebook\\.com/(?:[\\w/]+/permalink|(?!pages/|groups/).*?)(?:/|fbid=|\\?v=)(?\'id\'\\d+)(?=$|[/?&#])@'),7=>'<iframe width="560" height="315" src="//s9e.github.io/iframe/facebook.min.html#{$id}" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'flickr'=>array('Flickr','https://www.flickr.com/',array('images'=>1),"!flickr\\.com/photos/[^/]+/(?'id'\\d+)!\n!(?'id')flickr\\.com/photos/[^/]+/\\d!",array('!flickr\\.com/photos/[^/]+/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!<meta property="og:image:width" content="(?\'width\'\\d+)!','!<meta property="og:image:height" content="(?\'height\'\\d+)!'),'match'=>array('!flickr\\.com/photos/[^/]+/\\d!')))),
+		'foxnews'=>array('Fox News','http://www.foxnews.com/',array('news'=>1),'!video\\.foxnews\\.com/v/(?\'id\'\\d+)!',array('!video\\.foxnews\\.com/v/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="//video.foxnews.com/v/video-embed.html?video_id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'funnyordie'=>array('Funny or Die','http://www.funnyordie.com/',array('entertainment'=>1),'!funnyordie\\.com/videos/(?\'id\'[0-9a-f]+)!',array('!funnyordie\\.com/videos/(?\'id\'[0-9a-f]+)!'),7=>'<iframe width="640" height="360" src="http://www.funnyordie.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'gamespot'=>array('Gamespot','http://www.gamespot.com/',array('gaming'=>1),'!gamespot\\.com.*?/(?:events|videos)/.*?-(?\'id\'\\d+)/(?:[#?].*)?$!',array('!gamespot\\.com.*?/(?:events|videos)/.*?-(?\'id\'\\d+)/(?:[#?].*)?$!'),7=>'<iframe width="640" height="400" src="//www.gamespot.com/videos/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'gametrailers'=>array('GameTrailers','http://www.gametrailers.com/',array('gaming'=>1),'!(?\'id\')gametrailers\\.com/(?:full-episode|review|video)s/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:(?:episode|video):gametrailers\\.com:[-\\w]+)!'),'match'=>array('!gametrailers\\.com/(?:full-episode|review|video)s/!')))),
+		'getty'=>array('Getty Images','http://www.gettyimages.com/',array('images'=>1),"!gty\\.im/(?'id'\\d+)!\n!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?'id'\\d+)!",array('!gty\\.im/(?\'id\'\\d+)!','!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!"height":[ "]*(?\'height\'\\d+)!','!"width":[ "]*(?\'width\'\\d+)!','!et=(?\'et\'[-=\\w]+)!','!sig=(?\'sig\'[-=\\w]+)!'),'match'=>array('//'),'url'=>'http://embed.gettyimages.com/preview/{@id}'))),
+		'gfycat'=>array('Gfycat','http://gfycat.com/',array('images'=>1),'!gfycat\\.com/(?\'id\'\\w+)!',array('!gfycat\\.com/(?\'id\'\\w+)!'),true,array(array('extract'=>array('!gfyHeight[ ="]+(?\'height\'\\d+)!','!gfyWidth[ ="]+(?\'width\'\\d+)!'),'match'=>array('//'),'url'=>'http://gfycat.com/{@id}'))),
+		'gist'=>array('GitHub Gist (via custom iframe)','https://gist.github.com/',array('misc'=>1),'!gist\\.github\\.com/(?\'id\'(?:\\w+/)?\\d+(?:/[\\da-f]+)?)!',array('!gist\\.github\\.com/(?\'id\'(?:\\w+/)?\\d+(?:/[\\da-f]+)?)!'),7=>'<iframe style="width:100%" src="//s9e.github.io/iframe/gist.min.html#{$id}" frameborder="0" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))"></iframe>'),
+		'globalnews'=>array('Global News','http://globalnews.ca/',array('.ca'=>1,'news'=>1),'!globalnews\\.ca/video/(?\'id\'\\d+)!',array('!globalnews\\.ca/video/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="377" src="http://globalnews.ca/video/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'gofundme'=>array('GoFundMe','http://www.gofundme.com/',array('fundraising'=>1),'@gofundme\\.com/(?\'id\'\\w+)(?![^#?])@',array('@gofundme\\.com/(?\'id\'\\w+)(?![^#?])@'),7=>'<object type="application/x-shockwave-flash" typemustmatch="" width="258" height="338" data="//funds.gofundme.com/Widgetflex.swf"><param name="allowfullscreen" value="true"/><param name="flashvars" value="page={$id}"/><embed type="application/x-shockwave-flash" src="//funds.gofundme.com/Widgetflex.swf" width="258" height="338" allowfullscreen="" flashvars="page={$id}"/></object>'),
+		'googleplus'=>array('Google+','https://plus.google.com/',array('social'=>1),"!(?'id')//plus\\.google\\.com/(?:\\+\\w+|(?'oid'\\d+))/posts/(?'pid'\\w+)!\n!(?'id')//plus\\.google\\.com/\\+[^/]+/posts/\\w!",array('!//plus\\.google\\.com/(?:\\+\\w+|(?\'oid\'\\d+))/posts/(?\'pid\'\\w+)!'),true,array(array('extract'=>array('!oid="?(?\'oid\'\\d+)!'),'match'=>array('!//plus\\.google\\.com/\\+[^/]+/posts/\\w!')))),
+		'googlesheets'=>array('Google Sheets','http://www.google.com/sheets/about/',array('documents'=>1),'!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'\\w+)[^#]*(?:#gid=(?\'gid\'\\d+))?!',array('!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'\\w+)[^#]*(?:#gid=(?\'gid\'\\d+))?!'),true),
+		'grooveshark'=>array('Grooveshark','http://grooveshark.com/',array('music'=>1),"%(?'id')grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?'playlistid'\\d+)%\n%(?'id')grooveshark\\.com(?:/#!?)?/s/(?'path'[^/]+/.+)%",array('%grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?\'playlistid\'\\d+)%'),true,array(array('extract'=>array('%songID=(?\'songid\'\\d+)%'),'match'=>array('%grooveshark\\.com(?:/#!?)?/s/(?\'path\'[^/]+/.+)%'),'url'=>'http://grooveshark.com/s/{@path}'))),
+		'hulu'=>array('Hulu','http://www.hulu.com/',array('misc'=>1),'!(?\'id\')hulu\\.com/watch/!',array(),true,array(array('extract'=>array('!eid=(?\'id\'[-\\w]+)!'),'match'=>array('!hulu\\.com/watch/!'))),'<iframe width="640" height="360" src="https://secure.hulu.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'humortvnl'=>array('HumorTV','http://humortv.vara.nl/pg.2.pg-home.html',array('.nl'=>1,'entertainment'=>1),'!humortv\\.vara\\.nl/\\w+\\.(?\'id\'[-.\\w]+)\\.html!',array('!humortv\\.vara\\.nl/\\w+\\.(?\'id\'[-.\\w]+)\\.html!'),7=>'<iframe width="560" height="315" src="http://humortv.vara.nl/embed.{$id}.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'ign'=>array('IGN','http://www.ign.com/videos/',array('gaming'=>1),'!(?\'id\'https?://.*?ign\\.com/videos/.+)!',array('!(?\'id\'https?://.*?ign\\.com/videos/.+)!'),7=>'<iframe width="468" height="263" src="http://widgets.ign.com/video/embed/content.html?url={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'imdb'=>array('IMDb','http://www.imdb.com/',array('movies'=>1),'!imdb\\.com/video/\\w+/vi(?\'id\'\\d+)!',array('!imdb\\.com/video/\\w+/vi(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="http://www.imdb.com/video/imdb/vi{$id}/imdb/embed?autoplay=false&amp;width=560" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'imgur'=>array('imgur albums and GIFV','http://imgur.com/',array('images'=>1),"!imgur\\.com/a/(?'id'\\w+)!\n!imgur\\.com/(?'id'\\w+)\\.(?:gifv|mp4)!\n!(?'id')imgur\\.com/a/\\w!\n!(?'id')imgur\\.com/\\w+\\.(?:gifv|mp4)!",array('!imgur\\.com/a/(?\'id\'\\w+)!','!imgur\\.com/(?\'id\'\\w+)\\.(?:gifv|mp4)!'),true,array(array('extract'=>array('!<a class="(?\'type\'album)-embed-link!'),'match'=>array('!imgur\\.com/a/\\w!')),array('extract'=>array('!width:\\s*(?\'width\'\\d+)!','!height:\\s*(?\'height\'\\d+)!','!(?\'type\'gifv)!'),'match'=>array('!imgur\\.com/\\w+\\.(?:gifv|mp4)!'),'url'=>'http://i.imgur.com/{@id}.gifv'))),
+		'indiegogo'=>array('Indiegogo','http://www.indiegogo.com/',array('fundraising'=>1),"!indiegogo\\.com/projects/(?'id'\\d+)$!\n!(?'id')indiegogo\\.com/projects/.!",array('!indiegogo\\.com/projects/(?\'id\'\\d+)$!'),true,array(array('extract'=>array('!indiegogo\\.com/projects/(?\'id\'\\d+)/!'),'match'=>array('!indiegogo\\.com/projects/.!'))),'<iframe width="224" height="486" src="//www.indiegogo.com/project/{$id}/widget" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'instagram'=>array('Instagram','http://instagram.com/',array('social'=>1),'!instagram\\.com/p/(?\'id\'[-_\\w]+)!',array('!instagram\\.com/p/(?\'id\'[-_\\w]+)!'),7=>'<iframe width="612" height="710" src="//instagram.com/p/{$id}/embed/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'internetarchive'=>array('Internet Archive','https://archive.org/',array('misc'=>1),'!(?\'id\')archive\\.org/details/!',array(),true,array(array('extract'=>array('!meta property="twitter:player" content="https://archive.org/embed/(?\'id\'[^/"]+)!','!meta property="og:video:width" content="(?\'width\'\\d+)!','!meta property="og:video:height" content="(?\'height\'\\d+)!'),'match'=>array('!archive\\.org/details/!')))),
+		'izlesene'=>array('İzlesene','http://www.izlesene.com/',array('.tr'=>1),'!izlesene\\.com/video/[-\\w]+/(?\'id\'\\d+)!',array('!izlesene\\.com/video/[-\\w]+/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="//www.izlesene.com/embedplayer/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'khl'=>array('Kontinental Hockey League (КХЛ)','http://www.khl.ru/',array('.ru'=>1,'sports'=>1),'!(?\'id\')video\\.khl\\.ru/(?:event|quote)s/\\d!',array(),true,array(array('extract'=>array('!//video\\.khl\\.ru/iframe/feed/start/(?\'id\'[\\w/]+)!'),'match'=>array('!video\\.khl\\.ru/(?:event|quote)s/\\d!'))),'<iframe width="560" height="315" src="//video.khl.ru/iframe/feed/start/{$id}?type_id=18&amp;width=560&amp;height=315" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'kickstarter'=>array('Kickstarter','http://www.kickstarter.com/',array('fundraising'=>1),'!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!',array('!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!'),true),
+		'liveleak'=>array('LiveLeak','http://www.liveleak.com/',array('misc'=>1),'!liveleak\\.com/view\\?i=(?\'id\'[a-f_0-9]+)!',array('!liveleak\\.com/view\\?i=(?\'id\'[a-f_0-9]+)!'),7=>'<iframe width="640" height="360" src="http://www.liveleak.com/ll_embed?i={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'mailru'=>array('Mail.Ru','http://my.mail.ru/',array('.ru'=>1),'!(?\'id\')my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!',array(),true,array(array('extract'=>array('!mail\\.ru/videos/embed/(?\'id\'[\\w/]+)\\.html!'),'match'=>array('!my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!')))),
+		'mediacrush'=>array('MediaCrush','https://mediacru.sh/',array('misc'=>1),'!mediacru\\.sh/(?\'id\'\\w+)!',array('!mediacru\\.sh/(?\'id\'\\w+)!'),true,array(array('extract'=>array('!"height":\\s*(?\'height\'\\d+)!','!"width":\\s*(?\'width\'\\d+)!'),'match'=>array('//'),'url'=>'https://mediacru.sh/api/{@id}'))),
+		'metacafe'=>array('Metacafe','http://www.metacafe.com/',array('misc'=>1),'!metacafe\\.com/watch/(?\'id\'\\d+)!',array('!metacafe\\.com/watch/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="//www.metacafe.com/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'mixcloud'=>array('Mixcloud','http://www.mixcloud.com/',array('music'=>1),"@mixcloud\\.com/(?!categories|tag)(?'id'[-\\w]+/[^/&]+)/@\n@(?'id')//i\\.mixcloud\\.com/\\w+$@",array('@mixcloud\\.com/(?!categories|tag)(?\'id\'[-\\w]+/[^/&]+)/@'),true,array(array('extract'=>array('@link rel="canonical" href="https?://[^/]+/(?\'id\'[-\\w]+/[^/&]+)/@'),'match'=>array('@//i\\.mixcloud\\.com/\\w+$@'))),'<iframe width="400" height="400" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;embed_type=widget_standard" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'msnbc'=>array('MSNBC','http://www.msnbc.com/watch',array('news'=>1),'@(?\'id\')msnbc\\.com/[-\\w]+/watch/@',array(),true,array(array('extract'=>array('@guid="?(?\'id\'\\w+)@'),'match'=>array('@msnbc\\.com/[-\\w]+/watch/@'))),'<iframe width="635" height="440" src="//player.theplatform.com/p/2E2eJC/EmbeddedOffSite?guid={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'natgeochannel'=>array('National Geographic Channel','http://channel.nationalgeographic.com/',array('misc'=>1),'@channel\\.nationalgeographic\\.com/(?\'id\'[-/\\w]+/videos/[-\\w]+)@',array('@channel\\.nationalgeographic\\.com/(?\'id\'[-/\\w]+/videos/[-\\w]+)@'),7=>'<iframe width="560" height="315" src="//channel.nationalgeographic.com/{$id}/embed/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'natgeovideo'=>array('National Geographic Video','http://video.nationalgeographic.com/',array('documentaries'=>1),'@(?\'id\')video\\.nationalgeographic\\.com/(?:tv|video)/\\w@',array(),true,array(array('extract'=>array('@guid="(?\'id\'[-\\w]+)"@'),'match'=>array('@video\\.nationalgeographic\\.com/(?:tv|video)/\\w@'))),'<iframe width="560" height="315" src="//player.d.nationalgeographic.com/players/ngsvideo/share/?guid={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'nytimes'=>array('The New York Times Video','http://www.nytimes.com/video/',array('news'=>1),"!nytimes\\.com/video/[a-z]+/(?:[a-z]+/)?(?'id'\\d+)!\n!nytimes\\.com/video/\\d+/\\d+/\\d+/[a-z]+/(?'id'\\d+)!",array('!nytimes\\.com/video/[a-z]+/(?:[a-z]+/)?(?\'id\'\\d+)!','!nytimes\\.com/video/\\d+/\\d+/\\d+/[a-z]+/(?\'id\'\\d+)!'),7=>'<iframe width="480" height="373" src="http://graphics8.nytimes.com/bcvideo/1.0/iframe/embed.html?videoId={$id}&amp;playerType=embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'pastebin'=>array('Pastebin','http://pastebin.com/',array('misc'=>1),'!pastebin\\.com/(?:\\w+\\.php\\?i=)?(?\'id\'\\w+)!',array('!pastebin\\.com/(?:\\w+\\.php\\?i=)?(?\'id\'\\w+)!'),7=>'<iframe width="100%" height="300" src="//pastebin.com/embed_iframe.php?i={$id}" scrolling="" style="resize:both" allowfullscreen="" frameborder="0"></iframe>'),
+		'podbean'=>array('Podbean','http://www.podbean.com/',array('podcasts'=>1),"!podbean\\.com/site/player/index/pid/\\d+/eid/(?'id'\\d+)!\n!(?'id')podbean\\.com/e/!",array('!podbean\\.com/site/player/index/pid/\\d+/eid/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!embed/postId/(?\'id\'\\d+)!'),'match'=>array('!podbean\\.com/e/!'))),'<iframe width="100%" height="100" style="max-width:900px" src="http://www.podbean.com/media/player/audio/postId/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'prezi'=>array('Prezi','http://prezi.com/',array('presentations'=>1),'#//prezi\\.com/(?!(?:a(?:bout|mbassadors)|c(?:o(?:llaborate|mmunity|ntact)|reate)|exp(?:erts|lore)|ip(?:ad|hone)|jobs|l(?:ear|ogi)n|m(?:ac|obility)|pr(?:es(?:s|ent)|icing)|recommend|support|user|windows|your)/)(?\'id\'\\w+)/#',array('#//prezi\\.com/(?!(?:a(?:bout|mbassadors)|c(?:o(?:llaborate|mmunity|ntact)|reate)|exp(?:erts|lore)|ip(?:ad|hone)|jobs|l(?:ear|ogi)n|m(?:ac|obility)|pr(?:es(?:s|ent)|icing)|recommend|support|user|windows|your)/)(?\'id\'\\w+)/#'),7=>'<iframe width="550" height="400" src="//prezi.com/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'rdio'=>array('Rdio','http://www.rdio.com/',array('music'=>1),"!rd\\.io/./(?'id'\\w+)!\n!(?'id')rdio\\.com/.*?(?:playlist|track)!",array('!rd\\.io/./(?\'id\'\\w+)!'),true,array(array('extract'=>array('!rd\\.io/./(?\'id\'\\w+)!'),'match'=>array('!rdio\\.com/.*?(?:playlist|track)!'),'url'=>'http://www.rdio.com/api/oembed/?url={@url}')),'<iframe width="400" height="400" src="https://rd.io/i/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'rutube'=>array('Rutube','http://rutube.ru/',array('.ru'=>1),"!rutube\\.ru/tracks/(?'id'\\d+)!\n!(?'id')rutube\\.ru/video/[0-9a-f]{32}!",array('!rutube\\.ru/tracks/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!rutube\\.ru/play/embed/(?\'id\'\\d+)!'),'match'=>array('!rutube\\.ru/video/[0-9a-f]{32}!'))),'<iframe width="720" height="405" src="//rutube.ru/play/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'scribd'=>array('Scribd','http://www.scribd.com/',array('documents'=>1,'presentations'=>1),'!scribd\\.com/doc/(?\'id\'\\d+)!',array('!scribd\\.com/doc/(?\'id\'\\d+)!'),7=>'<iframe width="100%" height="500" style="resize:both" src="//www.scribd.com/embeds/{$id}/content?view_mode=scroll&amp;show_recommendations=false" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'slideshare'=>array('SlideShare','http://www.slideshare.net/',array('presentations'=>1),"!slideshare\\.net/[^/]+/[-\\w]+-(?'id'\\d{6,})$!\n!(?'id')slideshare\\.net/[^/]+/\\w!",array('!slideshare\\.net/[^/]+/[-\\w]+-(?\'id\'\\d{6,})$!'),true,array(array('extract'=>array('!"presentationId":(?\'id\'\\d+)!'),'match'=>array('!slideshare\\.net/[^/]+/\\w!'))),'<iframe width="427" height="356" src="//www.slideshare.net/slideshow/embed_code/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'soundcloud'=>array('SoundCloud','https://soundcloud.com/',array('music'=>1),"@(?'id'https?://(?:(?:api\\.soundcloud\\.com/(?:playlist|track)s/\\d+)|soundcloud\\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\\?secret_token=|/(?=s-))(?'secret_token'[-\\w]+))?|^[^/]+/[^/]+$)@\n@(?'id')soundcloud\\.com/(?!playlists/|tracks/)[^/]+/(?:sets/)?[^/]+/s-@",array('@(?\'id\'https?://(?:(?:api\\.soundcloud\\.com/(?:playlist|track)s/\\d+)|soundcloud\\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\\?secret_token=|/(?=s-))(?\'secret_token\'[-\\w]+))?|^[^/]+/[^/]+$)@'),true,array(array('extract'=>array('@playlists/(?\'playlist_id\'\\d+)@','@tracks/(?\'track_id\'\\d+)@'),'match'=>array('@soundcloud\\.com/(?!playlists/|tracks/)[^/]+/(?:sets/)?[^/]+/s-@'),'url'=>'https://api.soundcloud.com/resolve?url={@id}&_status_code_map%5B302%5D=200&_status_format=json&client_id=b45b1aa10f1ac2941910a7f0d10f8e28&app_version=7a35847b'))),
+		'sportsnet'=>array('Sportsnet','http://www.sportsnet.ca/',array('sports'=>1),'((?\'id\')sportsnet\\.ca/)',array(),true,array(array('extract'=>array('@vid(?:eoId)?=(?\'id\'\\d+)@'),'match'=>array('//'))),'<iframe width="560" height="315" src="https://images.rogersdigitalmedia.com/video_service.php?videoId={$id}&amp;playerKey=AQ~~,AAAAAGWRwLc~,cRCmKE8Utf7OFWP38XQcokFZ80fR-u_y&amp;autoStart=false&amp;width=100%25&amp;height=100%25" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'spotify'=>array('Spotify','https://www.spotify.com/',array('music'=>1),"!(?'id')(?'uri'spotify:(?:album|artist|user|track(?:set)?):[,:\\w]+)!\n!(?'id')(?:open|play)\\.spotify\\.com/(?'path'(?:album|artist|track|user)/[/\\w]+)!",array('!(?\'uri\'spotify:(?:album|artist|user|track(?:set)?):[,:\\w]+)!','!(?:open|play)\\.spotify\\.com/(?\'path\'(?:album|artist|track|user)/[/\\w]+)!'),true),
+		'strawpoll'=>array('Straw Poll','http://strawpoll.me/',array('misc'=>1),'!strawpoll\\.me/(?\'id\'\\d+)!',array('!strawpoll\\.me/(?\'id\'\\d+)!'),7=>'<iframe width="600" height="310" src="http://strawpoll.me/embed_1/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'teamcoco'=>array('Team Coco','http://teamcoco.com/',array('entertainment'=>1),"!teamcoco\\.com/video/(?'id'\\d+)!\n!(?'id')teamcoco\\.com/video/.!",array('!teamcoco\\.com/video/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!teamcoco\\.com/embed/v/(?\'id\'\\d+)!'),'match'=>array('!teamcoco\\.com/video/.!'))),'<iframe width="640" height="415" src="//teamcoco.com/embed/v/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'ted'=>array('TED Talks','http://www.ted.com/',array('presentations'=>1),'!ted\\.com/(?\'id\'(?:talk|playlist)s/[^\\s"?]+)!i',array('!ted\\.com/(?\'id\'(?:talk|playlist)s/[^\\s"?]+)!i')),
+		'theatlantic'=>array('The Atlantic Video','http://www.theatlantic.com/video/',array('news'=>1),'!theatlantic\\.com/video/index/(?\'id\'\\d+)!',array('!theatlantic\\.com/video/index/(?\'id\'\\d+)!'),7=>'<iframe width="640" height="360" src="http://www.theatlantic.com/video/iframe/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'theonion'=>array('The Onion','http://www.theonion.com/video/',array('entertainment'=>1),'!theonion\\.com/video/[-\\w]+,(?\'id\'\\d+)!',array('!theonion\\.com/video/[-\\w]+,(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="http://www.theonion.com/video_embed/?id={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'tinypic'=>array('TinyPic videos','http://tinypic.com/',array('images'=>1),'!tinypic\\.com/player\\.php\\?v=(?\'id\'\\w+)&s=(?\'s\'\\d+)!',array('!tinypic\\.com/player\\.php\\?v=(?\'id\'\\w+)&s=(?\'s\'\\d+)!'),true),
+		'tmz'=>array('TMZ','http://www.tmz.com/videos',array('gossip'=>1),'@tmz\\.com/videos/(?\'id\'\\w+)@',array('@tmz\\.com/videos/(?\'id\'\\w+)@'),7=>'<iframe width="560" height="315" src="//www.kaltura.com/index.php/kwidget/cache_st/133592691/wid/_591531/partner_id/591531/uiconf_id/9071262/entry_id/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'traileraddict'=>array('Trailer Addict','http://www.traileraddict.com/',array('movies'=>1),'@(?\'id\')traileraddict\\.com/(?!tags/)[^/]+/.@',array(),true,array(array('extract'=>array('@v\\.traileraddict\\.com/(?\'id\'\\d+)@'),'match'=>array('@traileraddict\\.com/(?!tags/)[^/]+/.@'))),'<iframe width="560" height="315" src="//v.traileraddict.com/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'twitch'=>array('Twitch','http://www.twitch.tv/',array('gaming'=>1),"#(?'id')twitch\\.tv/(?'channel'(?!m/)\\w+)(?:/b/(?'archive_id'\\d+)|/c/(?'chapter_id'\\d+))?#\n!(?'id')twitch\\.tv/m/\\d+!",array('#twitch\\.tv/(?\'channel\'(?!m/)\\w+)(?:/b/(?\'archive_id\'\\d+)|/c/(?\'chapter_id\'\\d+))?#'),true,array(array('extract'=>array('!channel=(?\'channel\'\\w+)&.*?archive_id=(?\'archive_id\'\\d+)!'),'match'=>array('!twitch\\.tv/m/\\d+!')))),
+		'twitter'=>array('Twitter (via custom iframe)','https://twitter.com/',array('social'=>1),'@twitter\\.com/(?:#!/)?\\w+/status(?:es)?/(?\'id\'\\d+)@',array('@twitter\\.com/(?:#!/)?\\w+/status(?:es)?/(?\'id\'\\d+)@'),7=>'<iframe width="500" height="186" src="//s9e.github.io/iframe/twitter.min.html#{$id}" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'ustream'=>array('Ustream','http://www.ustream.tv/',array('gaming'=>1),"!(?'id')ustream\\.tv/recorded/(?'vid'\\d+)!\n#(?'id')ustream\\.tv/(?!explore/|platform/|recorded/|search\\?|upcoming$|user/)(?:channel/)?[-\\w]+#",array('!ustream\\.tv/recorded/(?\'vid\'\\d+)!'),true,array(array('extract'=>array('!embed/(?\'cid\'\\d+)!'),'match'=>array('#ustream\\.tv/(?!explore/|platform/|recorded/|search\\?|upcoming$|user/)(?:channel/)?[-\\w]+#')))),
+		'vevo'=>array('VEVO','http://vevo.com/',array('music'=>1),'!vevo\\.com/watch/([-\\w/]+/)?(?\'id\'[A-Z0-9]+)!',array('!vevo\\.com/watch/([-\\w/]+/)?(?\'id\'[A-Z0-9]+)!'),7=>'<iframe width="575" height="324" src="http://cache.vevo.com/m/html/embed.html?video={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'viagame'=>array('Viagame','http://www.viagame.com/',array('gaming'=>1),'!viagame\\.com/channels/[^/]+/(?\'id\'\\d+)!',array('!viagame\\.com/channels/[^/]+/(?\'id\'\\d+)!'),7=>'<iframe width="640" height="392" src="//www.viagame.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'videomega'=>array('Videomega','http://videomega.tv/',array('misc'=>1),'!videomega\\.tv/\\?ref=(?\'id\'\\w+)!',array('!videomega\\.tv/\\?ref=(?\'id\'\\w+)!'),7=>'<iframe width="560" height="315" src="http://videomega.tv/iframe.php?ref={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'vidme'=>array('vidme','https://vid.me',array('misc'=>1),'!vid\\.me/(?\'id\'\\w+)!',array('!vid\\.me/(?\'id\'\\w+)!'),true,array(array('extract'=>array('!meta property="og:video:type" content="video/\\w+">\\s*<meta property="og:video:height" content="(?\'height\'\\d+)">\\s*<meta property="og:video:width" content="(?\'width\'\\d+)!'),'match'=>array('//')))),
+		'vimeo'=>array('Vimeo','http://vimeo.com/',array('misc'=>1),'!vimeo\\.com/(?:channels/[^/]+/)?(?\'id\'\\d+)!',array('!vimeo\\.com/(?:channels/[^/]+/)?(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="//player.vimeo.com/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'vine'=>array('Vine','https://vine.co/',array('misc'=>1),'!vine\\.co/v/(?\'id\'[^/]+)!',array('!vine\\.co/v/(?\'id\'[^/]+)!'),7=>'<iframe width="480" height="480" src="https://vine.co/v/{$id}/embed/simple" allowfullscreen="" frameborder="0" scrolling="no"></iframe><script async="" src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>'),
+		'vk'=>array('VK','https://vk.com/',array('.ru'=>1),"!(?'id')vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?'oid'-?\\d+)_(?'vid'\\d+)!\n!(?'id')vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?'oid'-?\\d+)&id=(?'vid'\\d+)&hash=(?'hash'[0-9a-f]+)!\n!(?'id')(?=.*?[./]vk(?>\\.com|ontakte\\.ru)[:/]).*?vk.*?video-?\\d+_\\d+!",array('!vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?\'oid\'-?\\d+)_(?\'vid\'\\d+)!','!vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?\'oid\'-?\\d+)&id=(?\'vid\'\\d+)&hash=(?\'hash\'[0-9a-f]+)!'),true,array(array('extract'=>array('!embed_hash=(?\'hash\'[0-9a-f]+)!'),'match'=>array('!vk.*?video-?\\d+_\\d+!'),'url'=>'http://vk.com/video{@oid}_{@vid}'))),
+		'vocaroo'=>array('Vocaroo','http://vocaroo.com/',array('misc'=>1),'!vocaroo\\.com/i/(?\'id\'\\w+)!',array('!vocaroo\\.com/i/(?\'id\'\\w+)!'),7=>'<object type="application/x-shockwave-flash" typemustmatch="" width="148" height="44" data="//vocaroo.com/player.swf?playMediaID={$id}&amp;autoplay=0"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" src="//vocaroo.com/player.swf?playMediaID={$id}&amp;autoplay=0" width="148" height="44" allowfullscreen=""/></object>'),
+		'vube'=>array('Vube','http://vube.com/',array('misc'=>1),"!vube\\.com/[^/]+/[^/]+/(?'id'\\w+)!\n!(?'id')vube\\.com/s/\\w+!",array('!vube\\.com/[^/]+/[^/]+/(?\'id\'\\w+)!'),true,array(array('extract'=>array('!vube\\.com/[^/]+/[^/]+/(?\'id\'\\w+)!'),'match'=>array('!vube\\.com/s/\\w+!'))),'<iframe width="640" height="435" src="//vube.com/embed/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'wshh'=>array('WorldStarHipHop','http://www.worldstarhiphop.com/',array('misc'=>1),"!worldstarhiphop\\.com/featured/(?'id'\\d+)!\n!(?'id')worldstarhiphop\\.com/(?:\\w+/)?video\\.php\\?v=\\w+!",array('!worldstarhiphop\\.com/featured/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!disqus_identifier[ =\']+(?\'id\'\\d+)!'),'match'=>array('!worldstarhiphop\\.com/(?:\\w+/)?video\\.php\\?v=\\w+!'))),'<iframe width="640" height="360" src="//www.worldstarhiphop.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'wsj'=>array('The Wall Street Journal Online','http://live.wsj.com/',array('news'=>1),"@live\\.wsj\\.com/[^#]*#!(?'id'[-0-9A-F]{36})@\n@live\\.wsj\\.com/video/[^/]+/(?'id'[-0-9A-F]{36})@",array('@live\\.wsj\\.com/[^#]*#!(?\'id\'[-0-9A-F]{36})@','@live\\.wsj\\.com/video/[^/]+/(?\'id\'[-0-9A-F]{36})@')),
+		'yahooscreen'=>array('Yahoo! Screen','https://screen.yahoo.com/',array('movies'=>1),'!screen\\.yahoo\\.com/(?:[-\\w]+/)?(?\'id\'[-\\w]+)\\.html!',array('!screen\\.yahoo\\.com/(?:[-\\w]+/)?(?\'id\'[-\\w]+)\\.html!'),7=>'<iframe width="640" height="360" src="https://screen.yahoo.com/{$id}.html?format=embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'youku'=>array('Youku','http://www.youku.com/',array('.cn'=>1),'!youku\\.com/v_show/id_(?\'id\'\\w+)!',array('!youku\\.com/v_show/id_(?\'id\'\\w+)!'),7=>'<iframe width="512" height="328" src="http://player.youku.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
+		'youtube'=>array('YouTube','http://www.youtube.com/',array('misc'=>1),"!youtube\\.com/(?:watch.*?v=|v/)(?'id'[-\\w]+)!\n!youtu\\.be/(?'id'[-\\w]+)!\n!(?'id')(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?:(?:(?'h'\\d+)h)?(?'m'\\d+)m(?'s'\\d+)|(?'t'\\d+))!\n!(?'id')(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?'list'[-\\w]+)!",array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!','!youtu\\.be/(?\'id\'[-\\w]+)!','!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?:(?:(?\'h\'\\d+)h)?(?\'m\'\\d+)m(?\'s\'\\d+)|(?\'t\'\\d+))!','!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?\'list\'[-\\w]+)!'),true)
+	);
+
+	/**
+	* @var array Associative array using enabled tags as keys
+	*/
+	public static $tags;
+
+	/**
+	* Installer
+	*
+	* @param  array|bool       $old   Either the add-on's old config on update, or FALSE on install
+	* @param  array            $new   The add-on's new config
+	* @param  SimpleXMLElement $addon The add-on's XML document
+	* @return void
+	*/
+	public static function install($old, array $new, SimpleXMLElement $addon)
 	{
-		$exclude = XenForo_Application::get('options')->s9e_EXCLUDE_SITES;
-		$custom  = class_exists('s9e_Custom');
-
-		if (!$exclude && !$custom)
+		self::loadSettings();
+		foreach (self::getFilteredSites() as $siteId => $site)
 		{
-			return;
+			self::addSite($addon->bb_code_media_sites, $siteId, $site);
 		}
 
-		$exclude = array_flip(preg_split('/\\W+/', $exclude, -1, PREG_SPLIT_NO_EMPTY));
-		$nodes   = array();
-
-		foreach ($addon->bb_code_media_sites->site as $site)
+		// Sniff s9e_Custom callbacks for backward compatibility
+		if (class_exists('s9e_Custom'))
 		{
-			$id = (string) $site['media_site_id'];
-
-			if (isset($exclude[$id]))
+			$value = '';
+			foreach ($addon->bb_code_media_sites->site as $site)
 			{
-				$nodes[] = dom_import_simplexml($site);
-				continue;
+				$siteId   = (string) $site['media_site_id'];
+				$callback = 's9e_Custom::' . $siteId;
+				if (!isset(self::$customCallbacks[$siteId]) && is_callable($callback))
+				{
+					$value .= $siteId . '=' . $callback . "\n";
+				}
 			}
 
-			$callback = 's9e_Custom::' . $id;
-
-			if ($custom && is_callable($callback))
+			if ($value)
 			{
-				$site->embed_html = '<!-- ' . $callback . "() -->\n" . $site->embed_html;
-
-				$site['embed_html_callback_class']  = 's9e_MediaBBCodes';
-				$site['embed_html_callback_method'] = 'embed';
+				$options = $addon->xpath('//option[@option_id="s9e_custom_callbacks"]');
+				$options[0]->default_value = $value;
 			}
 		}
 
-		foreach ($nodes as $node)
+		// Overwrite the default value of s9e_excluded_sites to maintain backward compatibility with
+		// the old s9e_EXCLUDE_SITES
+		$options = XenForo_Application::get('options');
+		if (empty($options->s9e_excluded_sites) && !empty(self::$excludedSites))
 		{
-			$node->parentNode->removeChild($node);
+			$options = $addon->xpath('//option[@option_id="s9e_excluded_sites"]');
+			$options[0]->default_value = self::$excludedSites;
 		}
 	}
 
-	public static function reinstall()
+	/**
+	* Return an array of all the tags (used as keys)
+	*
+	* @return array
+	*/
+	protected static function getAllTags()
 	{
+		$tags = array();
+		foreach (self::$sites as $site)
+		{
+			$tags += $site[self::KEY_TAGS];
+		}
+		ksort($tags);
+
+		return $tags;
+	}
+
+	/**
+	* Load the settings from XenForo's options
+	*
+	* @return void
+	*/
+	protected static function loadSettings()
+	{
+		if (!isset(self::$customCallbacks))
+		{
+			self::parseCustomCallbacks(XenForo_Application::get('options')->s9e_custom_callbacks);
+		}
+
+		if (!isset(self::$excludedSites))
+		{
+			$options = XenForo_Application::get('options');
+			self::$excludedSites = $options->s9e_excluded_sites ?: $options->s9e_EXCLUDE_SITES ?: '';
+		}
+
+		if (!isset(self::$tags))
+		{
+			self::$tags = XenForo_Application::get('options')->s9e_media_tags ?: self::getAllTags();
+		}
+	}
+
+	/**
+	* Add a site definition to the add-on's XML
+	*
+	* @param  SimpleXMLElement $parent Parent node
+	* @param  string           $siteId Site's ID
+	* @param  array            $config Site's config
+	* @return void
+	*/
+	protected static function addSite(SimpleXMLElement $parent, $siteId, array $config)
+	{
+		$site = $parent->addChild('site');
+
+		$site['media_site_id']  = $siteId;
+		$site['site_title']     = $config[self::KEY_TITLE];
+		$site['site_url']       = $config[self::KEY_URL];
+		$site['match_is_regex'] = 1;
+		$site['supported']      = 1;
+
+		if (!empty($config[self::KEY_USE_MATCH_CALLBACK]))
+		{
+			$site['match_callback_class']  = __CLASS__;
+			$site['match_callback_method'] = 'match';
+		}
+
+		if (isset($config[self::KEY_HTML]))
+		{
+			$embedHtml = $config[self::KEY_HTML];
+		}
+		else
+		{
+			$embedHtml = '<!-- see callback -->';
+			$site['embed_html_callback_class']  = __CLASS__;
+			$site['embed_html_callback_method'] = 'embed';
+		}
+
+		$site->addChild('embed_html', htmlspecialchars($embedHtml));
+		$site->addChild('match_urls', htmlspecialchars($config[self::KEY_MATCH_URLS]));
+	}
+
+	/**
+	* Parse a text to capture the list of custom callbacks
+	*
+	* @param  string $text List of callbacks as text, one per line as "site=callback" 
+	* @return void
+	*/
+	protected static function parseCustomCallbacks($text)
+	{
+		$regexp = '(^\\s*(\\w+)\\s*=\\s*(\\w+(?:\\s*::\\s*\\w+)?)\\s*$)m';
+		preg_match_all($regexp, $text, $matches, PREG_SET_ORDER);
+
+		self::$customCallbacks = array();
+		foreach ($matches as $m)
+		{
+			$siteId   = strtolower($m[1]);
+			$callback = preg_replace('(\\s+)', '', $m[2]);
+
+			self::$customCallbacks[$siteId] = $callback;
+		}
+		ksort(self::$customCallbacks);
+	}
+
+	/**
+	* Validate a list of custom callbacks and trigger the reinstallation
+	*
+	* @param  string &$text List of callbacks as text, one per line as "site=callback" 
+	* @return bool          Always TRUE
+	*/
+	public static function validateCustomCallbacks(&$text)
+	{
+		self::parseCustomCallbacks($text);
+
+		// Rebuild the list to remove malformed entries
+		$text = '';
+		foreach (self::$customCallbacks as $siteId => $callback)
+		{
+			$text .= $siteId . '=' . $callback . "\n";
+		}
+
+		self::reinstall();
+
+		return true;
+	}
+
+	/**
+	* Validate a comma-separated list of sites not to install
+	*
+	* @param  string &$text Comma-separated IDs, e.g. "foo,bar" 
+	* @return bool          Always TRUE
+	*/
+	public static function validateExcludedSites(&$text)
+	{
+		$siteIds = preg_split('(\\s*,\\s*)', trim($text));
+		sort($siteIds);
+		$text = implode(',', $siteIds);
+
+		self::$excludedSites = $text;
+		self::reinstall();
+
+		return true;
+	}
+
+	/**
+	* Reinstall media sites based on given list of tags
+	*
+	* @param  array $tags Associative array using site IDs as keys
+	* @return bool        Always TRUE
+	*/
+	public static function updateTags(array $tags)
+	{
+		self::$tags = $tags;
+		self::reinstall();
+
+		return true;
+	}
+
+	/**
+	* Return all of the sites, filtered to fit the user's preferences
+	*
+	* @return array Site IDs as keys, config arrays as values
+	*/
+	protected static function getFilteredSites()
+	{
+		self::loadSettings();
+
+		$sites = array();
+		foreach (self::$sites as $siteId => $site)
+		{
+			if (!array_intersect_key($site[self::KEY_TAGS], self::$tags))
+			{
+				continue;
+			}
+
+			$sites[$siteId] = $site;
+		}
+
+		if (self::$excludedSites)
+		{
+			$excludedSites = array_flip(preg_split('/\\W+/', self::$excludedSites, -1, PREG_SPLIT_NO_EMPTY));
+			$sites = array_diff_key($sites, $excludedSites);
+		}
+
+		return $sites;
+	}
+
+	/**
+	* Reinstall all enabled sites
+	*
+	* @return void
+	*/
+	protected static function reinstall()
+	{
+		$sites = simplexml_load_string('<sites/>');
+		foreach (self::getFilteredSites() as $siteId => $site)
+		{
+			self::addSite($sites, $siteId, $site);
+		}
+
 		$model = XenForo_Model::create('XenForo_Model_BbCode');
-		$model->deleteBbCodeMediaSitesForAddOn('s9e');
+		$model->importBbCodeMediaSitesAddOnXml($sites, 's9e');
 		$model->rebuildBbCodeCache();
 	}
 
-	public static function match($url, $regexps, $scrapes, $filters = array())
+	/**
+	* Match given URL and return an ID or all extracted vars serialized
+	*
+	* Vars are URLencoded and separated with semi-colons
+	*
+	* @param  string $url       Original URL
+	* @param  string $matchedId Unused
+	* @param  array  $site      Unused
+	* @param  string $siteId    Site's ID
+	* @return string
+	*/
+	public static function match($url, $matchedId, array $site, $siteId)
 	{
-		$vars = array();
-
-		if (!empty($regexps))
+		if (!isset(self::$sites[$siteId]))
 		{
-			$vars = self::getNamedCaptures($url, $regexps);
+			return false;
 		}
 
-		foreach ($scrapes as $scrape)
+		$config = self::$sites[$siteId];
+		$vars = array();
+
+		if (!empty($config[self::KEY_EXTRACT_REGEXPS]))
 		{
-			$scrapeVars = array();
+			$vars = self::getNamedCaptures($url, $config[self::KEY_EXTRACT_REGEXPS]);
+		}
 
-			$skip = true;
-			foreach ($scrape['match'] as $regexp)
+		if (!empty($config[self::KEY_SCRAPES]))
+		{
+			foreach ($config[self::KEY_SCRAPES] as $scrape)
 			{
-				if (preg_match($regexp, $url, $m))
-				{
-					// Add the named captures to the available vars
-					$scrapeVars += $m;
-
-					$skip = false;
-				}
+				// Overwrite vars extracted from URL with vars extracted from content
+				$vars = self::scrape($url, $scrape, $vars) + $vars;
 			}
-
-			if ($skip)
-			{
-				continue;
-			}
-
-			if (isset($scrape['url']))
-			{
-				// Add the vars from non-scrape "extract" regexps
-				$scrapeVars += $vars;
-
-				// Add the original URL
-				if (!isset($scrapeVars['url']))
-				{
-					$scrapeVars['url'] = $url;
-				}
-
-				// Replace {@var} tokens in the URL
-				$scrapeUrl = preg_replace_callback(
-					'#\\{@(\\w+)\\}#',
-					function ($m) use ($scrapeVars)
-					{
-						return (isset($scrapeVars[$m[1]])) ? $scrapeVars[$m[1]] : '';
-					},
-					$scrape['url']
-				);
-			}
-			else
-			{
-				// Use the same URL for scraping
-				$scrapeUrl = $url;
-			}
-
-			// Overwrite vars extracted from URL with vars extracted from content
-			$vars = array_merge($vars, self::scrape($scrapeUrl, $scrape['extract']));
 		}
 
 		// No vars = no match
@@ -127,30 +461,13 @@ class s9e_MediaBBCodes
 		}
 
 		// Apply filters
-		foreach ($filters as $varName => $callbacks)
-		{
-			if (!isset($vars[$varName]))
-			{
-				continue;
-			}
-
-			foreach ($callbacks as $callback)
-			{
-				$vars[$varName] = $callback($vars[$varName]);
-			}
-		}
+		self::applyFilters($siteId, $vars);
 
 		// If there's only one capture named "id" we store its value as-is
 		$keys = array_keys($vars);
 		if ($keys === array('id'))
 		{
 			return $vars['id'];
-		}
-
-		// If there's only one capture named "url" and it looks like a URL, we store its value as-is
-		if ($keys === array('url') && preg_match('#^\\w+://#', $vars['url']))
-		{
-			return $vars['url'];
 		}
 
 		// If there are more than one capture, or it's not named "id", we store it as a series of
@@ -170,8 +487,18 @@ class s9e_MediaBBCodes
 		return implode(';', $pairs);
 	}
 
-	public static function embed($mediaKey, $site)
+	/**
+	* Generate the HTML code for a site
+	*
+	* @param  string $mediaKey XenForo's "media key" (same format as match())
+	* @param  array  $site     Site's config. We're only interested in the embed_html element
+	* @param  string $siteId   Site's ID
+	* @return string           Embed code
+	*/
+	public static function embed($mediaKey, array $site, $siteId)
 	{
+		$vars = array('id' => $mediaKey);
+
 		// If the value looks like a URL, we copy its value to the "url" var
 		if (preg_match('#^\\w+://#', $mediaKey))
 		{
@@ -181,7 +508,6 @@ class s9e_MediaBBCodes
 		// If the value looks like a series of key=value pairs, add them to $vars
 		if (preg_match('(^(\\w+=[^;]*)(?>;(?1))*$)', $mediaKey))
 		{
-			$vars = array();
 			foreach (explode(';', $mediaKey) as $pair)
 			{
 				list($k, $v) = explode('=', $pair);
@@ -189,54 +515,13 @@ class s9e_MediaBBCodes
 			}
 		}
 
-		// The value is used as the "id" var if it hasn't been defined already
-		if (!isset($vars['id']))
-		{
-			$vars['id'] = $mediaKey;
-		}
-
-		// No vars = no match, return a link to the content, or the BBCode as text
-		if (empty($vars))
-		{
-			$mediaKey = htmlspecialchars($mediaKey);
-
-			return (preg_match('(^https?://)', $mediaKey))
-				? "<a href=\"$mediaKey\">$mediaKey</a>"
-				: "[media={$site['media_site_id']}]{$mediaKey}[/media]";
-		}
-
 		// Prepare the HTML
-		$html = $site['embed_html'];
-
-		// Test whether this particular site has its own renderer
-		$html = preg_replace_callback(
-			'(<!-- (' . __CLASS__ . '::render\\w+)\\((?:(\\d+), *(\\d+))?\\) -->)',
-			function ($m) use ($vars)
-			{
-				$callback = $m[1];
-
-				if (!is_callable($callback))
-				{
-					return $m[0];
-				}
-
-				$html = call_user_func($callback, $vars);
-
-				if (isset($m[2], $m[3]))
-				{
-					$html = preg_replace('/( width=")[^"]*/',  '${1}' . $m[2], $html);
-					$html = preg_replace('/( height=")[^"]*/', '${1}' . $m[3], $html);
-				}
-
-				return $html;
-			},
-			$html,
-			-1,
-			$cnt
-		);
-
-		// Otherwise use the configured template
-		if (!$cnt)
+		$methodName = 'render' . ucfirst($siteId);
+		if (method_exists(__CLASS__, $methodName))
+		{
+			$html = call_user_func(__CLASS__ . '::' . $methodName, $vars);
+		}
+		else
 		{
 			$html = preg_replace_callback(
 				// Interpolate {$id} and other {$vars}
@@ -249,20 +534,22 @@ class s9e_MediaBBCodes
 			);
 		}
 
-		// Test for custom modifications
-		if (preg_match('(^<!-- (s9e_Custom::\w+)\\(\\) -->\\s*)', $html, $m))
+		// Test for custom callbacks
+		self::loadSettings();
+		if (isset(self::$customCallbacks[$siteId]) && is_callable(self::$customCallbacks[$siteId]))
 		{
-			$html = substr($html, strlen($m[0]));
-
-			if (is_callable($m[1]))
-			{
-				$html = call_user_func($m[1], $html, $vars);
-			}
+			$html = call_user_func(self::$customCallbacks[$siteId], $html, $vars);
 		}
 
 		return $html;
 	}
 
+	/**
+	* Retrieve content from given URL
+	*
+	* @param  string $url Target URL
+	* @return string      Response body
+	*/
 	public static function wget($url)
 	{
 		// Return the content from the cache if applicable
@@ -294,12 +581,101 @@ class s9e_MediaBBCodes
 		return $page;
 	}
 
-	protected static function scrape($url, $regexps)
+	/**
+	* Apply the var filters associated with given site
+	*
+	* @param  string  $siteId
+	* @param  array  &$vars
+	* @return void
+	*/
+	protected static function applyFilters($siteId, array &$vars)
 	{
-		return self::getNamedCaptures(self::wget($url), $regexps);
+		if (!isset(self::$sites[$siteId][self::KEY_FILTERS]))
+		{
+			return;
+		}
+
+		foreach (self::$sites[$siteId][self::KEY_FILTERS] as $varName => $callbacks)
+		{
+			if (!isset($vars[$varName]))
+			{
+				continue;
+			}
+
+			foreach ($callbacks as $callback)
+			{
+				$vars[$varName] = $callback($vars[$varName]);
+			}
+		}
 	}
 
-	protected static function getNamedCaptures($string, $regexps)
+	/**
+	* Scrape vars off given URL
+	*
+	* @param  string   $url
+	* @param  array    $scrape
+	* @param  string[] $vars
+	* @return array
+	*/
+	protected static function scrape($url, array $scrape, array $vars)
+	{
+		$scrapeVars = array();
+
+		$match = false;
+		foreach ($scrape['match'] as $regexp)
+		{
+			if (preg_match($regexp, $url, $m))
+			{
+				// Add the named captures to the available vars
+				$scrapeVars += $m;
+
+				$match = true;
+			}
+		}
+
+		if (!$match)
+		{
+			return $scrapeVars;
+		}
+
+		if (isset($scrape['url']))
+		{
+			// Add the vars from non-scrape "extract" regexps
+			$scrapeVars += $vars;
+
+			// Add the original URL
+			if (!isset($scrapeVars['url']))
+			{
+				$scrapeVars['url'] = $url;
+			}
+
+			// Replace {@var} tokens in the URL
+			$scrapeUrl = preg_replace_callback(
+				'#\\{@(\\w+)\\}#',
+				function ($m) use ($scrapeVars)
+				{
+					return (isset($scrapeVars[$m[1]])) ? $scrapeVars[$m[1]] : '';
+				},
+				$scrape['url']
+			);
+		}
+		else
+		{
+			// Use the same URL for scraping
+			$scrapeUrl = $url;
+		}
+
+		return self::getNamedCaptures(self::wget($scrapeUrl), $scrape['extract']);
+	}
+
+	/**
+	* Capture substrings from a string using a set of regular expressions
+	*
+	* @param  string   $string
+	* @param  string[] $regexps
+	* @return array
+	*/
+	protected static function getNamedCaptures($string, array $regexps)
 	{
 		$vars = array();
 
@@ -330,14 +706,6 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchAmazon($url)
-	{
-		$regexps = array('#(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)[:/]).*?/(?:dp|gp/product)/(?\'id\'[A-Z0-9]+)#', '#(?=.*?[./]amazon\\.(?>c(?>a|o(?>m|\\.(?>jp|uk)))|de|fr|it)[:/]).*?amazon\\.(?:co\\.)?(?\'tld\'ca|de|fr|it|jp|uk)#');
-		$scrapes = array();
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
 	public static function renderAudiomack($vars)
 	{
 		$vars += array('id' => null, 'mode' => null);
@@ -345,14 +713,6 @@ class s9e_MediaBBCodes
 		$html='<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="';if($vars['mode']==='album')$html.='352';else$html.='144';$html.='" src="//www.audiomack.com/embed3';if($vars['mode']==='album')$html.='-album';$html.='/'.htmlspecialchars($vars['id'],2).'"></iframe>';
 
 		return $html;
-	}
-
-	public static function matchAudiomack($url)
-	{
-		$regexps = array('!audiomack\\.com/(?\'mode\'album|song)/(?\'id\'[-\\w]+/[-\\w]+)!');
-		$scrapes = array();
-
-		return self::match($url, $regexps, $scrapes);
 	}
 
 	public static function renderBandcamp($vars)
@@ -364,47 +724,13 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchBandcamp($url)
+	public static function renderBbcnews($vars)
 	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!bandcamp\\.com/album/.!'),
-				'extract' => array('!/album=(?\'album_id\'\\d+)!')
-			),
-			array(
-				'match'   => array('!bandcamp\\.com/track/.!'),
-				'extract' => array('!"album_id":(?\'album_id\'\\d+)!', '!"track_num":(?\'track_num\'\\d+)!', '!/track=(?\'track_id\'\\d+)!')
-			)
-		);
+		$vars += array('ad_site' => null, 'playlist' => null, 'poster' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<iframe width="560" height="315" src="https://ssl.bbc.co.uk/wwscripts/embed_player#playlist='.htmlspecialchars($vars['playlist'],2).'&amp;poster='.htmlspecialchars($vars['poster'],2).'&amp;ad_site='.htmlspecialchars($vars['ad_site'],2).'&amp;ad_keyword=&amp;source=twitter" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
-	public static function matchBbcnews($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!bbc\\.com/news/\\w+!'),
-				'extract' => array('!meta name="twitter:player".*?playlist=(?\'playlist\'[-/\\w]+)(?:&poster=(?\'poster\'[-/.\\w]+))?(?:&ad_site=(?\'ad_site\'[/\\w]+))?!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchBlip($url)
-	{
-		$regexps = array('!blip\\.tv/play/(?\'id\'[\\w+%/_]+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!blip\\.tv/[^/]+/[^/]+-\\d+$!'),
-				'extract' => array('!blip\\.tv/play/(?\'id\'[\\w%+/_]+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderCbsnews($vars)
@@ -416,56 +742,31 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchCbsnews($url)
+	public static function renderColbertnation($vars)
 	{
-		$regexps = array('#cbsnews\\.com/video/watch/\\?id=(?\'id\'\\d+)#');
-		$scrapes = array(
-			array(
-				'match'   => array('#cbsnews\\.com/videos/(?!watch/)#'),
-				'extract' => array('#"pid":"(?\'pid\'\\w+)"#')
-			)
-		);
+		$vars += array('id' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="512" height="288" src="//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchColbertnation($url)
+	public static function renderComedycentral($vars)
 	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!thecolbertreport\\.cc\\.com/videos/!'),
-				'extract' => array('!(?\'id\'mgid:arc:video:colbertnation\\.com:[-0-9a-f]+)!')
-			)
-		);
+		$vars += array('id' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="512" height="288" src="//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchComedycentral($url)
+	public static function renderDailyshow($vars)
 	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!c(?:c|omedycentral)\\.com/video-clips/!'),
-				'extract' => array('!(?\'id\'mgid:arc:video:[.\\w]+:[-\\w]+)!')
-			)
-		);
+		$vars += array('id' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<iframe width="512" height="288" src="//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
-	public static function matchDailyshow($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!thedailyshow\\.c(?:c\\.c)?om/(?:collection|extended-interviews|videos|watch)/!'),
-				'extract' => array('!(?\'id\'mgid:arc:(?:playlist|video):thedailyshow\\.com:[-0-9a-f]+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderDumpert($vars)
@@ -477,19 +778,6 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchDumpert($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!dumpert\\.nl/mediabase/\\d+/\\w+!'),
-				'extract' => array('!data-itemid="(?\'id\'\\w+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
 	public static function renderEbay($vars)
 	{
 		$vars += array('id' => null, 'itemid' => null, 'lang' => null);
@@ -499,64 +787,31 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchEbay($url)
+	public static function renderEspn($vars)
 	{
-		$regexps = array('#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'id\'\\d+)#', '#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?[?&]item=(?\'id\'\\d+)#');
-		$scrapes = array(
-			array(
-				'match'   => array('#ebay\\.(?!com/)#'),
-				'extract' => array('#"locale":"(?\'lang\'\\w+)"#')
-			)
-		);
+		$vars += array('cms' => null, 'id' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="560" height="315" src="https://espn.go.com/video/iframe/twitter/?cms='.htmlspecialchars($vars['cms'],2).'&amp;id='.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchEighttracks($url)
+	public static function renderFlickr($vars)
 	{
-		$regexps = array('!8tracks\\.com/[-\\w]+/(?\'id\'\\d+)(?=#|$)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!8tracks\\.com/[-\\w]+/[-\\w]+!'),
-				'extract' => array('!eighttracks://mix/(?\'id\'\\d+)!')
-			)
-		);
+		$vars += array('height' => null, 'id' => null, 'width' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="https://www.flickr.com/photos/_/'.htmlspecialchars($vars['id'],2).'/player/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchEspn($url)
+	public static function renderGametrailers($vars)
 	{
-		$regexps = array('#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#');
-		$scrapes = array();
+		$vars += array('id' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<iframe width="512" height="288" src="//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
-	public static function matchFlickr($url)
-	{
-		$regexps = array('!flickr\\.com/photos/[^/]+/(?\'id\'\\d+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!flickr\\.com/photos/[^/]+/\\d!'),
-				'extract' => array('!<meta property="og:image:width" content="(?\'width\'\\d+)!', '!<meta property="og:image:height" content="(?\'height\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchGametrailers($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!gametrailers\\.com/(?:full-episode|review|video)s/!'),
-				'extract' => array('!(?\'id\'mgid:arc:(?:episode|video):gametrailers\\.com:[-\\w]+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderGetty($vars)
@@ -568,53 +823,31 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchGetty($url)
+	public static function renderGfycat($vars)
 	{
-		$regexps = array('!gty\\.im/(?\'id\'\\d+)!', '!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?\'id\'\\d+)!');
-		$scrapes = array(
-			array(
-				'url'     => 'http://embed.gettyimages.com/preview/{@id}',
-				'match'   => array('//'),
-				'extract' => array('!"height":[ "]*(?\'height\'\\d+)!', '!"width":[ "]*(?\'width\'\\d+)!', '!et=(?\'et\'[-=\\w]+)!', '!sig=(?\'sig\'[-=\\w]+)!')
-			)
-		);
+		$vars += array('height' => null, 'id' => null, 'width' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="//gfycat.com/iframe/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchGfycat($url)
+	public static function renderGoogleplus($vars)
 	{
-		$regexps = array('!gfycat\\.com/(?\'id\'\\w+)!');
-		$scrapes = array(
-			array(
-				'url'     => 'http://gfycat.com/{@id}',
-				'match'   => array('//'),
-				'extract' => array('!gfyHeight[ ="]+(?\'height\'\\d+)!', '!gfyWidth[ ="]+(?\'width\'\\d+)!')
-			)
-		);
+		$vars += array('oid' => null, 'pid' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="450" height="240" src="//s9e.github.io/iframe/googleplus.min.html#'.htmlspecialchars($vars['oid'],2).'/posts/'.htmlspecialchars($vars['pid'],2).'" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchGoogleplus($url)
+	public static function renderGooglesheets($vars)
 	{
-		$regexps = array('!//plus\\.google\\.com/(?:\\+\\w+|(?\'oid\'\\d+))/posts/(?\'pid\'\\w+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!//plus\\.google\\.com/\\+[^/]+/posts/\\w!'),
-				'extract' => array('!oid="?(?\'oid\'\\d+)!')
-			)
-		);
+		$vars += array('gid' => null, 'id' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<iframe width="100%" height="500" style="resize:both" src="https://docs.google.com/spreadsheet/ccc?key='.htmlspecialchars($vars['id'],2).'&amp;widget=true&amp;headers=false&amp;rm=minimal#gid='.htmlspecialchars($vars['gid'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
-	public static function matchGooglesheets($url)
-	{
-		$regexps = array('!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'\\w+)[^#]*(?:#gid=(?\'gid\'\\d+))?!');
-		$scrapes = array();
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderGrooveshark($vars)
@@ -626,33 +859,6 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchGrooveshark($url)
-	{
-		$regexps = array('%grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?\'playlistid\'\\d+)%');
-		$scrapes = array(
-			array(
-				'url'     => 'http://grooveshark.com/s/{@path}',
-				'match'   => array('%grooveshark\\.com(?:/#!?)?/s/(?\'path\'[^/]+/.+)%'),
-				'extract' => array('%songID=(?\'songid\'\\d+)%')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchHulu($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!hulu\\.com/watch/!'),
-				'extract' => array('!eid=(?\'id\'[-\\w]+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
 	public static function renderImgur($vars)
 	{
 		$vars += array('height' => null, 'id' => null, 'type' => null, 'width' => null);
@@ -662,61 +868,13 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchImgur($url)
+	public static function renderInternetarchive($vars)
 	{
-		$regexps = array('!imgur\\.com/a/(?\'id\'\\w+)!', '!imgur\\.com/(?\'id\'\\w+)\\.(?:gifv|mp4)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!imgur\\.com/a/\\w!'),
-				'extract' => array('!<a class="(?\'type\'album)-embed-link!')
-			),
-			array(
-				'url'     => 'http://i.imgur.com/{@id}.gifv',
-				'match'   => array('!imgur\\.com/\\w+\\.(?:gifv|mp4)!'),
-				'extract' => array('!width:\\s*(?\'width\'\\d+)!', '!height:\\s*(?\'height\'\\d+)!', '!(?\'type\'gifv)!')
-			)
-		);
+		$vars += array('height' => null, 'id' => null, 'width' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="https://archive.org/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
-	public static function matchIndiegogo($url)
-	{
-		$regexps = array('!indiegogo\\.com/projects/(?\'id\'\\d+)$!');
-		$scrapes = array(
-			array(
-				'match'   => array('!indiegogo\\.com/projects/.!'),
-				'extract' => array('!indiegogo\\.com/projects/(?\'id\'\\d+)/!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchInternetarchive($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!archive\\.org/details/!'),
-				'extract' => array('!meta property="twitter:player" content="https://archive.org/embed/(?\'id\'[^/"]+)!', '!meta property="og:video:width" content="(?\'width\'\\d+)!', '!meta property="og:video:height" content="(?\'height\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchKhl($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!video\\.khl\\.ru/(?:event|quote)s/\\d!'),
-				'extract' => array('!//video\\.khl\\.ru/iframe/feed/start/(?\'id\'[\\w/]+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderKickstarter($vars)
@@ -728,131 +886,22 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchKickstarter($url)
+	public static function renderMailru($vars)
 	{
-		$regexps = array('!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!');
-		$scrapes = array();
+		$vars += array('id' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="560" height="342" src="http://videoapi.my.mail.ru/videos/embed/'.htmlspecialchars($vars['id'],2).'.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchMailru($url)
+	public static function renderMediacrush($vars)
 	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('!my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!'),
-				'extract' => array('!mail\\.ru/videos/embed/(?\'id\'[\\w/]+)\\.html!')
-			)
-		);
+		$vars += array('height' => null, 'id' => null, 'width' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="https://mediacru.sh/'.htmlspecialchars($vars['id'],2).'/frame" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
-	public static function matchMediacrush($url)
-	{
-		$regexps = array('!mediacru\\.sh/(?\'id\'\\w+)!');
-		$scrapes = array(
-			array(
-				'url'     => 'https://mediacru.sh/api/{@id}',
-				'match'   => array('//'),
-				'extract' => array('!"height":\\s*(?\'height\'\\d+)!', '!"width":\\s*(?\'width\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchMixcloud($url)
-	{
-		$regexps = array('@mixcloud\\.com/(?!categories|tag)(?\'id\'[-\\w]+/[^/&]+)/@');
-		$scrapes = array(
-			array(
-				'match'   => array('@//i\\.mixcloud\\.com/\\w+$@'),
-				'extract' => array('@link rel="canonical" href="https?://[^/]+/(?\'id\'[-\\w]+/[^/&]+)/@')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchMsnbc($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('@msnbc\\.com/[-\\w]+/watch/@'),
-				'extract' => array('@guid="?(?\'id\'\\w+)@')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchNatgeovideo($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('@video\\.nationalgeographic\\.com/(?:tv|video)/\\w@'),
-				'extract' => array('@guid="(?\'id\'[-\\w]+)"@')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchPodbean($url)
-	{
-		$regexps = array('!podbean\\.com/site/player/index/pid/\\d+/eid/(?\'id\'\\d+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!podbean\\.com/e/!'),
-				'extract' => array('!embed/postId/(?\'id\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchRdio($url)
-	{
-		$regexps = array('!rd\\.io/./(?\'id\'\\w+)!');
-		$scrapes = array(
-			array(
-				'url'     => 'http://www.rdio.com/api/oembed/?url={@url}',
-				'match'   => array('!rdio\\.com/.*?(?:playlist|track)!'),
-				'extract' => array('!rd\\.io/./(?\'id\'\\w+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchRutube($url)
-	{
-		$regexps = array('!rutube\\.ru/tracks/(?\'id\'\\d+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!rutube\\.ru/video/[0-9a-f]{32}!'),
-				'extract' => array('!rutube\\.ru/play/embed/(?\'id\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchSlideshare($url)
-	{
-		$regexps = array('!slideshare\\.net/[^/]+/[-\\w]+-(?\'id\'\\d{6,})$!');
-		$scrapes = array(
-			array(
-				'match'   => array('!slideshare\\.net/[^/]+/\\w!'),
-				'extract' => array('!"presentationId":(?\'id\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderSoundcloud($vars)
@@ -864,33 +913,6 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchSoundcloud($url)
-	{
-		$regexps = array('@(?\'id\'https?://(?:(?:api\\.soundcloud\\.com/(?:playlist|track)s/\\d+)|soundcloud\\.com/[^/]+/(?:sets/)?[^/]+)(?:(?:\\?secret_token=|/(?=s-))(?\'secret_token\'[-\\w]+))?|^[^/]+/[^/]+$)@');
-		$scrapes = array(
-			array(
-				'url'     => 'https://api.soundcloud.com/resolve?url={@id}&_status_code_map%5B302%5D=200&_status_format=json&client_id=b45b1aa10f1ac2941910a7f0d10f8e28&app_version=7a35847b',
-				'match'   => array('@soundcloud\\.com/(?!playlists/|tracks/)[^/]+/(?:sets/)?[^/]+/s-@'),
-				'extract' => array('@playlists/(?\'playlist_id\'\\d+)@', '@tracks/(?\'track_id\'\\d+)@')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchSportsnet($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('//'),
-				'extract' => array('@vid(?:eoId)?=(?\'id\'\\d+)@')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
 	public static function renderSpotify($vars)
 	{
 		$vars += array('path' => null, 'uri' => null);
@@ -898,27 +920,6 @@ class s9e_MediaBBCodes
 		$html='<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=';if(isset($vars['uri']))$html.=htmlspecialchars($vars['uri'],2);else$html.='spotify:'.htmlspecialchars(strtr($vars['path'],'/',':'),2);$html.='"></iframe>';
 
 		return $html;
-	}
-
-	public static function matchSpotify($url)
-	{
-		$regexps = array('!(?\'uri\'spotify:(?:album|artist|user|track(?:set)?):[,:\\w]+)!', '!(?:open|play)\\.spotify\\.com/(?\'path\'(?:album|artist|track|user)/[/\\w]+)!');
-		$scrapes = array();
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchTeamcoco($url)
-	{
-		$regexps = array('!teamcoco\\.com/video/(?\'id\'\\d+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!teamcoco\\.com/video/.!'),
-				'extract' => array('!teamcoco\\.com/embed/v/(?\'id\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
 	}
 
 	public static function renderTed($vars)
@@ -930,25 +931,13 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchTinypic($url)
+	public static function renderTinypic($vars)
 	{
-		$regexps = array('!tinypic\\.com/player\\.php\\?v=(?\'id\'\\w+)&s=(?\'s\'\\d+)!');
-		$scrapes = array();
+		$vars += array('id' => null, 's' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="560" height="345" data="http://tinypic.com/player.swf?file='.htmlspecialchars($vars['id'],2).'&amp;s='.htmlspecialchars($vars['s'],2).'"><param name="allowfullscreen" value="true"><embed type="application/x-shockwave-flash" src="http://tinypic.com/player.swf?file='.htmlspecialchars($vars['id'],2).'&amp;s='.htmlspecialchars($vars['s'],2).'" width="560" height="345" allowfullscreen=""></object>';
 
-	public static function matchTraileraddict($url)
-	{
-		$regexps = array();
-		$scrapes = array(
-			array(
-				'match'   => array('@traileraddict\\.com/(?!tags/)[^/]+/.@'),
-				'extract' => array('@v\\.traileraddict\\.com/(?\'id\'\\d+)@')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderTwitch($vars)
@@ -960,19 +949,6 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchTwitch($url)
-	{
-		$regexps = array('#twitch\\.tv/(?\'channel\'(?!m/)\\w+)(?:/b/(?\'archive_id\'\\d+)|/c/(?\'chapter_id\'\\d+))?#');
-		$scrapes = array(
-			array(
-				'match'   => array('!twitch\\.tv/m/\\d+!'),
-				'extract' => array('!channel=(?\'channel\'\\w+)&.*?archive_id=(?\'archive_id\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
 	public static function renderUstream($vars)
 	{
 		$vars += array('cid' => null, 'vid' => null);
@@ -982,70 +958,22 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function matchUstream($url)
+	public static function renderVidme($vars)
 	{
-		$regexps = array('!ustream\\.tv/recorded/(?\'vid\'\\d+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('#ustream\\.tv/(?!explore/|platform/|recorded/|search\\?|upcoming$|user/)(?:channel/)?[-\\w]+#'),
-				'extract' => array('!embed/(?\'cid\'\\d+)!')
-			)
-		);
+		$vars += array('height' => null, 'id' => null, 'width' => null);
 
-		return self::match($url, $regexps, $scrapes);
+		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="https://vid.me/e/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
 	}
 
-	public static function matchVidme($url)
+	public static function renderVk($vars)
 	{
-		$regexps = array('!vid\\.me/(?\'id\'\\w+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('//'),
-				'extract' => array('!meta property="og:video:type" content="video/\\w+">\\s*<meta property="og:video:height" content="(?\'height\'\\d+)">\\s*<meta property="og:video:width" content="(?\'width\'\\d+)!')
-			)
-		);
+		$vars += array('hash' => null, 'oid' => null, 'vid' => null);
 
-		return self::match($url, $regexps, $scrapes);
-	}
+		$html='<iframe width="607" height="360" src="//vk.com/video_ext.php?oid='.htmlspecialchars($vars['oid'],2).'&amp;id='.htmlspecialchars($vars['vid'],2).'&amp;hash='.htmlspecialchars($vars['hash'],2).'&amp;hd=1" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
-	public static function matchVk($url)
-	{
-		$regexps = array('!vk(?:\\.com|ontakte\\.ru)/(?:[\\w.]+\\?z=)?video(?\'oid\'-?\\d+)_(?\'vid\'\\d+)!', '!vk(?:\\.com|ontakte\\.ru)/video_ext\\.php\\?oid=(?\'oid\'-?\\d+)&id=(?\'vid\'\\d+)&hash=(?\'hash\'[0-9a-f]+)!');
-		$scrapes = array(
-			array(
-				'url'     => 'http://vk.com/video{@oid}_{@vid}',
-				'match'   => array('!vk.*?video-?\\d+_\\d+!'),
-				'extract' => array('!embed_hash=(?\'hash\'[0-9a-f]+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchVube($url)
-	{
-		$regexps = array('!vube\\.com/[^/]+/[^/]+/(?\'id\'\\w+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!vube\\.com/s/\\w+!'),
-				'extract' => array('!vube\\.com/[^/]+/[^/]+/(?\'id\'\\w+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
-	}
-
-	public static function matchWshh($url)
-	{
-		$regexps = array('!worldstarhiphop\\.com/featured/(?\'id\'\\d+)!');
-		$scrapes = array(
-			array(
-				'match'   => array('!worldstarhiphop\\.com/(?:\\w+/)?video\\.php\\?v=\\w+!'),
-				'extract' => array('!disqus_identifier[ =\']+(?\'id\'\\d+)!')
-			)
-		);
-
-		return self::match($url, $regexps, $scrapes);
+		return $html;
 	}
 
 	public static function renderWsj($vars)
@@ -1064,13 +992,5 @@ class s9e_MediaBBCodes
 		$html='<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['list']))$html.='?list='.htmlspecialchars($vars['list'],2);if(isset($vars['t'])||isset($vars['m'])){if(isset($vars['list']))$html.='&amp;';else$html.='?';$html.='start=';if(isset($vars['t']))$html.=htmlspecialchars($vars['t'],2);elseif(isset($vars['h']))$html.=htmlspecialchars($vars['h']*3600+$vars['m']*60+$vars['s'],2);else$html.=htmlspecialchars($vars['m']*60+$vars['s'],2);}$html.='"></iframe>';
 
 		return $html;
-	}
-
-	public static function matchYoutube($url)
-	{
-		$regexps = array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!', '!youtu\\.be/(?\'id\'[-\\w]+)!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?:(?:(?\'h\'\\d+)h)?(?\'m\'\\d+)m(?\'s\'\\d+)|(?\'t\'\\d+))!', '!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?\'list\'[-\\w]+)!');
-		$scrapes = array();
-
-		return self::match($url, $regexps, $scrapes);
 	}
 }
