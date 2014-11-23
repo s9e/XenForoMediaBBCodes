@@ -611,7 +611,7 @@ class s9e_MediaBBCodes
 
 	public static function matchGooglesheets($url)
 	{
-		$regexps = array('!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'\\w+)[^#]*(?:#gid=(?\'gid\'\\d+))?!');
+		$regexps = array('!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'[-\\w]+)[^#]*(?:#gid=(?\'gid\'\\d+))?!');
 		$scrapes = array();
 
 		return self::match($url, $regexps, $scrapes);
