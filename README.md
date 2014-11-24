@@ -395,6 +395,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 			<td>http://www.ustream.tv/channel/ps4-ustream-gameplay<br/>http://www.ustream.tv/baja1000tv<br/>http://www.ustream.tv/recorded/40688256</td>
 		</tr>
 		<tr>
+			<td><code>vbox7</code></td>
+			<td>VBOX7</td>
+			<td>http://vbox7.com/play:25ad44c316</td>
+		</tr>
+		<tr>
 			<td><code>vevo</code></td>
 			<td>VEVO</td>
 			<td>http://www.vevo.com/watch/USUV71400682<br/>http://www.vevo.com/watch/eminem/the-monster-explicit/USUV71302925</td>
