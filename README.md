@@ -397,7 +397,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<tr>
 			<td><code>vbox7</code></td>
 			<td>VBOX7</td>
-			<td>http://vbox7.com/play:25ad44c316</td>
+			<td>http://vbox7.com/play:3975300ec6</td>
 		</tr>
 		<tr>
 			<td><code>vevo</code></td>

@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201411240" version_string="20141124" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://github.com/s9e/XenForoMediaBBCodes" version_id="201411260" version_string="20141126" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites>
     <site media_site_id="abcnews" site_title="ABC News" site_url="http://abcnews.go.com/" match_is_regex="1" supported="1">
       <match_urls>!abcnews\.go\.com/[^/]+/video/[^/]+-(?'id'\d+)!</match_urls>
@@ -248,7 +248,7 @@
     <site media_site_id="podbean" site_title="Podbean" site_url="http://www.podbean.com/" match_is_regex="1" supported="1" match_callback_class="s9e_MediaBBCodes" match_callback_method="matchPodbean">
       <match_urls>!podbean\.com/site/player/index/pid/\d+/eid/(?'id'\d+)!
 !(?'id')podbean\.com/e/!</match_urls>
-      <embed_html><![CDATA[<iframe width="100%" height="100" style="max-width:900px" src="http://www.podbean.com/media/player/audio/postId/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
+      <embed_html><![CDATA[<iframe width="100%" height="100" style="max-width:900px" src="//www.podbean.com/media/player/audio/postId/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>]]></embed_html>
     </site>
     <site media_site_id="prezi" site_title="Prezi" site_url="http://prezi.com/" match_is_regex="1" supported="1">
       <match_urls>#//prezi\.com/(?!(?:a(?:bout|mbassadors)|c(?:o(?:llaborate|mmunity|ntact)|reate)|exp(?:erts|lore)|ip(?:ad|hone)|jobs|l(?:ear|ogi)n|m(?:ac|obility)|pr(?:es(?:s|ent)|icing)|recommend|support|user|windows|your)/)(?'id'\w+)/#</match_urls>
