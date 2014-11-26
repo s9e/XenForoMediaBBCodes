@@ -966,7 +966,7 @@ class s9e_MediaBBCodes
 		$scrapes = array(
 			array(
 				'match'   => array('!twitch\\.tv/m/\\d+!'),
-				'extract' => array('!channel=(?\'channel\'\\w+)&.*?archive_id=(?\'archive_id\'\\d+)!')
+				'extract' => array('!channel=(?\'channel\'\\w+).*?videoId=a(?\'archive_id\'\\d+)!')
 			)
 		);
 
