@@ -22,6 +22,6 @@ Upload this file to your webserver in the `library/s9e/` directory. The path to 
 
 Now you need to configure XenForo to use your custom callback. Go to the admin panel in Options > s9e Media Pack and enter the name of the site you want to modify and the name of the callback in the form `site=class::method`. You can modify as many sites as you want by entering each custom callback on a separate line. In our example, the site is `youtube`, the class is `s9e_Custom` and the method is `youtube`, so you'd have to enter `youtube=s9e_Custom::youtube` in the text box.
 
-[![](CustomCallbacksThumbnail.png)](CustomCallbacks.png)
+[![](CustomCallbacksThumbnail.png)](https://raw.githubusercontent.com/s9e/XenForoMediaBBCodes/master/docs/CustomCallbacks.png)
 
 Click "Save Changes" and you're done.
