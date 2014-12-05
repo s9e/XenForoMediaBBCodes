@@ -24,3 +24,4 @@ Now you need to configure XenForo to use your custom callback. Go to the admin p
 
 Click "Save Changes" and you're done.
 
+[![](CustomCallbacksThumbnail.png)](CustomCallbacks.png)
