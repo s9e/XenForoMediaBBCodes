@@ -2,18 +2,90 @@
 
 namespace s9e\XenForoMediaBBCodes\Tests;
 
+use DOMDocument;
 use PHPUnit_Framework_TestCase;
 use s9e_MediaBBCodes;
 use XenForo_Application;
+use XenForo_Model;
+use XenForo_Model_BbCode;
 
-include __DIR__ . '/Custom.php';
 include __DIR__ . '/XenForo_Application.php';
+include __DIR__ . '/XenForo_Model.php';
+include __DIR__ . '/XenForo_Model_BbCode.php';
+include __DIR__ . '/s9e_Custom.php';
 
 class Test extends PHPUnit_Framework_TestCase
 {
+	public static function setUpBeforeClass()
+	{
+		spl_autoload_register(
+			function ($className)
+			{
+				$filepath = __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
+				if ($className === 's9e_MediaBBCodes' && file_exists($filepath))
+				{
+					include $filepath;
+				}
+			}
+		);
+	}
+
 	public function setUp()
 	{
-		XenForo_Application::$options = array();
+		// Reset the s9e_MediaBBCodes vars only if the class already exists. This is to ensure that
+		// the class isn't loaded before the first test is run
+		if (class_exists('s9e_MediaBBCodes', false))
+		{
+			s9e_MediaBBCodes::$customCallbacks = null;
+			s9e_MediaBBCodes::$excludedSites   = null;
+			s9e_MediaBBCodes::$tags            = null;
+		}
+
+		XenForo_Application::$options = array(
+			's9e_EXCLUDE_SITES'    => null,
+			's9e_excluded_sites'   => null,
+			's9e_custom_callbacks' => null,
+			's9e_media_tags'       => null
+		);
+	}
+
+	public function getAddon($sitesXml = '<bb_code_media_sites/>')
+	{
+		$sites = new DOMDocument;
+		$sites->loadXML($sitesXml);
+
+		$addon = new DOMDocument;
+		$addon->load(__DIR__ . '/../build/addon-s9e.xml');
+
+		$node = $addon->getElementsByTagName('bb_code_media_sites')->item(0);
+		$node->parentNode->replaceChild($addon->importNode($sites->documentElement, true), $node);
+
+		return simplexml_import_dom($addon);
+	}
+
+	public function assertAddonHasSite($addon, $siteId)
+	{
+		return (bool) count($addon->xpath('//site[@media_site_id="' . $siteId . '"]'));
+	}
+
+	public function assertAddonNotHasSite($addon, $siteId)
+	{
+		return !$this->assertAddonHasSite($addon, $siteId);
+	}
+
+	public function assertReinstallWasCalled()
+	{
+		$this->assertArrayHasKey(0, XenForo_Model_BbCode::$loggedCalls);
+		$this->assertSame(
+			'importBbCodeMediaSitesAddOnXml',
+			XenForo_Model_BbCode::$loggedCalls[0][0]
+		);
+
+		$this->assertArrayHasKey(1, XenForo_Model_BbCode::$loggedCalls);
+		$this->assertSame(
+			'rebuildBbCodeCache',
+			XenForo_Model_BbCode::$loggedCalls[1][0]
+		);
 	}
 
 	/**
@@ -32,158 +104,211 @@ class Test extends PHPUnit_Framework_TestCase
 
 	public function testBlacklist()
 	{
-		if (!class_exists('s9e_MediaBBCodes'))
-		{
-			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
-		}
+		XenForo_Application::$options['s9e_excluded_sites'] = 'two, three, five';
 
-		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = 'two, three, five';
-
-		$addon = simplexml_load_string(
-			'<addon>
-				<bb_code_media_sites>
-					<site media_site_id="one"/>
-					<site media_site_id="two"/>
-					<site media_site_id="three"/>
-					<site media_site_id="four"/>
-					<site media_site_id="five"/>
-					<site media_site_id="six"/>
-				</bb_code_media_sites>
-			</addon>'
+		$addon = $this->getAddon(
+			'<bb_code_media_sites>
+				<site media_site_id="one"/>
+				<site media_site_id="two"/>
+				<site media_site_id="three"/>
+				<site media_site_id="four"/>
+				<site media_site_id="five"/>
+				<site media_site_id="six"/>
+			</bb_code_media_sites>'
 		);
 
-		s9e_MediaBBCodes::install(null, null, $addon);
+		s9e_MediaBBCodes::install(null, array(), $addon);
 
-		$this->assertXmlStringEqualsXmlString(
-			'<addon>
-				<bb_code_media_sites>
-					<site media_site_id="one"/>
-					<site media_site_id="four"/>
-					<site media_site_id="six"/>
-				</bb_code_media_sites>
-			</addon>',
-			$addon->asXML()
-		);
+		$this->assertAddonHasSite($addon, 'one');
+		$this->assertAddonHasSite($addon, 'four');
+		$this->assertAddonHasSite($addon, 'six');
+		$this->assertAddonNotHasSite($addon, 'two');
+		$this->assertAddonNotHasSite($addon, 'three');
+		$this->assertAddonNotHasSite($addon, 'five');
 	}
 
 	public function testBlacklistNoEmpty()
 	{
-		if (!class_exists('s9e_MediaBBCodes'))
-		{
-			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
-		}
+		XenForo_Application::$options['s9e_excluded_sites'] = '';
 
-		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = '';
-
-		$addon = simplexml_load_string(
-			'<addon>
-				<bb_code_media_sites>
-					<site media_site_id="one"/>
-					<site media_site_id="two"/>
-					<site media_site_id="three"/>
-				</bb_code_media_sites>
-			</addon>'
+		$addon = $this->getAddon(
+			'<bb_code_media_sites>
+				<site media_site_id="one"/>
+				<site media_site_id="two"/>
+				<site media_site_id="three"/>
+			</bb_code_media_sites>'
 		);
 
-		s9e_MediaBBCodes::install(null, null, $addon);
+		s9e_MediaBBCodes::install(null, array(), $addon);
 
-		$this->assertXmlStringEqualsXmlString(
-			'<addon>
-				<bb_code_media_sites>
-					<site media_site_id="one"/>
-					<site media_site_id="two"/>
-					<site media_site_id="three"/>
-				</bb_code_media_sites>
-			</addon>',
-			$addon->asXML()
-		);
+		$this->assertAddonHasSite($addon, 'one');
+		$this->assertAddonHasSite($addon, 'two');
+		$this->assertAddonHasSite($addon, 'three');
 	}
 
 	public function testBlacklistWithSurroundingSpace()
 	{
-		if (!class_exists('s9e_MediaBBCodes'))
-		{
-			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
-		}
+		XenForo_Application::$options['s9e_excluded_sites'] = ' two ';
 
-		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = ' two ';
-
-		$addon = simplexml_load_string(
-			'<addon>
-				<bb_code_media_sites>
-					<site media_site_id="one"/>
-					<site media_site_id="two"/>
-					<site media_site_id="three"/>
-				</bb_code_media_sites>
-			</addon>'
+		$addon = $this->getAddon(
+			'<bb_code_media_sites>
+				<site media_site_id="one"/>
+				<site media_site_id="two"/>
+				<site media_site_id="three"/>
+			</bb_code_media_sites>'
 		);
 
-		s9e_MediaBBCodes::install(null, null, $addon);
+		s9e_MediaBBCodes::install(null, array(), $addon);
 
-		$this->assertXmlStringEqualsXmlString(
-			'<addon>
-				<bb_code_media_sites>
-					<site media_site_id="one"/>
-					<site media_site_id="three"/>
-				</bb_code_media_sites>
-			</addon>',
+		$this->assertAddonHasSite($addon, 'one');
+		$this->assertAddonNotHasSite($addon, 'two');
+		$this->assertAddonHasSite($addon, 'three');
+	}
+
+	public function testBlacklistLegacy()
+	{
+		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = 'two, three, five';
+
+		$addon = $this->getAddon(
+			'<bb_code_media_sites>
+				<site media_site_id="one"/>
+				<site media_site_id="two"/>
+				<site media_site_id="three"/>
+				<site media_site_id="four"/>
+				<site media_site_id="five"/>
+				<site media_site_id="six"/>
+			</bb_code_media_sites>'
+		);
+
+		s9e_MediaBBCodes::install(null, array(), $addon);
+
+		$this->assertAddonHasSite($addon, 'one');
+		$this->assertAddonHasSite($addon, 'four');
+		$this->assertAddonHasSite($addon, 'six');
+		$this->assertAddonNotHasSite($addon, 'two');
+		$this->assertAddonNotHasSite($addon, 'three');
+		$this->assertAddonNotHasSite($addon, 'five');
+	}
+
+	public function testBlacklistLegacyInstall()
+	{
+		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = 'exfoo';
+
+		$addon = $this->getAddon();
+		s9e_MediaBBCodes::install(null, array(), $addon);
+
+		$this->assertContains(
+			'<default_value>exfoo</default_value></option>',
 			$addon->asXML()
 		);
 	}
 
-	public function testCustomInstall()
+	public function testDefaultInstall()
 	{
-		XenForo_Application::$options['s9e_EXCLUDE_SITES'] = null;
+		$addon = $this->getAddon();
+		s9e_MediaBBCodes::install(null, array(), $addon);
 
-		$addon = simplexml_load_string(
-			'<addon>
-				<bb_code_media_sites>
-					<site media_site_id="foobar">
-						<embed_html><![CDATA[foobar]]></embed_html>
-					</site>
-				</bb_code_media_sites>
-			</addon>'
+		// Test a couple of sites
+		$this->assertAddonHasSite($addon, 'youku');
+		$this->assertAddonHasSite($addon, 'youtube');
+	}
+
+	public function testMediaTags()
+	{
+		XenForo_Application::$options['s9e_media_tags'] = array('social' => 1);
+
+		$addon = $this->getAddon();
+		s9e_MediaBBCodes::install(null, array(), $addon);
+
+		// Test a couple of sites
+		$this->assertAddonHasSite($addon, 'twitter');
+		$this->assertAddonNotHasSite($addon, 'youku');
+	}
+
+	public function testUpdateTags()
+	{
+		$tags = array('new' => 1);
+
+		$this->assertTrue(s9e_MediaBBCodes::updateTags($tags));
+		$this->assertSame($tags, s9e_MediaBBCodes::$tags);
+		$this->assertReinstallWasCalled();
+	}
+
+	public function testValidateCustomCallbacksValue()
+	{
+		$text = "
+			youtube = foo :: bar
+
+			twitter = bar :: baz
+		";
+		s9e_MediaBBCodes::validateCustomCallbacks($text);
+
+		$this->assertSame("twitter=bar::baz\nyoutube=foo::bar\n", $text);
+	}
+
+	public function testValidateCustomCallbacksReinstall()
+	{
+		$text = '';
+		s9e_MediaBBCodes::validateCustomCallbacks($text);
+		$this->assertReinstallWasCalled();
+	}
+
+	public function testCustomCallbacksInstall()
+	{
+		$addon = $this->getAddon(
+			'<bb_code_media_sites>
+				<site media_site_id="custom">
+					<embed_html>x</embed_html>
+				</site>
+			</bb_code_media_sites>'
 		);
 
-		s9e_MediaBBCodes::install(null, null, $addon);
+		s9e_MediaBBCodes::install(null, array(), $addon);
 
-		$this->assertXmlStringEqualsXmlString(
-			'<addon>
-				<bb_code_media_sites>
-					<site embed_html_callback_class="s9e_MediaBBCodes" embed_html_callback_method="embed" media_site_id="foobar">
-						<embed_html><![CDATA[<!-- s9e_Custom::foobar() -->
-foobar]]></embed_html>
-					</site>
-				</bb_code_media_sites>
-			</addon>',
+		$this->assertContains(
+			"<default_value>custom=s9e_Custom::custom\n</default_value></option>",
 			$addon->asXML()
 		);
+	}
+
+	public function testValidateExcludedSitesValue()
+	{
+		$text = ' youtube , twitter ';
+		s9e_MediaBBCodes::validateExcludedSites($text);
+
+		$this->assertSame('twitter,youtube', $text);
+	}
+
+	public function testValidateExcludedSitesReinstall()
+	{
+		$text = '';
+		s9e_MediaBBCodes::validateExcludedSites($text);
+		$this->assertReinstallWasCalled();
 	}
 
 	/**
 	* @dataProvider getMatchCallbackTests
 	*/
-	public function testMatchCallback($id, $url, $expected, $assertMethod = 'assertSame', $setup = null)
+	public function testMatchCallback($siteId, $url, $expected, $assertMethod = 'assertSame', $setup = null)
 	{
-		if (!class_exists('s9e_MediaBBCodes'))
-		{
-			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
-		}
-
 		if (isset($setup))
 		{
 			$setup();
 		}
 
 		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
-		$methodName = 'match' . ucfirst($id);
 
-		$this->$assertMethod($expected, s9e_MediaBBCodes::$methodName($url));
+		$this->$assertMethod($expected, s9e_MediaBBCodes::match($url, null, array(), $siteId));
 	}
 
 	public function getMatchCallbackTests()
 	{
 		return array(
+			array(
+				'unknown',
+				'123',
+				false
+			),
 			array(
 				'amazon',
 				'http://www.amazon.ca/gp/product/B00GQT1LNO/',
@@ -628,13 +753,8 @@ foobar]]></embed_html>
 	/**
 	* @dataProvider getEmbedCallbackTests
 	*/
-	public function testEmbedCallback($mediaKey, $template, $expected, $assertMethod = 'assertSame', $setup = null)
+	public function testEmbedCallback($siteId, $mediaKey, $template, $expected, $assertMethod = 'assertSame', $setup = null)
 	{
-		if (!class_exists('s9e_MediaBBCodes'))
-		{
-			include __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
-		}
-
 		if (isset($setup))
 		{
 			$setup();
@@ -643,7 +763,7 @@ foobar]]></embed_html>
 		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
 
 		$site = array('embed_html' => $template);
-		$this->$assertMethod($expected, s9e_MediaBBCodes::embed($mediaKey, $site));
+		$this->$assertMethod($expected, s9e_MediaBBCodes::embed($mediaKey, $site, $siteId));
 	}
 
 	public function getEmbedCallbackTests()
@@ -651,52 +771,50 @@ foobar]]></embed_html>
 		return array(
 			array(
 				'foo',
+				'foo',
 				'<b>{$id}</b>',
 				'<b>foo</b>'
 			),
 			array(
+				'foo',
 				'foo&bar',
 				'<b>{$id}</b>',
 				'<b>foo&amp;bar</b>'
 			),
 			array(
+				'foo',
 				'foo=bar;baz=quux',
 				'{$foo} {$baz}',
 				'bar quux'
 			),
 			array(
-				'abc123',
-				'<!-- s9e_Custom::foobar() --><i>{$id}</i>',
-				'a:2:{i:0;s:13:"<i>abc123</i>";i:1;a:1:{s:2:"id";s:6:"abc123";}}'
-			),
-			array(
-				'abc123',
-				'<!-- s9e_Custom::invalid() --><i>{$id}</i>',
-				'<i>abc123</i>'
-			),
-			array(
+				'amazon',
 				'id=B00GQT1LNO;tld=ca',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-ca.amazon.ca/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00GQT1LNO&amp;o=15&amp;t=_"></iframe>'
 			),
 			array(
+				'amazon',
 				'id=B003AKZ6I8;tld=jp',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-jp.amazon.co.jp/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B003AKZ6I8&amp;o=9&amp;t=_"></iframe>'
 			),
 			array(
+				'amazon',
 				'id=B00BET0NR6;tld=uk',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-uk.amazon.co.uk/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2&amp;t=_"></iframe>'
 			),
 			array(
+				'amazon',
 				'B002MUC0ZY',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe>'
 			),
 			array(
+				'amazon',
 				'B002MUC0ZY',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=foo-20"></iframe>',
 				'assertSame',
 				function ()
@@ -705,249 +823,274 @@ foobar]]></embed_html>
 				}
 			),
 			array(
+				'amazon',
 				'id=B00ET2LTE6;tld=de',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-de.amazon.de/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3&amp;t=_"></iframe>'
 			),
 			array(
+				'amazon',
 				'id=B005NIKPAY;tld=fr',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-fr.amazon.fr/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8&amp;t=_"></iframe>'
 			),
 			array(
+				'amazon',
 				'id=B00JGOMIP6;tld=it',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t=_"></iframe>'
 			),
 			array(
+				'amazon',
 				'id=B002MUC0ZY;tld=com',
-				'<!-- s9e_MediaBBCodes::renderAmazon() -->',
+				'',
 				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm.amazon.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe>'
 			),
 			array(
+				'audiomack',
 				'id=hz-global/double-a-side-vol3;mode=album',
-				'<!-- s9e_MediaBBCodes::renderAudiomack() -->',
+				'',
 				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="352" src="//www.audiomack.com/embed3-album/hz-global/double-a-side-vol3"></iframe>'
 			),
 			array(
+				'audiomack',
 				'id=random-2/buy-the-world-final-1;mode=song',
-				'<!-- s9e_MediaBBCodes::renderAudiomack() -->',
+				'',
 				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="144" src="//www.audiomack.com/embed3/random-2/buy-the-world-final-1"></iframe>'
 			),
 			array(
+				'bandcamp',
 				'album_id=1122163921',
-				'<!-- s9e_MediaBBCodes::renderBandcamp() -->',
+				'',
 				'<iframe width="400" height="400" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/size=large/minimal=true/album=1122163921"></iframe>'
 			),
 			array(
+				'bandcamp',
 				'album_id=1122163921;track_num=7',
-				'<!-- s9e_MediaBBCodes::renderBandcamp() -->',
+				'',
 				'<iframe width="400" height="400" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/size=large/minimal=true/album=1122163921/t=7"></iframe>'
 			),
 			array(
+				'cbsnews',
 				'50156501',
-				'<!-- s9e_MediaBBCodes::renderCbsnews() -->',
+				'',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="si=254&amp;contentValue=50156501"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="http://i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf" flashvars="si=254&amp;contentValue=50156501"></object>'
 			),
 			array(
+				'cbsnews',
 				'pid=W4MVSOaNEYMq',
-				'<!-- s9e_MediaBBCodes::renderCbsnews() -->',
+				'',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://www.cbsnews.com/common/video/cbsnews_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="http://www.cbsnews.com/common/video/cbsnews_player.swf" flashvars="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object>'
 			),
 			array(
+				'dumpert',
 				'6622635_f6d1e0fd',
-				'<!-- s9e_MediaBBCodes::renderDumpert() -->',
+				'',
 				'<iframe width="560" height="315" src="http://www.dumpert.nl/embed/6622635/f6d1e0fd/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'ebay',
 				'251053262701',
-				'<!-- s9e_MediaBBCodes::renderEbay() -->',
+				'',
 				'<a href="http://www.ebay.com/itm/251053262701">eBay item #251053262701</a>'
 			),
 			array(
+				'ebay',
 				'itemid=251053262701',
-				'<!-- s9e_MediaBBCodes::renderEbay() -->',
+				'',
 				'<a href="http://www.ebay.com/itm/251053262701">eBay item #251053262701</a>'
 			),
 			array(
+				'ebay',
 				'itemid=251053262701;lang=en_GB',
-				'<!-- s9e_MediaBBCodes::renderEbay() -->',
+				'',
 				'<a href="http://www.ebay.co.uk/itm/251053262701">eBay item #251053262701</a>'
 			),
 			array(
+				'getty',
 				'et=0KmkT83GTG1ynPe0_63zHg;height=399;id=3232182;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48%3D;width=594',
-				'<!-- s9e_MediaBBCodes::renderGetty() -->',
+				'',
 				'<iframe width="594" height="448" src="//embed.gettyimages.com/embed/3232182?et=0KmkT83GTG1ynPe0_63zHg&amp;similar=on&amp;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48=" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'gfycat',
 				'height=338;id=SereneIllfatedCapybara;width=600',
-				'<iframe width="{$width}" height="{$height}" src="http://gfycat.com/iframe/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>',
-				'<iframe width="600" height="338" src="http://gfycat.com/iframe/SereneIllfatedCapybara" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'',
+				'<iframe width="600" height="338" src="//gfycat.com/iframe/SereneIllfatedCapybara" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'grooveshark',
 				'playlistid=74854761',
-				'<!-- s9e_MediaBBCodes::renderGrooveshark() -->',
+				'',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="400" data="//grooveshark.com/widget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=74854761&amp;songID="><embed type="application/x-shockwave-flash" src="//grooveshark.com/widget.swf" width="400" height="400" allowfullscreen="" flashvars="playlistID=74854761&amp;songID="></object>'
 			),
 			array(
+				'grooveshark',
 				'songid=35292216',
-				'<!-- s9e_MediaBBCodes::renderGrooveshark() -->',
+				'',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="40" data="//grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=&amp;songID=35292216"><embed type="application/x-shockwave-flash" src="//grooveshark.com/songWidget.swf" width="400" height="40" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"></object>'
 			),
 			array(
+				'imgur',
 				'9UGCL',
-				'<!-- s9e_MediaBBCodes::renderImgur() -->',
+				'',
 				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed"></iframe>'
 			),
 			array(
+				'imgur',
 				'id=9UGCL;type=album',
-				'<!-- s9e_MediaBBCodes::renderImgur() -->',
+				'',
 				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed"></iframe>'
 			),
 			array(
+				'imgur',
 				'height=389;id=u7Yo0Vy;type=gifv;width=915',
-				'<!-- s9e_MediaBBCodes::renderImgur() -->',
+				'',
 				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="915" height="389" src="//i.imgur.com/u7Yo0Vy.gifv#embed"></iframe>'
 			),
 			array(
+				'kickstarter',
 				'1869987317/wish-i-was-here-1',
-				'<!-- s9e_MediaBBCodes::renderKickstarter() -->',
+				'',
 				'<iframe width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'kickstarter',
 				'card=card;id=1869987317%2Fwish-i-was-here-1',
-				'<!-- s9e_MediaBBCodes::renderKickstarter() -->',
+				'',
 				'<iframe width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'kickstarter',
 				'id=1869987317%2Fwish-i-was-here-1;video=video',
-				'<!-- s9e_MediaBBCodes::renderKickstarter() -->',
+				'',
 				'<iframe width="480" height="360" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
-				'<!-- s9e_MediaBBCodes::renderSoundcloud() -->',
+				'',
 				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116"></iframe>'
 			),
 			array(
+				'soundcloud',
 				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F12345%3Fsecret_token%3Ds-foobar;secret_token=s-foobar',
-				'<!-- s9e_MediaBBCodes::renderSoundcloud() -->',
+				'',
 				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/12345?secret_token=s-foobar&amp;secret_token=s-foobar"></iframe>'
 			),
 			array(
+				'soundcloud',
 				'id=https%3A%2F%2Fsoundcloud.com%2Fmatt0753%2Firoh-ii-deep-voice%2Fs-UpqTm;secret_token=s-UpqTm;track_id=51465673',
-				'<!-- s9e_MediaBBCodes::renderSoundcloud() -->',
+				'',
 				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/51465673&amp;secret_token=s-UpqTm"></iframe>'
 			),
 			array(
+				'soundcloud',
 				'nruau/nruau-mix2',
-				'<!-- s9e_MediaBBCodes::renderSoundcloud() -->',
+				'',
 				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/nruau/nruau-mix2"></iframe>'
 			),
 			array(
+				'spotify',
 				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai',
-				'<!-- s9e_MediaBBCodes::renderSpotify() -->',
+				'',
 				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:track:5JunxkcjfCYcY7xJ29tLai"></iframe>'
 			),
 			array(
+				'spotify',
 				'uri=spotify%3Atrackset%3APREFEREDTITLE%3A5Z7ygHQo02SUrFmcgpwsKW%2C1x6ACsKV4UdWS2FMuPFUiT%2C4bi73jCM02fMpkI11Lqmfe',
-				'<!-- s9e_MediaBBCodes::renderSpotify() -->',
+				'',
 				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"></iframe>'
 			),
 			array(
+				'spotify',
 				'path=user%2Fozmoetr%2Fplaylist%2F4yRrCWNhWOqWZx5lmFqZvt',
-				'<!-- s9e_MediaBBCodes::renderSpotify() -->',
+				'',
 				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt"></iframe>'
 			),
 			array(
+				'spotify',
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
-				'<!-- s9e_MediaBBCodes::renderSpotify() -->',
+				'',
 				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"></iframe>'
 			),
 			array(
+				'ted',
 				'talks/eli_pariser_beware_online_filter_bubbles.html',
-				'<!-- s9e_MediaBBCodes::renderTed() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="http://embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
 			),
 			array(
+				'ted',
 				'talks/eli_pariser_beware_online_filter_bubbles',
-				'<!-- s9e_MediaBBCodes::renderTed() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="http://embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
 			),
 			array(
+				'twitch',
 				'channel=minigolf2000',
-				'<!-- s9e_MediaBBCodes::renderTwitch() -->',
+				'',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="//www.twitch.tv/widgets/live_embed_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="channel=minigolf2000&amp;auto_play=false"><embed type="application/x-shockwave-flash" width="620" height="378" allowfullscreen="" src="//www.twitch.tv/widgets/live_embed_player.swf" flashvars="channel=minigolf2000&amp;auto_play=false"></object>',
 			),
 			array(
+				'twitch',
 				'archive_id=361358487;channel=minigolf2000',
-				'<!-- s9e_MediaBBCodes::renderTwitch() -->',
+				'',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="//www.twitch.tv/widgets/archive_embed_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="channel=minigolf2000&amp;archive_id=361358487&amp;auto_play=false"><embed type="application/x-shockwave-flash" width="620" height="378" allowfullscreen="" src="//www.twitch.tv/widgets/archive_embed_player.swf" flashvars="channel=minigolf2000&amp;archive_id=361358487&amp;auto_play=false"></object>',
 			),
 			array(
+				'ustream',
 				'cid=16234409',
-				'<!-- s9e_MediaBBCodes::renderUstream() -->',
+				'',
 				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/16234409"></iframe>'
 			),
 			array(
+				'ustream',
 				'vid=40688256',
-				'<!-- s9e_MediaBBCodes::renderUstream() -->',
+				'',
 				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/recorded/40688256"></iframe>'
 			),
 			array(
+				'wsj',
 				'09FB2B3B-583E-4284-99D8-FEF6C23BE4E2',
-				'<!-- s9e_MediaBBCodes::renderWsj() -->',
+				'',
 				'<iframe width="512" height="288" src="http://live.wsj.com/public/page/embed-09FB2B3B_583E_4284_99D8_FEF6C23BE4E2.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'youtube',
 				'-cEzsCAzTak',
-				'<!-- s9e_MediaBBCodes::renderYoutube() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"></iframe>'
 			),
 			array(
+				'youtube',
 				'id=9bZkp7q19f0;t=113',
-				'<!-- s9e_MediaBBCodes::renderYoutube() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/9bZkp7q19f0?start=113"></iframe>'
 			),
 			array(
+				'youtube',
 				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA',
-				'<!-- s9e_MediaBBCodes::renderYoutube() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA"></iframe>'
 			),
 			array(
+				'youtube',
 				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA;t=123',
-				'<!-- s9e_MediaBBCodes::renderYoutube() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA&amp;start=123"></iframe>'
 			),
 			array(
+				'youtube',
 				'h=1;id=wZZ7oFKsKzY;m=23;s=45',
-				'<!-- s9e_MediaBBCodes::renderYoutube() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/wZZ7oFKsKzY?start=5025"></iframe>'
 			),
 			array(
+				'youtube',
 				'id=wZZ7oFKsKzY;m=23;s=45',
-				'<!-- s9e_MediaBBCodes::renderYoutube() -->',
+				'',
 				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/wZZ7oFKsKzY?start=1425"></iframe>'
-			),
-			array(
-				'-cEzsCAzTak',
-				'<div class="responsiveVideoContainer"><!-- s9e_MediaBBCodes::renderYoutube() --></div>',
-				'<div class="responsiveVideoContainer"><iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"></iframe></div>'
-			),
-			array(
-				'xyz',
-				'<!-- s9e_MediaBBCodes::renderInexistent() -->',
-				'<!-- s9e_MediaBBCodes::renderInexistent() -->'
-			),
-			array(
-				'-cEzsCAzTak',
-				'<!-- s9e_MediaBBCodes::renderYoutube(1280, 620) -->',
-				'<iframe width="1280" height="620" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"></iframe>'
-			),
-			array(
-				'-cEzsCAzTak',
-				'<!-- s9e_MediaBBCodes::renderYoutube(1280,620) -->',
-				'<iframe width="1280" height="620" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"></iframe>'
 			),
 		);
 	}

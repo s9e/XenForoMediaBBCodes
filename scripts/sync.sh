@@ -4,10 +4,11 @@ git submodule update --remote
 phpunit || exit
 rm -f releases/*-dev*
 php scripts/build.php "$@"
+php scripts/generateTagsPage.php
 git diff
-git commit -a                                               && \
-git push                                                    && \
-cp www/configure.html ../s9e.github.io/XenForoMediaBBCodes/ && \
-cd ../s9e.github.io/XenForoMediaBBCodes/                    && \
-git commit -a -m"Updated XenForoMediaBBCodes"               && \
+git commit -a                                          && \
+git push                                               && \
+cp www/tags.html ../s9e.github.io/XenForoMediaBBCodes/ && \
+cd ../s9e.github.io/XenForoMediaBBCodes/               && \
+git commit -a -m"Updated XenForoMediaBBCodes"          && \
 git push
