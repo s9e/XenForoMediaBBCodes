@@ -20,8 +20,8 @@ class s9e_Custom
 
 Upload this file to your webserver in the `library/s9e/` directory. The path to the file will be `library/s9e/Custom.php`. If we had chosen `Foo_Bar` as the class name, the file would be `library/Foo/Bar.php`.
 
-Now you need to configure XenForo to use your custom callback. Go to the admin panel in Options > s9e Media Pack and enter the name of the site you want to modify and the name of the callback in the form `site=class::method`. You can modify as many sites as you want by entering each custom callback on a separate line.
-
-Click "Save Changes" and you're done.
+Now you need to configure XenForo to use your custom callback. Go to the admin panel in Options > s9e Media Pack and enter the name of the site you want to modify and the name of the callback in the form `site=class::method`. You can modify as many sites as you want by entering each custom callback on a separate line. In our example, the site is `youtube`, the class is `s9e_Custom` and the method is `youtube`, so you'd have to enter `youtube=s9e_Custom::youtube` in the text box.
 
 [![](CustomCallbacksThumbnail.png)](CustomCallbacks.png)
+
+Click "Save Changes" and you're done.
