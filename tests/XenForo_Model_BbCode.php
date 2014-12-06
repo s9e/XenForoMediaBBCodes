@@ -1,14 +1,5 @@
 <?php
 
-class XenForo_Model_BbCode
+class XenForo_Model_BbCode extends s9e\XenForoMediaBBCodes\Tests\Dummy
 {
-	public static $loggedCalls = array();
-	public function __construct()
-	{
-		self::$loggedCalls = array();
-	}
-	public function __call($methodName, $args)
-	{
-		self::$loggedCalls[] = array($methodName, $args);
-	}
 }

@@ -6,12 +6,19 @@ use DOMDocument;
 use PHPUnit_Framework_TestCase;
 use s9e_MediaBBCodes;
 use XenForo_Application;
+use XenForo_DataWriter;
+use XenForo_DataWriter_TemplateModification;
 use XenForo_Model;
 use XenForo_Model_BbCode;
+use XenForo_Model_TemplateModification;
 
+include __DIR__ . '/Dummy.php';
 include __DIR__ . '/XenForo_Application.php';
+include __DIR__ . '/XenForo_DataWriter.php';
+include __DIR__ . '/XenForo_DataWriter_TemplateModification.php';
 include __DIR__ . '/XenForo_Model.php';
 include __DIR__ . '/XenForo_Model_BbCode.php';
+include __DIR__ . '/XenForo_Model_TemplateModification.php';
 include __DIR__ . '/s9e_Custom.php';
 
 class Test extends PHPUnit_Framework_TestCase
@@ -284,6 +291,47 @@ class Test extends PHPUnit_Framework_TestCase
 		$text = '';
 		s9e_MediaBBCodes::validateExcludedSites($text);
 		$this->assertReinstallWasCalled();
+	}
+
+	public function testFooterCallbackNoModification()
+	{
+		XenForo_DataWriter_TemplateModification::$loggedCalls = array();
+		XenForo_Model_TemplateModification::$modification = false;
+
+		$this->assertSame('show', s9e_MediaBBCodes::validateFooter('show'));
+		$this->assertEmpty(XenForo_DataWriter_TemplateModification::$loggedCalls);
+	}
+
+	public function testFooterCallbackOnUpdateShow()
+	{
+		XenForo_DataWriter_TemplateModification::$loggedCalls = array();
+		XenForo_Model_TemplateModification::$modification = array('enabled' => 0);
+
+		$this->assertSame('show', s9e_MediaBBCodes::validateFooter('show'));
+		$this->assertSame(
+			array(
+				array('setExistingData', array(array('enabled' => 0))),
+				array('set',             array('enabled', 1)),
+				array('save',            array())
+			),
+			XenForo_DataWriter_TemplateModification::$loggedCalls
+		);
+	}
+
+	public function testFooterCallbackOnUpdateHide()
+	{
+		XenForo_DataWriter_TemplateModification::$loggedCalls = array();
+		XenForo_Model_TemplateModification::$modification = array('enabled' => 1);
+
+		$this->assertSame('hide', s9e_MediaBBCodes::validateFooter('hide'));
+		$this->assertSame(
+			array(
+				array('setExistingData', array(array('enabled' => 1))),
+				array('set',             array('enabled', 0)),
+				array('save',            array())
+			),
+			XenForo_DataWriter_TemplateModification::$loggedCalls
+		);
 	}
 
 	/**

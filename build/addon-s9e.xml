@@ -1,8 +1,25 @@
 <addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201412060" version_string="20141206" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites/>
+  <phrases>
+    <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
+    <phrase title="option_s9e_footer" version_id="1" version_string="1">Show your support</phrase>
+    <phrase title="option_s9e_footer_explain" version_id="1" version_string="1">You may also choose to support the author directly with a voluntary donation in USD or in EUR.&lt;br&gt;&lt;a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;amp;hosted_button_id=ABGFV5AGE98AG"&gt;&lt;img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" alt="Donate in USD" title="Donate in USD"&gt;&lt;a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6P6985GT2DLGL"&gt;&lt;img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" alt="Donate in EUR" title="Donate in EUR"&gt;&lt;/a&gt;</phrase>
+    <phrase title="option_group_s9e_description" version_id="1" version_string="1">Configure the s9e media sites</phrase>
+    <phrase title="option_s9e_media_tags" version_id="1" version_string="1">Categories of media sites to install</phrase>
+    <phrase title="option_s9e_media_tags_explain" version_id="1" version_string="1">&lt;a href="http://s9e.github.io/XenForoMediaBBCodes/tags.html" target="_blank"&gt;List of optional sites enabled by each category&lt;/a&gt;</phrase>
+    <phrase title="option_s9e_custom_callbacks" version_id="1" version_string="1">Custom callbacks</phrase>
+    <phrase title="option_s9e_custom_callbacks_explain" version_id="1" version_string="1">&lt;a href="https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/CustomCallbacks.md" target="_blank" style="cursor:help"&gt;Help&lt;/a&gt;</phrase>
+    <phrase title="option_s9e_excluded_sites" version_id="1" version_string="1">Excluded sites</phrase>
+    <phrase title="option_s9e_excluded_sites_explain" version_id="1" version_string="1">Comma-separated list of sites not to install</phrase>
+    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG</phrase>
+    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_explain" version_id="1" version_string="1"/>
+  </phrases>
   <optiongroups>
     <group group_id="s9e" display_order="0" debug_only="0"/>
-    <option option_id="s9e_AMAZON_ASSOCIATE_TAG" edit_format="textbox" data_type="string" can_backup="1">
+    <option option_id="s9e_footer" edit_format="radio" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateFooter">
+      <default_value>show</default_value>
+      <edit_format_params>show=I want to display a link to this add-on in the page footer
+hide=I do not want to display a link to this add-on</edit_format_params>
       <relation group_id="s9e" display_order="1"/>
     </option>
     <option option_id="s9e_media_tags" edit_format="checkbox" data_type="array" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="updateTags">
@@ -38,19 +55,10 @@ sports=Sports</edit_format_params>
     <option option_id="s9e_excluded_sites" edit_format="textbox" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateExcludedSites">
       <relation group_id="s9e" display_order="4"/>
     </option>
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG" edit_format="textbox" data_type="string" can_backup="1">
+      <relation group_id="s9e" display_order="5"/>
+    </option>
   </optiongroups>
-  <phrases>
-    <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
-    <phrase title="option_group_s9e_description" version_id="1" version_string="1">Configure the s9e media sites</phrase>
-    <phrase title="option_s9e_media_tags" version_id="1" version_string="1">Categories of media sites to install</phrase>
-    <phrase title="option_s9e_media_tags_explain" version_id="1" version_string="1">&lt;a href="http://s9e.github.io/XenForoMediaBBCodes/tags.html" target="_blank"&gt;List of optional sites enabled by each category&lt;/a&gt;</phrase>
-    <phrase title="option_s9e_custom_callbacks" version_id="1" version_string="1">Custom callbacks</phrase>
-    <phrase title="option_s9e_custom_callbacks_explain" version_id="1" version_string="1">&lt;a href="https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/CustomCallbacks.md" target="_blank" style="cursor:help"&gt;Help&lt;/a&gt;</phrase>
-    <phrase title="option_s9e_excluded_sites" version_id="1" version_string="1">Excluded sites</phrase>
-    <phrase title="option_s9e_excluded_sites_explain" version_id="1" version_string="1">Comma-separated list of sites not to install</phrase>
-    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG</phrase>
-    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_explain" version_id="1" version_string="1"/>
-  </phrases>
   <public_template_modifications>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>

@@ -380,15 +380,7 @@ $php[0] = preg_replace_callback(
 // Remove temp files
 array_map('unlink', glob(sys_get_temp_dir() . '/Renderer_*'));
 
-// Prepare the option group
-$optiongroups = $addon->appendChild($dom->createElement('optiongroups'));
-
-$group = $optiongroups->appendChild($dom->createElement('group'));
-$group->setAttribute('group_id',      $addon->getAttribute('addon_id'));
-$group->setAttribute('display_order', 0);
-$group->setAttribute('debug_only',    0);
-
-// Prepare the phrase nodes
+// Prepare the phrase group
 $phrases = $addon->appendChild($dom->createElement('phrases'));
 
 setAttributes(
@@ -400,6 +392,82 @@ setAttributes(
 	]
 );
 
+// Prepare the option group
+$optiongroups = $addon->appendChild($dom->createElement('optiongroups'));
+
+$group = $optiongroups->appendChild($dom->createElement('group'));
+$group->setAttribute('group_id',      $addon->getAttribute('addon_id'));
+$group->setAttribute('display_order', 0);
+$group->setAttribute('debug_only',    0);
+$displayOrder = 0;
+
+// Add the attribution link
+if (isset($linkText))
+{
+	$modifications = $addon->appendChild($dom->createElement('public_template_modifications'));
+	$modification  = $modifications->appendChild($dom->createElement('modification'));
+	setAttributes(
+		$modification,
+		[
+			'action'           => 'str_replace',
+			'description'      => 'Adds a link back to ' . $addonTitle,
+			'enabled'          => 1,
+			'execution_order'  => 10,
+			'modification_key' => $addonId . '_footer',
+			'template'         => 'footer'
+		]
+	);
+	$modification->appendChild($dom->createElement(
+		'find',
+		'{xen:phrase extra_copyright}'
+	));
+	$modification->appendChild($dom->createElement(
+		'replace',
+		' | <a class="concealed" href="' . $addonUrl . '" title="Media BBCodes provided by ' . $addonTitle . ' ' . $version . '">' . $linkText . '</a>$0'
+	));
+
+	$option = $optiongroups->appendChild($dom->createElement('option'));
+	setAttributes(
+		$option,
+		[
+			'option_id'         => $addonId . '_footer',
+			'edit_format'       => 'radio',
+			'data_type'         => 'string',
+			'can_backup'        => 1,
+			'validation_class'  => $className,
+			'validation_method' => 'validateFooter'
+		]
+	);
+	$option->appendChild($dom->createElement('default_value', 'show'));
+	$option->appendChild($dom->createElement('edit_format_params', "show=I want to display a link to this add-on in the page footer\nhide=I do not want to display a link to this add-on"));
+	setAttributes(
+		$option->appendChild($dom->createElement('relation')),
+		[
+			'group_id'      => $addon->getAttribute('addon_id'),
+			'display_order' => ++$displayOrder
+		]
+	);
+
+	setAttributes(
+		$phrases->appendChild($dom->createElement('phrase', 'Show your support')),
+		[
+			'title'          => 'option_' . $addonId . '_footer',
+			'version_id'     => '1',
+			'version_string' => '1'
+		]
+	);
+	$html = 'You may also choose to support the author directly with a voluntary donation in USD or in EUR.<br><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=ABGFV5AGE98AG"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" alt="Donate in USD" title="Donate in USD"><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" alt="Donate in EUR" title="Donate in EUR"></a>';
+	setAttributes(
+		$phrases->appendChild($dom->createElement('phrase', htmlspecialchars($html))),
+		[
+			'title'          => 'option_' . $addonId . '_footer_explain',
+			'version_id'     => '1',
+			'version_string' => '1'
+		]
+	);
+}
+
+// Tag checkboxes
 setAttributes(
 	$phrases->appendChild($dom->createElement('phrase', 'Configure the s9e media sites')),
 	[
@@ -418,13 +486,13 @@ setAttributes(
 	]
 );
 
-$text = '';
+$html = '';
 if (isset($tagsDescUrl))
 {
-	$text = '<a href="' . $tagsDescUrl . '" target="_blank">List of optional sites enabled by each category</a>';
+	$html = '<a href="' . $tagsDescUrl . '" target="_blank">List of optional sites enabled by each category</a>';
 }
 setAttributes(
-	$phrases->appendChild($dom->createElement('phrase', $text)),
+	$phrases->appendChild($dom->createElement('phrase', htmlspecialchars($html))),
 	[
 		'title'          => 'option_' . $addonId . '_media_tags_explain',
 		'version_id'     => '1',
@@ -471,51 +539,6 @@ setAttributes(
 		'version_string' => '1'
 	]
 );
-
-// Add the params as XenForo options
-ksort($optionNames);
-
-$displayOrder = 0;
-foreach ($optionNames as $paramName => $optionName)
-{
-	$option = $optiongroups->appendChild($dom->createElement('option'));
-
-	setAttributes(
-		$option,
-		[
-			'option_id'   => $optionName,
-			'edit_format' => 'textbox',
-			'data_type'   => 'string',
-			'can_backup'  => '1'
-		]
-	);
-
-	setAttributes(
-		$option->appendChild($dom->createElement('relation')),
-		[
-			'group_id'      => $addon->getAttribute('addon_id'),
-			'display_order' => ++$displayOrder
-		]
-	);
-
-	setAttributes(
-		$phrases->appendChild($dom->createElement('phrase', $paramName)),
-		[
-			'title'          => 'option_' . $optionName,
-			'version_id'     => '1',
-			'version_string' => '1'
-		]
-	);
-
-	setAttributes(
-		$phrases->appendChild($dom->createElement('phrase')),
-		[
-			'title'          => 'option_' . $optionName . '_explain',
-			'version_id'     => '1',
-			'version_string' => '1'
-		]
-	);
-}
 
 // Add the category checkboxes
 $option = $optiongroups->appendChild($dom->createElement('option'));
@@ -601,30 +624,48 @@ setAttributes(
 	]
 );
 
-// Add the attribution link
-if (isset($linkText))
+// Add the params as XenForo options
+ksort($optionNames);
+
+foreach ($optionNames as $paramName => $optionName)
 {
-	$modifications = $addon->appendChild($dom->createElement('public_template_modifications'));
-	$modification  = $modifications->appendChild($dom->createElement('modification'));
+	$option = $optiongroups->appendChild($dom->createElement('option'));
+
 	setAttributes(
-		$modification,
+		$option,
 		[
-			'action'           => 'str_replace',
-			'description'      => 'Adds a link back to ' . $addonTitle,
-			'enabled'          => 1,
-			'execution_order'  => 10,
-			'modification_key' => $addonId . '_footer',
-			'template'         => 'footer'
+			'option_id'   => $optionName,
+			'edit_format' => 'textbox',
+			'data_type'   => 'string',
+			'can_backup'  => '1'
 		]
 	);
-	$modification->appendChild($dom->createElement(
-		'find',
-		'{xen:phrase extra_copyright}'
-	));
-	$modification->appendChild($dom->createElement(
-		'replace',
-		' | <a class="concealed" href="' . $addonUrl . '" title="Media BBCodes provided by ' . $addonTitle . ' ' . $version . '">' . $linkText . '</a>$0'
-	));
+
+	setAttributes(
+		$option->appendChild($dom->createElement('relation')),
+		[
+			'group_id'      => $addon->getAttribute('addon_id'),
+			'display_order' => ++$displayOrder
+		]
+	);
+
+	setAttributes(
+		$phrases->appendChild($dom->createElement('phrase', $paramName)),
+		[
+			'title'          => 'option_' . $optionName,
+			'version_id'     => '1',
+			'version_string' => '1'
+		]
+	);
+
+	setAttributes(
+		$phrases->appendChild($dom->createElement('phrase')),
+		[
+			'title'          => 'option_' . $optionName . '_explain',
+			'version_id'     => '1',
+			'version_string' => '1'
+		]
+	);
 }
 
 // Save the helper class

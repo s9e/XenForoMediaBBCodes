@@ -359,6 +359,28 @@ class s9e_MediaBBCodes
 	}
 
 	/**
+	* Callback used to toggle the link in the footer
+	*
+	* @param  string $value Either "show" or "hide"
+	* @return string        Original value, returned as-is
+	*/
+	public static function validateFooter($value)
+	{
+		$model = XenForo_Model::create('XenForo_Model_TemplateModification');
+		$modification = $model->getModificationByKey('s9e_footer');
+
+		if ($modification)
+		{
+			$dw = XenForo_DataWriter::create('XenForo_DataWriter_TemplateModification');
+			$dw->setExistingData($modification);
+			$dw->set('enabled', (int) ($value === 'show'));
+			$dw->save();
+		}
+
+		return $value;
+	}
+
+	/**
 	* Reinstall media sites based on given list of tags
 	*
 	* @param  array $tags Associative array using site IDs as keys

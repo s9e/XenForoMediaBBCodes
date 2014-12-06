@@ -1,6 +1,6 @@
 <?php
 
-class XenForo_Model
+class XenForo_DataWriter
 {
 	public static function create($className)
 	{
