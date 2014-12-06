@@ -90,7 +90,6 @@ class s9e_MediaBBCodes
 		'dailymotion'=>array('Dailymotion','http://www.dailymotion.com/',array('misc'=>1),'!dailymotion\\.com/(?:video/|user/[^#]+#video=)(?\'id\'[A-Za-z0-9]+)!',array('!dailymotion\\.com/(?:video/|user/[^#]+#video=)(?\'id\'[A-Za-z0-9]+)!'),7=>'<iframe width="560" height="315" src="//www.dailymotion.com/embed/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'dailyshow'=>array('The Daily Show with Jon Stewart','http://www.thedailyshow.com/',array('entertainment'=>1),'!(?\'id\')thedailyshow\\.c(?:c\\.c)?om/(?:collection|extended-interviews|videos|watch)/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:(?:playlist|video):thedailyshow\\.com:[-0-9a-f]+)!'),'match'=>array('!thedailyshow\\.c(?:c\\.c)?om/(?:collection|extended-interviews|videos|watch)/!')))),
 		'dumpert'=>array('dumpert','http://www.dumpert.nl/',array('.nl'=>1,'entertainment'=>1),'!(?\'id\')dumpert\\.nl/mediabase/\\d+/\\w+!',array(),true,array(array('extract'=>array('!data-itemid="(?\'id\'\\w+)!'),'match'=>array('!dumpert\\.nl/mediabase/\\d+/\\w+!')))),
-		'ebay'=>array('eBay','http://www.ebay.com/',array('misc'=>1),"#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?'id'\\d+)#\n#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?[?&]item=(?'id'\\d+)#\n#(?'id')(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?ebay\\.(?!com/)#",array('#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?ebay.[\\w.]+/itm/(?:[-\\w]+/)?(?\'id\'\\d+)#','#(?=.*?[./]ebay\\.(?>co(?>m|\\.uk)|de|fr|[ai]t)[:/]).*?[?&]item=(?\'id\'\\d+)#'),true,array(array('extract'=>array('#"locale":"(?\'lang\'\\w+)"#'),'match'=>array('#ebay\\.(?!com/)#')))),
 		'eighttracks'=>array('8tracks','http://8tracks.com/',array('music'=>1),"!8tracks\\.com/[-\\w]+/(?'id'\\d+)(?=#|$)!\n!(?'id')8tracks\\.com/[-\\w]+/[-\\w]+!",array('!8tracks\\.com/[-\\w]+/(?\'id\'\\d+)(?=#|$)!'),true,array(array('extract'=>array('!eighttracks://mix/(?\'id\'\\d+)!'),'match'=>array('!8tracks\\.com/[-\\w]+/[-\\w]+!'))),'<iframe width="400" height="400" src="//8tracks.com/mixes/{$id}/player_v3_universal" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'espn'=>array('ESPN','http://espn.go.com/',array('sports'=>1),'#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#',array('#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#'),true),
 		'facebook'=>array('Facebook','http://www.facebook.com/',array('social'=>1),'@www\\.facebook\\.com/(?:[\\w/]+/permalink|(?!pages/|groups/).*?)(?:/|fbid=|\\?v=)(?\'id\'\\d+)(?=$|[/?&#])@',array('@www\\.facebook\\.com/(?:[\\w/]+/permalink|(?!pages/|groups/).*?)(?:/|fbid=|\\?v=)(?\'id\'\\d+)(?=$|[/?&#])@'),7=>'<iframe width="560" height="315" src="//s9e.github.io/iframe/facebook.min.html#{$id}" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
@@ -775,15 +774,6 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null);
 
 		$html='<iframe width="560" height="315" src="http://www.dumpert.nl/embed/'.htmlspecialchars(strtr($vars['id'],'_','/'),2).'/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
-
-		return $html;
-	}
-
-	public static function renderEbay($vars)
-	{
-		$vars += array('id' => null, 'itemid' => null, 'lang' => null);
-
-		$html='<a href="http://www.ebay.';if($vars['lang']==='de_AT')$html.='at';elseif($vars['lang']==='en_GB')$html.='co.uk';elseif($vars['lang']==='de_DE')$html.='de';elseif($vars['lang']==='fr_FR')$html.='fr';elseif($vars['lang']==='it_IT')$html.='it';else$html.='com';$html.='/itm/';if(isset($vars['itemid']))$html.=htmlspecialchars($vars['itemid'],2);else$html.=htmlspecialchars($vars['id'],2);$html.='">eBay item #';if(isset($vars['itemid']))$html.=htmlspecialchars($vars['itemid'],0);else$html.=htmlspecialchars($vars['id'],0);$html.='</a>';
 
 		return $html;
 	}

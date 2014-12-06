@@ -420,16 +420,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'6622635_f6d1e0fd'
 			),
 			array(
-				'ebay',
-				'http://www.ebay.com/itm/Converse-All-Star-Chuck-Taylor-Black-Hi-Canvas-M9160-Men-/251053262701',
-				'251053262701'
-			),
-			array(
-				'ebay',
-				'http://www.ebay.co.uk/itm/Converse-Classic-Chuck-Taylor-Low-Trainer-Sneaker-All-Star-OX-NEW-sizes-Shoes-/230993099153',
-				'id=230993099153;lang=en_GB'
-			),
-			array(
 				'eighttracks',
 				'http://8tracks.com/mc_raw/canadian-flavored-indie-rock-grilled-cheese',
 				'1007987'
@@ -887,24 +877,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'6622635_f6d1e0fd',
 				'',
 				'<iframe width="560" height="315" src="http://www.dumpert.nl/embed/6622635/f6d1e0fd/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
-			),
-			array(
-				'ebay',
-				'251053262701',
-				'',
-				'<a href="http://www.ebay.com/itm/251053262701">eBay item #251053262701</a>'
-			),
-			array(
-				'ebay',
-				'itemid=251053262701',
-				'',
-				'<a href="http://www.ebay.com/itm/251053262701">eBay item #251053262701</a>'
-			),
-			array(
-				'ebay',
-				'itemid=251053262701;lang=en_GB',
-				'',
-				'<a href="http://www.ebay.co.uk/itm/251053262701">eBay item #251053262701</a>'
 			),
 			array(
 				'getty',
