@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201412060" version_string="20141206" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201412070" version_string="20141207" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites/>
   <phrases>
     <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
@@ -62,7 +62,7 @@ sports=Sports</edit_format_params>
   <public_template_modifications>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>
-      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20141206"&gt;Media embeds powered by s9e&lt;/a&gt;$0</replace>
+      <replace>&lt;br&gt;&lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20141207"&gt;Media embeds powered by s9e&lt;/a&gt;$0</replace>
     </modification>
   </public_template_modifications>
 </addon>
