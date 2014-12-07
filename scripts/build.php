@@ -723,16 +723,16 @@ This pack contains the definitions for [b]' . count($sitenames) . ' media sites[
 
 The BBCodes definitions are based on [url="https://github.com/s9e/TextFormatter"]the s9e\TextFormatter library[/url], and more specifically its [url="https://github.com/s9e/TextFormatter/tree/master/src/Plugins/MediaEmbed"]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
 
-This add-on is released under [url="http://en.wikipedia.org/wiki/MIT_License"]The MIT License[/url]. Redistribution is allowed and [b]encouraged[/b]. [color=#fff]This add-on is free and available on GitHub. If you paid for it, you\'ve been swindled.[/color]
+This add-on is released under [url="http://en.wikipedia.org/wiki/MIT_License"]The MIT License[/url]. Redistribution is allowed and [b]encouraged[/b]. [color=#fff]This add-on is free, open source and available on GitHub. If you paid for it, you\'ve been swindled.[/color]
 [url="https://travis-ci.org/s9e/XenForoMediaBBCodes"][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master&' . $version . '[/img][/url] [url="https://coveralls.io/r/s9e/XenForoMediaBBCodes"][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png?' . $version . '[/img][/url]
 
 [size=6][font=Arial][b]Installation[/b][/font][/size]
 
 Unzip the archive, and upload the content of the [font=monospace]upload[/font] folder to your XenForo installation. Then go to your forum\'s Admin CP and install the add-on via the provided [font=monospace]addon-s9e.xml[/font] file.
 
-[size=6][font=Arial][b]Compatibility and customization[/b][/font][/size]
+[size=6][font=Arial][b]Configuration[/b][/font][/size]
 
-Most of the definitions found in this pack are compatible with existing definitions, but some of them may not be. [b]Note that this add-on replaces the default media sites.[/b] If you only want to install [i]some[/i] of the BBCodes found in this pack, you can try the [url="http://s9e.github.io/XenForoMediaBBCodes/configure.html"]online configurator interface[/url].
+You can configure which categories of media sites you want installed in the Admin CP by going to Home > Options > s9e Media Pack. By default, all the media sites are installed. You do not need to reinstall after changing the configuration.
 
 [size=6][font=Arial][b]How to request a media site[/b][/font][/size]
 
