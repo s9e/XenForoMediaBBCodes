@@ -751,6 +751,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'63175'
 			),
 			array(
+				'xboxclips',
+				'http://xboxclips.com/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000',
+				'id=508269a4-6f05-4b3e-a66a-fe4e91e92000;user=Soulshifted'
+			),
+			array(
 				'youtube',
 				'http://www.youtube.com/watch?v=-cEzsCAzTak',
 				'-cEzsCAzTak'
@@ -1075,6 +1080,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'09FB2B3B-583E-4284-99D8-FEF6C23BE4E2',
 				'',
 				'<iframe width="512" height="288" src="http://live.wsj.com/public/page/embed-09FB2B3B_583E_4284_99D8_FEF6C23BE4E2.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+			),
+			array(
+				'xboxclips',
+				'id=508269a4-6f05-4b3e-a66a-fe4e91e92000;user=Soulshifted',
+				'',
+				'<iframe width="560" height="315" src="//xboxclips.com/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'youtube',
