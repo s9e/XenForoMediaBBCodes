@@ -68,6 +68,11 @@ class s9e_MediaBBCodes
 	public static $excludedSites;
 
 	/**
+	* @var integer Maximum width for responsive embeds
+	*/
+	public static $maxResponsiveWidth;
+
+	/**
 	* @var array Associative array using site IDs as keys, sites' config arrays as values
 	*/
 	public static $sites = array(
@@ -241,20 +246,26 @@ class s9e_MediaBBCodes
 	*/
 	protected static function loadSettings()
 	{
+		$options = XenForo_Application::get('options');
+
 		if (!isset(self::$customCallbacks))
 		{
-			self::parseCustomCallbacks(XenForo_Application::get('options')->s9e_custom_callbacks);
+			self::parseCustomCallbacks($options->s9e_custom_callbacks);
 		}
 
 		if (!isset(self::$excludedSites))
 		{
-			$options = XenForo_Application::get('options');
 			self::$excludedSites = $options->s9e_excluded_sites ?: $options->s9e_EXCLUDE_SITES ?: '';
+		}
+
+		if (!isset(self::$maxResponsiveWidth))
+		{
+			self::$maxResponsiveWidth = (int) $options->s9e_max_responsive_width;
 		}
 
 		if (!isset(self::$tags))
 		{
-			self::$tags = XenForo_Application::get('options')->s9e_media_tags ?: self::getAllTags();
+			self::$tags = $options->s9e_media_tags ?: self::getAllTags();
 		}
 	}
 
@@ -285,6 +296,10 @@ class s9e_MediaBBCodes
 		if (isset($config[self::KEY_HTML]))
 		{
 			$embedHtml = $config[self::KEY_HTML];
+			if (self::$maxResponsiveWidth)
+			{
+				$embedHtml = self::customiseDimensions($embedHtml);
+			}
 		}
 		else
 		{
@@ -382,6 +397,20 @@ class s9e_MediaBBCodes
 	}
 
 	/**
+	* Trigger the reinstallation when the max responsive width is toggled
+	*
+	* @param  string &$text Max responsive width, as text
+	* @return bool          Always TRUE
+	*/
+	public static function validateMaxResponsiveWidth(&$text)
+	{
+		self::$maxResponsiveWidth = (int) $text;
+		self::reinstall();
+
+		return true;
+	}
+
+	/**
 	* Reinstall media sites based on given list of tags
 	*
 	* @param  array $tags Associative array using site IDs as keys
@@ -431,6 +460,7 @@ class s9e_MediaBBCodes
 	*/
 	protected static function reinstall()
 	{
+		self::loadSettings();
 		$sites = simplexml_load_string('<sites/>');
 		foreach (self::getFilteredSites() as $siteId => $site)
 		{
@@ -520,6 +550,7 @@ class s9e_MediaBBCodes
 	*/
 	public static function embed($mediaKey, array $site, $siteId)
 	{
+		self::loadSettings();
 		$vars = array('id' => $mediaKey);
 
 		// If the value looks like a URL, we copy its value to the "url" var
@@ -557,8 +588,12 @@ class s9e_MediaBBCodes
 			);
 		}
 
+		if (self::$maxResponsiveWidth)
+		{
+			$html = self::customiseDimensions($html);
+		}
+
 		// Test for custom callbacks
-		self::loadSettings();
 		if (isset(self::$customCallbacks[$siteId]) && is_callable(self::$customCallbacks[$siteId]))
 		{
 			$html = call_user_func(self::$customCallbacks[$siteId], $html, $vars);
@@ -718,6 +753,53 @@ class s9e_MediaBBCodes
 		}
 
 		return $vars;
+	}
+
+	/**
+	* Extract absolute dimensions of from HTML code
+	*
+	* @param  string  $html Original code
+	* @return string        Modified code
+	*/
+	protected static function customiseDimensions($html)
+	{
+		$ratio = self::getEmbedRatio($html);
+		if (!$ratio)
+		{
+			return $html;
+		}
+
+		$css  = 'position:absolute;top:0;left:0;width:100%;height:100%';
+		$html = preg_replace('( style="[^"]*)', '$0;' . $css, $html, -1, $cnt);
+		if (!$cnt)
+		{
+			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
+		}
+
+		return '<div style="max-width:' . self::$maxResponsiveWidth . 'px"><div style="height:0;position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
+	}
+
+	/**
+	* Compute the height:width ratio of given embed code
+	*
+	* @param  string      $html Original code
+	* @return float|false Height:width ratio or FALSE
+	*/
+	protected static function getEmbedRatio($html)
+	{
+		// Don't try to compute the ratio if the height is set dynamically in an onload event
+		if (preg_match('(onload="[^"]*height)', $html))
+		{
+			return false;
+		}
+
+		if (preg_match('(height="(\\d+)")', $html, $height)
+		 && preg_match('(width="(\\d+)")', $html, $width))
+		{
+			return $height[1] / $width[1];
+		}
+
+		return false;
 	}
 
 	public static function renderAmazon($vars)

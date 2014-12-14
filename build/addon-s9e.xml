@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201412130" version_string="20141213" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201412140" version_string="20141214" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites/>
   <phrases>
     <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
@@ -11,6 +11,8 @@
     <phrase title="option_s9e_custom_callbacks_explain" version_id="1" version_string="1">&lt;a href="https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/CustomCallbacks.md" target="_blank" style="cursor:help"&gt;Help&lt;/a&gt;</phrase>
     <phrase title="option_s9e_excluded_sites" version_id="1" version_string="1">Excluded sites</phrase>
     <phrase title="option_s9e_excluded_sites_explain" version_id="1" version_string="1">Comma-separated list of sites not to install</phrase>
+    <phrase title="option_s9e_max_responsive_width" version_id="1" version_string="1">Max responsive width</phrase>
+    <phrase title="option_s9e_max_responsive_width_explain" version_id="1" version_string="1">Set to 0 to disable</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_explain" version_id="1" version_string="1"/>
   </phrases>
@@ -55,14 +57,17 @@ sports=Sports</edit_format_params>
     <option option_id="s9e_excluded_sites" edit_format="textbox" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateExcludedSites">
       <relation group_id="s9e" display_order="4"/>
     </option>
-    <option option_id="s9e_AMAZON_ASSOCIATE_TAG" edit_format="textbox" data_type="string" can_backup="1">
+    <option option_id="s9e_max_responsive_width" edit_format="textbox" data_type="unsigned_integer" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateMaxResponsiveWidth" default_value="0">
       <relation group_id="s9e" display_order="5"/>
+    </option>
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG" edit_format="textbox" data_type="string" can_backup="1">
+      <relation group_id="s9e" display_order="6"/>
     </option>
   </optiongroups>
   <public_template_modifications>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>
-      <replace>&lt;br&gt;&lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20141213"&gt;Media embeds powered by s9e&lt;/a&gt;$0</replace>
+      <replace>&lt;br&gt;&lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20141214"&gt;Media embeds powered by s9e&lt;/a&gt;$0</replace>
     </modification>
   </public_template_modifications>
 </addon>

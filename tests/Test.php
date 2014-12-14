@@ -43,16 +43,18 @@ class Test extends PHPUnit_Framework_TestCase
 		// the class isn't loaded before the first test is run
 		if (class_exists('s9e_MediaBBCodes', false))
 		{
-			s9e_MediaBBCodes::$customCallbacks = null;
-			s9e_MediaBBCodes::$excludedSites   = null;
-			s9e_MediaBBCodes::$tags            = null;
+			s9e_MediaBBCodes::$customCallbacks    = null;
+			s9e_MediaBBCodes::$excludedSites      = null;
+			s9e_MediaBBCodes::$maxResponsiveWidth = null;
+			s9e_MediaBBCodes::$tags               = null;
 		}
 
 		XenForo_Application::$options = array(
-			's9e_EXCLUDE_SITES'    => null,
-			's9e_excluded_sites'   => null,
-			's9e_custom_callbacks' => null,
-			's9e_media_tags'       => null
+			's9e_EXCLUDE_SITES'        => null,
+			's9e_excluded_sites'       => null,
+			's9e_custom_callbacks'     => null,
+			's9e_max_responsive_width' => null,
+			's9e_media_tags'           => null
 		);
 	}
 
@@ -291,6 +293,20 @@ class Test extends PHPUnit_Framework_TestCase
 		$text = '';
 		s9e_MediaBBCodes::validateExcludedSites($text);
 		$this->assertReinstallWasCalled();
+	}
+
+	public function testValidateMaxResponsiveWidthReinstall()
+	{
+		$text = '';
+		s9e_MediaBBCodes::validateMaxResponsiveWidth($text);
+		$this->assertReinstallWasCalled();
+	}
+
+	public function testValidateMaxResponsiveWidthUpdated()
+	{
+		$text = '123';
+		s9e_MediaBBCodes::validateMaxResponsiveWidth($text);
+		$this->assertEquals(123, s9e_MediaBBCodes::$maxResponsiveWidth);
 	}
 
 	public function testFooterCallbackNoModification()
@@ -829,6 +845,50 @@ class Test extends PHPUnit_Framework_TestCase
 				'foo=bar;baz=quux',
 				'{$foo} {$baz}',
 				'bar quux'
+			),
+			array(
+				'foo',
+				'123',
+				'<iframe width="560" height="315"></iframe>',
+				'<div style="max-width:800px"><div style="height:0;position:relative;padding-top:56.25%"><iframe width="560" height="315" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
+				'assertSame',
+				function ()
+				{
+					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
+				}
+			),
+			array(
+				'foo',
+				'123',
+				'<iframe width="560" height="315" style="border:1px"></iframe>',
+				'<div style="max-width:800px"><div style="height:0;position:relative;padding-top:56.25%"><iframe width="560" height="315" style="border:1px;position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
+				'assertSame',
+				function ()
+				{
+					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
+				}
+			),
+			array(
+				'foo',
+				'123',
+				'<iframe width="100%" height="315"></iframe>',
+				'<iframe width="100%" height="315"></iframe>',
+				'assertSame',
+				function ()
+				{
+					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
+				}
+			),
+			array(
+				'foo',
+				'123',
+				'<iframe width="400" height="150" onload="this.height=123"></iframe>',
+				'<iframe width="400" height="150" onload="this.height=123"></iframe>',
+				'assertSame',
+				function ()
+				{
+					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
+				}
 			),
 			array(
 				'amazon',

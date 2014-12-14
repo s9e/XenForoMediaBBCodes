@@ -624,6 +624,44 @@ setAttributes(
 	]
 );
 
+// Add the max width param
+$option = $optiongroups->appendChild($dom->createElement('option'));
+setAttributes(
+	$option,
+	[
+		'option_id'         => $addonId . '_max_responsive_width',
+		'edit_format'       => 'textbox',
+		'data_type'         => 'unsigned_integer',
+		'can_backup'        => 1,
+		'validation_class'  => $className,
+		'validation_method' => 'validateMaxResponsiveWidth',
+		'default_value'     => 0
+	]
+);
+setAttributes(
+	$option->appendChild($dom->createElement('relation')),
+	[
+		'group_id'      => $addonId,
+		'display_order' => ++$displayOrder
+	]
+);
+setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', 'Max responsive width')),
+	[
+		'title'          => 'option_' . $addonId . '_max_responsive_width',
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', 'Set to 0 to disable')),
+	[
+		'title'          => 'option_' . $addonId . '_max_responsive_width_explain',
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+
 // Add the params as XenForo options
 ksort($optionNames);
 
