@@ -288,6 +288,22 @@ class Test extends PHPUnit_Framework_TestCase
 		$this->assertSame('twitter,youtube', $text);
 	}
 
+	public function testValidateExcludedSitesValueLowercased()
+	{
+		$text = ' YouTube , Twitter ';
+		s9e_MediaBBCodes::validateExcludedSites($text);
+
+		$this->assertSame('twitter,youtube', $text);
+	}
+
+	public function testValidateExcludedSitesByName()
+	{
+		$text = 'YouTube, 8tracks, Internet Archive';
+		s9e_MediaBBCodes::validateExcludedSites($text);
+
+		$this->assertSame('eighttracks,internetarchive,youtube', $text);
+	}
+
 	public function testValidateExcludedSitesReinstall()
 	{
 		$text = '';

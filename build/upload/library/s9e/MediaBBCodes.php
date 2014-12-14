@@ -336,6 +336,38 @@ class s9e_MediaBBCodes
 	}
 
 	/**
+	* Parse a text to capture the list of excluded sites
+	*
+	* @param  string $text Comma-separated list of excluded sites (ID or name)
+	* @return void
+	*/
+	protected static function parseExcludedSites($text)
+	{
+		$siteIds = array();
+		foreach (preg_split('(\\s*,\\s*)', strtolower(trim($text))) as $name)
+		{
+			if (isset(self::$sites[$name]))
+			{
+				$siteIds[] = $name;
+			}
+			else
+			{
+				foreach (self::$sites as $siteId => $site)
+				{
+					if (strtolower($site[self::KEY_TITLE]) === $name)
+					{
+						$siteIds[] = $siteId;
+					}
+				}
+			}
+		}
+
+		sort($siteIds);
+		$text = implode(',', $siteIds);
+		self::$excludedSites = $text;
+	}
+
+	/**
 	* Validate a list of custom callbacks and trigger the reinstallation
 	*
 	* @param  string &$text List of callbacks as text, one per line as "site=callback"
@@ -365,11 +397,8 @@ class s9e_MediaBBCodes
 	*/
 	public static function validateExcludedSites(&$text)
 	{
-		$siteIds = preg_split('(\\s*,\\s*)', trim($text));
-		sort($siteIds);
-		$text = implode(',', $siteIds);
-
-		self::$excludedSites = $text;
+		self::parseExcludedSites($text);
+		$text = self::$excludedSites;
 		self::reinstall();
 
 		return true;
