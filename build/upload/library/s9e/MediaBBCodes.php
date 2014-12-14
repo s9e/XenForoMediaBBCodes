@@ -300,7 +300,7 @@ class s9e_MediaBBCodes
 	/**
 	* Parse a text to capture the list of custom callbacks
 	*
-	* @param  string $text List of callbacks as text, one per line as "site=callback" 
+	* @param  string $text List of callbacks as text, one per line as "site=callback"
 	* @return void
 	*/
 	protected static function parseCustomCallbacks($text)
@@ -322,7 +322,7 @@ class s9e_MediaBBCodes
 	/**
 	* Validate a list of custom callbacks and trigger the reinstallation
 	*
-	* @param  string &$text List of callbacks as text, one per line as "site=callback" 
+	* @param  string &$text List of callbacks as text, one per line as "site=callback"
 	* @return bool          Always TRUE
 	*/
 	public static function validateCustomCallbacks(&$text)
@@ -344,7 +344,7 @@ class s9e_MediaBBCodes
 	/**
 	* Validate a comma-separated list of sites not to install
 	*
-	* @param  string &$text Comma-separated IDs, e.g. "foo,bar" 
+	* @param  string &$text Comma-separated IDs, e.g. "foo,bar"
 	* @return bool          Always TRUE
 	*/
 	public static function validateExcludedSites(&$text)
