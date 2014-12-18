@@ -806,7 +806,7 @@ class s9e_MediaBBCodes
 			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
 		}
 
-		return '<div style="max-width:' . self::$maxResponsiveWidth . 'px"><div style="height:0;position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
+		return '<div style="display:inline-block;max-width:100%;width:' . self::$maxResponsiveWidth . 'px"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
 	}
 
 	/**
