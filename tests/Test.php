@@ -788,6 +788,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=508269a4-6f05-4b3e-a66a-fe4e91e92000;user=Soulshifted'
 			),
 			array(
+				'xboxdvr',
+				'http://xboxdvr.com/Alternat/33fb93ca-5dee-44d8-bcb2-9f2fc0994868',
+				'id=33fb93ca-5dee-44d8-bcb2-9f2fc0994868;user=Alternat'
+			),
+			array(
 				'youtube',
 				'http://www.youtube.com/watch?v=-cEzsCAzTak',
 				'-cEzsCAzTak'
@@ -1162,6 +1167,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=508269a4-6f05-4b3e-a66a-fe4e91e92000;user=Soulshifted',
 				'',
 				'<iframe width="560" height="315" src="//xboxclips.com/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+			),
+			array(
+				'xboxdvr',
+				'id=33fb93ca-5dee-44d8-bcb2-9f2fc0994868;user=Alternat',
+				'',
+				'<iframe width="560" height="430" src="//xboxdvr.com/Alternat/33fb93ca-5dee-44d8-bcb2-9f2fc0994868/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'youtube',
