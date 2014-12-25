@@ -166,6 +166,7 @@ class s9e_MediaBBCodes
 		'wshh'=>array('WorldStarHipHop','http://www.worldstarhiphop.com/',array('misc'=>1),"!worldstarhiphop\\.com/featured/(?'id'\\d+)!\n!(?'id')worldstarhiphop\\.com/(?:\\w+/)?video\\.php\\?v=\\w+!",array('!worldstarhiphop\\.com/featured/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!disqus_identifier[ =\']+(?\'id\'\\d+)!'),'match'=>array('!worldstarhiphop\\.com/(?:\\w+/)?video\\.php\\?v=\\w+!'))),'<iframe width="640" height="360" src="//www.worldstarhiphop.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'wsj'=>array('The Wall Street Journal Online','http://live.wsj.com/',array('news'=>1),"@live\\.wsj\\.com/[^#]*#!(?'id'[-0-9A-F]{36})@\n@live\\.wsj\\.com/video/[^/]+/(?'id'[-0-9A-F]{36})@",array('@live\\.wsj\\.com/[^#]*#!(?\'id\'[-0-9A-F]{36})@','@live\\.wsj\\.com/video/[^/]+/(?\'id\'[-0-9A-F]{36})@')),
 		'xboxclips'=>array('XboxClips','http://xboxclips.com/',array('gaming'=>1),'!xboxclips\\.com/(?\'user\'[^/]+)/(?\'id\'[-0-9a-f]+)!',array('!xboxclips\\.com/(?\'user\'[^/]+)/(?\'id\'[-0-9a-f]+)!'),true),
+		'xboxdvr'=>array('Xbox DVR','http://xboxdvr.com/',array('gaming'=>1),'!xboxdvr\\.com/(?\'user\'[^/]+)/(?\'id\'[-0-9a-f]+)!',array('!xboxdvr\\.com/(?\'user\'[^/]+)/(?\'id\'[-0-9a-f]+)!'),true),
 		'yahooscreen'=>array('Yahoo! Screen','https://screen.yahoo.com/',array('movies'=>1),'!screen\\.yahoo\\.com/(?:[-\\w]+/)?(?\'id\'[-\\w]+)\\.html!',array('!screen\\.yahoo\\.com/(?:[-\\w]+/)?(?\'id\'[-\\w]+)\\.html!'),7=>'<iframe width="640" height="360" src="https://screen.yahoo.com/{$id}.html?format=embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'youku'=>array('Youku','http://www.youku.com/',array('.cn'=>1),'!youku\\.com/v_show/id_(?\'id\'\\w+)!',array('!youku\\.com/v_show/id_(?\'id\'\\w+)!'),7=>'<iframe width="512" height="328" src="http://player.youku.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'youtube'=>array('YouTube','http://www.youtube.com/',array('misc'=>1),"!youtube\\.com/(?:watch.*?v=|v/)(?'id'[-\\w]+)!\n!youtu\\.be/(?'id'[-\\w]+)!\n!(?'id')(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?:(?:(?'h'\\d+)h)?(?'m'\\d+)m(?'s'\\d+)|(?'t'\\d+))!\n!(?'id')(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?'list'[-\\w]+)!",array('!youtube\\.com/(?:watch.*?v=|v/)(?\'id\'[-\\w]+)!','!youtu\\.be/(?\'id\'[-\\w]+)!','!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?:(?:(?\'h\'\\d+)h)?(?\'m\'\\d+)m(?\'s\'\\d+)|(?\'t\'\\d+))!','!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?\'list\'[-\\w]+)!'),true)
@@ -1116,6 +1117,15 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null, 'user' => null);
 
 		$html='<iframe width="560" height="315" src="//xboxclips.com/'.htmlspecialchars($vars['user'],2).'/'.htmlspecialchars($vars['id'],2).'/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+
+		return $html;
+	}
+
+	public static function renderXboxdvr($vars)
+	{
+		$vars += array('id' => null, 'user' => null);
+
+		$html='<iframe width="560" height="430" src="//xboxdvr.com/'.htmlspecialchars($vars['user'],2).'/'.htmlspecialchars($vars['id'],2).'/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
 		return $html;
 	}
