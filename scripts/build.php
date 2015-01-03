@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @copyright Copyright (c) 2013-2014 The s9e Authors
+* @copyright Copyright (c) 2013-2015 The s9e Authors
 * @license   http://www.opensource.org/licenses/mit-license.php The MIT License
 */
 
