@@ -392,6 +392,43 @@ setAttributes(
 	]
 );
 
+// Add template modifications
+$modifications = $addon->appendChild($dom->createElement('public_template_modifications'));
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'preg_replace',
+		'description'      => 'Fixes responsive embeds in XenForo Media Gallery',
+		'enabled'          => 1,
+		'execution_order'  => 10,
+		'modification_key' => $addonId . '_xmg_fix',
+		'template'         => 'xengallery_media_view.css'
+	]
+);
+$modification->appendChild($dom->createElement('find', '(^)'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	".videoContainer>div\n{\n\tmax-width: none !important;\n\tmargin-top: -30px;\n}\n\n"
+));
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'preg_replace',
+		'description'      => "Fixes responsive embeds in XenForo Media Gallery's lightbox",
+		'enabled'          => 1,
+		'execution_order'  => 10,
+		'modification_key' => $addonId . '_lightbox_fix',
+		'template'         => 'xengallery_media_preview.css'
+	]
+);
+$modification->appendChild($dom->createElement('find', '(^)'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	".mfp-iframe-scaler>div>div>iframe\n{\n\tposition: fixed !important;\n}\n\n"
+));
+
 // Prepare the option group
 $optiongroups = $addon->appendChild($dom->createElement('optiongroups'));
 
@@ -404,7 +441,6 @@ $displayOrder = 0;
 // Add the attribution link
 if (isset($linkText))
 {
-	$modifications = $addon->appendChild($dom->createElement('public_template_modifications'));
 	$modification  = $modifications->appendChild($dom->createElement('modification'));
 	setAttributes(
 		$modification,

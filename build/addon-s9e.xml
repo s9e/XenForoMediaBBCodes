@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201501030" version_string="20150103" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201501031" version_string="20150103b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install">
   <bb_code_media_sites/>
   <phrases>
     <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
@@ -16,6 +16,31 @@
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_explain" version_id="1" version_string="1"/>
   </phrases>
+  <public_template_modifications>
+    <modification action="preg_replace" description="Fixes responsive embeds in XenForo Media Gallery" enabled="1" execution_order="10" modification_key="s9e_xmg_fix" template="xengallery_media_view.css">
+      <find>(^)</find>
+      <replace>.videoContainer&gt;div
+{
+	max-width: none !important;
+	margin-top: -30px;
+}
+
+</replace>
+    </modification>
+    <modification action="preg_replace" description="Fixes responsive embeds in XenForo Media Gallery's lightbox" enabled="1" execution_order="10" modification_key="s9e_lightbox_fix" template="xengallery_media_preview.css">
+      <find>(^)</find>
+      <replace>.mfp-iframe-scaler&gt;div&gt;div&gt;iframe
+{
+	position: fixed !important;
+}
+
+</replace>
+    </modification>
+    <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
+      <find>{xen:phrase extra_copyright}</find>
+      <replace>&lt;br&gt;&lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150103b"&gt;Media embeds powered by s9e&lt;/a&gt;$0</replace>
+    </modification>
+  </public_template_modifications>
   <optiongroups>
     <group group_id="s9e" display_order="0" debug_only="0"/>
     <option option_id="s9e_footer" edit_format="radio" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateFooter">
@@ -64,10 +89,4 @@ sports=Sports</edit_format_params>
       <relation group_id="s9e" display_order="6"/>
     </option>
   </optiongroups>
-  <public_template_modifications>
-    <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
-      <find>{xen:phrase extra_copyright}</find>
-      <replace>&lt;br&gt;&lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150103"&gt;Media embeds powered by s9e&lt;/a&gt;$0</replace>
-    </modification>
-  </public_template_modifications>
 </addon>
