@@ -1124,13 +1124,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'ted',
 				'talks/eli_pariser_beware_online_filter_bubbles.html',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="http://embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
 			),
 			array(
 				'ted',
 				'talks/eli_pariser_beware_online_filter_bubbles',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="http://embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
 			),
 			array(
 				'twitch',
