@@ -116,13 +116,15 @@ $addon->appendChild($dom->createElement('bb_code_media_sites'));
 setAttributes(
 	$addon,
 	[
-		'addon_id'                => $addonId,
-		'title'                   => $addonTitle,
-		'url'                     => $addonUrl,
-		'version_id'              => $versionId,
-		'version_string'          => $version,
-		'install_callback_class'  => $className,
-		'install_callback_method' => 'install'
+		'addon_id'                  => $addonId,
+		'title'                     => $addonTitle,
+		'url'                       => $addonUrl,
+		'version_id'                => $versionId,
+		'version_string'            => $version,
+		'install_callback_class'    => $className,
+		'install_callback_method'   => 'install',
+		'uninstall_callback_class'  => $className,
+		'uninstall_callback_method' => 'uninstall'
 	]
 );
 

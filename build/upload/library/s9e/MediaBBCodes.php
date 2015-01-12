@@ -225,6 +225,27 @@ class s9e_MediaBBCodes
 	}
 
 	/**
+	* Uninstaller
+	*
+	* Will unconditionally reinstall the default media sites
+	*
+	* @return void
+	*/
+	public static function uninstall()
+	{
+		try
+		{
+			$defaultData = XenForo_Install_Data_MySql::getData();
+			$query = preg_replace('(^(\\s*)INSERT)', '$1REPLACE', $defaultData['xf_bb_code_media_site']);
+			XenForo_Application::getDb()->query($query);
+		}
+		catch (Exception $e)
+		{
+			// Nothing to do here
+		}
+	}
+
+	/**
 	* Return an array of all the tags (used as keys)
 	*
 	* @return array
