@@ -212,7 +212,16 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 		preg_match_all('(@(\\w+))', $template, $matches);
 		foreach ($matches[1] as $varName)
 		{
-			$vars[$varName] = var_export($varName, true) . ' => null';
+			$defaultValue = 'null';
+			if (isset($site->attributes->$varName))
+			{
+				$attribute = $site->attributes->$varName;
+				if (isset($attribute['defaultValue']))
+				{
+					$defaultValue = $attribute['defaultValue'];
+				}
+			}
+			$vars[$varName] = var_export($varName, true) . ' => ' . $defaultValue;
 		}
 		ksort($vars);
 

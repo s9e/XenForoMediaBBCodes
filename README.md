@@ -94,7 +94,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>dailymotion</code></td>
 		<td>Dailymotion</td>
-		<td>http://www.dailymotion.com/video/x222z1<br/>http://www.dailymotion.com/user/Dailymotion/2#video=x222z1</td>
+		<td>http://www.dailymotion.com/video/x222z1<br/>http://www.dailymotion.com/user/Dailymotion/2#video=x222z1<br/>http://games.dailymotion.com/live/x15gjhi</td>
 	</tr>
 	<tr>
 		<td><code>dailyshow</code></td>

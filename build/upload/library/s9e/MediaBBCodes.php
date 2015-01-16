@@ -973,7 +973,7 @@ class s9e_MediaBBCodes
 
 	public static function renderGfycat($vars)
 	{
-		$vars += array('height' => null, 'id' => null, 'width' => null);
+		$vars += array('height' => 315, 'id' => null, 'width' => 560);
 
 		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="//gfycat.com/iframe/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
