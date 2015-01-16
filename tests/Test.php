@@ -1025,6 +1025,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'<iframe width="600" height="338" src="//gfycat.com/iframe/SereneIllfatedCapybara" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
+				'gfycat',
+				'id=SereneIllfatedCapybara',
+				'',
+				'<iframe width="560" height="315" src="//gfycat.com/iframe/SereneIllfatedCapybara" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+			),
+			array(
 				'grooveshark',
 				'playlistid=74854761',
 				'',
