@@ -1142,13 +1142,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'twitch',
 				'channel=minigolf2000',
 				'',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="//www.twitch.tv/widgets/live_embed_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="channel=minigolf2000&amp;auto_play=false"><embed type="application/x-shockwave-flash" width="620" height="378" allowfullscreen="" src="//www.twitch.tv/widgets/live_embed_player.swf" flashvars="channel=minigolf2000&amp;auto_play=false"></object>',
+				'<iframe width="620" height="378" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000"></iframe>',
 			),
 			array(
 				'twitch',
 				'archive_id=361358487;channel=minigolf2000',
 				'',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="620" height="378" data="//www.twitch.tv/widgets/archive_embed_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="channel=minigolf2000&amp;archive_id=361358487&amp;auto_play=false"><embed type="application/x-shockwave-flash" width="620" height="378" allowfullscreen="" src="//www.twitch.tv/widgets/archive_embed_player.swf" flashvars="channel=minigolf2000&amp;archive_id=361358487&amp;auto_play=false"></object>',
+				'<iframe width="620" height="378" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000&amp;videoId=a361358487"></iframe>',
 			),
 			array(
 				'ustream',
