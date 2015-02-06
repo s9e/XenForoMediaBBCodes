@@ -262,6 +262,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>https://mediacru.sh/vKUNeYFRuzDC</td>
 	</tr>
 	<tr>
+		<td><code>medium</code></td>
+		<td>Medium</td>
+		<td>https://medium.com/@donnydonny/team-internet-is-about-to-win-net-neutrality-and-they-didnt-need-googles-help-e7e2cf9b8a95</td>
+	</tr>
+	<tr>
 		<td><code>metacafe</code></td>
 		<td>Metacafe</td>
 		<td>http://www.metacafe.com/watch/10785282/chocolate_treasure_chest_epic_meal_time/</td>
