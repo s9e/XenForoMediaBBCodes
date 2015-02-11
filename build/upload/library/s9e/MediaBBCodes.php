@@ -322,7 +322,7 @@ class s9e_MediaBBCodes
 		if (isset($config[self::KEY_HTML]))
 		{
 			$embedHtml = $config[self::KEY_HTML];
-			if (self::$maxResponsiveWidth)
+			if (self::$maxResponsiveWidth && $siteId !== 'amazon' && $siteId !== 'medium' && $siteId !== 'npr')
 			{
 				$embedHtml = self::customiseDimensions($embedHtml);
 			}
@@ -643,7 +643,7 @@ class s9e_MediaBBCodes
 			);
 		}
 
-		if (self::$maxResponsiveWidth)
+		if (self::$maxResponsiveWidth && $siteId !== 'amazon' && $siteId !== 'medium' && $siteId !== 'npr')
 		{
 			$html = self::customiseDimensions($html);
 		}
