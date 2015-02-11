@@ -1176,7 +1176,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('file' => null, 'server' => null);
 
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="100%" height="80" data="//api.zippyshare.com/api/player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="file='.htmlspecialchars($vars['file'],2).'&amp;server='.htmlspecialchars($vars['server'],2).'&amp;autostart=false"><embed type="application/x-shockwave-flash" width="100%" height="80" src="//api.zippyshare.com/api/player.swf" allowfullscreen="" flashvars="file='.htmlspecialchars($vars['file'],2).'&amp;server='.htmlspecialchars($vars['server'],2).'&amp;autostart=false"></object>';
+		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="100%" height="80" data="//api.zippyshare.com/api/player.swf" style="max-width:900px"><param name="allowfullscreen" value="true"><param name="flashvars" value="file='.htmlspecialchars($vars['file'],2).'&amp;server='.htmlspecialchars($vars['server'],2).'&amp;autostart=false"><embed type="application/x-shockwave-flash" width="100%" height="80" style="max-width:900px" src="//api.zippyshare.com/api/player.swf" allowfullscreen="" flashvars="file='.htmlspecialchars($vars['file'],2).'&amp;server='.htmlspecialchars($vars['server'],2).'&amp;autostart=false"></object>';
 
 		return $html;
 	}
