@@ -50,7 +50,7 @@ hide=I do not want to display a link to this add-on</edit_format_params>
       <relation group_id="s9e" display_order="1"/>
     </option>
     <option option_id="s9e_media_tags" edit_format="checkbox" data_type="array" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="updateTags">
-      <default_value>a:22:{s:3:".bg";i:1;s:3:".ca";i:1;s:3:".cn";i:1;s:3:".nl";i:1;s:3:".ru";i:1;s:3:".tr";i:1;s:8:"blogging";i:1;s:13:"documentaries";i:1;s:9:"documents";i:1;s:13:"entertainment";i:1;s:11:"fundraising";i:1;s:6:"gaming";i:1;s:6:"gossip";i:1;s:6:"images";i:1;s:4:"misc";i:1;s:6:"movies";i:1;s:5:"music";i:1;s:4:"news";i:1;s:8:"podcasts";i:1;s:13:"presentations";i:1;s:6:"social";i:1;s:6:"sports";i:1;}</default_value>
+      <default_value>a:23:{s:3:".bg";i:1;s:3:".ca";i:1;s:3:".cn";i:1;s:3:".nl";i:1;s:3:".ru";i:1;s:3:".tr";i:1;s:8:"blogging";i:1;s:13:"documentaries";i:1;s:9:"documents";i:1;s:13:"entertainment";i:1;s:12:"file sharing";i:1;s:11:"fundraising";i:1;s:6:"gaming";i:1;s:6:"gossip";i:1;s:6:"images";i:1;s:4:"misc";i:1;s:6:"movies";i:1;s:5:"music";i:1;s:4:"news";i:1;s:8:"podcasts";i:1;s:13:"presentations";i:1;s:6:"social";i:1;s:6:"sports";i:1;}</default_value>
       <edit_format_params>.bg=.bg
 .ca=.ca
 .cn=.cn
@@ -61,6 +61,7 @@ blogging=Blogging
 documentaries=Documentaries
 documents=Documents
 entertainment=Entertainment
+file sharing=File sharing
 fundraising=Fundraising
 gaming=Gaming
 gossip=Gossip
