@@ -648,7 +648,7 @@ class s9e_MediaBBCodes
 			);
 		}
 
-		if (self::$maxResponsiveWidth && empty($config[self::KEY_UNRESPONSIVE]))
+		if (self::$maxResponsiveWidth && empty(self::$sites[$siteId][self::KEY_UNRESPONSIVE]))
 		{
 			$html = self::customiseDimensions($html);
 		}
