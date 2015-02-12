@@ -148,6 +148,11 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 		KEY_URL   => (string) $site['homepage']
 	);
 
+	if (!empty($site['unresponsive']))
+	{
+		$config[KEY_UNRESPONSIVE] = true;
+	}
+
 	if (isset($site->tags->tag))
 	{
 		foreach ($site->tags->tag as $tag)
