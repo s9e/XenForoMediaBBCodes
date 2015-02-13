@@ -109,7 +109,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>eighttracks</code></td>
 		<td>8tracks</td>
-		<td>http://8tracks.com/lovinq/headphones-in-world-out<br/>http://8tracks.com/midna/2242699</td>
+		<td>http://8tracks.com/lovinq/headphones-in-world-out<br/>http://8tracks.com/lovinq/4982023</td>
 	</tr>
 	<tr>
 		<td><code>espn</code></td>
@@ -255,11 +255,6 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td><code>mailru</code></td>
 		<td>Mail.Ru</td>
 		<td>http://my.mail.ru/corp/auto/video/testdrive/34.html<br/>http://my.mail.ru/mail/classolo/video/28/29.html<br/>http://my.mail.ru/inbox/madasafish1969/video/_myvideo/1986.html<br/>http://my.mail.ru/mail/you4videos/video/_myvideo/1121.html</td>
-	</tr>
-	<tr>
-		<td><code>mediacrush</code></td>
-		<td>MediaCrush</td>
-		<td>https://mediacru.sh/vKUNeYFRuzDC</td>
 	</tr>
 	<tr>
 		<td><code>medium</code></td>

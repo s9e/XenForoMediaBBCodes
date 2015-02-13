@@ -111,7 +111,7 @@ class s9e_MediaBBCodes
 		'gametrailers'=>array('GameTrailers','http://www.gametrailers.com/',array('gaming'=>1),'!(?\'id\')gametrailers\\.com/(?:full-episode|review|video)s/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:(?:episode|video):gametrailers\\.com:[-\\w]+)!'),'match'=>array('!gametrailers\\.com/(?:full-episode|review|video)s/!')))),
 		'getty'=>array('Getty Images','http://www.gettyimages.com/',array('images'=>1),"!gty\\.im/(?'id'\\d+)!\n!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?'id'\\d+)!",array('!gty\\.im/(?\'id\'\\d+)!','!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!"height":[ "]*(?\'height\'\\d+)!','!"width":[ "]*(?\'width\'\\d+)!','!et=(?\'et\'[-=\\w]+)!','!sig=(?\'sig\'[-=\\w]+)!'),'match'=>array('//'),'url'=>'http://embed.gettyimages.com/preview/{@id}'))),
 		'gfycat'=>array('Gfycat','http://gfycat.com/',array('images'=>1),'!gfycat\\.com/(?\'id\'\\w+)!',array('!gfycat\\.com/(?\'id\'\\w+)!'),true,array(array('extract'=>array('!gfyHeight[ ="]+(?\'height\'\\d+)!','!gfyWidth[ ="]+(?\'width\'\\d+)!'),'match'=>array('//'),'url'=>'http://gfycat.com/{@id}'))),
-		'gist'=>array('GitHub Gist (via custom iframe)','https://gist.github.com/',array('misc'=>1),'!gist\\.github\\.com/(?\'id\'(?:\\w+/)?[\\da-f]+(?:/[\\da-f]+)?)!',array('!gist\\.github\\.com/(?\'id\'(?:\\w+/)?[\\da-f]+(?:/[\\da-f]+)?)!'),7=>'<iframe style="width:100%" src="//s9e.github.io/iframe/gist.min.html#{$id}" frameborder="0" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))"></iframe>',8=>true),
+		'gist'=>array('GitHub Gist (via custom iframe)','https://gist.github.com/',array('misc'=>1),'!gist\\.github\\.com/(?\'id\'(?:\\w+/)?[\\da-f]+(?:/[\\da-f]+)?)!',array('!gist\\.github\\.com/(?\'id\'(?:\\w+/)?[\\da-f]+(?:/[\\da-f]+)?)!'),7=>'<iframe width="100%" height="180" src="//s9e.github.io/iframe/gist.min.html#{$id}" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>',8=>true),
 		'globalnews'=>array('Global News','http://globalnews.ca/',array('.ca'=>1,'news'=>1),'!globalnews\\.ca/video/(?\'id\'\\d+)!',array('!globalnews\\.ca/video/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="377" src="http://globalnews.ca/video/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'gofundme'=>array('GoFundMe','http://www.gofundme.com/',array('fundraising'=>1),'@gofundme\\.com/(?\'id\'\\w+)(?![^#?])@',array('@gofundme\\.com/(?\'id\'\\w+)(?![^#?])@'),7=>'<object type="application/x-shockwave-flash" typemustmatch="" width="258" height="338" data="//funds.gofundme.com/Widgetflex.swf"><param name="allowfullscreen" value="true"/><param name="flashvars" value="page={$id}"/><embed type="application/x-shockwave-flash" width="258" height="338" src="//funds.gofundme.com/Widgetflex.swf" allowfullscreen="" flashvars="page={$id}"/></object>'),
 		'googleplus'=>array('Google+','https://plus.google.com/',array('social'=>1),"!(?'id')//plus\\.google\\.com/(?:\\+\\w+|(?'oid'\\d+))/posts/(?'pid'\\w+)!\n!(?'id')//plus\\.google\\.com/\\+[^/]+/posts/\\w!",array('!//plus\\.google\\.com/(?:\\+\\w+|(?\'oid\'\\d+))/posts/(?\'pid\'\\w+)!'),true,array(array('extract'=>array('!oid="?(?\'oid\'\\d+)!'),'match'=>array('!//plus\\.google\\.com/\\+[^/]+/posts/\\w!'))),null,true),
@@ -130,7 +130,6 @@ class s9e_MediaBBCodes
 		'kickstarter'=>array('Kickstarter','http://www.kickstarter.com/',array('fundraising'=>1),'!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!',array('!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!'),true),
 		'liveleak'=>array('LiveLeak','http://www.liveleak.com/',array('misc'=>1),'!liveleak\\.com/view\\?i=(?\'id\'[a-f_0-9]+)!',array('!liveleak\\.com/view\\?i=(?\'id\'[a-f_0-9]+)!'),7=>'<iframe width="640" height="360" src="http://www.liveleak.com/ll_embed?i={$id}" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'mailru'=>array('Mail.Ru','http://my.mail.ru/',array('.ru'=>1),'!(?\'id\')my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!',array(),true,array(array('extract'=>array('!mail\\.ru/videos/embed/(?\'id\'[\\w/]+)\\.html!'),'match'=>array('!my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!')))),
-		'mediacrush'=>array('MediaCrush','https://mediacru.sh/',array('misc'=>1),'!mediacru\\.sh/(?\'id\'\\w+)!',array('!mediacru\\.sh/(?\'id\'\\w+)!'),true,array(array('extract'=>array('!"height":\\s*(?\'height\'\\d+)!','!"width":\\s*(?\'width\'\\d+)!'),'match'=>array('//'),'url'=>'https://mediacru.sh/api/{@id}'))),
 		'medium'=>array('Medium','https://medium.com/',array('blogging'=>1),'!medium\\.com/[^/]*/(?:[-\\w]+-)?(?\'id\'[\\da-f]+)!',array('!medium\\.com/[^/]*/(?:[-\\w]+-)?(?\'id\'[\\da-f]+)!'),7=>'<iframe width="400" height="454" src="https://api.medium.com/embed?type=story&amp;path=//{$id}" style="border:solid 1px;border-color:#eee #ddd #bbb;border-radius:5px;box-shadow:rgba(0,0,0,0.15) 0px 1px 3px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'metacafe'=>array('Metacafe','http://www.metacafe.com/',array('misc'=>1),'!metacafe\\.com/watch/(?\'id\'\\d+)!',array('!metacafe\\.com/watch/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="//www.metacafe.com/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
 		'mixcloud'=>array('Mixcloud','http://www.mixcloud.com/',array('music'=>1),"@mixcloud\\.com/(?!categories|tag)(?'id'[-\\w]+/[^/&]+)/@\n@(?'id')//i\\.mixcloud\\.com/\\w+$@",array('@mixcloud\\.com/(?!categories|tag)(?\'id\'[-\\w]+/[^/&]+)/@'),true,array(array('extract'=>array('@link rel="canonical" href="https?://[^/]+/(?\'id\'[-\\w]+/[^/&]+)/@'),'match'=>array('@//i\\.mixcloud\\.com/\\w+$@'))),'<iframe width="400" height="400" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;embed_type=widget_standard" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'),
@@ -1037,7 +1036,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'video' => null);
 
-		$html='';if(isset($vars['video']))$html.='<iframe width="480" height="360" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';else$html.='<iframe width="220" height="380" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
+		$html='<iframe allowfullscreen="" frameborder="0" scrolling="no" width="';if(isset($vars['video']))$html.='480';else$html.='220';$html.='" height="';if(isset($vars['video']))$html.='360';else$html.='380';$html.='" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/';if(isset($vars['video']))$html.='video';else$html.='card';$html.='.html"></iframe>';
 
 		return $html;
 	}
@@ -1047,15 +1046,6 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null);
 
 		$html='<iframe width="560" height="342" src="http://videoapi.my.mail.ru/videos/embed/'.htmlspecialchars($vars['id'],2).'.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
-
-		return $html;
-	}
-
-	public static function renderMediacrush($vars)
-	{
-		$vars += array('height' => null, 'id' => null, 'width' => null);
-
-		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="https://mediacru.sh/'.htmlspecialchars($vars['id'],2).'/frame" allowfullscreen="" frameborder="0" scrolling="no"></iframe>';
 
 		return $html;
 	}

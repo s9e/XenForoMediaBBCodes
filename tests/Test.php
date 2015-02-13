@@ -638,11 +638,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=1869987317%2Fwish-i-was-here-1;video=video'
 			),
 			array(
-				'mediacrush',
-				'https://cdn.mediacru.sh/Sl5mn6Id29Yg.gif',
-				'height=275;id=Sl5mn6Id29Yg;width=430'
-			),
-			array(
 				'msnbc',
 				'http://www.msnbc.com/ronan-farrow-daily/watch/thats-no-moon--300512323725',
 				'n_farrow_moon_140709_257794'
@@ -1064,19 +1059,19 @@ class Test extends PHPUnit_Framework_TestCase
 				'kickstarter',
 				'1869987317/wish-i-was-here-1',
 				'',
-				'<iframe width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
 			),
 			array(
 				'kickstarter',
 				'card=card;id=1869987317%2Fwish-i-was-here-1',
 				'',
-				'<iframe width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
 			),
 			array(
 				'kickstarter',
 				'id=1869987317%2Fwish-i-was-here-1;video=video',
 				'',
-				'<iframe width="480" height="360" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="480" height="360" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html"></iframe>'
 			),
 			array(
 				'soundcloud',
