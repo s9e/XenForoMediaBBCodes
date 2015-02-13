@@ -195,9 +195,9 @@ class s9e_MediaBBCodes
 	public static function install($old, array $new, SimpleXMLElement $addon)
 	{
 		self::loadSettings();
-		if (isset($old['version_id']) && $old['version_id'] < 201502120)
+		if (isset($old['version_id']))
 		{
-			self::$tags['videos'] = 1;
+			self::upgrade($old['version_id']);
 		}
 		foreach (self::getFilteredSites() as $siteId => $site)
 		{
@@ -232,6 +232,36 @@ class s9e_MediaBBCodes
 		{
 			$options = $addon->xpath('//option[@option_id="s9e_excluded_sites"]');
 			$options[0]->default_value = self::$excludedSites;
+		}
+	}
+
+	/**
+	* Upgrade this add-on's options
+	*
+	* @param  integer $versionId Old version ID
+	* @return void
+	*/
+	protected static function upgrade($versionId)
+	{
+		$save = false;
+		$tags = array(
+			'videos' => 201502120
+		);
+		foreach ($tags as $tag => $tagVersionId)
+		{
+			if ($versionId < $tagVersionId)
+			{
+				self::$tags[$tag] = 1;
+				$save = true;
+			}
+		}
+
+		if ($save)
+		{
+			$dw = XenForo_DataWriter::create('XenForo_DataWriter_Option');
+			$dw->setExistingData('s9e_media_tags');
+			$dw->set('option_value', self::$tags);
+			$dw->save();
 		}
 	}
 
