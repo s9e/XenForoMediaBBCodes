@@ -255,7 +255,6 @@ class s9e_MediaBBCodes
 				$save = true;
 			}
 		}
-
 		if ($save)
 		{
 			$dw = XenForo_DataWriter::create('XenForo_DataWriter_Option');
