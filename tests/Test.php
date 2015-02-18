@@ -366,6 +366,47 @@ class Test extends PHPUnit_Framework_TestCase
 		);
 	}
 
+	public function testLazyLoadingCallbackNoModification()
+	{
+		XenForo_DataWriter_TemplateModification::$loggedCalls = array();
+		XenForo_Model_TemplateModification::$modification = false;
+
+		$this->assertSame('immediate', s9e_MediaBBCodes::validateLazyLoading('immediate'));
+		$this->assertEmpty(XenForo_DataWriter_TemplateModification::$loggedCalls);
+	}
+
+	public function testLazyLoadingCallbackOnUpdateImmediate()
+	{
+		XenForo_DataWriter_TemplateModification::$loggedCalls = array();
+		XenForo_Model_TemplateModification::$modification = array('enabled' => 1);
+
+		$this->assertSame('immediate', s9e_MediaBBCodes::validateLazyLoading('immediate'));
+		$this->assertSame(
+			array(
+				array('setExistingData', array(array('enabled' => 1))),
+				array('set',             array('enabled', 0)),
+				array('save',            array())
+			),
+			XenForo_DataWriter_TemplateModification::$loggedCalls
+		);
+	}
+
+	public function testLazyLoadingCallbackOnUpdateLazy()
+	{
+		XenForo_DataWriter_TemplateModification::$loggedCalls = array();
+		XenForo_Model_TemplateModification::$modification = array('enabled' => 0);
+
+		$this->assertSame('lazy', s9e_MediaBBCodes::validateLazyLoading('lazy'));
+		$this->assertSame(
+			array(
+				array('setExistingData', array(array('enabled' => 0))),
+				array('set',             array('enabled', 1)),
+				array('save',            array())
+			),
+			XenForo_DataWriter_TemplateModification::$loggedCalls
+		);
+	}
+
 	/**
 	* @dataProvider getMatchCallbackTests
 	*/

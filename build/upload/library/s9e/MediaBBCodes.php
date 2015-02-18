@@ -489,6 +489,28 @@ class s9e_MediaBBCodes
 	}
 
 	/**
+	* Callback used to toggle lazy loading
+	*
+	* @param  string $value Either "immediate" or "lazy"
+	* @return string        Original value, returned as-is
+	*/
+	public static function validateLazyLoading($value)
+	{
+		$model = XenForo_Model::create('XenForo_Model_TemplateModification');
+		$modification = $model->getModificationByKey('s9e_lazy_loading');
+
+		if ($modification)
+		{
+			$dw = XenForo_DataWriter::create('XenForo_DataWriter_TemplateModification');
+			$dw->setExistingData($modification);
+			$dw->set('enabled', (int) ($value === 'lazy'));
+			$dw->save();
+		}
+
+		return $value;
+	}
+
+	/**
 	* Trigger the reinstallation when the max responsive width is toggled
 	*
 	* @param  string &$text Max responsive width, as text

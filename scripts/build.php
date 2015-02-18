@@ -714,9 +714,67 @@ setAttributes(
 	]
 );
 
+// Add the lazy loading modification and option
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'preg_replace',
+		'description'      => 'Defers the loading of embedded content',
+		'enabled'          => 0,
+		'execution_order'  => 10,
+		'modification_key' => $addonId . '_lazy_loading',
+		'template'         => 'ad_thread_view_below_messages'
+	]
+);
+$modification->appendChild($dom->createElement('find', '(^)'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	htmlspecialchars('<script>(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50<a.top&&a.top<b||-50<a.bottom&&a.bottom<b}function h(){f=!0}function k(){for(var a=document.getElementsByTagName("iframe"),d=a.length,e=-1;++e<d;){var c=a[e];"about:blank"!==c.src&&!g(c)&&c.hasAttribute("allowfullscreen")&&(b.unshift([c,c.src]),c.src="about:blank")}}var b=[],f=!0;k();b.length&&(4<b.length&&setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(f){f=!1;for(var a=b.length;0<=--a;){var d=b[a][0],e=b[a][1];g(d)&&(d.src=e,b.splice(a,1))}}},500))})();</script>$0')
+));
+
+$option = $optiongroups->appendChild($dom->createElement('option'));
+setAttributes(
+	$option,
+	[
+		'option_id'         => $addonId . '_lazy_loading',
+		'edit_format'       => 'radio',
+		'data_type'         => 'string',
+		'can_backup'        => 1,
+		'validation_class'  => $className,
+		'validation_method' => 'validateLazyLoading'
+	]
+);
+$option->appendChild($dom->createElement('default_value', 'immediate'));
+$option->appendChild($dom->createElement('edit_format_params', "immediate=Load embedded content immediately\nlazy=Defer loading embedded content until it's visible (experimental)"));
+setAttributes(
+	$option->appendChild($dom->createElement('relation')),
+	[
+		'group_id'      => $addon->getAttribute('addon_id'),
+		'display_order' => ++$displayOrder
+	]
+);
+setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', 'Performance')),
+	[
+		'title'          => 'option_' . $addonId . '_lazy_loading',
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', 'Deferring the loading of embedded content makes pages load faster and use memory. However, scrolling may be less smooth.')),
+	[
+		'title'          => 'option_' . $addonId . '_lazy_loading_explain',
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+
 // Add the params as XenForo options
 ksort($optionNames);
 
+$displayOrder = 100;
 foreach ($optionNames as $paramName => $optionName)
 {
 	$option = $optiongroups->appendChild($dom->createElement('option'));
