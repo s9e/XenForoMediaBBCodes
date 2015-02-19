@@ -39,6 +39,16 @@ $configurator->rendering->engine->forceEmptyElements = false;
 $configurator->rendering->engine->useEmptyElements   = false;
 $configurator->MediaEmbed->sitesDir = $sitesDir;
 
+$configurator->templateNormalizer->add(
+	function (DOMElement $template)
+	{
+		foreach ($template->getElementsByTagName('iframe') as $iframe)
+		{
+			$iframe->setAttribute('data-s9e', '');
+		}
+	}
+);
+
 // Load the PHP file and remove the renderers
 $php = file_get_contents($classFile);
 $php = preg_replace('((.*?)(?:\\s*public static function render.*)?\\}$)s', '$1', $php);
@@ -730,7 +740,7 @@ setAttributes(
 $modification->appendChild($dom->createElement('find', '(^)'));
 $modification->appendChild($dom->createElement(
 	'replace',
-	htmlspecialchars('<script>(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50<a.top&&a.top<b||-50<a.bottom&&a.bottom<b}function h(){d=!0}function k(){for(var a=document.getElementsByTagName("iframe"),b=a.length,d=-1;++d<b;){var c=a[d];if(!c.hasAttribute("data-lazy")&&!g(c)&&c.hasAttribute("allowfullscreen")){var f=/youtube\.com\/embed\/(\w+)/.exec(c.src);f&&(c.style.background="url(https://i.ytimg.com/vi/"+f[1]+"/hqdefault.jpg) no-repeat 50% 50% / cover");e.unshift(c);c.contentWindow.location.replace("about:blank");c.setAttribute("data-lazy","")}}}var e=[],f=!0,d=!1;k();e.length&&(3<e.length&&setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(d)d=!1,f=!0;else if(f){f=!1;for(var a=e.length;0<=--a;){var b=e[a];g(b)&&(b.contentWindow.location.replace(b.src),b.removeAttribute("data-lazy"),e.splice(a,1))}}},100))})();</script>$0')
+	htmlspecialchars('<script>(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50<a.top&&a.top<b||-50<a.bottom&&a.bottom<b}function h(){d=!0}function k(){for(var a=document.getElementsByTagName("iframe"),b=a.length,d=-1;++d<b;){var c=a[d];if(!c.hasAttribute("data-lazy")&&c.hasAttribute("data-s9e")&&!g(c)){var f=/youtube\.com\/embed\/(\w+)/.exec(c.src);f&&(c.style.background="url(https://i.ytimg.com/vi/"+f[1]+"/hqdefault.jpg) no-repeat 50% 50% / cover");e.unshift(c);c.contentWindow.location.replace("about:blank");c.setAttribute("data-lazy","")}}}var e=[],f=!0,d=!1;k();e.length&&(3<e.length&&setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(d)d=!1,f=!0;else if(f){f=!1;for(var a=e.length;0<=--a;){var b=e[a];g(b)&&(b.contentWindow.location.replace(b.src),b.removeAttribute("data-lazy"),e.splice(a,1))}}},100))})();</script>')
 ));
 
 $option = $optiongroups->appendChild($dom->createElement('option'));

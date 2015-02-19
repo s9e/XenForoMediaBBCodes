@@ -879,7 +879,9 @@ class Test extends PHPUnit_Framework_TestCase
 		s9e_MediaBBCodes::$cacheDir = __DIR__ . '/.cache';
 
 		$site = array('embed_html' => $template);
-		$this->$assertMethod($expected, s9e_MediaBBCodes::embed($mediaKey, $site, $siteId));
+		$html = s9e_MediaBBCodes::embed($mediaKey, $site, $siteId);
+		$html = str_replace(' data-s9e=""', '', $html);
+		$this->$assertMethod($expected, $html);
 	}
 
 	public function getEmbedCallbackTests()
