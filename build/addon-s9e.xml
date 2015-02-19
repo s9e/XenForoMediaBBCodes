@@ -14,7 +14,7 @@
     <phrase title="option_s9e_max_responsive_width" version_id="1" version_string="1">Max responsive width</phrase>
     <phrase title="option_s9e_max_responsive_width_explain" version_id="1" version_string="1">Set to 0 to disable</phrase>
     <phrase title="option_s9e_lazy_loading" version_id="1" version_string="1">Performance</phrase>
-    <phrase title="option_s9e_lazy_loading_explain" version_id="1" version_string="1">Deferring the loading of embedded content makes pages load faster and use memory. However, scrolling may be less smooth.</phrase>
+    <phrase title="option_s9e_lazy_loading_explain" version_id="1" version_string="1">Deferring the loading of embedded content makes pages load faster and use less memory.</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_explain" version_id="1" version_string="1"/>
   </phrases>

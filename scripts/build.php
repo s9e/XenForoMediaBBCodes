@@ -763,7 +763,7 @@ setAttributes(
 	]
 );
 setAttributes(
-	$phrases->appendChild($dom->createElement('phrase', 'Deferring the loading of embedded content makes pages load faster and use memory. However, scrolling may be less smooth.')),
+	$phrases->appendChild($dom->createElement('phrase', 'Deferring the loading of embedded content makes pages load faster and use less memory.')),
 	[
 		'title'          => 'option_' . $addonId . '_lazy_loading_explain',
 		'version_id'     => '1',
