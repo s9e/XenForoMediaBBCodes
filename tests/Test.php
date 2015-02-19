@@ -730,8 +730,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'sportsnet',
-				'http://www.sportsnet.ca/football/cfl/milanovich-argos-allowed-second-half-to-snowball/',
-				'3783955076001'
+				'http://www.sportsnet.ca/videos/shows/tim-and-sid-video/',
+				'4066554578001'
 			),
 			array(
 				'spotify',
