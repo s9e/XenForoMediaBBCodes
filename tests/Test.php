@@ -731,7 +731,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'sportsnet',
 				'http://www.sportsnet.ca/videos/shows/tim-and-sid-video/',
-				'4066554578001'
+				'4069860654001'
 			),
 			array(
 				'spotify',
