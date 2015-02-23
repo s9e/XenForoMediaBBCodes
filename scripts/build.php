@@ -315,6 +315,11 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 		$useMatchCallback = true;
 	}
 
+	if ($siteId === 'livestream')
+	{
+		$regexps = ['//'];
+	}
+
 	foreach ($regexps as $k => $regexp)
 	{
 		// Test whether this regexp contains the name of at least one host. If not, make it match
