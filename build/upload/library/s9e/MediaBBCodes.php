@@ -129,6 +129,7 @@ class s9e_MediaBBCodes
 		'khl'=>array('Kontinental Hockey League (КХЛ)','http://www.khl.ru/',array('.ru'=>1,'sports'=>1),'!(?\'id\')video\\.khl\\.ru/(?:event|quote)s/\\d!',array(),true,array(array('extract'=>array('!//video\\.khl\\.ru/iframe/feed/start/(?\'id\'[\\w/]+)!'),'match'=>array('!video\\.khl\\.ru/(?:event|quote)s/\\d!'))),'<iframe width="560" height="315" src="//video.khl.ru/iframe/feed/start/{$id}?type_id=18&amp;width=560&amp;height=315" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'kickstarter'=>array('Kickstarter','http://www.kickstarter.com/',array('fundraising'=>1),'!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!',array('!kickstarter\\.com/projects/(?\'id\'[^/]+/[^/?]+)(?:/widget/(?:(?\'card\'card)|(?\'video\'video)))?!'),true),
 		'liveleak'=>array('LiveLeak','http://www.liveleak.com/',array('videos'=>1),'!liveleak\\.com/view\\?i=(?\'id\'[a-f_0-9]+)!',array('!liveleak\\.com/view\\?i=(?\'id\'[a-f_0-9]+)!'),7=>'<iframe width="640" height="360" src="http://www.liveleak.com/ll_embed?i={$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
+		'livestream'=>array('Livestream','http://new.livestream.com/',array('videos'=>1),'!(?\'id\')(?=.*?[./]livestream\\.com[:/]).*?/videos/(?\'video_id\'\\d+)!',array('!(?=.*?[./]livestream\\.com[:/]).*?/videos/(?\'video_id\'\\d+)!'),true,array(array('extract'=>array('!accounts/(?\'account_id\'\\d+)/events/(?\'event_id\'\\d+)!'),'match'=>array('//')))),
 		'mailru'=>array('Mail.Ru','http://my.mail.ru/',array('.ru'=>1),'!(?\'id\')my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!',array(),true,array(array('extract'=>array('!mail\\.ru/videos/embed/(?\'id\'[\\w/]+)\\.html!'),'match'=>array('!my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!')))),
 		'medium'=>array('Medium','https://medium.com/',array('blogging'=>1),'!medium\\.com/[^/]*/(?:[-\\w]+-)?(?\'id\'[\\da-f]+)!',array('!medium\\.com/[^/]*/(?:[-\\w]+-)?(?\'id\'[\\da-f]+)!'),7=>'<iframe width="400" height="454" src="https://api.medium.com/embed?type=story&amp;path=//{$id}" style="border:solid 1px;border-color:#eee #ddd #bbb;border-radius:5px;box-shadow:rgba(0,0,0,0.15) 0px 1px 3px" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'metacafe'=>array('Metacafe','http://www.metacafe.com/',array('videos'=>1),'!metacafe\\.com/watch/(?\'id\'\\d+)!',array('!metacafe\\.com/watch/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="//www.metacafe.com/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
@@ -1093,6 +1094,15 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null, 'video' => null);
 
 		$html='<iframe allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" width="';if(isset($vars['video']))$html.='480';else$html.='220';$html.='" height="';if(isset($vars['video']))$html.='360';else$html.='380';$html.='" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/';if(isset($vars['video']))$html.='video';else$html.='card';$html.='.html"></iframe>';
+
+		return $html;
+	}
+
+	public static function renderLivestream($vars)
+	{
+		$vars += array('account_id' => null, 'event_id' => null, 'video_id' => null);
+
+		$html='<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" src="//new.livestream.com/accounts/'.htmlspecialchars($vars['account_id'],2).'/events/'.htmlspecialchars($vars['event_id'],2);if(isset($vars['video_id']))$html.='/videos/'.htmlspecialchars($vars['video_id'],2);$html.='/player?autoPlay=false"></iframe>';
 
 		return $html;
 	}

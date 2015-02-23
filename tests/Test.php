@@ -679,6 +679,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=1869987317%2Fwish-i-was-here-1;video=video'
 			),
 			array(
+				'livestream',
+				'http://new.livestream.com/ShawConferenceCentre/CrashedIce/videos/77576437',
+				'account_id=12014794;event_id=3788876;video_id=77576437'
+			),
+			array(
 				'msnbc',
 				'http://www.msnbc.com/ronan-farrow-daily/watch/thats-no-moon--300512323725',
 				'n_farrow_moon_140709_257794'
@@ -1115,6 +1120,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=1869987317%2Fwish-i-was-here-1;video=video',
 				'',
 				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="480" height="360" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html"></iframe>'
+			),
+			array(
+				'livestream',
+				'account_id=12014794;event_id=3788876;video_id=77576437',
+				'',
+				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//new.livestream.com/accounts/12014794/events/3788876/videos/77576437/player?autoPlay=false"></iframe>'
 			),
 			array(
 				'soundcloud',
