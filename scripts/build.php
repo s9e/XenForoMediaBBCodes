@@ -317,7 +317,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 
 	if ($siteId === 'livestream')
 	{
-		$regexps = ['//'];
+		$regexps = ['()'];
 	}
 
 	foreach ($regexps as $k => $regexp)
