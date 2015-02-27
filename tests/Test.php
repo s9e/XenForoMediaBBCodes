@@ -633,6 +633,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'songid=35292216'
 			),
 			array(
+				'hudl',
+				'http://www.hudl.com/athlete/2067184/highlights/163744377',
+				'athlete=2067184;highlight=163744377'
+			),
+			array(
+				'hudl',
+				'http://www.hudl.com/v/CVmja',
+				'athlete=2122944;highlight=206727383'
+			),
+			array(
 				'hulu',
 				'http://www.hulu.com/watch/484180',
 				'zPFCgxncn97IFkqEnZ-kRA'
@@ -1085,6 +1095,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'songid=35292216',
 				'',
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="40" data="//grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=&amp;songID=35292216"><embed type="application/x-shockwave-flash" width="400" height="40" src="//grooveshark.com/songWidget.swf" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"></object>'
+			),
+			array(
+				'hudl',
+				'athlete=2067184;highlight=163744377',
+				'',
+				'<iframe width="640" height="360" src="//www.hudl.com/embed/athlete/2067184/highlights/163744377" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'imgur',
