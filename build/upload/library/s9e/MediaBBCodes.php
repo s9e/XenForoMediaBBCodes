@@ -892,7 +892,7 @@ class s9e_MediaBBCodes
 			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
 		}
 
-		return '<div style="display:inline-block;width:100%;max-width:' . self::$maxResponsiveWidth . 'px;overflow:hidden"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
+		return '<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:' . self::$maxResponsiveWidth . 'px;overflow:hidden"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
 	}
 
 	/**

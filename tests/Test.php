@@ -925,7 +925,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'foo',
 				'123',
 				'<iframe width="560" height="315"></iframe>',
-				'<div style="display:inline-block;width:100%;max-width:800px;overflow:hidden"><div style="position:relative;padding-top:56.25%"><iframe width="560" height="315" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
+				'<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:800px;overflow:hidden"><div style="position:relative;padding-top:56.25%"><iframe width="560" height="315" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
 				'assertSame',
 				function ()
 				{
@@ -936,7 +936,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'foo',
 				'123',
 				'<iframe width="560" height="315" style="border:1px"></iframe>',
-				'<div style="display:inline-block;width:100%;max-width:800px;overflow:hidden"><div style="position:relative;padding-top:56.25%"><iframe width="560" height="315" style="border:1px;position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
+				'<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:800px;overflow:hidden"><div style="position:relative;padding-top:56.25%"><iframe width="560" height="315" style="border:1px;position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
 				'assertSame',
 				function ()
 				{

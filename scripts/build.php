@@ -786,6 +786,25 @@ setAttributes(
 	]
 );
 
+// Make the CSS that applies to iframes in quotes apply to their wrapper too
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'str_replace',
+		'description'      => 'Make the CSS that applies to iframes in quote apply to the responsive embed wrapper too',
+		'enabled'          => 1,
+		'execution_order'  => 10,
+		'modification_key' => $addonId . '_quote_css',
+		'template'         => 'bb_code.css'
+	]
+);
+$modification->appendChild($dom->createElement('find', '.bbCodeQuote iframe,'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	'.bbCodeQuote iframe, .bbCodeQuote [data-s9e="wrapper"],'
+));
+
 // Add the params as XenForo options
 ksort($optionNames);
 

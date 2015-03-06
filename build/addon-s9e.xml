@@ -46,6 +46,10 @@
       <find>(^)</find>
       <replace>&lt;script&gt;(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50&lt;a.top&amp;&amp;a.top&lt;b||-50&lt;a.bottom&amp;&amp;a.bottom&lt;b}function h(){d=!0}function k(){for(var a=document.getElementsByTagName("iframe"),b=a.length,d=-1;++d&lt;b;){var c=a[d];if(!c.hasAttribute("data-lazy")&amp;&amp;c.hasAttribute("data-s9e")&amp;&amp;!g(c)){var f=/youtube\.com\/embed\/(\w+)/.exec(c.src);f&amp;&amp;(c.style.background="url(https://i.ytimg.com/vi/"+f[1]+"/hqdefault.jpg) no-repeat 50% 50% / cover");e.unshift(c);c.contentWindow.location.replace("about:blank");c.setAttribute("data-lazy","")}}}var e=[],f=!0,d=!1;k();e.length&amp;&amp;(3&lt;e.length&amp;&amp;setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(d)d=!1,f=!0;else if(f){f=!1;for(var a=e.length;0&lt;=--a;){var b=e[a];g(b)&amp;&amp;(b.contentWindow.location.replace(b.src),b.removeAttribute("data-lazy"),e.splice(a,1))}}},100))})();&lt;/script&gt;</replace>
     </modification>
+    <modification action="str_replace" description="Make the CSS that applies to iframes in quote apply to the responsive embed wrapper too" enabled="1" execution_order="10" modification_key="s9e_quote_css" template="bb_code.css">
+      <find>.bbCodeQuote iframe,</find>
+      <replace>.bbCodeQuote iframe, .bbCodeQuote [data-s9e="wrapper"],</replace>
+    </modification>
   </public_template_modifications>
   <optiongroups>
     <group group_id="s9e" display_order="0" debug_only="0"/>
