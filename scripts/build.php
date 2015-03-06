@@ -17,7 +17,7 @@ if (!isset($addonId))
 	$className   = 's9e_MediaBBCodes';
 	$addonTitle  = 's9e Media Pack';
 	$addonUrl    = 'https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/';
-	$linkText    = 'Media embeds powered by s9e';
+	$linkText    = 'Media embeds by s9e';
 	$tagsDescUrl = 'http://s9e.github.io/XenForoMediaBBCodes/tags.html';
 	$githubUrl   = 'https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/';
 }
@@ -490,7 +490,7 @@ if (isset($linkText))
 	));
 	$modification->appendChild($dom->createElement(
 		'replace',
-		'<br><a class="concealed" href="' . $addonUrl . '" title="Media BBCodes provided by ' . $addonTitle . ' ' . $version . '">' . $linkText . '</a>$0'
+		' | <a class="concealed" href="' . $addonUrl . '" title="Media BBCodes provided by ' . $addonTitle . ' ' . $version . '">' . $linkText . '</a>$0'
 	));
 
 	$option = $optiongroups->appendChild($dom->createElement('option'));

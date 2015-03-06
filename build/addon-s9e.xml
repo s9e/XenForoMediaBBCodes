@@ -40,7 +40,7 @@
     </modification>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>
-      <replace>&lt;br&gt;&lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150306"&gt;Media embeds powered by s9e&lt;/a&gt;$0</replace>
+      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150306"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
     </modification>
     <modification action="preg_replace" description="Defers the loading of embedded content" enabled="0" execution_order="10" modification_key="s9e_lazy_loading" template="ad_thread_view_below_messages">
       <find>(^)</find>
