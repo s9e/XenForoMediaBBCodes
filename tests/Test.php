@@ -409,12 +409,12 @@ class Test extends PHPUnit_Framework_TestCase
 
 	public function testMatchCallbackReturnsFalseIfSiteIdIsMissing()
 	{
-		$this->assertFalse(s9e_MediaBBCodes::match('http://www', '', []));
+		$this->assertFalse(s9e_MediaBBCodes::match('http://www', '', array()));
 	}
 
 	public function testEmbedCallbackReturnsAnHtmlErrorMessageIfSiteIdIsMissing()
 	{
-		$this->assertContains('outdated version', s9e_MediaBBCodes::embed('foo', []));
+		$this->assertContains('outdated version', s9e_MediaBBCodes::embed('foo', array()));
 	}
 
 	/**
