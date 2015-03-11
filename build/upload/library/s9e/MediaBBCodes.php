@@ -599,7 +599,7 @@ class s9e_MediaBBCodes
 	* @param  string $siteId    Site's ID
 	* @return string
 	*/
-	public static function match($url, $matchedId, array $site, $siteId)
+	public static function match($url, $matchedId, array $site, $siteId = null)
 	{
 		if (!isset(self::$sites[$siteId]))
 		{
@@ -664,8 +664,13 @@ class s9e_MediaBBCodes
 	* @param  string $siteId   Site's ID
 	* @return string           Embed code
 	*/
-	public static function embed($mediaKey, array $site, $siteId)
+	public static function embed($mediaKey, array $site, $siteId = null)
 	{
+		if (!isset($siteId))
+		{
+			return '<div style="background:#d00;color:#fff;font-weight:bold;text-align:center">Cannot render media site: you may be running an outdated version of XenForo</div>';
+		}
+
 		self::loadSettings();
 		$vars = array('id' => $mediaKey);
 
