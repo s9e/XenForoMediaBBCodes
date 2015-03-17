@@ -936,7 +936,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'mode' => null);
 
-		$html='<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" height="';if($vars['mode']==='album')$html.='352';else$html.='144';$html.='" src="//www.audiomack.com/embed3';if($vars['mode']==='album')$html.='-album';$html.='/'.htmlspecialchars($vars['id'],2).'"></iframe>';
+		$html='<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" height="';if($vars['mode']==='album')$html.='340';else$html.='110';$html.='" src="//www.audiomack.com/embed4';if($vars['mode']==='album')$html.='-album';$html.='/'.htmlspecialchars($vars['id'],2).'"></iframe>';
 
 		return $html;
 	}
