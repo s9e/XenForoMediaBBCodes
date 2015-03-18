@@ -795,6 +795,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'86191'
 			),
 			array(
+				'tumblr',
+				'http://mrbenvey.tumblr.com/post/104191225637',
+				'did=5f3b4bc6718317df9c2b1e77c20839ab94f949cd;id=104191225637;key=uFhWDPKj-bGU0ZlDAnUyxg;name=mrbenvey'
+			),
+			array(
 				'twitch',
 				'http://www.twitch.tv/minigolf2000/b/361358487',
 				'archive_id=361358487;channel=minigolf2000'

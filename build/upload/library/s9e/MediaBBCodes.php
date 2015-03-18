@@ -159,6 +159,7 @@ class s9e_MediaBBCodes
 		'tinypic'=>array('TinyPic videos','http://tinypic.com/',array('images'=>1),'!tinypic\\.com/player\\.php\\?v=(?\'id\'\\w+)&s=(?\'s\'\\d+)!',array('!tinypic\\.com/player\\.php\\?v=(?\'id\'\\w+)&s=(?\'s\'\\d+)!'),true),
 		'tmz'=>array('TMZ','http://www.tmz.com/videos',array('gossip'=>1),'@tmz\\.com/videos/(?\'id\'\\w+)@',array('@tmz\\.com/videos/(?\'id\'\\w+)@'),7=>'<iframe width="560" height="315" src="//www.kaltura.com/index.php/kwidget/cache_st/133592691/wid/_591531/partner_id/591531/uiconf_id/9071262/entry_id/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'traileraddict'=>array('Trailer Addict','http://www.traileraddict.com/',array('movies'=>1),'@(?\'id\')traileraddict\\.com/(?!tags/)[^/]+/.@',array(),true,array(array('extract'=>array('@v\\.traileraddict\\.com/(?\'id\'\\d+)@'),'match'=>array('@traileraddict\\.com/(?!tags/)[^/]+/.@'))),'<iframe width="560" height="315" src="//v.traileraddict.com/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
+		'tumblr'=>array('Tumblr','https://www.tumblr.com/',array('social'=>1),'!(?\'name\'[-\\w]+)\\.tumblr\\.com/post/(?\'id\'\\d+)!',array('!(?\'name\'[-\\w]+)\\.tumblr\\.com/post/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!"embed_did":"(?\'did\'[-\\w]+)!','!"embed_key":"(?\'key\'[-\\w]+)!'),'match'=>array('//'),'url'=>'http://{@name}.tumblr.com/post/{@id}/embed'))),
 		'twitch'=>array('Twitch','http://www.twitch.tv/',array('gaming'=>1),"#(?'id')twitch\\.tv/(?'channel'(?!m/)\\w+)(?:/b/(?'archive_id'\\d+)|/c/(?'chapter_id'\\d+)|/v/(?'video_id'\\d+))?#\n!(?'id')twitch\\.tv/m/\\d+!",array('#twitch\\.tv/(?\'channel\'(?!m/)\\w+)(?:/b/(?\'archive_id\'\\d+)|/c/(?\'chapter_id\'\\d+)|/v/(?\'video_id\'\\d+))?#'),true,array(array('extract'=>array('!channel=(?\'channel\'\\w+).*?videoId=a(?\'archive_id\'\\d+)!'),'match'=>array('!twitch\\.tv/m/\\d+!')))),
 		'twitter'=>array('Twitter (via custom iframe)','https://twitter.com/',array('social'=>1),'@twitter\\.com/(?:#!/)?\\w+/status(?:es)?/(?\'id\'\\d+)@',array('@twitter\\.com/(?:#!/)?\\w+/status(?:es)?/(?\'id\'\\d+)@'),7=>'<iframe width="500" height="186" src="//s9e.github.io/iframe/twitter.min.html#{$id}" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>',8=>true),
 		'ustream'=>array('Ustream','http://www.ustream.tv/',array('gaming'=>1),"!(?'id')ustream\\.tv/recorded/(?'vid'\\d+)!\n#(?'id')ustream\\.tv/(?!explore/|platform/|recorded/|search\\?|upcoming$|user/)(?:channel/)?[-\\w]+#",array('!ustream\\.tv/recorded/(?\'vid\'\\d+)!'),true,array(array('extract'=>array('!embed/(?\'cid\'\\d+)!'),'match'=>array('#ustream\\.tv/(?!explore/|platform/|recorded/|search\\?|upcoming$|user/)(?:channel/)?[-\\w]+#')))),
@@ -1171,6 +1172,15 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null, 's' => null);
 
 		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="560" height="345" data="http://tinypic.com/player.swf?file='.htmlspecialchars($vars['id'],2).'&amp;s='.htmlspecialchars($vars['s'],2).'"><param name="allowfullscreen" value="true"><embed type="application/x-shockwave-flash" width="560" height="345" src="http://tinypic.com/player.swf?file='.htmlspecialchars($vars['id'],2).'&amp;s='.htmlspecialchars($vars['s'],2).'" allowfullscreen=""></object>';
+
+		return $html;
+	}
+
+	public static function renderTumblr($vars)
+	{
+		$vars += array('id' => null, 'key' => null);
+
+		$html='<iframe width="520" height="180" src="//s9e.github.io/iframe/tumblr.min.html#'.htmlspecialchars($vars['key'],2).'/'.htmlspecialchars($vars['id'],2).'" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
 
 		return $html;
 	}
