@@ -299,7 +299,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>nhl</code></td>
 		<td>NHL VideoCenter</td>
-		<td>http://video.nhl.com/videocenter/console?id=783647&amp;catid=35</td>
+		<td>http://video.nhl.com/videocenter/console?id=783647&amp;catid=35<br/>http://video.nhl.com/videocenter/console?id=2014021049-387-h</td>
 	</tr>
 	<tr>
 		<td><code>npr</code></td>
