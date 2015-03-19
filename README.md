@@ -297,6 +297,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>http://video.nationalgeographic.com/tv/changing-earth<br/>http://video.nationalgeographic.com/video/weirdest-superb-lyrebird</td>
 	</tr>
 	<tr>
+		<td><code>nhl</code></td>
+		<td>NHL VideoCenter</td>
+		<td>http://video.nhl.com/videocenter/console?id=783647&amp;catid=35</td>
+	</tr>
+	<tr>
 		<td><code>npr</code></td>
 		<td>NPR</td>
 		<td>http://www.npr.org/blogs/goatsandsoda/2015/02/11/385396431/the-50-most-effective-ways-to-transform-the-developing-world</td>
