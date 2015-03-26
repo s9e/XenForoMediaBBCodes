@@ -734,6 +734,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'QitDVOn7'
 			),
 			array(
+				'reddit',
+				'http://www.reddit.com/r/xenforo/comments/2synou/xenforo_144_released/cnua3uz',
+				'path=%2Fr%2Fxenforo%2Fcomments%2F2synou%2Fxenforo_144_released%2Fcnua3uz;token=27cb224c4f7f3cfe4a6d1e7e70148bafa8c5bc80'
+			),
+			array(
 				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
 				'http://api.soundcloud.com/tracks/98282116'
