@@ -613,6 +613,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'height=338;id=SereneIllfatedCapybara;width=600'
 			),
 			array(
+				'googleplus',
+				'https://plus.google.com/+TonyHawk/posts/C5TMsDZJWBd',
+				'name=TonyHawk;pid=C5TMsDZJWBd'
+			),
+			array(
+				'googleplus',
+				'https://plus.google.com/106189723444098348646/posts/V8AojCoTzxV',
+				'oid=106189723444098348646;pid=V8AojCoTzxV'
+			),
+			array(
 				'googlesheets',
 				'https://docs.google.com/spreadsheets/d/1f988o68HDvk335xXllJD16vxLBuRcmm3vg6U9lVaYpA',
 				'1f988o68HDvk335xXllJD16vxLBuRcmm3vg6U9lVaYpA'
@@ -736,7 +746,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'reddit',
 				'http://www.reddit.com/r/xenforo/comments/2synou/xenforo_144_released/cnua3uz',
-				'path=%2Fr%2Fxenforo%2Fcomments%2F2synou%2Fxenforo_144_released%2Fcnua3uz;token=27cb224c4f7f3cfe4a6d1e7e70148bafa8c5bc80'
+				'path=%2Fr%2Fxenforo%2Fcomments%2F2synou%2Fxenforo_144_released%2Fcnua3uz'
 			),
 			array(
 				'soundcloud',
@@ -1103,6 +1113,18 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=SereneIllfatedCapybara',
 				'',
 				'<iframe width="560" height="315" src="//gfycat.com/iframe/SereneIllfatedCapybara" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+			),
+			array(
+				'googleplus',
+				'name=TonyHawk;pid=C5TMsDZJWBd',
+				'',
+				'<iframe width="450" height="240" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/googleplus.min.html#+TonyHawk/posts/C5TMsDZJWBd"></iframe>'
+			),
+			array(
+				'googleplus',
+				'oid=106189723444098348646;pid=V8AojCoTzxV',
+				'',
+				'<iframe width="450" height="240" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/googleplus.min.html#106189723444098348646/posts/V8AojCoTzxV"></iframe>'
 			),
 			array(
 				'grooveshark',
