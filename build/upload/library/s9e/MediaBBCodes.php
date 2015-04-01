@@ -1109,7 +1109,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'video' => null);
 
-		$html='<iframe allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" width="';if(isset($vars['video']))$html.='480';else$html.='220';$html.='" height="';if(isset($vars['video']))$html.='360';else$html.='380';$html.='" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/';if(isset($vars['video']))$html.='video';else$html.='card';$html.='.html"></iframe>';
+		$html='<iframe allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" width="';if(isset($vars['video']))$html.='480';else$html.='220';$html.='" height="';if(isset($vars['video']))$html.='360';else$html.='420';$html.='" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/';if(isset($vars['video']))$html.='video';else$html.='card';$html.='.html"></iframe>';
 
 		return $html;
 	}

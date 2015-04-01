@@ -1166,13 +1166,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'kickstarter',
 				'1869987317/wish-i-was-here-1',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
 			),
 			array(
 				'kickstarter',
 				'card=card;id=1869987317%2Fwish-i-was-here-1',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="380" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
 			),
 			array(
 				'kickstarter',
