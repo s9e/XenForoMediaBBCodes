@@ -218,8 +218,8 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	</tr>
 	<tr>
 		<td><code>imgur</code></td>
-		<td>imgur albums and GIFV</td>
-		<td>http://imgur.com/a/9UGCL<br/>http://imgur.com/gallery/9UGCL<br/>http://i.imgur.com/u7Yo0Vy.gifv<br/>http://i.imgur.com/UO1UrIx.mp4</td>
+		<td>Imgur</td>
+		<td>http://imgur.com/AsQ0K3P<br/>http://imgur.com/a/9UGCL<br/>http://imgur.com/gallery/9UGCL<br/>http://i.imgur.com/u7Yo0Vy.gifv<br/>http://i.imgur.com/UO1UrIx.mp4</td>
 	</tr>
 	<tr>
 		<td><code>indiegogo</code></td>

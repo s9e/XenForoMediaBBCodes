@@ -670,12 +670,17 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'imgur',
 				'http://imgur.com/a/9UGCL',
-				'id=9UGCL;type=album'
+				'id=a%2F9UGCL;type=album'
 			),
 			array(
 				'imgur',
 				'http://i.imgur.com/u7Yo0Vy.gifv',
 				'height=389;id=u7Yo0Vy;type=gifv;width=915'
+			),
+			array(
+				'imgur',
+				'https://imgur.com/AsQ0K3P',
+				'AsQ0K3P'
 			),
 			array(
 				'indiegogo',
@@ -1146,21 +1151,27 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'imgur',
-				'9UGCL',
+				'AsQ0K3P',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" onload="var id=Math.random();window.addEventListener(\'message\',function(a){a.data.id==id&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});var origin=src.substr(0,src.indexOf(\'/\',8));contentWindow.postMessage(\'s9e:\'+id,origin);"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=9UGCL;type=album',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed" onload=""></iframe>'
+			),
+			array(
+				'imgur',
+				'id=a/9UGCL;type=album',
+				'',
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed" onload=""></iframe>'
 			),
 			array(
 				'imgur',
 				'height=389;id=u7Yo0Vy;type=gifv;width=915',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="915" height="389" src="//i.imgur.com/u7Yo0Vy.gifv#embed"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="915" height="389" src="//i.imgur.com/u7Yo0Vy.gifv#embed" onload=""></iframe>'
 			),
 			array(
 				'kickstarter',
