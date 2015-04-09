@@ -715,8 +715,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'livestream',
-				'http://new.livestream.com/ShawConferenceCentre/CrashedIce/videos/77576437',
-				'account_id=12014794;event_id=3788876;video_id=77576437'
+				'http://livestream.com/ccscsl/USChessChampionships/videos/83267610',
+				'account_id=3913412;event_id=3933674;video_id=83267610'
 			),
 			array(
 				'msnbc',
