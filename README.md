@@ -42,6 +42,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>http://www.bbc.com/news/science-environment-29232523</td>
 	</tr>
 	<tr>
+		<td><code>bleacherreport</code></td>
+		<td>Bleacher Report videos</td>
+		<td>http://bleacherreport.com/articles/2418813-steph-curry-salsas-after-teammate-leandro-barbosa-converts-difficult-layup</td>
+	</tr>
+	<tr>
 		<td><code>blip</code></td>
 		<td>Blip</td>
 		<td>http://blip.tv/blip-on-blip/damian-bruno-and-vinyl-rewind-blip-on-blip-58-5226104<br/>http://blip.tv/play/g6VTgpjxbQA</td>
@@ -259,7 +264,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>livestream</code></td>
 		<td>Livestream</td>
-		<td>http://new.livestream.com/jbtvlive/musicmarathon<br/>http://new.livestream.com/ShawConferenceCentre/CrashedIce/videos/77576437</td>
+		<td>http://new.livestream.com/jbtvlive/musicmarathon<br/>http://livestream.com/ccscsl/USChessChampionships/videos/83267610</td>
 	</tr>
 	<tr>
 		<td><code>mailru</code></td>

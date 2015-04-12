@@ -506,6 +506,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'ad_site=%2Fnews%2Fbusiness;playlist=%2Fnews%2Fbusiness-29149086A;poster=%2Fmedia%2Fimages%2F77590000%2Fjpg%2F_77590973_mapopgetty.jpg'
 			),
 			array(
+				'bleacherreport',
+				'http://bleacherreport.com/articles/2415420-creating-a-starting-xi-of-the-most-overrated-players-in-world-football',
+				'dtYjVhdDr5492cyQTjVPDcM--Mg2rJj5'
+			),
+			array(
 				'blip',
 				'http://blip.tv/hilah-cooking/hilah-cooking-vegetable-beef-stew-6663725',
 				'AYOW3REC'
