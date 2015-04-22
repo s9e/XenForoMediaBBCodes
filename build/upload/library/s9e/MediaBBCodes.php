@@ -105,7 +105,7 @@ class s9e_MediaBBCodes
 		'espn'=>array('ESPN','http://espn.go.com/',array('sports'=>1),'#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#',array('#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#'),true),
 		'espndeportes'=>array('ESPN Deportes','http://www.espndeportes.com/',array('sports'=>1),"!espndeportes\\.com/videohub/video/clipDeportes\\?id=(?:deportes:)?(?'id'\\d+)!\n!(?'id')espndeportes\\.com/\\?id=\\w+&topId=\\d+!",array('!espndeportes\\.com/videohub/video/clipDeportes\\?id=(?:deportes:)?(?\'id\'\\d+)!'),true,array(array('extract'=>array('!espn\\.mem\\.video\\((?\'id\'\\d+)!'),'match'=>array('!espndeportes\\.com/\\?id=\\w+&topId=\\d+!'))),'<iframe width="560" height="315" src="https://espn.go.com/video/iframe/twitter/?cms=deportes&amp;id={$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'facebook'=>array('Facebook','http://www.facebook.com/',array('social'=>1),'@www\\.facebook\\.com/(?:[\\w/]+/permalink|(?!pages/|groups/).*?)(?:/|fbid=|\\?v=)(?\'id\'\\d+)(?=$|[/?&#])@',array('@www\\.facebook\\.com/(?:[\\w/]+/permalink|(?!pages/|groups/).*?)(?:/|fbid=|\\?v=)(?\'id\'\\d+)(?=$|[/?&#])@'),7=>'<iframe width="560" height="315" src="//s9e.github.io/iframe/facebook.min.html#{$id}" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>',8=>true),
-		'flickr'=>array('Flickr','https://www.flickr.com/',array('images'=>1),"!flickr\\.com/photos/[^/]+/(?'id'\\d+)!\n!(?'id')flickr\\.com/photos/[^/]+/\\d!",array('!flickr\\.com/photos/[^/]+/(?\'id\'\\d+)!'),true,array(array('extract'=>array('!<meta property="og:image:width" content="(?\'width\'\\d+)!','!<meta property="og:image:height" content="(?\'height\'\\d+)!'),'match'=>array('!flickr\\.com/photos/[^/]+/\\d!')))),
+		'flickr'=>array('Flickr','https://www.flickr.com/',array('images'=>1),'!flickr\\.com/photos/[^/]+/(?\'id\'\\d+)!',array('!flickr\\.com/photos/[^/]+/(?\'id\'\\d+)!'),7=>'<iframe width="500" height="500" src="https://www.flickr.com/photos/_/{$id}/player/" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'foxnews'=>array('Fox News','http://www.foxnews.com/',array('news'=>1),'!video\\.foxnews\\.com/v/(?\'id\'\\d+)!',array('!video\\.foxnews\\.com/v/(?\'id\'\\d+)!'),7=>'<iframe width="560" height="315" src="//video.foxnews.com/v/video-embed.html?video_id={$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'funnyordie'=>array('Funny or Die','http://www.funnyordie.com/',array('entertainment'=>1),'!funnyordie\\.com/videos/(?\'id\'[0-9a-f]+)!',array('!funnyordie\\.com/videos/(?\'id\'[0-9a-f]+)!'),7=>'<iframe width="640" height="360" src="http://www.funnyordie.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'gamespot'=>array('Gamespot','http://www.gamespot.com/',array('gaming'=>1),'!gamespot\\.com.*?/(?:events|videos)/.*?-(?\'id\'\\d+)/(?:[#?].*)?$!',array('!gamespot\\.com.*?/(?:events|videos)/.*?-(?\'id\'\\d+)/(?:[#?].*)?$!'),7=>'<iframe width="640" height="400" src="//www.gamespot.com/videos/embed/{$id}/" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
@@ -1012,15 +1012,6 @@ class s9e_MediaBBCodes
 		$vars += array('cms' => null, 'id' => null);
 
 		$html='<iframe width="560" height="315" src="https://espn.go.com/video/iframe/twitter/?cms='.htmlspecialchars($vars['cms'],2).'&amp;id='.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
-
-		return $html;
-	}
-
-	public static function renderFlickr($vars)
-	{
-		$vars += array('height' => null, 'id' => null, 'width' => null);
-
-		$html='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="https://www.flickr.com/photos/_/'.htmlspecialchars($vars['id'],2).'/player/" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
 
 		return $html;
 	}
