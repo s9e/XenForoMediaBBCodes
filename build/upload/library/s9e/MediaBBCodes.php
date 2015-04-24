@@ -316,22 +316,18 @@ class s9e_MediaBBCodes
 	protected static function loadSettings()
 	{
 		$options = XenForo_Application::get('options');
-
 		if (!isset(self::$customCallbacks))
 		{
 			self::parseCustomCallbacks($options->s9e_custom_callbacks);
 		}
-
 		if (!isset(self::$excludedSites))
 		{
 			self::$excludedSites = $options->s9e_excluded_sites ?: $options->s9e_EXCLUDE_SITES ?: '';
 		}
-
 		if (!isset(self::$maxResponsiveWidth))
 		{
 			self::$maxResponsiveWidth = (int) $options->s9e_max_responsive_width;
 		}
-
 		if (!isset(self::$tags))
 		{
 			self::$tags = $options->s9e_media_tags ?: self::getAllTags();
