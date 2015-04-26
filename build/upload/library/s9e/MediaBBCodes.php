@@ -249,7 +249,7 @@ class s9e_MediaBBCodes
 	*/
 	protected static function upgrade($versionId)
 	{
-		self::upgradeTags();
+		self::upgradeTags($versionId);
 	}
 
 	/**
@@ -259,7 +259,7 @@ class s9e_MediaBBCodes
 	*
 	* @return void
 	*/
-	protected static function upgradeTags()
+	protected static function upgradeTags($versionId)
 	{
 		if (!isset(XenForo_Application::get('options')->s9e_media_tags))
 		{
