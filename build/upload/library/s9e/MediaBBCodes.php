@@ -257,6 +257,7 @@ class s9e_MediaBBCodes
 	*
 	* Automatically enables new tags
 	*
+	* @param  integer $versionId Old version ID
 	* @return void
 	*/
 	protected static function upgradeTags($versionId)
