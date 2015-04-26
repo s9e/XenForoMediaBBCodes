@@ -249,6 +249,22 @@ class s9e_MediaBBCodes
 	*/
 	protected static function upgrade($versionId)
 	{
+		$this->upgradeTags();
+	}
+
+	/**
+	* Upgrade the list of enabled tags
+	*
+	* Automatically enables new tags
+	*
+	* @return void
+	*/
+	protected static function upgradeTags()
+	{
+		if (!isset(XenForo_Application::get('options')->s9e_media_tags))
+		{
+			return;
+		}
 		$save = false;
 		$tags = array(
 			'videos' => 201502120
