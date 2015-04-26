@@ -249,7 +249,7 @@ class s9e_MediaBBCodes
 	*/
 	protected static function upgrade($versionId)
 	{
-		$this->upgradeTags();
+		self::upgradeTags();
 	}
 
 	/**
