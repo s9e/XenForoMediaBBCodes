@@ -9,6 +9,8 @@
     <phrase title="option_s9e_media_tags_explain" version_id="1" version_string="1">&lt;a href="http://s9e.github.io/XenForoMediaBBCodes/tags.html" target="_blank"&gt;List of optional sites enabled by each category&lt;/a&gt;</phrase>
     <phrase title="option_s9e_custom_callbacks" version_id="1" version_string="1">Custom callbacks</phrase>
     <phrase title="option_s9e_custom_callbacks_explain" version_id="1" version_string="1">&lt;a href="https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/CustomCallbacks.md" target="_blank" style="cursor:help"&gt;Help&lt;/a&gt;</phrase>
+    <phrase title="option_s9e_custom_dimensions" version_id="1" version_string="1">Custom dimensions</phrase>
+    <phrase title="option_s9e_custom_dimensions_explain" version_id="1" version_string="1">&lt;a href="https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/CustomDimensions.md" target="_blank" style="cursor:help"&gt;Help&lt;/a&gt;</phrase>
     <phrase title="option_s9e_excluded_sites" version_id="1" version_string="1">Excluded sites</phrase>
     <phrase title="option_s9e_excluded_sites_explain" version_id="1" version_string="1">Comma-separated list of sites not to install</phrase>
     <phrase title="option_s9e_max_responsive_width" version_id="1" version_string="1">Max responsive width</phrase>
@@ -92,17 +94,21 @@ videos=Videos</edit_format_params>
       <edit_format_params>rows=2</edit_format_params>
       <relation group_id="s9e" display_order="3"/>
     </option>
-    <option option_id="s9e_excluded_sites" edit_format="textbox" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateExcludedSites">
+    <option option_id="s9e_custom_dimensions" edit_format="textbox" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateCustomDimensions">
+      <edit_format_params>rows=2</edit_format_params>
       <relation group_id="s9e" display_order="4"/>
     </option>
-    <option option_id="s9e_max_responsive_width" edit_format="textbox" data_type="unsigned_integer" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateMaxResponsiveWidth" default_value="0">
+    <option option_id="s9e_excluded_sites" edit_format="textbox" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateExcludedSites">
       <relation group_id="s9e" display_order="5"/>
+    </option>
+    <option option_id="s9e_max_responsive_width" edit_format="textbox" data_type="unsigned_integer" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateMaxResponsiveWidth" default_value="0">
+      <relation group_id="s9e" display_order="6"/>
     </option>
     <option option_id="s9e_lazy_loading" edit_format="radio" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateLazyLoading">
       <default_value>immediate</default_value>
       <edit_format_params>immediate=Load embedded content immediately
 lazy=Defer loading embedded content until it's visible (experimental)</edit_format_params>
-      <relation group_id="s9e" display_order="6"/>
+      <relation group_id="s9e" display_order="7"/>
     </option>
     <option option_id="s9e_AMAZON_ASSOCIATE_TAG" edit_format="textbox" data_type="string" can_backup="1">
       <relation group_id="s9e" display_order="101"/>

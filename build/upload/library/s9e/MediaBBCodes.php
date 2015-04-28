@@ -68,6 +68,11 @@ class s9e_MediaBBCodes
 	public static $customCallbacks;
 
 	/**
+	* @var array Associative array using site IDs as keys, [width, height] as values
+	*/
+	public static $customDimensions;
+
+	/**
 	* @var string Comma-separated list of sites that should not be installed
 	*/
 	public static $excludedSites;
@@ -337,6 +342,10 @@ class s9e_MediaBBCodes
 		{
 			self::parseCustomCallbacks($options->s9e_custom_callbacks);
 		}
+		if (!isset(self::$customDimensions))
+		{
+			self::parseCustomDimensions($options->s9e_custom_dimensions);
+		}
 		if (!isset(self::$excludedSites))
 		{
 			self::$excludedSites = $options->s9e_excluded_sites ?: $options->s9e_EXCLUDE_SITES ?: '';
@@ -377,20 +386,24 @@ class s9e_MediaBBCodes
 
 		if (isset($config[self::KEY_HTML]))
 		{
-			$embedHtml = $config[self::KEY_HTML];
+			$html = $config[self::KEY_HTML];
+			if (isset(self::$customDimensions[$siteId]))
+			{
+				$html = self::setCustomDimensions($html, self::$customDimensions[$siteId]);
+			}
 			if (self::$maxResponsiveWidth && empty($config[self::KEY_UNRESPONSIVE]))
 			{
-				$embedHtml = self::addResponsiveWrapper($embedHtml);
+				$html = self::addResponsiveWrapper($html);
 			}
 		}
 		else
 		{
-			$embedHtml = '<!-- see callback -->';
+			$html = '<!-- see callback -->';
 			$site['embed_html_callback_class']  = __CLASS__;
 			$site['embed_html_callback_method'] = 'embed';
 		}
 
-		$site->addChild('embed_html', htmlspecialchars($embedHtml));
+		$site->addChild('embed_html', htmlspecialchars($html));
 		$site->addChild('match_urls', htmlspecialchars($config[self::KEY_MATCH_URLS]));
 	}
 
@@ -414,6 +427,28 @@ class s9e_MediaBBCodes
 			self::$customCallbacks[$siteId] = $callback;
 		}
 		ksort(self::$customCallbacks);
+	}
+
+	/**
+	* Parse a text to capture the list of custom dimensions
+	*
+	* @param  string $text List of dimensions as text, one per line as "site=width,height"
+	* @return void
+	*/
+	protected static function parseCustomDimensions($text)
+	{
+		preg_match_all('((\\w+)\\s*=\\s*(\\d+)\\s*,\\s*(\\d+))', $text, $matches, PREG_SET_ORDER);
+
+		self::$customDimensions = array();
+		foreach ($matches as $match)
+		{
+			list(, $siteId, $width, $height) = $match;
+			foreach (self::parseSiteIds($siteId) as $siteId)
+			{
+				self::$customDimensions[$siteId] = [(int) $width, (int) $height];
+			}
+		}
+		ksort(self::$customDimensions);
 	}
 
 	/**
@@ -475,6 +510,29 @@ class s9e_MediaBBCodes
 		foreach (self::$customCallbacks as $siteId => $callback)
 		{
 			$text .= $siteId . '=' . $callback . "\n";
+		}
+
+		self::reinstall();
+
+		return true;
+	}
+
+	/**
+	* Validate a list of custom dimensions and trigger the reinstallation
+	*
+	* @param  string &$text List of dimensions as text, one per line as "site=width,height"
+	* @return bool          Always TRUE
+	*/
+	public static function validateCustomDimensions(&$text)
+	{
+		self::parseCustomDimensions($text);
+
+		// Rebuild the list to remove malformed entries
+		$text = '';
+		foreach (self::$customDimensions as $siteId => $dimensions)
+		{
+			list($width, $height) = $dimensions;
+			$text .= $siteId . '=' . $width . ',' . $height . "\n";
 		}
 
 		self::reinstall();
@@ -762,6 +820,10 @@ class s9e_MediaBBCodes
 			);
 		}
 
+		if (isset(self::$customDimensions[$siteId]))
+		{
+			$html = self::setCustomDimensions($html, self::$customDimensions[$siteId]);
+		}
 		if (self::$maxResponsiveWidth && empty(self::$sites[$siteId][self::KEY_UNRESPONSIVE]))
 		{
 			$html = self::addResponsiveWrapper($html);
@@ -949,6 +1011,33 @@ class s9e_MediaBBCodes
 		}
 
 		return false;
+	}
+
+	/**
+	* Replace dimensions in given HTML
+	*
+	* @param  string    $html       Original HTML
+	* @param  integer[] $dimensions [width, height]
+	* @return string                Modified HTML
+	*/
+	protected static function setCustomDimensions($html, array $dimensions)
+	{
+		list($width, $height) = $dimensions;
+		$match = $replace = array();
+
+		$match[]   = '(width="\\d+")';
+		$replace[] = 'width="' . $width . '"';
+
+		$match[]   = '(height="\\d+")';
+		$replace[] = 'height="' . $height . '"';
+
+		$match[]   = '(width:\\s*\\d+\\s*px)';
+		$replace[] = 'width:' . $width . 'px';
+
+		$match[]   = '(height:\\s*\\d+\\s*px)';
+		$replace[] = 'height:' . $height . 'px';
+
+		return preg_replace($match, $replace, $html);
 	}
 
 	public static function renderAmazon($vars)

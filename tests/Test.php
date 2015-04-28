@@ -44,6 +44,7 @@ class Test extends PHPUnit_Framework_TestCase
 		if (class_exists('s9e_MediaBBCodes', false))
 		{
 			s9e_MediaBBCodes::$customCallbacks    = null;
+			s9e_MediaBBCodes::$customDimensions   = null;
 			s9e_MediaBBCodes::$excludedSites      = null;
 			s9e_MediaBBCodes::$maxResponsiveWidth = null;
 			s9e_MediaBBCodes::$tags               = null;
@@ -53,6 +54,7 @@ class Test extends PHPUnit_Framework_TestCase
 			's9e_EXCLUDE_SITES'        => null,
 			's9e_excluded_sites'       => null,
 			's9e_custom_callbacks'     => null,
+			's9e_custom_dimensions'    => null,
 			's9e_max_responsive_width' => null,
 			's9e_media_tags'           => null
 		);
@@ -276,6 +278,43 @@ class Test extends PHPUnit_Framework_TestCase
 
 		$this->assertContains(
 			"<default_value>custom=s9e_Custom::custom\n</default_value></option>",
+			$addon->asXML()
+		);
+	}
+
+	public function testValidateCustomDimensionsValue()
+	{
+		$text = "
+			YouTube = 123,456
+			Twitter = 222,444
+		";
+		s9e_MediaBBCodes::validateCustomDimensions($text);
+
+		$this->assertSame("twitter=222,444\nyoutube=123,456\n", $text);
+	}
+
+	public function testValidateCustomDimensionsReinstall()
+	{
+		$text = '';
+		s9e_MediaBBCodes::validateCustomDimensions($text);
+		$this->assertReinstallWasCalled();
+	}
+
+	public function testCustomDimensionsInstall()
+	{
+		$addon = $this->getAddon(
+			'<bb_code_media_sites>
+				<site media_site_id="custom">
+					<embed_html><iframe width="888" height="999"></iframe></embed_html>
+				</site>
+			</bb_code_media_sites>'
+		);
+
+		XenForo_Application::$options['s9e_custom_dimensions'] = 'custom=123,456';
+		s9e_MediaBBCodes::install(null, array(), $addon);
+
+		$this->assertContains(
+			'foo',
 			$addon->asXML()
 		);
 	}

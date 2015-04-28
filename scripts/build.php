@@ -591,6 +591,29 @@ setAttributes(
 );
 
 setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', 'Custom dimensions')),
+	[
+		'title'          => 'option_' . $addonId . '_custom_dimensions',
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+
+$text = '';
+if (isset($githubUrl))
+{
+	$text = '<a href="' . $githubUrl . 'CustomDimensions.md" target="_blank" style="cursor:help">Help</a>';
+}
+setAttributes(
+	$phrases->appendChild($dom->createElement('phrase', $text)),
+	[
+		'title'          => 'option_' . $addonId . '_custom_dimensions_explain',
+		'version_id'     => '1',
+		'version_string' => '1'
+	]
+);
+
+setAttributes(
 	$phrases->appendChild($dom->createElement('phrase', 'Excluded sites')),
 	[
 		'title'          => 'option_' . $addonId . '_excluded_sites',
@@ -659,6 +682,28 @@ setAttributes(
 		'can_backup'        => 1,
 		'validation_class'  => $className,
 		'validation_method' => 'validateCustomCallbacks'
+	]
+);
+$option->appendChild($dom->createElement('edit_format_params', 'rows=2'));
+setAttributes(
+	$option->appendChild($dom->createElement('relation')),
+	[
+		'group_id'      => $addon->getAttribute('addon_id'),
+		'display_order' => ++$displayOrder
+	]
+);
+
+// Add the custom dimensions list
+$option = $optiongroups->appendChild($dom->createElement('option'));
+setAttributes(
+	$option,
+	[
+		'option_id'         => $addonId . '_custom_dimensions',
+		'edit_format'       => 'textbox',
+		'data_type'         => 'string',
+		'can_backup'        => 1,
+		'validation_class'  => $className,
+		'validation_method' => 'validateCustomDimensions'
 	]
 );
 $option->appendChild($dom->createElement('edit_format_params', 'rows=2'));
