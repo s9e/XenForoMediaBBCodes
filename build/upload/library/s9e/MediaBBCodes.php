@@ -63,7 +63,7 @@ class s9e_MediaBBCodes
 	public static $cacheDir;
 
 	/**
-	* @var array Associative array using site IDs as key, callbacks as values
+	* @var array Associative array using site IDs as keys, callbacks as values
 	*/
 	public static $customCallbacks;
 
@@ -380,7 +380,7 @@ class s9e_MediaBBCodes
 			$embedHtml = $config[self::KEY_HTML];
 			if (self::$maxResponsiveWidth && empty($config[self::KEY_UNRESPONSIVE]))
 			{
-				$embedHtml = self::setResponsiveDimensions($embedHtml);
+				$embedHtml = self::addResponsiveWrapper($embedHtml);
 			}
 		}
 		else
@@ -570,6 +570,30 @@ class s9e_MediaBBCodes
 	}
 
 	/**
+	* Add the responsive wrapper around given HTML
+	*
+	* @param  string  $html Original code
+	* @return string        Modified code
+	*/
+	protected static function addResponsiveWrapper($html)
+	{
+		$ratio = self::getEmbedRatio($html);
+		if (!$ratio)
+		{
+			return $html;
+		}
+
+		$css  = 'position:absolute;top:0;left:0;width:100%;height:100%';
+		$html = preg_replace('( style="[^"]*)', '$0;' . $css, $html, -1, $cnt);
+		if (!$cnt)
+		{
+			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
+		}
+
+		return '<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:' . self::$maxResponsiveWidth . 'px;overflow:hidden"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
+	}
+
+	/**
 	* Return all of the sites, filtered to fit the user's preferences
 	*
 	* @return array Site IDs as keys, config arrays as values
@@ -740,7 +764,7 @@ class s9e_MediaBBCodes
 
 		if (self::$maxResponsiveWidth && empty(self::$sites[$siteId][self::KEY_UNRESPONSIVE]))
 		{
-			$html = self::setResponsiveDimensions($html);
+			$html = self::addResponsiveWrapper($html);
 		}
 
 		// Test for custom callbacks
@@ -925,30 +949,6 @@ class s9e_MediaBBCodes
 		}
 
 		return false;
-	}
-
-	/**
-	* Extract absolute dimensions of from HTML code
-	*
-	* @param  string  $html Original code
-	* @return string        Modified code
-	*/
-	protected static function setResponsiveDimensions($html)
-	{
-		$ratio = self::getEmbedRatio($html);
-		if (!$ratio)
-		{
-			return $html;
-		}
-
-		$css  = 'position:absolute;top:0;left:0;width:100%;height:100%';
-		$html = preg_replace('( style="[^"]*)', '$0;' . $css, $html, -1, $cnt);
-		if (!$cnt)
-		{
-			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
-		}
-
-		return '<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:' . self::$maxResponsiveWidth . 'px;overflow:hidden"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
 	}
 
 	public static function renderAmazon($vars)
