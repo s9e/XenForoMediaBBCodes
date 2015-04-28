@@ -424,6 +424,19 @@ class s9e_MediaBBCodes
 	*/
 	protected static function parseExcludedSites($text)
 	{
+		$siteIds = self::parseSiteIds($text);
+		$text = implode(',', $siteIds);
+		self::$excludedSites = $text;
+	}
+
+	/**
+	* Parsed a list of sites into an array of siteId
+	*
+	* @param  string   Comma-separated list of sites
+	* @return string[]
+	*/
+	protected static function parseSiteIds($text)
+	{
 		$siteIds = array();
 		foreach (preg_split('(\\s*,\\s*)', strtolower(trim($text))) as $name)
 		{
@@ -442,10 +455,9 @@ class s9e_MediaBBCodes
 				}
 			}
 		}
-
 		sort($siteIds);
-		$text = implode(',', $siteIds);
-		self::$excludedSites = $text;
+
+		return $siteIds;
 	}
 
 	/**
