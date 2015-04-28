@@ -380,7 +380,7 @@ class s9e_MediaBBCodes
 			$embedHtml = $config[self::KEY_HTML];
 			if (self::$maxResponsiveWidth && empty($config[self::KEY_UNRESPONSIVE]))
 			{
-				$embedHtml = self::customiseDimensions($embedHtml);
+				$embedHtml = self::setResponsiveDimensions($embedHtml);
 			}
 		}
 		else
@@ -740,7 +740,7 @@ class s9e_MediaBBCodes
 
 		if (self::$maxResponsiveWidth && empty(self::$sites[$siteId][self::KEY_UNRESPONSIVE]))
 		{
-			$html = self::customiseDimensions($html);
+			$html = self::setResponsiveDimensions($html);
 		}
 
 		// Test for custom callbacks
@@ -905,30 +905,6 @@ class s9e_MediaBBCodes
 	}
 
 	/**
-	* Extract absolute dimensions of from HTML code
-	*
-	* @param  string  $html Original code
-	* @return string        Modified code
-	*/
-	protected static function customiseDimensions($html)
-	{
-		$ratio = self::getEmbedRatio($html);
-		if (!$ratio)
-		{
-			return $html;
-		}
-
-		$css  = 'position:absolute;top:0;left:0;width:100%;height:100%';
-		$html = preg_replace('( style="[^"]*)', '$0;' . $css, $html, -1, $cnt);
-		if (!$cnt)
-		{
-			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
-		}
-
-		return '<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:' . self::$maxResponsiveWidth . 'px;overflow:hidden"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
-	}
-
-	/**
 	* Compute the height:width ratio of given embed code
 	*
 	* @param  string      $html Original code
@@ -949,6 +925,30 @@ class s9e_MediaBBCodes
 		}
 
 		return false;
+	}
+
+	/**
+	* Extract absolute dimensions of from HTML code
+	*
+	* @param  string  $html Original code
+	* @return string        Modified code
+	*/
+	protected static function setResponsiveDimensions($html)
+	{
+		$ratio = self::getEmbedRatio($html);
+		if (!$ratio)
+		{
+			return $html;
+		}
+
+		$css  = 'position:absolute;top:0;left:0;width:100%;height:100%';
+		$html = preg_replace('( style="[^"]*)', '$0;' . $css, $html, -1, $cnt);
+		if (!$cnt)
+		{
+			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
+		}
+
+		return '<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:' . self::$maxResponsiveWidth . 'px;overflow:hidden"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
 	}
 
 	public static function renderAmazon($vars)
