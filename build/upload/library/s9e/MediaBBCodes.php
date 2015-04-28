@@ -445,7 +445,7 @@ class s9e_MediaBBCodes
 			list(, $siteId, $width, $height) = $match;
 			foreach (self::parseSiteIds($siteId) as $siteId)
 			{
-				self::$customDimensions[$siteId] = [(int) $width, (int) $height];
+				self::$customDimensions[$siteId] = array((int) $width, (int) $height);
 			}
 		}
 		ksort(self::$customDimensions);
