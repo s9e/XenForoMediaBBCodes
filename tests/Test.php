@@ -677,26 +677,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'gid=70;id=0An1aCHqyU7FqdGtBUDc1S1NNSWhqY3NidndIa1JuQWc'
 			),
 			array(
-				'grooveshark',
-				'http://grooveshark.com/playlist/Purity+Ring+Shrines/74854761',
-				'playlistid=74854761'
-			),
-			array(
-				'grooveshark',
-				'http://grooveshark.com/#!/playlist/Purity+Ring+Shrines/74854761',
-				'playlistid=74854761'
-			),
-			array(
-				'grooveshark',
-				'http://grooveshark.com/s/Soul+Below/4zGL7i?src=5',
-				'songid=35292216'
-			),
-			array(
-				'grooveshark',
-				'http://grooveshark.com/#!/s/Soul+Below/4zGL7i?src=5',
-				'songid=35292216'
-			),
-			array(
 				'hudl',
 				'http://www.hudl.com/athlete/2067184/highlights/163744377',
 				'athlete=2067184;highlight=163744377'
@@ -1174,18 +1154,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'oid=106189723444098348646;pid=V8AojCoTzxV',
 				'',
 				'<iframe width="450" height="240" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/googleplus.min.html#106189723444098348646/posts/V8AojCoTzxV"></iframe>'
-			),
-			array(
-				'grooveshark',
-				'playlistid=74854761',
-				'',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="400" data="//grooveshark.com/widget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=74854761&amp;songID="><embed type="application/x-shockwave-flash" width="400" height="400" src="//grooveshark.com/widget.swf" allowfullscreen="" flashvars="playlistID=74854761&amp;songID="></object>'
-			),
-			array(
-				'grooveshark',
-				'songid=35292216',
-				'',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="40" data="//grooveshark.com/songWidget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID=&amp;songID=35292216"><embed type="application/x-shockwave-flash" width="400" height="40" src="//grooveshark.com/songWidget.swf" allowfullscreen="" flashvars="playlistID=&amp;songID=35292216"></object>'
 			),
 			array(
 				'hudl',

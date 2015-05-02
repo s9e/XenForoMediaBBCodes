@@ -122,7 +122,6 @@ class s9e_MediaBBCodes
 		'gofundme'=>array('GoFundMe','http://www.gofundme.com/',array('fundraising'=>1),'@gofundme\\.com/(?\'id\'\\w+)(?![^#?])@',array('@gofundme\\.com/(?\'id\'\\w+)(?![^#?])@'),7=>'<object type="application/x-shockwave-flash" typemustmatch="" width="258" height="338" data="//funds.gofundme.com/Widgetflex.swf"><param name="allowfullscreen" value="true"/><param name="flashvars" value="page={$id}"/><embed type="application/x-shockwave-flash" width="258" height="338" src="//funds.gofundme.com/Widgetflex.swf" allowfullscreen="" flashvars="page={$id}"/></object>'),
 		'googleplus'=>array('Google+','https://plus.google.com/',array('social'=>1),'!(?\'id\')//plus\\.google\\.com/(?:u/\\d+/)?(?:\\+(?\'name\'\\w+)|(?\'oid\'\\d+))/posts/(?\'pid\'\\w+)!',array('!//plus\\.google\\.com/(?:u/\\d+/)?(?:\\+(?\'name\'\\w+)|(?\'oid\'\\d+))/posts/(?\'pid\'\\w+)!'),true,7=>null,8=>true),
 		'googlesheets'=>array('Google Sheets','http://www.google.com/sheets/about/',array('documents'=>1),'!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'[-\\w]+)[^#]*(?:#gid=(?\'gid\'\\d+))?!',array('!docs\\.google\\.com/spreadsheet(?:/ccc\\?key=|s/d/)(?\'id\'[-\\w]+)[^#]*(?:#gid=(?\'gid\'\\d+))?!'),true,7=>null,8=>true),
-		'grooveshark'=>array('Grooveshark','http://grooveshark.com/',array('music'=>1),"%(?'id')grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?'playlistid'\\d+)%\n%(?'id')grooveshark\\.com(?:/#!?)?/s/(?'path'[^/]+/.+)%",array('%grooveshark\\.com(?:/#!?)?/playlist/[^/]+/(?\'playlistid\'\\d+)%'),true,array(array('extract'=>array('%songID=(?\'songid\'\\d+)%'),'match'=>array('%grooveshark\\.com(?:/#!?)?/s/(?\'path\'[^/]+/.+)%'),'url'=>'http://grooveshark.com/s/{@path}'))),
 		'hudl'=>array('Hudl','http://www.hudl.com/',array('sports'=>1),"!(?'id')hudl\\.com/athlete/(?'athlete'\\d+)/highlights/(?'highlight'\\d+)!\n!(?'id')hudl\\.com/v/!",array('!hudl\\.com/athlete/(?\'athlete\'\\d+)/highlights/(?\'highlight\'\\d+)!'),true,array(array('extract'=>array('!hudl\\.com/athlete/(?\'athlete\'\\d+)/highlights/(?\'highlight\'\\d+)!'),'match'=>array('!hudl\\.com/v/!')))),
 		'hulu'=>array('Hulu','http://www.hulu.com/',array('misc'=>1),'!(?\'id\')hulu\\.com/watch/!',array(),true,array(array('extract'=>array('!eid=(?\'id\'[-\\w]+)!'),'match'=>array('!hulu\\.com/watch/!'))),'<iframe width="640" height="360" src="https://secure.hulu.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'humortvnl'=>array('HumorTV','http://humortv.vara.nl/pg.2.pg-home.html',array('.nl'=>1,'entertainment'=>1),'!humortv\\.vara\\.nl/\\w+\\.(?\'id\'[-.\\w]+)\\.html!',array('!humortv\\.vara\\.nl/\\w+\\.(?\'id\'[-.\\w]+)\\.html!'),7=>'<iframe width="560" height="315" src="http://humortv.vara.nl/embed.{$id}.html" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
@@ -1171,15 +1170,6 @@ class s9e_MediaBBCodes
 		$vars += array('gid' => null, 'id' => null);
 
 		$html='<iframe width="100%" height="500" style="resize:both" src="https://docs.google.com/spreadsheet/ccc?key='.htmlspecialchars($vars['id'],2).'&amp;widget=true&amp;headers=false&amp;rm=minimal#gid='.htmlspecialchars($vars['gid'],2).'" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
-
-		return $html;
-	}
-
-	public static function renderGrooveshark($vars)
-	{
-		$vars += array('playlistid' => null, 'songid' => null);
-
-		$html='<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="'.htmlspecialchars((isset($vars['songid'])?40:400),2).'" data="//grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"><embed type="application/x-shockwave-flash" width="400" height="'.htmlspecialchars((isset($vars['songid'])?40:400),2).'" src="//grooveshark.com/'.htmlspecialchars((isset($vars['songid'])?'songW':'w'),2).'idget.swf" allowfullscreen="" flashvars="playlistID='.htmlspecialchars($vars['playlistid'],2).'&amp;songID='.htmlspecialchars($vars['songid'],2).'"></object>';
 
 		return $html;
 	}
