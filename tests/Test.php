@@ -738,6 +738,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=1869987317%2Fwish-i-was-here-1;video=video'
 			),
 			array(
+				'libsyn',
+				'http://bunkerbuddies.libsyn.com/interstellar-w-brandie-posey',
+				'3521244'
+			),
+			array(
 				'livestream',
 				'http://livestream.com/ccscsl/USChessChampionships/videos/83267610',
 				'account_id=3913412;event_id=3933674;video_id=83267610'
@@ -822,6 +827,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'spotify',
 				'https://play.spotify.com/album/5OSzFvFAYuRh93WDNCTLEz',
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz'
+			),
+			array(
+				'stitcher',
+				'http://www.stitcher.com/podcast/twit/tech-news-today/e/twitter-shares-fall-18-percent-after-earnings-leak-on-twitter-37808629',
+				'eid=37808629;fid=12645'
 			),
 			array(
 				'teamcoco',
