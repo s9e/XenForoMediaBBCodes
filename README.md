@@ -404,7 +404,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>theonion</code></td>
 		<td>The Onion</td>
-		<td>http://www.theonion.com/video/nation-successfully-completes-mothers-day-by-918-a,35998/</td>
+		<td>http://www.theonion.com/video/nation-successfully-completes-mothers-day-by-918-a,35998/<br/>http://www.theonion.com/video/the-onion-reviews-avengers-age-of-ultron-38524</td>
 	</tr>
 	<tr>
 		<td><code>tinypic</code></td>
