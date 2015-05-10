@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201505100" version_string="20150510" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201505101" version_string="20150510b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
   <bb_code_media_sites/>
   <phrases>
     <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
@@ -23,6 +23,8 @@
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_CA_explain" version_id="1" version_string="1"/>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_DE" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG_DE</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_DE_explain" version_id="1" version_string="1"/>
+    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_ES" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG_ES</phrase>
+    <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_ES_explain" version_id="1" version_string="1"/>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_FR" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG_FR</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_FR_explain" version_id="1" version_string="1"/>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG_IT" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG_IT</phrase>
@@ -54,7 +56,7 @@
     </modification>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>
-      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150510"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
+      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150510b"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
     </modification>
     <modification action="preg_replace" description="Defers the loading of embedded content" enabled="0" execution_order="10" modification_key="s9e_lazy_loading" template="ad_thread_view_below_messages">
       <find>(^)</find>
@@ -131,17 +133,20 @@ lazy=Defer loading embedded content until it's visible (experimental)</edit_form
     <option option_id="s9e_AMAZON_ASSOCIATE_TAG_DE" edit_format="textbox" data_type="string" can_backup="1">
       <relation group_id="s9e" display_order="103"/>
     </option>
-    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_FR" edit_format="textbox" data_type="string" can_backup="1">
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_ES" edit_format="textbox" data_type="string" can_backup="1">
       <relation group_id="s9e" display_order="104"/>
     </option>
-    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_IT" edit_format="textbox" data_type="string" can_backup="1">
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_FR" edit_format="textbox" data_type="string" can_backup="1">
       <relation group_id="s9e" display_order="105"/>
     </option>
-    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_JP" edit_format="textbox" data_type="string" can_backup="1">
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_IT" edit_format="textbox" data_type="string" can_backup="1">
       <relation group_id="s9e" display_order="106"/>
     </option>
-    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_UK" edit_format="textbox" data_type="string" can_backup="1">
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_JP" edit_format="textbox" data_type="string" can_backup="1">
       <relation group_id="s9e" display_order="107"/>
+    </option>
+    <option option_id="s9e_AMAZON_ASSOCIATE_TAG_UK" edit_format="textbox" data_type="string" can_backup="1">
+      <relation group_id="s9e" display_order="108"/>
     </option>
   </optiongroups>
 </addon>

@@ -37,6 +37,7 @@ $configurator = new s9e\TextFormatter\Configurator;
 $configurator->rendering->engine = 'PHP';
 $configurator->rendering->engine->forceEmptyElements = false;
 $configurator->rendering->engine->useEmptyElements   = false;
+$configurator->rendering->engine->serializer->branchTableThreshold = PHP_INT_MAX;
 $configurator->MediaEmbed->sitesDir = $sitesDir;
 
 $configurator->templateNormalizer->add(
