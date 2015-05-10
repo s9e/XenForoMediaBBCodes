@@ -581,11 +581,6 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'dailyshow',
-				'http://www.thedailyshow.com/watch/mon-july-16-2012/louis-c-k-',
-				'mgid:arc:video:thedailyshow.com:627cc3c2-4218-4a78-bf1d-c8258f4db2f8'
-			),
-			array(
-				'dailyshow',
 				'http://thedailyshow.cc.com/extended-interviews/rpgevm/exclusive-matt-taibbi-extended-interview',
 				'mgid:arc:playlist:thedailyshow.com:85ebd39c-9fea-44f3-9da2-f3088cab195d'
 			),
