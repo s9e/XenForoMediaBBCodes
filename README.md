@@ -107,6 +107,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>http://www.thedailyshow.com/watch/mon-july-16-2012/louis-c-k-<br/>http://www.thedailyshow.com/collection/429537/shutstorm-2013/429508<br/>http://thedailyshow.cc.com/videos/elvsf4/what-not-to-buy</td>
 	</tr>
 	<tr>
+		<td><code>democracynow</code></td>
+		<td>Democracy Now!</td>
+		<td>http://www.democracynow.org/2014/7/2/dn_at_almedalen_week_at_swedens<br/>http://m.democracynow.org/stories/15236</td>
+	</tr>
+	<tr>
 		<td><code>dumpert</code></td>
 		<td>dumpert</td>
 		<td>http://www.dumpert.nl/mediabase/6622577/4652b140/r_mi_gaillard_doet_halloween_prank.html</td>
