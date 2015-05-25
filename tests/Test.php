@@ -1143,6 +1143,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/show/2006/2/20"></iframe>'
 			),
 			array(
+				'democracynow',
+				'2015/5/21/headlines',
+				'',
+				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/headlines/2015/5/21"></iframe>'
+			),
+			array(
 				'dumpert',
 				'6622635_f6d1e0fd',
 				'',

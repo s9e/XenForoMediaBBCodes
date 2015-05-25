@@ -1118,7 +1118,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null);
 
-		$html='<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" src="//www.democracynow.org/embed/';if((strpos($vars['id'],'2')===0))$html.='story/'.htmlspecialchars($vars['id'],2);elseif((strpos($vars['id'],'shows/')===0))$html.='show/'.htmlspecialchars(substr($vars['id'],strpos($vars['id'],'/')+1),2);else$html.=htmlspecialchars($vars['id'],2);$html.='"></iframe>';
+		$html='<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" src="//www.democracynow.org/embed/';if((strpos($vars['id'],'/headlines')!==false))$html.='headlines/'.htmlspecialchars(strstr($vars['id'],'/headlines',true),2);elseif((strpos($vars['id'],'2')===0))$html.='story/'.htmlspecialchars($vars['id'],2);elseif((strpos($vars['id'],'shows/')===0))$html.='show/'.htmlspecialchars(substr($vars['id'],strpos($vars['id'],'/')+1),2);else$html.=htmlspecialchars($vars['id'],2);$html.='"></iframe>';
 
 		return $html;
 	}
