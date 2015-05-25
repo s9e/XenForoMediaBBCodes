@@ -105,7 +105,7 @@ class s9e_MediaBBCodes
 		'coub'=>array('Coub','http://coub.com/',array('videos'=>1),'!coub\\.com/view/(?\'id\'\\w+)!',array('!coub\\.com/view/(?\'id\'\\w+)!'),7=>'<iframe width="560" height="315" src="//coub.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'dailymotion'=>array('Dailymotion','http://www.dailymotion.com/',array('videos'=>1),'!dailymotion\\.com/(?:live/|user/[^#]+#video=|video/)(?\'id\'[A-Za-z0-9]+)!',array('!dailymotion\\.com/(?:live/|user/[^#]+#video=|video/)(?\'id\'[A-Za-z0-9]+)!'),7=>'<iframe width="560" height="315" src="//www.dailymotion.com/embed/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'dailyshow'=>array('The Daily Show with Jon Stewart','http://www.thedailyshow.com/',array('entertainment'=>1),'!(?\'id\')thedailyshow\\.c(?:c\\.c)?om/(?:collection|extended-interviews|videos|watch)/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:(?:playlist|video):thedailyshow\\.com:[-0-9a-f]+)!'),'match'=>array('!thedailyshow\\.c(?:c\\.c)?om/(?:collection|extended-interviews|videos|watch)/!')))),
-		'democracynow'=>array('Democracy Now!','http://www.democracynow.org/',array('misc'=>1),"!(?=.*?[./]democracynow\\.org[:/]).*?democracynow.org/(?:embed/story/)?(?'id'\\d+/\\d+/\\d+/\\w+)!\n!(?'id')m\\.democracynow\\.org/stories/\\d!",array('!(?=.*?[./]democracynow\\.org[:/]).*?democracynow.org/(?:embed/story/)?(?\'id\'\\d+/\\d+/\\d+/\\w+)!'),true,array(array('extract'=>array('!democracynow\\.org/(?\'id\'\\d+/\\d+/\\d+/\\w+)\' rel=\'canonical!'),'match'=>array('!m\\.democracynow\\.org/stories/\\d!'))),'<iframe width="640" height="360" src="//www.democracynow.org/embed/story/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
+		'democracynow'=>array('Democracy Now!','http://www.democracynow.org/',array('misc'=>1),"!(?=.*?[./]democracynow\\.org[:/]).*?democracynow.org/(?:embed/)?(?'id'(?:\\w+/)?\\d+/\\d+/\\d+(?:/\\w+)?)!\n!(?'id')m\\.democracynow\\.org/stories/\\d!",array('!(?=.*?[./]democracynow\\.org[:/]).*?democracynow.org/(?:embed/)?(?\'id\'(?:\\w+/)?\\d+/\\d+/\\d+(?:/\\w+)?)!'),true,array(array('extract'=>array('!democracynow\\.org/(?\'id\'(?:\\w+/)?\\d+/\\d+/\\d+(?:/\\w+)?)\' rel=\'canonical!'),'match'=>array('!m\\.democracynow\\.org/stories/\\d!')))),
 		'dumpert'=>array('dumpert','http://www.dumpert.nl/',array('.nl'=>1,'entertainment'=>1),'!(?\'id\')dumpert\\.nl/mediabase/\\d+/\\w+!',array(),true,array(array('extract'=>array('!data-itemid="(?\'id\'\\w+)!'),'match'=>array('!dumpert\\.nl/mediabase/\\d+/\\w+!')))),
 		'eighttracks'=>array('8tracks','http://8tracks.com/',array('music'=>1),"!8tracks\\.com/[-\\w]+/(?'id'\\d+)(?=#|$)!\n!(?'id')8tracks\\.com/[-\\w]+/[-\\w]+!",array('!8tracks\\.com/[-\\w]+/(?\'id\'\\d+)(?=#|$)!'),true,array(array('extract'=>array('!eighttracks://mix/(?\'id\'\\d+)!'),'match'=>array('!8tracks\\.com/[-\\w]+/[-\\w]+!'))),'<iframe width="400" height="400" src="//8tracks.com/mixes/{$id}/player_v3_universal" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'espn'=>array('ESPN','http://espn.go.com/',array('sports'=>1),'#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#',array('#(?=.*?[./]espn\\.go\\.com[:/]).*?(?\'cms\'deportes|espn(?!d)).*(?:clip\\?|video\\?v|clipDeportes\\?)id=(?:\\w+:)?(?\'id\'\\d+)#'),true),
@@ -1110,6 +1110,15 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null);
 
 		$html='<iframe width="512" height="288" src="//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
+
+		return $html;
+	}
+
+	public static function renderDemocracynow($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" src="//www.democracynow.org/embed/';if((strpos($vars['id'],'2')===0))$html.='story/'.htmlspecialchars($vars['id'],2);elseif((strpos($vars['id'],'shows/')===0))$html.='show/'.htmlspecialchars(substr($vars['id'],strpos($vars['id'],'/')+1),2);else$html.=htmlspecialchars($vars['id'],2);$html.='"></iframe>';
 
 		return $html;
 	}

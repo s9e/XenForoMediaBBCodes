@@ -1125,6 +1125,24 @@ class Test extends PHPUnit_Framework_TestCase
 				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://www.cbsnews.com/common/video/cbsnews_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"><embed type="application/x-shockwave-flash" width="425" height="279" allowfullscreen="" src="http://www.cbsnews.com/common/video/cbsnews_player.swf" flashvars="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object>'
 			),
 			array(
+				'democracynow',
+				'2014/7/2/dn_at_almedalen_week_at_swedens',
+				'',
+				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/story/2014/7/2/dn_at_almedalen_week_at_swedens"></iframe>'
+			),
+			array(
+				'democracynow',
+				'blog/2015/3/13/part_2_bruce_schneier_on_the',
+				'',
+				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/blog/2015/3/13/part_2_bruce_schneier_on_the"></iframe>'
+			),
+			array(
+				'democracynow',
+				'shows/2006/2/20',
+				'',
+				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/show/2006/2/20"></iframe>'
+			),
+			array(
 				'dumpert',
 				'6622635_f6d1e0fd',
 				'',

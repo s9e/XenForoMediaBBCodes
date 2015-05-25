@@ -220,7 +220,9 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 
 		if (preg_match("((?<!XenForo_Application::get\\('options'\\))->)", $src))
 		{
-			die('Cannot convert ' . $site['name'] . " (->)\n");
+			echo "$src\n";
+			echo 'Cannot convert ', $site['name'], " (->)\n";
+			die(1);
 		}
 
 		// Collect the name of all vars in use to initialize them with a null value
