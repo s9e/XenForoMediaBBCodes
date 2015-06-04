@@ -277,11 +277,6 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>http://my.mail.ru/corp/auto/video/testdrive/34.html<br/>http://my.mail.ru/mail/classolo/video/28/29.html<br/>http://my.mail.ru/inbox/madasafish1969/video/_myvideo/1986.html<br/>http://my.mail.ru/mail/you4videos/video/_myvideo/1121.html</td>
 	</tr>
 	<tr>
-		<td><code>mediafire</code></td>
-		<td>MediaFire videos</td>
-		<td>http://www.mediafire.com/watch/i3fsrdvbbeocrb9/The_Psycho_Network_Part_I-Title15.mpg<br/>http://mfi.re/watch/i3fsrdvbbeocrb9</td>
-	</tr>
-	<tr>
 		<td><code>medium</code></td>
 		<td>Medium</td>
 		<td>https://medium.com/@donnydonny/team-internet-is-about-to-win-net-neutrality-and-they-didnt-need-googles-help-e7e2cf9b8a95</td>
@@ -319,7 +314,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>npr</code></td>
 		<td>NPR</td>
-		<td>http://www.npr.org/blogs/goatsandsoda/2015/02/11/385396431/the-50-most-effective-ways-to-transform-the-developing-world</td>
+		<td>http://www.npr.org/blogs/goatsandsoda/2015/02/11/385396431/the-50-most-effective-ways-to-transform-the-developing-world<br/>http://n.pr/1Qky1m5</td>
 	</tr>
 	<tr>
 		<td><code>nytimes</code></td>
