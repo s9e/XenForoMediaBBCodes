@@ -257,6 +257,11 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 		<td>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html<br/>http://www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html</td>
 	</tr>
 	<tr>
+		<td><code>kissvideo</code></td>
+		<td>Kiss Video</td>
+		<td>http://www.kissvideo.click/alton-towers-smiler-rollercoaster-crash_7789d8de8.html</td>
+	</tr>
+	<tr>
 		<td><code>libsyn</code></td>
 		<td>Libsyn</td>
 		<td>http://bunkerbuddies.libsyn.com/interstellar-w-brandie-posey</td>
