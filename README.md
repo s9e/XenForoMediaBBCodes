@@ -443,7 +443,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	</tr>
 	<tr>
 		<td><code>twitter</code></td>
-		<td>Twitter (via custom iframe)</td>
+		<td>Twitter</td>
 		<td>https://twitter.com/IJasonAlexander/statuses/526635414338023424<br/>https://mobile.twitter.com/DerekTVShow/status/463372588690202624<br/>https://twitter.com/#!/IJasonAlexander/status/526635414338023424</td>
 	</tr>
 	<tr>
@@ -504,7 +504,7 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 	<tr>
 		<td><code>wsj</code></td>
 		<td>The Wall Street Journal Online</td>
-		<td>http://live.wsj.com/#!09FB2B3B-583E-4284-99D8-FEF6C23BE4E2<br/>http://live.wsj.com/video/seahawks-qb-russell-wilson-on-super-bowl-win/9B3DF790-9D20-442C-B564-51524B06FD26.html<br/>http://live.wsj.com/video/seth-rogen-emotional-appeal-over-alzheimer/3885A1E1-D5DE-443A-AA45-6A8F6BB8FBD8.html?mod=trending_now_video_4#!3885A1E1-D5DE-443A-AA45-6A8F6BB8FBD8</td>
+		<td>http://www.wsj.com/video/nba-players-primp-with-pedicures/9E476D54-6A60-4F3F-ABC1-411014552DE6.html<br/>http://live.wsj.com/#!09FB2B3B-583E-4284-99D8-FEF6C23BE4E2<br/>http://live.wsj.com/video/seahawks-qb-russell-wilson-on-super-bowl-win/9B3DF790-9D20-442C-B564-51524B06FD26.html</td>
 	</tr>
 	<tr>
 		<td><code>xboxclips</code></td>
