@@ -780,22 +780,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
-				'http://api.soundcloud.com/tracks/98282116'
+				'id=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F98282116;track_id=98282116'
 			),
 			array(
 				'soundcloud',
 				'https://soundcloud.com/andrewbird/three-white-horses',
 				'https://soundcloud.com/andrewbird/three-white-horses'
-			),
-			array(
-				'soundcloud',
-				'[soundcloud url="https://api.soundcloud.com/tracks/12345?secret_token=s-foobar" width="100%" height="166" iframe="true" /]',
-				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F12345%3Fsecret_token%3Ds-foobar;secret_token=s-foobar'
-			),
-			array(
-				'soundcloud',
-				'https://soundcloud.com/matt0753/iroh-ii-deep-voice/s-UpqTm',
-				'id=https%3A%2F%2Fsoundcloud.com%2Fmatt0753%2Firoh-ii-deep-voice%2Fs-UpqTm;secret_token=s-UpqTm;track_id=51465673'
 			),
 			array(
 				'sportsnet',
@@ -1242,25 +1232,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
 				'',
-				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116"></iframe>'
-			),
-			array(
-				'soundcloud',
-				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F12345%3Fsecret_token%3Ds-foobar;secret_token=s-foobar',
-				'',
-				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/12345?secret_token=s-foobar&amp;secret_token=s-foobar"></iframe>'
-			),
-			array(
-				'soundcloud',
-				'id=https%3A%2F%2Fsoundcloud.com%2Fmatt0753%2Firoh-ii-deep-voice%2Fs-UpqTm;secret_token=s-UpqTm;track_id=51465673',
-				'',
-				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/51465673&amp;secret_token=s-UpqTm"></iframe>'
+				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="166" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116"></iframe>'
 			),
 			array(
 				'soundcloud',
 				'nruau/nruau-mix2',
 				'',
-				'<iframe width="100%" height="166" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/nruau/nruau-mix2"></iframe>'
+				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="166" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/nruau/nruau-mix2"></iframe>'
 			),
 			array(
 				'spotify',
