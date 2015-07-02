@@ -945,6 +945,7 @@ if (!file_exists(__DIR__ . '/../releases') || !empty($_SERVER['TRAVIS']))
 chdir(__DIR__ . '/../build');
 copy('../LICENSE', 'LICENSE');
 exec('kzip -r -y ../releases/XenForoMediaBBCodes-' . $version . '.zip addon-s9e.xml LICENSE upload/library/s9e/MediaBBCodes.php');
+exec('advzip -z4 ../releases/XenForoMediaBBCodes-' . $version . '.zip');
 
 $readme =
 '[center][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][/center]
