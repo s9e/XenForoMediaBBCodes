@@ -864,6 +864,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'height=1280;id=Ogt;width=720'
 			),
 			array(
+				'vox',
+				'http://www.vox.com/2015/7/21/9005857/ant-man-marvel-apology-review#ooid=ltbzJkdTpKpE-O6hOfD3YJew3t3MppXb',
+				'ltbzJkdTpKpE-O6hOfD3YJew3t3MppXb'
+			),
+			array(
 				'vk',
 				'http://vkontakte.ru/video-7016284_163645555',
 				'hash=eb5d7a5e6e1d8b71;oid=-7016284;vid=163645555'
