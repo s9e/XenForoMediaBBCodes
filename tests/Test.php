@@ -1040,7 +1040,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'amazon',
 				'id=B00BET0NR6;tld=uk',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-uk.amazon.co.uk/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2&amp;t=_"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2&amp;t=_"></iframe>'
 			),
 			array(
 				'amazon',
@@ -1063,19 +1063,19 @@ class Test extends PHPUnit_Framework_TestCase
 				'amazon',
 				'id=B00ET2LTE6;tld=de',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-de.amazon.de/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3&amp;t=_"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3&amp;t=_"></iframe>'
 			),
 			array(
 				'amazon',
 				'id=B005NIKPAY;tld=fr',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-fr.amazon.fr/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8&amp;t=_"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8&amp;t=_"></iframe>'
 			),
 			array(
 				'amazon',
 				'id=B00JGOMIP6;tld=it',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t=_"></iframe>'
+				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t=_"></iframe>'
 			),
 			array(
 				'amazon',
@@ -1189,7 +1189,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'imgur',
 				'AsQ0K3P',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" onload="var id=Math.random();window.addEventListener(\'message\',function(a){a.data.id==id&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});var origin=src.substr(0,src.indexOf(\'/\',8));contentWindow.postMessage(\'s9e:\'+id,origin);"></iframe>'
+				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))"></iframe>'
 			),
 			array(
 				'imgur',
