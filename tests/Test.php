@@ -550,16 +550,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'dtYjVhdDr5492cyQTjVPDcM--Mg2rJj5'
 			),
 			array(
-				'blip',
-				'http://blip.tv/hilah-cooking/hilah-cooking-vegetable-beef-stew-6663725',
-				'AYOW3REC'
-			),
-			array(
-				'blip',
-				'http://blip.tv/play/g6VTgpjxbQA',
-				'g6VTgpjxbQA'
-			),
-			array(
 				'cbsnews',
 				'http://www.cbsnews.com/video/watch/?id=50156501n',
 				'50156501'
@@ -568,11 +558,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'cbsnews',
 				'http://www.cbsnews.com/videos/is-the-us-stock-market-rigged',
 				'pid=W4MVSOaNEYMq'
-			),
-			array(
-				'colbertnation',
-				'http://thecolbertreport.cc.com/videos/gh6urb/neil-degrasse-tyson-pt--1',
-				'mgid:arc:video:colbertnation.com:676d3a42-4c19-47e0-9509-f333fa76b4eb'
 			),
 			array(
 				'comedycentral',
