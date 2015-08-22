@@ -565,11 +565,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'mgid:arc:video:comedycentral.com:bc275e2f-48e3-46d9-b095-0254381497ea'
 			),
 			array(
-				'dailyshow',
-				'http://thedailyshow.cc.com/extended-interviews/rpgevm/exclusive-matt-taibbi-extended-interview',
-				'mgid:arc:playlist:thedailyshow.com:85ebd39c-9fea-44f3-9da2-f3088cab195d'
-			),
-			array(
 				'dumpert',
 				'http://www.dumpert.nl/mediabase/6622635/f6d1e0fd/lompe_boer_op_zuidlaardermarkt_doet_shetlandpony_pijn.html',
 				'6622635_f6d1e0fd'

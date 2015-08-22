@@ -98,12 +98,10 @@ class s9e_MediaBBCodes
 		'cnbc'=>array('CNBC','http://www.cnbc.com/',array('news'=>1),'!(?=.*?[./]video\\.cnbc\\.com[:/]).*?cnbc\\.com/gallery/\\?video=(?\'id\'\\d+)!',array('!(?=.*?[./]video\\.cnbc\\.com[:/]).*?cnbc\\.com/gallery/\\?video=(?\'id\'\\d+)!'),7=>'<object type="application/x-shockwave-flash" typemustmatch="" width="400" height="380" data="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare"><param name="allowfullscreen" value="true"/><embed type="application/x-shockwave-flash" width="400" height="380" src="//plus.cnbc.com/rssvideosearch/action/player/id/{$id}/code/cnbcplayershare" allowfullscreen=""/></object>'),
 		'cnn'=>array('CNN','http://edition.cnn.com/video/',array('news'=>1),'!cnn\\.com/video/data/2\\.0/video/(?\'id\'.*\\.cnn)!',array('!cnn\\.com/video/data/2\\.0/video/(?\'id\'.*\\.cnn)!'),7=>'<iframe width="560" height="315" src="http://edition.cnn.com/video/api/embed.html#/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'cnnmoney'=>array('CNNMoney','http://money.cnn.com/video/',array('news'=>1),'!money\\.cnn\\.com/video/(?\'id\'.*\\.cnnmoney)!',array('!money\\.cnn\\.com/video/(?\'id\'.*\\.cnnmoney)!'),7=>'<iframe width="560" height="360" src="http://money.cnn.com/.element/ssi/video/7.0/players/embed.player.html?videoid=video/{$id}&amp;width=560&amp;height=360" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
-		'colbertnation'=>array('Colbert Nation','http://thecolbertreport.cc.com/',array('entertainment'=>1),'!(?\'id\')thecolbertreport\\.cc\\.com/videos/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:video:comedycentral\\.com:[-0-9a-f]+)!'),'match'=>array('!thecolbertreport\\.cc\\.com/videos/!')))),
 		'collegehumor'=>array('CollegeHumor','http://www.collegehumor.com/',array('entertainment'=>1),'!collegehumor\\.com/(?:video|embed)/(?\'id\'\\d+)!',array('!collegehumor\\.com/(?:video|embed)/(?\'id\'\\d+)!'),7=>'<iframe width="600" height="369" src="//www.collegehumor.com/e/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'comedycentral'=>array('Comedy Central','http://www.comedycentral.com/funny-videos',array('entertainment'=>1),'!(?\'id\')c(?:c|omedycentral)\\.com/video-clips/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:video:[.\\w]+:[-\\w]+)!'),'match'=>array('!c(?:c|omedycentral)\\.com/video-clips/!')))),
 		'coub'=>array('Coub','http://coub.com/',array('videos'=>1),'!coub\\.com/view/(?\'id\'\\w+)!',array('!coub\\.com/view/(?\'id\'\\w+)!'),7=>'<iframe width="560" height="315" src="//coub.com/embed/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
 		'dailymotion'=>array('Dailymotion','http://www.dailymotion.com/',array('videos'=>1),'!dailymotion\\.com/(?:live/|user/[^#]+#video=|video/)(?\'id\'[A-Za-z0-9]+)!',array('!dailymotion\\.com/(?:live/|user/[^#]+#video=|video/)(?\'id\'[A-Za-z0-9]+)!'),7=>'<iframe width="560" height="315" src="//www.dailymotion.com/embed/video/{$id}" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
-		'dailyshow'=>array('The Daily Show with Jon Stewart','http://www.thedailyshow.com/',array('entertainment'=>1),'!(?\'id\')thedailyshow\\.cc\\.com/(?:collection|extended-interviews|videos|watch)/!',array(),true,array(array('extract'=>array('!(?\'id\'mgid:arc:(?:playlist|video):thedailyshow\\.com:[-0-9a-f]+)!'),'match'=>array('!thedailyshow\\.cc\\.com/(?:collection|extended-interviews|videos|watch)/!')))),
 		'democracynow'=>array('Democracy Now!','http://www.democracynow.org/',array('misc'=>1),"!(?=.*?[./]democracynow\\.org[:/]).*?democracynow.org/(?:embed/)?(?'id'(?:\\w+/)?\\d+/\\d+/\\d+(?:/\\w+)?)!\n!(?'id')m\\.democracynow\\.org/stories/\\d!",array('!(?=.*?[./]democracynow\\.org[:/]).*?democracynow.org/(?:embed/)?(?\'id\'(?:\\w+/)?\\d+/\\d+/\\d+(?:/\\w+)?)!'),true,array(array('extract'=>array('!democracynow\\.org/(?\'id\'(?:\\w+/)?\\d+/\\d+/\\d+(?:/\\w+)?)\' rel=\'canonical!'),'match'=>array('!m\\.democracynow\\.org/stories/\\d!')))),
 		'dumpert'=>array('dumpert','http://www.dumpert.nl/',array('.nl'=>1,'entertainment'=>1),'!(?\'id\')dumpert\\.nl/mediabase/\\d+/\\w+!',array(),true,array(array('extract'=>array('!data-itemid="(?\'id\'\\w+)!'),'match'=>array('!dumpert\\.nl/mediabase/\\d+/\\w+!')))),
 		'eighttracks'=>array('8tracks','http://8tracks.com/',array('music'=>1),"!8tracks\\.com/[-\\w]+/(?'id'\\d+)(?=#|$)!\n!(?'id')8tracks\\.com/[-\\w]+/[-\\w]+!",array('!8tracks\\.com/[-\\w]+/(?\'id\'\\d+)(?=#|$)!'),true,array(array('extract'=>array('!eighttracks://mix/(?\'id\'\\d+)!'),'match'=>array('!8tracks\\.com/[-\\w]+/[-\\w]+!'))),'<iframe width="400" height="400" src="//8tracks.com/mixes/{$id}/player_v3_universal" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>'),
@@ -1088,25 +1086,7 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
-	public static function renderColbertnation($vars)
-	{
-		$vars += array('id' => null);
-
-		$html='<iframe width="512" height="288" src="//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
-
-		return $html;
-	}
-
 	public static function renderComedycentral($vars)
-	{
-		$vars += array('id' => null);
-
-		$html='<iframe width="512" height="288" src="//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2).'" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
-
-		return $html;
-	}
-
-	public static function renderDailyshow($vars)
 	{
 		$vars += array('id' => null);
 
