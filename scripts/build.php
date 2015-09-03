@@ -159,7 +159,8 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 		KEY_URL   => (string) $site['homepage']
 	);
 
-	if (!empty($site['unresponsive']))
+	if ((isset($site->iframe['responsive']) && 0 == $site->iframe['responsive'])
+	 || (isset($site->flash['responsive'])  && 0 == $site->flash['responsive']))
 	{
 		$config[KEY_UNRESPONSIVE] = true;
 	}
