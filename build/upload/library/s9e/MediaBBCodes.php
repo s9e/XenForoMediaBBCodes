@@ -1180,7 +1180,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('height' => null, 'id' => null, 'type' => null, 'width' => null);
 
-		$html='<iframe allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" width="';if($vars['type']==='gifv'&&isset($vars['width']))$html.=htmlspecialchars($vars['width'],2);else$html.='100%';$html.='" height="';if($vars['type']==='gifv'&&isset($vars['height']))$html.=htmlspecialchars($vars['height'],2);else$html.='550';$html.='" src="';if($vars['type']==='gifv')$html.='//i.imgur.com/'.htmlspecialchars($vars['id'],2).'.gifv#embed';elseif((strpos($vars['id'],'a/')===0))$html.='//imgur.com/'.htmlspecialchars($vars['id'],2).'/embed';elseif($vars['type']==='album')$html.='//imgur.com/a/'.htmlspecialchars($vars['id'],2).'/embed';else$html.='//s9e.github.io/iframe/imgur.min.html#'.htmlspecialchars($vars['id'],2);$html.='" onload="';if(!($vars['type']==='gifv'||$vars['type']==='album'))$html.='var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))';$html.='"></iframe>';
+		$html='';if($vars['type']==='gifv'&&isset($vars['width'])&&isset($vars['height']))$html.='<iframe width="'.htmlspecialchars($vars['width'],2).'" height="'.htmlspecialchars($vars['height'],2).'" src="//i.imgur.com/'.htmlspecialchars($vars['id'],2).'.gifv#embed" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';elseif((strpos($vars['id'],'a/')===0))$html.='<iframe width="100%" height="550" src="//imgur.com/'.htmlspecialchars($vars['id'],2).'/embed" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';elseif($vars['type']==='album')$html.='<iframe width="100%" height="550" src="//imgur.com/a/'.htmlspecialchars($vars['id'],2).'/embed" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';else$html.='<iframe width="100%" height="550" src="//s9e.github.io/iframe/imgur.min.html#'.htmlspecialchars($vars['id'],2).'" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
 
 		return $html;
 	}
@@ -1198,7 +1198,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'video' => null);
 
-		$html='<iframe allowfullscreen="" frameborder="0" scrolling="no" data-s9e="" width="';if(isset($vars['video']))$html.='480';else$html.='220';$html.='" height="';if(isset($vars['video']))$html.='360';else$html.='420';$html.='" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/';if(isset($vars['video']))$html.='video';else$html.='card';$html.='.html"></iframe>';
+		$html='';if(isset($vars['video']))$html.='<iframe width="480" height="360" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';else$html.='<iframe width="220" height="420" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no" data-s9e=""></iframe>';
 
 		return $html;
 	}

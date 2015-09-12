@@ -1169,43 +1169,43 @@ class Test extends PHPUnit_Framework_TestCase
 				'imgur',
 				'AsQ0K3P',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))"></iframe>'
+				'<iframe width="100%" height="550" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=9UGCL;type=album',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed" onload=""></iframe>'
+				'<iframe width="100%" height="550" src="//imgur.com/a/9UGCL/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=a/9UGCL;type=album',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="100%" height="550" src="//imgur.com/a/9UGCL/embed" onload=""></iframe>'
+				'<iframe width="100%" height="550" src="//imgur.com/a/9UGCL/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'imgur',
 				'height=389;id=u7Yo0Vy;type=gifv;width=915',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="915" height="389" src="//i.imgur.com/u7Yo0Vy.gifv#embed" onload=""></iframe>'
+				'<iframe width="915" height="389" src="//i.imgur.com/u7Yo0Vy.gifv#embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'kickstarter',
 				'1869987317/wish-i-was-here-1',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
+				'<iframe width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'kickstarter',
 				'card=card;id=1869987317%2Fwish-i-was-here-1',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html"></iframe>'
+				'<iframe width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'kickstarter',
 				'id=1869987317%2Fwish-i-was-here-1;video=video',
 				'',
-				'<iframe allowfullscreen="" frameborder="0" scrolling="no" width="480" height="360" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html"></iframe>'
+				'<iframe width="480" height="360" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'livestream',
