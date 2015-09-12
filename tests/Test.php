@@ -808,11 +808,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://tinypic.com/player.php?v=29x86j9&s=8',
 				'id=29x86j9;s=8'
 			),
-			array(
-				'traileraddict',
-				'http://www.traileraddict.com/muppets-most-wanted/super-bowl-tv-spot',
-				'86191'
-			),
+//			array(
+//				'traileraddict',
+//				'http://www.traileraddict.com/muppets-most-wanted/super-bowl-tv-spot',
+//				'86191'
+//			),
 			array(
 				'tumblr',
 				'http://mrbenvey.tumblr.com/post/104191225637',
