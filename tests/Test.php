@@ -1067,13 +1067,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'audiomack',
 				'id=hz-global/double-a-side-vol3;mode=album',
 				'',
-				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="340" src="//www.audiomack.com/embed4-album/hz-global/double-a-side-vol3"></iframe>'
+				'<iframe width="100%" height="340" src="//www.audiomack.com/embed4-album/hz-global/double-a-side-vol3" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'audiomack',
 				'id=random-2/buy-the-world-final-1;mode=song',
 				'',
-				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="110" src="//www.audiomack.com/embed4/random-2/buy-the-world-final-1"></iframe>'
+				'<iframe width="100%" height="110" src="//www.audiomack.com/embed4/random-2/buy-the-world-final-1" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'bandcamp',
@@ -1217,13 +1217,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
 				'',
-				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="166" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116"></iframe>'
+				'<iframe width="100%" height="166" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'soundcloud',
 				'nruau/nruau-mix2',
 				'',
-				'<iframe width="100%" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no" height="166" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/nruau/nruau-mix2"></iframe>'
+				'<iframe width="100%" height="166" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/nruau/nruau-mix2" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
 			),
 			array(
 				'spotify',
