@@ -1277,13 +1277,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'ustream',
 				'cid=16234409',
 				'',
-				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/16234409"></iframe>'
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/16234409?html5ui"></iframe>'
 			),
 			array(
 				'ustream',
 				'vid=40688256',
 				'',
-				'<iframe width="480" height="302" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/recorded/40688256"></iframe>'
+				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/recorded/40688256?html5ui"></iframe>'
 			),
 			array(
 				'xboxclips',
