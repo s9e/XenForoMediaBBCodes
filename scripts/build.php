@@ -40,16 +40,6 @@ $configurator->rendering->engine->useEmptyElements   = false;
 $configurator->rendering->engine->serializer->branchTableThreshold = PHP_INT_MAX;
 $configurator->MediaEmbed->sitesDir = $sitesDir;
 
-$configurator->templateNormalizer->add(
-	function (DOMElement $template)
-	{
-		foreach ($template->getElementsByTagName('iframe') as $iframe)
-		{
-			$iframe->setAttribute('data-s9e', '');
-		}
-	}
-);
-
 // Load the PHP file and remove the renderers
 $php = file_get_contents($classFile);
 $php = preg_replace('((.*?)(?:\\s*public static function render.*)?\\}$)s', '$1', $php);
@@ -603,13 +593,8 @@ setAttributes(
 	]
 );
 
-$text = '';
-if (isset($githubUrl))
-{
-	$text = '<a href="' . $githubUrl . 'CustomDimensions.md" target="_blank" style="cursor:help">Help</a>';
-}
 setAttributes(
-	$phrases->appendChild($dom->createElement('phrase', $text)),
+	$phrases->appendChild($dom->createElement('phrase', '<i>Deprecated</i>')),
 	[
 		'title'          => 'option_' . $addonId . '_custom_dimensions_explain',
 		'version_id'     => '1',
@@ -740,44 +725,6 @@ setAttributes(
 	]
 );
 
-// Add the max width param
-$option = $optiongroups->appendChild($dom->createElement('option'));
-setAttributes(
-	$option,
-	[
-		'option_id'         => $addonId . '_max_responsive_width',
-		'edit_format'       => 'textbox',
-		'data_type'         => 'unsigned_integer',
-		'can_backup'        => 1,
-		'validation_class'  => $className,
-		'validation_method' => 'validateMaxResponsiveWidth',
-		'default_value'     => 0
-	]
-);
-setAttributes(
-	$option->appendChild($dom->createElement('relation')),
-	[
-		'group_id'      => $addonId,
-		'display_order' => ++$displayOrder
-	]
-);
-setAttributes(
-	$phrases->appendChild($dom->createElement('phrase', 'Max responsive width')),
-	[
-		'title'          => 'option_' . $addonId . '_max_responsive_width',
-		'version_id'     => '1',
-		'version_string' => '1'
-	]
-);
-setAttributes(
-	$phrases->appendChild($dom->createElement('phrase', 'Set to 0 to disable')),
-	[
-		'title'          => 'option_' . $addonId . '_max_responsive_width_explain',
-		'version_id'     => '1',
-		'version_string' => '1'
-	]
-);
-
 // Add the lazy loading modification and option
 $modification  = $modifications->appendChild($dom->createElement('modification'));
 setAttributes(
@@ -794,7 +741,7 @@ setAttributes(
 $modification->appendChild($dom->createElement('find', '(^)'));
 $modification->appendChild($dom->createElement(
 	'replace',
-	htmlspecialchars('<script>(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50<a.top&&a.top<b||-50<a.bottom&&a.bottom<b}function h(){d=!0}function k(){for(var a=document.getElementsByTagName("iframe"),b=a.length,d=-1;++d<b;){var c=a[d];if(!c.hasAttribute("data-lazy")&&c.hasAttribute("data-s9e")&&!g(c)){var f=/youtube\.com\/embed\/(\w+)/.exec(c.src);f&&(c.style.background="url(https://i.ytimg.com/vi/"+f[1]+"/hqdefault.jpg) no-repeat 50% 50% / cover");e.unshift(c);c.contentWindow.location.replace("about:blank");c.setAttribute("data-lazy","")}}}var e=[],f=!0,d=!1;k();e.length&&(3<e.length&&setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(d)d=!1,f=!0;else if(f){f=!1;for(var a=e.length;0<=--a;){var b=e[a];g(b)&&(b.contentWindow.location.replace(b.src),b.removeAttribute("data-lazy"),e.splice(a,1))}}},100))})();</script>')
+	htmlspecialchars('<script>(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50<a.top&&a.top<b||-50<a.bottom&&a.bottom<b}function h(){d=!0}function k(){for(var a=document.getElementsByTagName("iframe"),b=a.length,d=-1;++d<b;){var c=a[d];if(!c.hasAttribute("data-lazy")&&(c.hasAttribute("data-s9e-mediaembed")||c.parentNode.parentNode.hasAttribute("data-s9e-mediaembed"))&&!g(c)){var f=/youtube\.com\/embed\/(\w+)/.exec(c.src);f&&(c.style.background="url(https://i.ytimg.com/vi/"+f[1]+"/hqdefault.jpg) no-repeat 50% 50% / cover");e.push(c);c.contentWindow.location.replace("data:text/html,");c.setAttribute("data-lazy","")}}}var e=[],f=!0,d=!1;k();e.length&&(3<e.length&&setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(d)d=!1,f=!0;else if(f){f=!1;for(var a=e.length;0<=--a;){var b=e[a];g(b)&&(b.contentWindow.location.replace(b.src),b.removeAttribute("data-lazy"),e.splice(a,1))}}},100))})()</script>')
 ));
 
 $option = $optiongroups->appendChild($dom->createElement('option'));
@@ -851,7 +798,7 @@ setAttributes(
 $modification->appendChild($dom->createElement('find', '.bbCodeQuote iframe,'));
 $modification->appendChild($dom->createElement(
 	'replace',
-	'.bbCodeQuote iframe, .bbCodeQuote [data-s9e="wrapper"],'
+	'.bbCodeQuote iframe, .bbCodeQuote [data-s9e-mediaembed],'
 ));
 
 // Add the params as XenForo options

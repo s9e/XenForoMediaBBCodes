@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201509221" version_string="20150922b" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201509240" version_string="20150924" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
   <bb_code_media_sites/>
   <phrases>
     <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
@@ -10,11 +10,9 @@
     <phrase title="option_s9e_custom_callbacks" version_id="1" version_string="1">Custom callbacks</phrase>
     <phrase title="option_s9e_custom_callbacks_explain" version_id="1" version_string="1">&lt;a href="https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/CustomCallbacks.md" target="_blank" style="cursor:help"&gt;Help&lt;/a&gt;</phrase>
     <phrase title="option_s9e_custom_dimensions" version_id="1" version_string="1">Custom dimensions</phrase>
-    <phrase title="option_s9e_custom_dimensions_explain" version_id="1" version_string="1">&lt;a href="https://github.com/s9e/XenForoMediaBBCodes/blob/master/docs/CustomDimensions.md" target="_blank" style="cursor:help"&gt;Help&lt;/a&gt;</phrase>
+    <phrase title="option_s9e_custom_dimensions_explain" version_id="1" version_string="1">&lt;i&gt;Deprecated&lt;/i&gt;</phrase>
     <phrase title="option_s9e_excluded_sites" version_id="1" version_string="1">Excluded sites</phrase>
     <phrase title="option_s9e_excluded_sites_explain" version_id="1" version_string="1">Comma-separated list of sites not to install</phrase>
-    <phrase title="option_s9e_max_responsive_width" version_id="1" version_string="1">Max responsive width</phrase>
-    <phrase title="option_s9e_max_responsive_width_explain" version_id="1" version_string="1">Set to 0 to disable</phrase>
     <phrase title="option_s9e_lazy_loading" version_id="1" version_string="1">Performance</phrase>
     <phrase title="option_s9e_lazy_loading_explain" version_id="1" version_string="1">Deferring the loading of embedded content makes pages load faster and use less memory.</phrase>
     <phrase title="option_s9e_AMAZON_ASSOCIATE_TAG" version_id="1" version_string="1">AMAZON_ASSOCIATE_TAG</phrase>
@@ -56,15 +54,15 @@
     </modification>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>
-      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150922b"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
+      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack 20150924"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
     </modification>
     <modification action="preg_replace" description="Defers the loading of embedded content" enabled="0" execution_order="10" modification_key="s9e_lazy_loading" template="ad_thread_view_below_messages">
       <find>(^)</find>
-      <replace>&lt;script&gt;(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50&lt;a.top&amp;&amp;a.top&lt;b||-50&lt;a.bottom&amp;&amp;a.bottom&lt;b}function h(){d=!0}function k(){for(var a=document.getElementsByTagName("iframe"),b=a.length,d=-1;++d&lt;b;){var c=a[d];if(!c.hasAttribute("data-lazy")&amp;&amp;c.hasAttribute("data-s9e")&amp;&amp;!g(c)){var f=/youtube\.com\/embed\/(\w+)/.exec(c.src);f&amp;&amp;(c.style.background="url(https://i.ytimg.com/vi/"+f[1]+"/hqdefault.jpg) no-repeat 50% 50% / cover");e.unshift(c);c.contentWindow.location.replace("about:blank");c.setAttribute("data-lazy","")}}}var e=[],f=!0,d=!1;k();e.length&amp;&amp;(3&lt;e.length&amp;&amp;setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(d)d=!1,f=!0;else if(f){f=!1;for(var a=e.length;0&lt;=--a;){var b=e[a];g(b)&amp;&amp;(b.contentWindow.location.replace(b.src),b.removeAttribute("data-lazy"),e.splice(a,1))}}},100))})();&lt;/script&gt;</replace>
+      <replace>&lt;script&gt;(function(){function g(a){a=a.getBoundingClientRect();var b=innerHeight+100;return-50&lt;a.top&amp;&amp;a.top&lt;b||-50&lt;a.bottom&amp;&amp;a.bottom&lt;b}function h(){d=!0}function k(){for(var a=document.getElementsByTagName("iframe"),b=a.length,d=-1;++d&lt;b;){var c=a[d];if(!c.hasAttribute("data-lazy")&amp;&amp;(c.hasAttribute("data-s9e-mediaembed")||c.parentNode.parentNode.hasAttribute("data-s9e-mediaembed"))&amp;&amp;!g(c)){var f=/youtube\.com\/embed\/(\w+)/.exec(c.src);f&amp;&amp;(c.style.background="url(https://i.ytimg.com/vi/"+f[1]+"/hqdefault.jpg) no-repeat 50% 50% / cover");e.push(c);c.contentWindow.location.replace("data:text/html,");c.setAttribute("data-lazy","")}}}var e=[],f=!0,d=!1;k();e.length&amp;&amp;(3&lt;e.length&amp;&amp;setInterval(k,6E4),addEventListener("scroll",h),addEventListener("resize",h),setInterval(function(){if(d)d=!1,f=!0;else if(f){f=!1;for(var a=e.length;0&lt;=--a;){var b=e[a];g(b)&amp;&amp;(b.contentWindow.location.replace(b.src),b.removeAttribute("data-lazy"),e.splice(a,1))}}},100))})()&lt;/script&gt;</replace>
     </modification>
     <modification action="str_replace" description="Make the CSS that applies to iframes in quote apply to the responsive embed wrapper too" enabled="1" execution_order="10" modification_key="s9e_quote_css" template="bb_code.css">
       <find>.bbCodeQuote iframe,</find>
-      <replace>.bbCodeQuote iframe, .bbCodeQuote [data-s9e="wrapper"],</replace>
+      <replace>.bbCodeQuote iframe, .bbCodeQuote [data-s9e-mediaembed],</replace>
     </modification>
   </public_template_modifications>
   <optiongroups>
@@ -115,14 +113,11 @@ videos=Videos</edit_format_params>
     <option option_id="s9e_excluded_sites" edit_format="textbox" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateExcludedSites">
       <relation group_id="s9e" display_order="5"/>
     </option>
-    <option option_id="s9e_max_responsive_width" edit_format="textbox" data_type="unsigned_integer" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateMaxResponsiveWidth" default_value="0">
-      <relation group_id="s9e" display_order="6"/>
-    </option>
     <option option_id="s9e_lazy_loading" edit_format="radio" data_type="string" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="validateLazyLoading">
       <default_value>immediate</default_value>
       <edit_format_params>immediate=Load embedded content immediately
 lazy=Defer loading embedded content until it's visible (experimental)</edit_format_params>
-      <relation group_id="s9e" display_order="7"/>
+      <relation group_id="s9e" display_order="6"/>
     </option>
     <option option_id="s9e_AMAZON_ASSOCIATE_TAG" edit_format="textbox" data_type="string" can_backup="1">
       <relation group_id="s9e" display_order="101"/>

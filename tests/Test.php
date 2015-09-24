@@ -300,25 +300,6 @@ class Test extends PHPUnit_Framework_TestCase
 		$this->assertReinstallWasCalled();
 	}
 
-	public function testCustomDimensionsInstall()
-	{
-		$addon = $this->getAddon(
-			'<bb_code_media_sites>
-				<site media_site_id="custom">
-					<embed_html><iframe width="888" height="999"></iframe></embed_html>
-				</site>
-			</bb_code_media_sites>'
-		);
-
-		XenForo_Application::$options['s9e_custom_dimensions'] = 'custom=123,456';
-		s9e_MediaBBCodes::install(null, array(), $addon);
-
-		$this->assertContains(
-			'foo',
-			$addon->asXML()
-		);
-	}
-
 	public function testValidateExcludedSitesValue()
 	{
 		$text = ' youtube , twitter ';
@@ -961,78 +942,34 @@ class Test extends PHPUnit_Framework_TestCase
 				'bar quux'
 			),
 			array(
-				'foo',
-				'123',
-				'<iframe width="560" height="315"></iframe>',
-				'<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:800px;overflow:hidden"><div style="position:relative;padding-top:56.25%"><iframe width="560" height="315" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
-				'assertSame',
-				function ()
-				{
-					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
-				}
-			),
-			array(
-				'foo',
-				'123',
-				'<iframe width="560" height="315" style="border:1px"></iframe>',
-				'<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:800px;overflow:hidden"><div style="position:relative;padding-top:56.25%"><iframe width="560" height="315" style="border:1px;position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>',
-				'assertSame',
-				function ()
-				{
-					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
-				}
-			),
-			array(
-				'foo',
-				'123',
-				'<iframe width="100%" height="315"></iframe>',
-				'<iframe width="100%" height="315"></iframe>',
-				'assertSame',
-				function ()
-				{
-					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
-				}
-			),
-			array(
-				'foo',
-				'123',
-				'<iframe width="400" height="150" onload="this.height=123"></iframe>',
-				'<iframe width="400" height="150" onload="this.height=123"></iframe>',
-				'assertSame',
-				function ()
-				{
-					s9e_MediaBBCodes::$maxResponsiveWidth = 800;
-				}
-			),
-			array(
 				'amazon',
 				'id=B00GQT1LNO;tld=ca',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00GQT1LNO&amp;o=15&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00GQT1LNO&amp;o=15&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'amazon',
 				'id=B003AKZ6I8;tld=jp',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B003AKZ6I8&amp;o=9&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B003AKZ6I8&amp;o=9&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'amazon',
 				'id=B00BET0NR6;tld=uk',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00BET0NR6&amp;o=2&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'amazon',
 				'B002MUC0ZY',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'amazon',
 				'B002MUC0ZY',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=foo-20"></iframe>',
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=foo-20"></iframe></div></div>',
 				'assertSame',
 				function ()
 				{
@@ -1043,295 +980,295 @@ class Test extends PHPUnit_Framework_TestCase
 				'amazon',
 				'id=B00ET2LTE6;tld=de',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00ET2LTE6&amp;o=3&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'amazon',
 				'id=B005NIKPAY;tld=fr',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B005NIKPAY&amp;o=8&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'amazon',
 				'id=B00JGOMIP6;tld=it',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'amazon',
 				'id=B002MUC0ZY;tld=com',
 				'',
-				'<iframe width="120" height="240" allowfullscreen="" frameborder="0" scrolling="no" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe>'
+				'<div data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><div style="position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B002MUC0ZY&amp;o=1&amp;t=_"></iframe></div></div>'
 			),
 			array(
 				'audiomack',
 				'id=hz-global/double-a-side-vol3;mode=album',
 				'',
-				'<iframe width="100%" height="340" src="//www.audiomack.com/embed4-album/hz-global/double-a-side-vol3" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="//www.audiomack.com/embed4-album/hz-global/double-a-side-vol3" style="border:0;height:340px;max-width:900px;width:100%"></iframe>'
 			),
 			array(
 				'audiomack',
 				'id=random-2/buy-the-world-final-1;mode=song',
 				'',
-				'<iframe width="100%" height="110" src="//www.audiomack.com/embed4/random-2/buy-the-world-final-1" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="//www.audiomack.com/embed4/random-2/buy-the-world-final-1" style="border:0;height:110px;max-width:900px;width:100%"></iframe>'
 			),
 			array(
 				'bandcamp',
 				'album_id=1122163921',
 				'',
-				'<iframe width="400" height="400" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/size=large/minimal=true/album=1122163921"></iframe>'
+				'<div data-s9e-mediaembed="bandcamp" style="display:inline-block;width:100%;max-width:400px"><div style="position:relative;padding-bottom:100%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//bandcamp.com/EmbeddedPlayer/size=large/minimal=true/album=1122163921"></iframe></div></div>'
 			),
 			array(
 				'bandcamp',
 				'album_id=1122163921;track_num=7',
 				'',
-				'<iframe width="400" height="400" allowfullscreen="" frameborder="0" scrolling="no" src="//bandcamp.com/EmbeddedPlayer/size=large/minimal=true/album=1122163921/t=7"></iframe>'
+				'<div data-s9e-mediaembed="bandcamp" style="display:inline-block;width:100%;max-width:400px"><div style="position:relative;padding-bottom:100%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//bandcamp.com/EmbeddedPlayer/size=large/minimal=true/album=1122163921/t=7"></iframe></div></div>'
 			),
 			array(
 				'cbsnews',
 				'50156501',
 				'',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="si=254&amp;contentValue=50156501"></object>'
+				'<div data-s9e-mediaembed="cbsnews" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:62.5%;padding-bottom:calc(56.25% + 40px)"><object data="//i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf" style="height:100%;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="si=254&amp;contentValue=50156501"></object></div></div>'
 			),
 			array(
 				'cbsnews',
 				'pid=W4MVSOaNEYMq',
 				'',
-				'<object type="application/x-shockwave-flash" typemustmatch="" width="425" height="279" data="http://www.cbsnews.com/common/video/cbsnews_player.swf"><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object>'
+				'<div data-s9e-mediaembed="cbsnews" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:62.1875%;padding-bottom:calc(56.25% + 38px)"><object data="//www.cbsnews.com/common/video/cbsnews_player.swf" style="height:100%;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object></div></div>'
 			),
 			array(
 				'democracynow',
 				'2014/7/2/dn_at_almedalen_week_at_swedens',
 				'',
-				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/story/2014/7/2/dn_at_almedalen_week_at_swedens"></iframe>'
+				'<div data-s9e-mediaembed="democracynow" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.democracynow.org/embed/story/2014/7/2/dn_at_almedalen_week_at_swedens"></iframe></div></div>'
 			),
 			array(
 				'democracynow',
 				'blog/2015/3/13/part_2_bruce_schneier_on_the',
 				'',
-				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/blog/2015/3/13/part_2_bruce_schneier_on_the"></iframe>'
+				'<div data-s9e-mediaembed="democracynow" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.democracynow.org/embed/blog/2015/3/13/part_2_bruce_schneier_on_the"></iframe></div></div>'
 			),
 			array(
 				'democracynow',
 				'shows/2006/2/20',
 				'',
-				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/show/2006/2/20"></iframe>'
+				'<div data-s9e-mediaembed="democracynow" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.democracynow.org/embed/show/2006/2/20"></iframe></div></div>'
 			),
 			array(
 				'democracynow',
 				'2015/5/21/headlines',
 				'',
-				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//www.democracynow.org/embed/headlines/2015/5/21"></iframe>'
+				'<div data-s9e-mediaembed="democracynow" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.democracynow.org/embed/headlines/2015/5/21"></iframe></div></div>'
 			),
 			array(
 				'dumpert',
 				'6622635_f6d1e0fd',
 				'',
-				'<iframe width="560" height="315" src="http://www.dumpert.nl/embed/6622635/f6d1e0fd/" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="dumpert" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="http://www.dumpert.nl/embed/6622635/f6d1e0fd/" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'getty',
 				'et=0KmkT83GTG1ynPe0_63zHg;height=399;id=3232182;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48%3D;width=594',
 				'',
-				'<iframe width="594" height="448" src="//embed.gettyimages.com/embed/3232182?et=0KmkT83GTG1ynPe0_63zHg&amp;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48=" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="getty" style="display:inline-block;width:100%;max-width:594px"><div style="position:relative;padding-bottom:75.420875420875%;padding-bottom:calc(67.171717171717% + 49px)"><iframe allowfullscreen="" scrolling="no" src="//embed.gettyimages.com/embed/3232182?et=0KmkT83GTG1ynPe0_63zHg&amp;sig=adwXi8c671w6BF-VxLAckfZZa3teIln3t9BDYiCil48=" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'gfycat',
 				'height=338;id=SereneIllfatedCapybara;width=600',
 				'',
-				'<iframe width="600" height="338" src="//gfycat.com/iframe/SereneIllfatedCapybara" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:600px"><div style="position:relative;padding-bottom:56.333333333333%"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/SereneIllfatedCapybara" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'gfycat',
 				'id=SereneIllfatedCapybara',
 				'',
-				'<iframe width="560" height="315" src="//gfycat.com/iframe/SereneIllfatedCapybara" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:560px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/SereneIllfatedCapybara" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'googleplus',
 				'name=TonyHawk;pid=C5TMsDZJWBd',
 				'',
-				'<iframe width="450" height="240" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/googleplus.min.html#+TonyHawk/posts/C5TMsDZJWBd"></iframe>'
+				'<iframe data-s9e-mediaembed="googleplus" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" style="border:0;height:240px;max-width:450px;width:100%" src="//s9e.github.io/iframe/googleplus.min.html#+TonyHawk/posts/C5TMsDZJWBd"></iframe>'
 			),
 			array(
 				'googleplus',
 				'oid=106189723444098348646;pid=V8AojCoTzxV',
 				'',
-				'<iframe width="450" height="240" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/googleplus.min.html#106189723444098348646/posts/V8AojCoTzxV"></iframe>'
+				'<iframe data-s9e-mediaembed="googleplus" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" style="border:0;height:240px;max-width:450px;width:100%" src="//s9e.github.io/iframe/googleplus.min.html#106189723444098348646/posts/V8AojCoTzxV"></iframe>'
 			),
 			array(
 				'hudl',
 				'athlete=2067184;highlight=163744377',
 				'',
-				'<iframe width="640" height="360" src="//www.hudl.com/embed/athlete/2067184/highlights/163744377" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="hudl" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.hudl.com/embed/athlete/2067184/highlights/163744377" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'imgur',
 				'AsQ0K3P',
 				'',
-				'<iframe width="100%" height="550" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" style="border:0;height:550px;width:100%"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=9UGCL;type=album',
 				'',
-				'<iframe width="100%" height="550" src="//imgur.com/a/9UGCL/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" scrolling="no" src="//imgur.com/a/9UGCL/embed" style="border:0;height:550px;width:100%"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=a/9UGCL;type=album',
 				'',
-				'<iframe width="100%" height="550" src="//imgur.com/a/9UGCL/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" scrolling="no" src="//imgur.com/a/9UGCL/embed" style="border:0;height:550px;width:100%"></iframe>'
 			),
 			array(
 				'imgur',
 				'height=389;id=u7Yo0Vy;type=gifv;width=915',
 				'',
-				'<iframe width="915" height="389" src="//i.imgur.com/u7Yo0Vy.gifv#embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="imgur" style="display:inline-block;width:100%;max-width:915px"><div style="position:relative;padding-bottom:42.513661202186%"><iframe allowfullscreen="" scrolling="no" src="//i.imgur.com/u7Yo0Vy.gifv#embed" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'kickstarter',
 				'1869987317/wish-i-was-here-1',
 				'',
-				'<iframe width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="kickstarter" style="display:inline-block;width:100%;max-width:220px"><div style="position:relative;padding-bottom:190.90909090909%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'kickstarter',
 				'card=card;id=1869987317%2Fwish-i-was-here-1',
 				'',
-				'<iframe width="220" height="420" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="kickstarter" style="display:inline-block;width:100%;max-width:220px"><div style="position:relative;padding-bottom:190.90909090909%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/card.html" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'kickstarter',
 				'id=1869987317%2Fwish-i-was-here-1;video=video',
 				'',
-				'<iframe width="480" height="360" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="kickstarter" style="display:inline-block;width:100%;max-width:480px"><div style="position:relative;padding-bottom:75%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'livestream',
 				'account_id=12014794;event_id=3788876;video_id=77576437',
 				'',
-				'<iframe width="640" height="360" allowfullscreen="" frameborder="0" scrolling="no" src="//new.livestream.com/accounts/12014794/events/3788876/videos/77576437/player?autoPlay=false"></iframe>'
+				'<div data-s9e-mediaembed="livestream" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//new.livestream.com/accounts/12014794/events/3788876/videos/77576437/player?autoPlay=false"></iframe></div></div>'
 			),
 			array(
 				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
 				'',
-				'<iframe width="100%" height="166" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe data-s9e-mediaembed="soundcloud" allowfullscreen="" scrolling="no" src="https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/98282116" style="border:0;height:166px;max-width:900px;width:100%"></iframe>'
 			),
 			array(
 				'soundcloud',
 				'nruau/nruau-mix2',
 				'',
-				'<iframe width="100%" height="166" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/nruau/nruau-mix2" style="max-width:900px" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<iframe data-s9e-mediaembed="soundcloud" allowfullscreen="" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/nruau/nruau-mix2" style="border:0;height:166px;max-width:900px;width:100%"></iframe>'
 			),
 			array(
 				'spotify',
 				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai',
 				'',
-				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:track:5JunxkcjfCYcY7xJ29tLai"></iframe>'
+				'<div data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><div style="position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:track:5JunxkcjfCYcY7xJ29tLai"></iframe></div></div>'
 			),
 			array(
 				'spotify',
 				'uri=spotify%3Atrackset%3APREFEREDTITLE%3A5Z7ygHQo02SUrFmcgpwsKW%2C1x6ACsKV4UdWS2FMuPFUiT%2C4bi73jCM02fMpkI11Lqmfe',
 				'',
-				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"></iframe>'
+				'<div data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><div style="position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"></iframe></div></div>'
 			),
 			array(
 				'spotify',
 				'path=user%2Fozmoetr%2Fplaylist%2F4yRrCWNhWOqWZx5lmFqZvt',
 				'',
-				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt"></iframe>'
+				'<div data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><div style="position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt"></iframe></div></div>'
 			),
 			array(
 				'spotify',
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
 				'',
-				'<iframe width="400" height="480" allowfullscreen="" frameborder="0" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"></iframe>'
+				'<div data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><div style="position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"></iframe></div></div>'
 			),
 			array(
 				'ted',
 				'talks/eli_pariser_beware_online_filter_bubbles.html',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
+				'<div data-s9e-mediaembed="ted" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe></div></div>'
 			),
 			array(
 				'ted',
 				'talks/eli_pariser_beware_online_filter_bubbles',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe>'
+				'<div data-s9e-mediaembed="ted" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe></div></div>'
 			),
 			array(
 				'twitch',
 				'channel=minigolf2000',
 				'',
-				'<iframe width="620" height="378" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000"></iframe>',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000"></iframe></div></div>',
 			),
 			array(
 				'twitch',
 				'archive_id=361358487;channel=minigolf2000',
 				'',
-				'<iframe width="620" height="378" allowfullscreen="" frameborder="0" scrolling="no" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000&amp;videoId=a361358487"></iframe>',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000&amp;videoId=a361358487"></iframe></div></div>',
 			),
 			array(
 				'ustream',
 				'cid=16234409',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/16234409?html5ui"></iframe>'
+				'<div data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.ustream.tv/embed/16234409?html5ui" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'ustream',
 				'vid=40688256',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.ustream.tv/embed/recorded/40688256?html5ui"></iframe>'
+				'<div data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.ustream.tv/embed/recorded/40688256?html5ui" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'xboxclips',
 				'id=508269a4-6f05-4b3e-a66a-fe4e91e92000;user=Soulshifted',
 				'',
-				'<iframe width="560" height="315" src="//xboxclips.com/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="xboxclips" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//xboxclips.com/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000/embed" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'xboxdvr',
 				'id=33fb93ca-5dee-44d8-bcb2-9f2fc0994868;user=Alternat',
 				'',
-				'<iframe width="560" height="430" src="//xboxdvr.com/Alternat/33fb93ca-5dee-44d8-bcb2-9f2fc0994868/embed" allowfullscreen="" frameborder="0" scrolling="no"></iframe>'
+				'<div data-s9e-mediaembed="xboxdvr" style="display:inline-block;width:100%;max-width:560px"><div style="position:relative;padding-bottom:76.785714285714%"><iframe allowfullscreen="" scrolling="no" src="//xboxdvr.com/Alternat/33fb93ca-5dee-44d8-bcb2-9f2fc0994868/embed" style="border:0;height:100%;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'youtube',
 				'-cEzsCAzTak',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/-cEzsCAzTak"></iframe>'
+				'<div data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.youtube.com/embed/-cEzsCAzTak"></iframe></div></div>'
 			),
 			array(
 				'youtube',
 				'id=9bZkp7q19f0;t=113',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/9bZkp7q19f0?start=113"></iframe>'
+				'<div data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.youtube.com/embed/9bZkp7q19f0?start=113"></iframe></div></div>'
 			),
 			array(
 				'youtube',
 				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA"></iframe>'
+				'<div data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA"></iframe></div></div>'
 			),
 			array(
 				'youtube',
 				'id=pC35x6iIPmo;list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA;t=123',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA&amp;start=123"></iframe>'
+				'<div data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.youtube.com/embed/pC35x6iIPmo?list=PLOU2XLYxmsIIxJrlMIY5vYXAFcO5g83gA&amp;start=123"></iframe></div></div>'
 			),
 			array(
 				'youtube',
 				'h=1;id=wZZ7oFKsKzY;m=23;s=45',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/wZZ7oFKsKzY?start=5025"></iframe>'
+				'<div data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.youtube.com/embed/wZZ7oFKsKzY?start=5025"></iframe></div></div>'
 			),
 			array(
 				'youtube',
 				'id=wZZ7oFKsKzY;m=23;s=45',
 				'',
-				'<iframe width="560" height="315" allowfullscreen="" frameborder="0" scrolling="no" src="//www.youtube.com/embed/wZZ7oFKsKzY?start=1425"></iframe>'
+				'<div data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;position:absolute;width:100%" src="//www.youtube.com/embed/wZZ7oFKsKzY?start=1425"></iframe></div></div>'
 			),
 		);
 	}
