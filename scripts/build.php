@@ -434,7 +434,7 @@ setAttributes(
 $modification->appendChild($dom->createElement('find', '(^)'));
 $modification->appendChild($dom->createElement(
 	'replace',
-	".videoContainer>div\n{\n\tmax-width: none !important;\n\tmargin-top: -30px;\n}\n\n"
+	".videoContainer>[data-s9e-mediaembed]\n{\n\tmax-width:100%!important;\n}\n\n"
 ));
 $modification  = $modifications->appendChild($dom->createElement('modification'));
 setAttributes(
@@ -451,7 +451,7 @@ setAttributes(
 $modification->appendChild($dom->createElement('find', '(^)'));
 $modification->appendChild($dom->createElement(
 	'replace',
-	".mfp-iframe-scaler>div>div>iframe\n{\n\tposition: fixed !important;\n}\n\n"
+	".mfp-iframe-scaler>div[data-s9e-mediaembed]>div>iframe\n{\n\tposition: fixed !important;\n}\n\n"
 ));
 
 // Prepare the option group
