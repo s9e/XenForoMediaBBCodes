@@ -863,7 +863,10 @@ class s9e_MediaBBCodes
 			'compress.zlib://' . $url,
 			false,
 			stream_context_create(array(
-				'http' => array('header' => 'Accept-Encoding: gzip'),
+				'http' => array(
+					'header'     => 'Accept-Encoding: gzip',
+					'user_agent' => 'PHP (not Mozilla)'
+				),
 				'ssl'  => array('verify_peer' => false)
 			))
 		);
