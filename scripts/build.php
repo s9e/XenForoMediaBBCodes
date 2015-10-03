@@ -177,7 +177,6 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	// we force them to be rendered in PHP regardless of the template
 	if (strpos($html, '<xsl:') !== false
 	 || preg_match('(="[^"]*(?<!\\{)\\{(?!\\{|@id\\}))', $html)
-	 || strpos($html, 'mtvnservices') !== false
 	 || $siteId === 'mailru')
 	{
 		// Capture the PHP source for this template
