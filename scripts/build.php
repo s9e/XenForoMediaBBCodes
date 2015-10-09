@@ -174,9 +174,11 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	$useEmbedCallback = false;
 
 	// Test whether the template needs to be rendered in PHP. Some sites don't like URL-encoding so
-	// we force them to be rendered in PHP regardless of the template
+	// we force them to be rendered in PHP regardless of the template. XenForo encodes ":" to %3A
+	// which Comedy Central's servers don't like
 	if (strpos($html, '<xsl:') !== false
 	 || preg_match('(="[^"]*(?<!\\{)\\{(?!\\{|@id\\}))', $html)
+	 || strpos($html, 'media.mtvnservices.com') !== false
 	 || $siteId === 'mailru')
 	{
 		// Capture the PHP source for this template
