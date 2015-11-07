@@ -1137,6 +1137,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'<div data-s9e-mediaembed="imgur" style="display:inline-block;width:100%;max-width:915px"><div style="position:relative;padding-bottom:42.513661202186%"><iframe allowfullscreen="" scrolling="no" src="//i.imgur.com/u7Yo0Vy.gifv#embed" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
+				'imgur',
+				'id=u7Yo0Vy;type=gifv',
+				'',
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" src="//s9e.github.io/iframe/imgur.min.html#u7Yo0Vy" style="border:0;height:550px;width:100%"></iframe>'
+			),
+			array(
 				'kickstarter',
 				'1869987317/wish-i-was-here-1',
 				'',
