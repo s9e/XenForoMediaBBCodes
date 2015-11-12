@@ -537,8 +537,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'cbsnews',
-				'http://www.cbsnews.com/videos/is-the-us-stock-market-rigged',
-				'pid=W4MVSOaNEYMq'
+				'http://www.cbsnews.com/videos/is-carbonated-water-a-healthy-option/',
+				'pid=B2AtjLUWB4Vj'
 			),
 			array(
 				'comedycentral',
@@ -860,11 +860,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'hash=e06b0878046e1d32;oid=121599878;vid=165723901'
 			),
 			array(
-				'wshh',
-				'http://m.worldstarhiphop.com/video.php?v=wshh2SXFFe7W14DqQx61',
-				'63175'
-			),
-			array(
 				'xboxclips',
 				'http://xboxclips.com/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000',
 				'id=508269a4-6f05-4b3e-a66a-fe4e91e92000;user=Soulshifted'
@@ -1042,9 +1037,9 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'cbsnews',
-				'pid=W4MVSOaNEYMq',
+				'pid=B2AtjLUWB4Vj',
 				'',
-				'<div data-s9e-mediaembed="cbsnews" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:62.1875%;padding-bottom:calc(56.25% + 38px)"><object data="//www.cbsnews.com/common/video/cbsnews_player.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=W4MVSOaNEYMq"></object></div></div>'
+				'<div data-s9e-mediaembed="cbsnews" style="display:inline-block;width:100%;max-width:640px"><div style="position:relative;padding-bottom:62.1875%;padding-bottom:calc(56.25% + 38px)"><object data="//www.cbsnews.com/common/video/cbsnews_player.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=B2AtjLUWB4Vj"></object></div></div>'
 			),
 			array(
 				'democracynow',
