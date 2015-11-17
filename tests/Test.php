@@ -1042,6 +1042,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'<div data-s9e-mediaembed="cbsnews" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:62.1875%;padding-bottom:calc(56.25% + 38px)"><object data="//www.cbsnews.com/common/video/cbsnews_player.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid=B2AtjLUWB4Vj"></object></div></div>'
 			),
 			array(
+				'cnn',
+				'tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn',
+				'',
+				'<div data-s9e-mediaembed="cnn" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="http://edition.cnn.com/video/api/embed.html#/video/tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+			),
+			array(
 				'democracynow',
 				'2014/7/2/dn_at_almedalen_week_at_swedens',
 				'',
