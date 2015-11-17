@@ -179,6 +179,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	if (strpos($html, '<xsl:') !== false
 	 || preg_match('(="[^"]*(?<!\\{)\\{(?!\\{|@id\\}))', $html)
 	 || strpos($html, 'media.mtvnservices.com') !== false
+	 || $siteId === 'cnn'
 	 || $siteId === 'mailru')
 	{
 		// Capture the PHP source for this template
