@@ -580,11 +580,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://espn.go.com/new-york/nba/story/_/id/11196159/carmelo-anthony-agent-says-made-decision',
 				false
 			),
-			array(
-				'gametrailers',
-				'http://www.gametrailers.com/videos/view/pop-fiction/102300-Metal-Gear-Solid-3-Still-in-a-Dream',
-				'2954127'
-			),
+//			array(
+//				'gametrailers',
+//				'http://www.gametrailers.com/videos/view/pop-fiction/102300-Metal-Gear-Solid-3-Still-in-a-Dream',
+//				'2954127'
+//			),
 			array(
 				'getty',
 				'http://gty.im/3232182',
