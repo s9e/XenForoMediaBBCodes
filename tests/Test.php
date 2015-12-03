@@ -582,18 +582,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'gametrailers',
-				'http://www.gametrailers.com/videos/jz8rt1/tom-clancy-s-the-division-vgx-2013--world-premiere-featurette',
-				'mgid:arc:video:gametrailers.com:85dee3c3-60f6-4b80-8124-cf3ebd9d2a6c'
-			),
-			array(
-				'gametrailers',
-				'http://www.gametrailers.com/reviews/zalxz0/crimson-dragon-review',
-				'mgid:arc:video:gametrailers.com:31c93ab8-fe77-4db2-bfee-ff37837e6704'
-			),
-			array(
-				'gametrailers',
-				'http://www.gametrailers.com/full-episodes/zdzfok/pop-fiction-episode-40--jak-ii--sandover-village',
-				'mgid:arc:episode:gametrailers.com:1e287a4e-b795-4c7f-9d48-1926eafb5740'
+				'http://www.gametrailers.com/videos/view/pop-fiction/102300-Metal-Gear-Solid-3-Still-in-a-Dream',
+				'2954127'
 			),
 			array(
 				'getty',
@@ -1099,13 +1089,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'googleplus',
 				'name=TonyHawk;pid=C5TMsDZJWBd',
 				'',
-				'<iframe data-s9e-mediaembed="googleplus" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" style="border:0;height:240px;max-width:450px;width:100%" src="//s9e.github.io/iframe/googleplus.min.html#+TonyHawk/posts/C5TMsDZJWBd"></iframe>'
+				'<iframe data-s9e-mediaembed="googleplus" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:240px;max-width:450px;width:100%" src="https://s9e.github.io/iframe/googleplus.min.html#+TonyHawk/posts/C5TMsDZJWBd"></iframe>'
 			),
 			array(
 				'googleplus',
 				'oid=106189723444098348646;pid=V8AojCoTzxV',
 				'',
-				'<iframe data-s9e-mediaembed="googleplus" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" style="border:0;height:240px;max-width:450px;width:100%" src="//s9e.github.io/iframe/googleplus.min.html#106189723444098348646/posts/V8AojCoTzxV"></iframe>'
+				'<iframe data-s9e-mediaembed="googleplus" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:240px;max-width:450px;width:100%" src="https://s9e.github.io/iframe/googleplus.min.html#106189723444098348646/posts/V8AojCoTzxV"></iframe>'
 			),
 			array(
 				'hudl',
@@ -1117,7 +1107,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'imgur',
 				'AsQ0K3P',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" src="//s9e.github.io/iframe/imgur.min.html#AsQ0K3P" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#AsQ0K3P" style="border:0;height:550px;width:100%"></iframe>'
 			),
 			array(
 				'imgur',
@@ -1135,13 +1125,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'imgur',
 				'height=389;id=u7Yo0Vy;type=gifv;width=915',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" src="//s9e.github.io/iframe/imgur.min.html#u7Yo0Vy" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy" style="border:0;height:550px;width:100%"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=u7Yo0Vy;type=gifv',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,src.substr(0,src.indexOf(\'/\',8)))" scrolling="no" src="//s9e.github.io/iframe/imgur.min.html#u7Yo0Vy" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy" style="border:0;height:550px;width:100%"></iframe>'
 			),
 			array(
 				'kickstarter',
@@ -1219,13 +1209,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'twitch',
 				'channel=minigolf2000',
 				'',
-				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000"></iframe></div></div>',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://s9e.github.io/iframe/twitch.min.html#channel=minigolf2000"></iframe></div></div>',
 			),
 			array(
 				'twitch',
 				'archive_id=361358487;channel=minigolf2000',
 				'',
-				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//s9e.github.io/iframe/twitch.min.html#channel=minigolf2000&amp;videoId=a361358487"></iframe></div></div>',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://s9e.github.io/iframe/twitch.min.html#channel=minigolf2000&amp;videoId=a361358487"></iframe></div></div>',
 			),
 			array(
 				'ustream',
