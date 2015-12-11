@@ -1209,13 +1209,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'twitch',
 				'channel=minigolf2000',
 				'',
-				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://s9e.github.io/iframe/twitch.min.html#channel=minigolf2000"></iframe></div></div>',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//player.twitch.tv/?autoplay=false&amp;channel=minigolf2000"></iframe></div></div>',
 			),
 			array(
 				'twitch',
 				'archive_id=361358487;channel=minigolf2000',
 				'',
-				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:60.9375%;padding-bottom:calc(56.25% + 30px)"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://s9e.github.io/iframe/twitch.min.html#channel=minigolf2000&amp;videoId=a361358487"></iframe></div></div>',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//player.twitch.tv/?autoplay=false&amp;video=a361358487"></iframe></div></div>',
 			),
 			array(
 				'ustream',
