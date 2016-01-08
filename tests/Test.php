@@ -714,16 +714,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'5168723'
 			),
 			array(
-				'rdio',
-				'http://rd.io/x/QcD7oTdeWevg/',
-				'QcD7oTdeWevg'
-			),
-			array(
-				'rdio',
-				'https://www.rdio.com/artist/Hannibal_Buress/album/Animal_Furnace/track/Hands-Free/',
-				'QitDVOn7'
-			),
-			array(
 				'reddit',
 				'http://www.reddit.com/r/xenforo/comments/2synou/xenforo_144_released/cnua3uz',
 				'path=%2Fr%2Fxenforo%2Fcomments%2F2synou%2Fxenforo_144_released%2Fcnua3uz'
