@@ -859,7 +859,47 @@ class s9e_MediaBBCodes
 			}
 		}
 
-		$page = @file_get_contents(
+		$page = (extension_loaded('curl')) ? self::wgetCurl($url) : self::wgetNative($url);
+		if ($page && isset($cacheFile))
+		{
+			file_put_contents($cacheFile, gzencode($page, 9));
+		}
+
+		return $page;
+	}
+
+	/**
+	* Retrieve content from given URL via cURL
+	*
+	* @param  string $url Target URL
+	* @return string      Response body
+	*/
+	protected static function wgetCurl($url)
+	{
+		static $curl;
+		if (!isset($curl))
+		{
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_ENCODING,       '');
+			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($curl, CURLOPT_USERAGENT,      'PHP (not Mozilla)');
+		}
+		curl_setopt($curl, CURLOPT_URL, $url);
+
+		return curl_exec($curl);
+	}
+
+	/**
+	* Retrieve content from given URL via native PHP stream
+	*
+	* @param  string $url Target URL
+	* @return string      Response body
+	*/
+	protected static function wgetNative($url)
+	{
+		return @file_get_contents(
 			'compress.zlib://' . $url,
 			false,
 			stream_context_create(array(
@@ -870,11 +910,6 @@ class s9e_MediaBBCodes
 				'ssl'  => array('verify_peer' => false)
 			))
 		);
-
-		if ($page && isset($cacheFile))
-		{
-			file_put_contents($cacheFile, gzencode($page, 9));
-		}
 
 		return $page;
 	}
