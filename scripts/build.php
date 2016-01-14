@@ -790,7 +790,7 @@ setAttributes(
 	$modification,
 	[
 		'action'           => 'str_replace',
-		'description'      => 'Make the CSS that applies to iframes in quote apply to the responsive embed wrapper too',
+		'description'      => 'Makes the CSS that applies to iframes in quote also apply to the responsive embed wrapper',
 		'enabled'          => 1,
 		'execution_order'  => 10,
 		'modification_key' => $addonId . '_quote_css',
@@ -808,19 +808,18 @@ $modification  = $modifications->appendChild($dom->createElement('modification')
 setAttributes(
 	$modification,
 	[
-		'action'           => 'str_replace',
-		'description'      => 'Expand embeds inside of expanded quote blocks',
+		'action'           => 'preg_replace',
+		'description'      => 'Expands embeds inside of expanded quote blocks',
 		'enabled'          => 1,
-		'execution_order'  => 10,
+		'execution_order'  => 1,
 		'modification_key' => $addonId . '_quote_expanded_css',
 		'template'         => 'bb_code.css'
 	]
 );
-$modification->appendChild($dom->createElement('find', '<xen:if is="@bbCodeQuoteMaxHeight">'));
+$modification->appendChild($dom->createElement('find', '(^)'));
 $modification->appendChild($dom->createElement(
 	'replace',
-	'<xen:if is="@bbCodeQuoteMaxHeight">
-	.quoteContainer.expanded [data-s9e-mediaembed],
+	'.quoteContainer.expanded iframe[data-s9e-mediaembed],
 	.quoteContainer.expanded [data-s9e-mediaembed] iframe
 	{
 		max-height: none;
