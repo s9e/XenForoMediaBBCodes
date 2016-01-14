@@ -803,6 +803,33 @@ $modification->appendChild($dom->createElement(
 	'.bbCodeQuote iframe, .bbCodeQuote [data-s9e-mediaembed],'
 ));
 
+// Make the CSS that applies to iframes in quotes apply to their wrapper too
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'str_replace',
+		'description'      => 'Expand embeds inside of expanded quote blocks',
+		'enabled'          => 1,
+		'execution_order'  => 10,
+		'modification_key' => $addonId . '_quote_expanded_css',
+		'template'         => 'bb_code.css'
+	]
+);
+$modification->appendChild($dom->createElement('find', '<xen:if is="@bbCodeQuoteMaxHeight">'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	'<xen:if is="@bbCodeQuoteMaxHeight">
+	.quoteContainer.expanded [data-s9e-mediaembed],
+	.quoteContainer.expanded [data-s9e-mediaembed] iframe
+	{
+		max-height: none;
+		max-width:  none;
+	}
+
+'
+));
+
 // Add the params as XenForo options
 ksort($optionNames);
 
