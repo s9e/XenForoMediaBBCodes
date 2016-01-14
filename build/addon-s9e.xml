@@ -63,6 +63,16 @@
       <find>.bbCodeQuote iframe,</find>
       <replace>.bbCodeQuote iframe, .bbCodeQuote [data-s9e-mediaembed],</replace>
     </modification>
+    <modification action="str_replace" description="Click to Extend integration." enabled="1" execution_order="10" modification_key="s9e_quote_iframe_css" template="bb_code.css" >
+      <find><![CDATA[.bbCodeQuote iframe,]]></find>
+      <replace><![CDATA[.bbCodeQuote iframe[data-s9e-mediaembed]
+{
+	max-width: none;
+	max-height: none;
+}
+
+	$0]]></replace>
+    </modification>
   </public_template_modifications>
   <optiongroups>
     <group group_id="s9e" display_order="0" debug_only="0"/>
