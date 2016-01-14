@@ -66,6 +66,7 @@
     <modification action="str_replace" description="Expand embeds inside of expanded quote blocks" enabled="1" execution_order="10" modification_key="s9e_quote_expanded_css" template="bb_code.css">
       <find>&lt;xen:if is="@bbCodeQuoteMaxHeight"&gt;</find>
       <replace>&lt;xen:if is="@bbCodeQuoteMaxHeight"&gt;
+	.quoteContainer.expanded [data-s9e-mediaembed],
 	.quoteContainer.expanded [data-s9e-mediaembed] iframe
 	{
 		max-height: none;
