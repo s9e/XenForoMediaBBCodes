@@ -526,6 +526,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'ad_site=%2Fnews%2Fbusiness;playlist=%2Fnews%2Fbusiness-29149086A;poster=%2Fmedia%2Fimages%2F77590000%2Fjpg%2F_77590973_mapopgetty.jpg'
 			),
 			array(
+				'blab',
+				'https://blab.im/05b6ce88279f40798069bb6227a04fce',
+				'05b6ce88279f40798069bb6227a04fce'
+			),
+			array(
+				'blab',
+				'https://blab.im/about',
+				false
+			),
+			array(
 				'bleacherreport',
 				'http://bleacherreport.com/articles/2415420-creating-a-starting-xi-of-the-most-overrated-players-in-world-football',
 				'dtYjVhdDr5492cyQTjVPDcM--Mg2rJj5'
