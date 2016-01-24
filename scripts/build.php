@@ -399,7 +399,12 @@ $php[0] = preg_replace_callback(
 	'((?<=public static \\$sites = ).*?(?=;\\s*/\\*\\*))s',
 	function () use ($sites)
 	{
-		return exportSites($sites);
+		$php = exportSites($sites);
+
+		// Replace (?'id' with (?P<id>
+		$php = preg_replace("(\\(\\?\\\\?'(\\w+)\\\\?')", '(?P<$1>', $php);
+
+		return $php;
 	},
 	$php[0]
 );
