@@ -860,7 +860,7 @@ class s9e_MediaBBCodes
 			}
 		}
 
-		$page = (extension_loaded('curl')) ? self::wgetCurl($url) : self::wgetNative($url);
+		$page = (extension_loaded('curl') && !ini_get('open_basedir') && !ini_get('safe_mode')) ? self::wgetCurl($url) : self::wgetNative($url);
 		if ($page && isset($cacheFile))
 		{
 			file_put_contents($cacheFile, gzencode($page, 9));
