@@ -663,6 +663,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'AsQ0K3P'
 			),
 			array(
+				'imgur',
+				'http://imgur.com/r/animals',
+				false
+			),
+			array(
+				'imgur',
+				'http://imgur.com/user/name',
+				false
+			),
+			array(
 				'indiegogo',
 				'http://www.indiegogo.com/projects/gameheart-redesigned',
 				'gameheart-redesigned'
