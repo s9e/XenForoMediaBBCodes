@@ -709,6 +709,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'3521244'
 			),
 			array(
+				'livecap',
+				'https://www.livecap.tv/s/esl_sc2/uZoEz6RR1eA',
+				'channel=esl_sc2;id=uZoEz6RR1eA'
+			),
+			array(
+				'livecap',
+				'https://www.livecap.tv/t/riotgames/uLxUzBTBs7u',
+				'channel=riotgames;id=uLxUzBTBs7u'
+			),
+			array(
 				'livestream',
 				'http://livestream.com/ccscsl/USChessChampionships/videos/83267610',
 				'account_id=3913412;event_id=3933674;video_id=83267610'
@@ -1160,6 +1170,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=1869987317%2Fwish-i-was-here-1;video=video',
 				'',
 				'<div data-s9e-mediaembed="kickstarter" style="display:inline-block;width:100%;max-width:480px"><div style="overflow:hidden;position:relative;padding-bottom:75%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+			),
+			array(
+				'livecap',
+				'channel=esl_sc2;id=uZoEz6RR1eA',
+				'',
+				'<div data-s9e-mediaembed="livecap" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://www.livecap.tv/s/embed/esl_sc2/uZoEz6RR1eA" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'livestream',
