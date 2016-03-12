@@ -541,6 +541,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'dtYjVhdDr5492cyQTjVPDcM--Mg2rJj5'
 			),
 			array(
+				'brightcove',
+				'http://link.brightcove.com/services/player/bcpid30183073001?bclid=0&bctid=624233815001',
+				'bckey=AQ%7E%7E%2CAAAABvb_NGE%7E%2CDMkZt2E6wO3dFlbHM7HTX1y1bVRDHLp_;bcpid=1065729157001;bctid=624233815001'
+			),
+			array(
 				'cbsnews',
 				'http://www.cbsnews.com/video/watch/?id=50156501n',
 				'50156501'
@@ -590,6 +595,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://espn.go.com/new-york/nba/story/_/id/11196159/carmelo-anthony-agent-says-made-decision',
 				false
 			),
+			array(
+				'foratv',
+				'http://fora.tv/2009/07/30/Marijuana_Economics',
+				'9677'
+			),
 //			array(
 //				'gametrailers',
 //				'http://www.gametrailers.com/videos/view/pop-fiction/102300-Metal-Gear-Solid-3-Still-in-a-Dream',
@@ -631,6 +641,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'googlesheets',
 				'https://docs.google.com/spreadsheet/ccc?key=0An1aCHqyU7FqdGtBUDc1S1NNSWhqY3NidndIa1JuQWc#gid=70',
 				'gid=70;id=0An1aCHqyU7FqdGtBUDc1S1NNSWhqY3NidndIa1JuQWc'
+			),
+			array(
+				'healthguru',
+				'http://college.healthguru.com/video/handling-heartache',
+				'ZX'
+			),
+			array(
+				'healthguru',
+				'http://college.healthguru.com/content/video/watch/100502/handling-heartache',
+				'RX'
 			),
 			array(
 				'hudl',
@@ -724,6 +744,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'account_id=3913412;event_id=3933674;video_id=83267610'
 			),
 			array(
+				'livestream',
+				'http://livestre.am/1aHRU',
+				'channel=maps_cp;clip_id=pla_d1501f90-438c-401d-98ae-e96ab34a09ae'
+			),
+			array(
+				'mrctv',
+				'http://dev.mrctv.org/videos/cnn-frets-about-tobacco-companies-color-coding-tricks',
+				'55537'
+			),
+			array(
 				'msnbc',
 				'http://www.msnbc.com/ronan-farrow-daily/watch/thats-no-moon--300512323725',
 				'n_farrow_moon_140709_257794'
@@ -737,6 +767,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'natgeovideo',
 				'http://video.nationalgeographic.com/video/news/140916-bison-smithsonian-zoo-vin?source=featuredvideo',
 				'00000148-7a7d-d0bf-a3ff-7f7d480e0001'
+			),
+			array(
+				'nytimes',
+				'http://movies.nytimes.com/movie/131154/Crooklyn/trailers',
+				'100000003313949'
 			),
 			array(
 				'podbean',
@@ -1040,6 +1075,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'<div data-s9e-mediaembed="bandcamp" style="display:inline-block;width:100%;max-width:400px"><div style="overflow:hidden;position:relative;padding-bottom:100%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//bandcamp.com/EmbeddedPlayer/size=large/minimal=true/album=1122163921/t=7"></iframe></div></div>'
 			),
 			array(
+				'brightcove',
+				'bckey=AQ%7E%7E%2CAAAABvb_NGE%7E%2CDMkZt2E6wO3dFlbHM7HTX1y1bVRDHLp_;bcpid=1065729157001;bctid=624233815001',
+				'',
+				'<div data-s9e-mediaembed="brightcove" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://link.brightcove.com/services/player/bcpid1065729157001?bckey=AQ~~,AAAABvb_NGE~,DMkZt2E6wO3dFlbHM7HTX1y1bVRDHLp_&amp;bctid=624233815001&amp;secureConnections=true&amp;secureHTMLConnections=true&amp;autoStart=false&amp;height=100%25&amp;width=100%25" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+			),
+			array(
 				'cbsnews',
 				'50156501',
 				'',
@@ -1181,7 +1222,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'livestream',
 				'account_id=12014794;event_id=3788876;video_id=77576437',
 				'',
-				'<div data-s9e-mediaembed="livestream" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//new.livestream.com/accounts/12014794/events/3788876/videos/77576437/player?autoPlay=false"></iframe></div></div>'
+				'<div data-s9e-mediaembed="livestream" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//livestream.com/accounts/12014794/events/3788876/videos/77576437/player?autoPlay=false"></iframe></div></div>'
+			),
+			array(
+				'livestream',
+				'channel=maps_cp;clip_id=pla_d1501f90-438c-401d-98ae-e96ab34a09ae',
+				'',
+				'<div data-s9e-mediaembed="livestream" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//cdn.livestream.com/embed/maps_cp?layout=4&amp;autoplay=false&amp;clip=pla_d1501f90-438c-401d-98ae-e96ab34a09ae"></iframe></div></div>'
 			),
 			array(
 				'soundcloud',
