@@ -46,7 +46,6 @@ class Test extends PHPUnit_Framework_TestCase
 			s9e_MediaBBCodes::$customCallbacks    = null;
 			s9e_MediaBBCodes::$customDimensions   = null;
 			s9e_MediaBBCodes::$excludedSites      = null;
-			s9e_MediaBBCodes::$maxResponsiveWidth = null;
 			s9e_MediaBBCodes::$tags               = null;
 		}
 
@@ -55,7 +54,6 @@ class Test extends PHPUnit_Framework_TestCase
 			's9e_excluded_sites'       => null,
 			's9e_custom_callbacks'     => null,
 			's9e_custom_dimensions'    => null,
-			's9e_max_responsive_width' => null,
 			's9e_media_tags'           => null
 		);
 	}
@@ -329,20 +327,6 @@ class Test extends PHPUnit_Framework_TestCase
 		$text = '';
 		s9e_MediaBBCodes::validateExcludedSites($text);
 		$this->assertReinstallWasCalled();
-	}
-
-	public function testValidateMaxResponsiveWidthReinstall()
-	{
-		$text = '';
-		s9e_MediaBBCodes::validateMaxResponsiveWidth($text);
-		$this->assertReinstallWasCalled();
-	}
-
-	public function testValidateMaxResponsiveWidthUpdated()
-	{
-		$text = '123';
-		s9e_MediaBBCodes::validateMaxResponsiveWidth($text);
-		$this->assertEquals(123, s9e_MediaBBCodes::$maxResponsiveWidth);
 	}
 
 	public function testFooterCallbackNoModification()

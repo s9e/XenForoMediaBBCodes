@@ -149,12 +149,6 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 		KEY_URL   => (string) $site['homepage']
 	);
 
-	if ((isset($site->iframe['responsive']) && 0 == $site->iframe['responsive'])
-	 || (isset($site->flash['responsive'])  && 0 == $site->flash['responsive']))
-	{
-		$config[KEY_UNRESPONSIVE] = true;
-	}
-
 	if (isset($site->tags->tag))
 	{
 		foreach ($site->tags->tag as $tag)

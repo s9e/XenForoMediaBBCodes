@@ -15,7 +15,7 @@ class s9e_MediaBBCodes
 	/**
 	* Index at which attribute filters are stored in the sites config
 	*/
-	const KEY_FILTERS = 9;
+	const KEY_FILTERS = 8;
 
 	/**
 	* Index at which a site's embed HTML is stored in the sites config
@@ -41,11 +41,6 @@ class s9e_MediaBBCodes
 	* Index at which a site's title is stored in the sites config
 	*/
 	const KEY_TITLE = 0;
-
-	/**
-	* Index at which the unresponsive site flag stored in the sites config
-	*/
-	const KEY_UNRESPONSIVE = 8;
 
 	/**
 	* Index at which a site's homepage URL is stored in the sites config
@@ -76,11 +71,6 @@ class s9e_MediaBBCodes
 	* @var string Comma-separated list of sites that should not be installed
 	*/
 	public static $excludedSites;
-
-	/**
-	* @var integer Maximum width for responsive embeds
-	*/
-	public static $maxResponsiveWidth;
 
 	/**
 	* @var array Associative array using site IDs as keys, sites' config arrays as values
@@ -359,10 +349,6 @@ class s9e_MediaBBCodes
 		{
 			self::$excludedSites = $options->s9e_excluded_sites ?: $options->s9e_EXCLUDE_SITES ?: '';
 		}
-		if (!isset(self::$maxResponsiveWidth))
-		{
-			self::$maxResponsiveWidth = (int) $options->s9e_max_responsive_width;
-		}
 		if (!isset(self::$tags))
 		{
 			self::$tags = $options->s9e_media_tags ?: self::getAllTags();
@@ -399,10 +385,6 @@ class s9e_MediaBBCodes
 			if (isset(self::$customDimensions[$siteId]))
 			{
 				$html = self::setCustomDimensions($html, self::$customDimensions[$siteId]);
-			}
-			if (self::$maxResponsiveWidth && empty($config[self::KEY_UNRESPONSIVE]))
-			{
-				$html = self::addResponsiveWrapper($html);
 			}
 		}
 		else
@@ -609,20 +591,6 @@ class s9e_MediaBBCodes
 	}
 
 	/**
-	* Trigger the reinstallation when the max responsive width is toggled
-	*
-	* @param  string &$text Max responsive width, as text
-	* @return bool          Always TRUE
-	*/
-	public static function validateMaxResponsiveWidth(&$text)
-	{
-		self::$maxResponsiveWidth = (int) $text;
-		self::reinstall();
-
-		return true;
-	}
-
-	/**
 	* Reinstall media sites based on given list of tags
 	*
 	* @param  array $tags Associative array using site IDs as keys
@@ -634,30 +602,6 @@ class s9e_MediaBBCodes
 		self::reinstall();
 
 		return true;
-	}
-
-	/**
-	* Add the responsive wrapper around given HTML
-	*
-	* @param  string  $html Original code
-	* @return string        Modified code
-	*/
-	protected static function addResponsiveWrapper($html)
-	{
-		$ratio = self::getEmbedRatio($html);
-		if (!$ratio)
-		{
-			return $html;
-		}
-
-		$css  = 'position:absolute;top:0;left:0;width:100%;height:100%';
-		$html = preg_replace('( style="[^"]*)', '$0;' . $css, $html, -1, $cnt);
-		if (!$cnt)
-		{
-			$html = preg_replace('(>)', ' style="' . $css . '">', $html, 1);
-		}
-
-		return '<div data-s9e="wrapper" style="display:inline-block;width:100%;max-width:' . self::$maxResponsiveWidth . 'px;overflow:hidden"><div style="position:relative;padding-top:' . round(100 * $ratio, 2) . '%">' . $html . '</div></div>';
 	}
 
 	/**
@@ -832,10 +776,6 @@ class s9e_MediaBBCodes
 		if (isset(self::$customDimensions[$siteId]))
 		{
 			$html = self::setCustomDimensions($html, self::$customDimensions[$siteId]);
-		}
-		if (self::$maxResponsiveWidth && empty(self::$sites[$siteId][self::KEY_UNRESPONSIVE]))
-		{
-			$html = self::addResponsiveWrapper($html);
 		}
 
 		// Test for custom callbacks
