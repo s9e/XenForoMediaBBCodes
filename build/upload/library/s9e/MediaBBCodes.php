@@ -1157,7 +1157,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null);
 
-		$html='<iframe data-s9e-mediaembed="gist" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/gist.min.html#'.htmlspecialchars($vars['id'],2).'" style="border:0;height:180px;width:100%"></iframe>';
+		$html='<iframe data-s9e-mediaembed="gist" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="" src="https://s9e.github.io/iframe/gist.min.html#'.htmlspecialchars($vars['id'],2).'" style="border:0;height:180px;width:100%"></iframe>';
 
 		return $html;
 	}
