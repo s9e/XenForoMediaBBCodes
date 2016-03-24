@@ -626,16 +626,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'https://docs.google.com/spreadsheet/ccc?key=0An1aCHqyU7FqdGtBUDc1S1NNSWhqY3NidndIa1JuQWc#gid=70',
 				'gid=70;id=0An1aCHqyU7FqdGtBUDc1S1NNSWhqY3NidndIa1JuQWc'
 			),
-			array(
-				'healthguru',
-				'http://college.healthguru.com/video/handling-heartache',
-				'ZX'
-			),
-			array(
-				'healthguru',
-				'http://college.healthguru.com/content/video/watch/100502/handling-heartache',
-				'RX'
-			),
+//			array(
+//				'healthguru',
+//				'http://college.healthguru.com/video/handling-heartache',
+//				'ZX'
+//			),
+//			array(
+//				'healthguru',
+//				'http://college.healthguru.com/content/video/watch/100502/handling-heartache',
+//				'RX'
+//			),
 			array(
 				'hudl',
 				'http://www.hudl.com/athlete/2067184/highlights/163744377',
