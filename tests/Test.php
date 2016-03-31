@@ -547,7 +547,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'dumpert',
 				'http://www.dumpert.nl/mediabase/6622635/f6d1e0fd/lompe_boer_op_zuidlaardermarkt_doet_shetlandpony_pijn.html',
-				'6622635_f6d1e0fd'
+				'6622635/f6d1e0fd'
 			),
 			array(
 				'eighttracks',
@@ -1110,7 +1110,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'dumpert',
 				'6622635_f6d1e0fd',
 				'',
-				'<div data-s9e-mediaembed="dumpert" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="http://www.dumpert.nl/embed/6622635/f6d1e0fd/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+				'<div data-s9e-mediaembed="dumpert" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.dumpert.nl/embed/6622635/f6d1e0fd/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+			),
+			array(
+				'dumpert',
+				'6622635/f6d1e0fd',
+				'',
+				'<div data-s9e-mediaembed="dumpert" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.dumpert.nl/embed/6622635/f6d1e0fd/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'getty',
