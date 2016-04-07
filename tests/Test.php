@@ -1080,7 +1080,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'cnn',
 				'tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn',
 				'',
-				'<div data-s9e-mediaembed="cnn" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="http://edition.cnn.com/video/api/embed.html#/video/tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+				'<div data-s9e-mediaembed="cnn" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//edition.cnn.com/video/api/embed.html#/video/tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'democracynow',
