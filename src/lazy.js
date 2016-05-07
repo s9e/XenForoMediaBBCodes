@@ -24,12 +24,6 @@
 			var iframe = iframes[i];
 			if (canBeLazyLoaded(iframe))
 			{
-				var m = /youtube\.com\/embed\/(\w+)/.exec(iframe.src);
-				if (m)
-				{
-					iframe.style.background = 'url(https://i.ytimg.com/vi/' + m[1] + '/hqdefault.jpg) no-repeat 50% 50% / cover';
-				}
-
 				lazyIframes.push(iframe);
 				iframe.contentWindow.location.replace('data:text/html,');
 				iframe.setAttribute('data-lazy', '');
