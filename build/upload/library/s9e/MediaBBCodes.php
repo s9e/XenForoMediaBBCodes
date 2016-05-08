@@ -1142,7 +1142,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('et' => null, 'height' => 360, 'id' => null, 'sig' => null, 'width' => 640);
 
-		$html='<div data-s9e-mediaembed="getty" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;padding-bottom:'.htmlspecialchars(100*($vars['height']+49)/$vars['width'],2).'%;padding-bottom:calc('.htmlspecialchars(100*$vars['height']/$vars['width'],2).'% + 49px)"><iframe allowfullscreen="" scrolling="no" src="//embed.gettyimages.com/embed/'.htmlspecialchars($vars['id'],2).'?et='.htmlspecialchars($vars['et'],2).'&amp;sig='.htmlspecialchars($vars['sig'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
+		$html='<div data-s9e-mediaembed="getty" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;';if($vars['width']>0)$html.='padding-bottom:'.htmlspecialchars(100*($vars['height']+49)/$vars['width'],2).'%;padding-bottom:calc('.htmlspecialchars(100*$vars['height']/$vars['width'],2).'% + 49px)';$html.='"><iframe allowfullscreen="" scrolling="no" src="//embed.gettyimages.com/embed/'.htmlspecialchars($vars['id'],2).'?et='.htmlspecialchars($vars['et'],2).'&amp;sig='.htmlspecialchars($vars['sig'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
 
 		return $html;
 	}
@@ -1151,7 +1151,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('height' => 315, 'id' => null, 'width' => 560);
 
-		$html='<div data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
+		$html='<div data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;';if($vars['width']>0)$html.='padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%';$html.='"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
 
 		return $html;
 	}
@@ -1205,7 +1205,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('height' => null, 'id' => null, 'width' => null);
 
-		$html='<div data-s9e-mediaembed="internetarchive" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%"><iframe allowfullscreen="" scrolling="no" src="https://archive.org/embed/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
+		$html='<div data-s9e-mediaembed="internetarchive" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;';if($vars['width']>0)$html.='padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%';$html.='"><iframe allowfullscreen="" scrolling="no" src="https://archive.org/embed/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
 
 		return $html;
 	}
@@ -1349,7 +1349,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('height' => 360, 'id' => null, 'width' => 640);
 
-		$html='<div data-s9e-mediaembed="vidme" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%"><iframe allowfullscreen="" scrolling="no" src="https://vid.me/e/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
+		$html='<div data-s9e-mediaembed="vidme" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;';if($vars['width']>0)$html.='padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%';$html.='"><iframe allowfullscreen="" scrolling="no" src="https://vid.me/e/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
 
 		return $html;
 	}
