@@ -161,7 +161,7 @@ class s9e_MediaBBCodes
 		'teamcoco'=>array('Team Coco','http://teamcoco.com/',array('entertainment'=>1),"!teamcoco\\.com/video/(?P<id>\\d+)!\n!(?P<id>)teamcoco\\.com/video/.!",array('!teamcoco\\.com/video/(?P<id>\\d+)!'),true,array(array('extract'=>array('!"id":(?P<id>\\d+)!'),'match'=>array('!teamcoco\\.com/video/.!'))),'<div data-s9e-mediaembed="teamcoco" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:64.84375%"><iframe allowfullscreen="" scrolling="no" src="//teamcoco.com/embed/v/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'),
 		'ted'=>array('TED Talks','http://www.ted.com/',array('presentations'=>1),'!ted\\.com/(?P<id>(?:talk|playlist)s/[^\\s"?]+)!i',array('!ted\\.com/(?P<id>(?:talk|playlist)s/[^\\s"?]+)!i')),
 		'theatlantic'=>array('The Atlantic Video','http://www.theatlantic.com/video/',array('news'=>1),'!theatlantic\\.com/video/index/(?P<id>\\d+)!',array('!theatlantic\\.com/video/index/(?P<id>\\d+)!'),7=>'<div data-s9e-mediaembed="theatlantic" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.theatlantic.com/video/iframe/{$id}/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'),
-		'theguardian'=>array('The Guardian','http://www.theguardian.com/video',array('news'=>1),'!theguardian\\.com/(?P<id>\\w+/video/[-/\\w]+)!',array('!theguardian\\.com/(?P<id>\\w+/video/[-/\\w]+)!'),7=>'<div data-s9e-mediaembed="theguardian" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//embed.theguardian.com/embed/video/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'),
+		'theguardian'=>array('The Guardian','http://www.theguardian.com/video',array('news'=>1),'!theguardian\\.com/(?P<id>\\w+/video/[-/\\w]+)!',array('!theguardian\\.com/(?P<id>\\w+/video/[-/\\w]+)!')),
 		'theonion'=>array('The Onion','http://www.theonion.com/video/',array('entertainment'=>1),'!theonion\\.com/video/[-\\w]+[-,](?P<id>\\d+)!',array('!theonion\\.com/video/[-\\w]+[-,](?P<id>\\d+)!'),7=>'<div data-s9e-mediaembed="theonion" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.theonion.com/video_embed/?id={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'),
 		'tinypic'=>array('TinyPic videos','http://tinypic.com/',array('images'=>1),"!tinypic\\.com/player\\.php\\?v=(?P<id>\\w+)&s=(?P<s>\\d+)!\n!tinypic\\.com/r/(?P<id>\\w+)/(?P<s>\\d+)!",array('!tinypic\\.com/player\\.php\\?v=(?P<id>\\w+)&s=(?P<s>\\d+)!','!tinypic\\.com/r/(?P<id>\\w+)/(?P<s>\\d+)!'),true),
 		'tmz'=>array('TMZ','http://www.tmz.com/videos',array('gossip'=>1),'@tmz\\.com/videos/(?P<id>\\w+)@',array('@tmz\\.com/videos/(?P<id>\\w+)@'),7=>'<div data-s9e-mediaembed="tmz" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.kaltura.com/index.php/kwidget/cache_st/133592691/wid/_591531/partner_id/591531/uiconf_id/9071262/entry_id/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'),
@@ -1314,6 +1314,15 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null);
 
 		$html='<div data-s9e-mediaembed="ted" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//embed.ted.com/'.htmlspecialchars($vars['id'],2);if((strpos($vars['id'],'.html')===false))$html.='.html';$html.='"></iframe></div></div>';
+
+		return $html;
+	}
+
+	public static function renderTheguardian($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<div data-s9e-mediaembed="theguardian" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//embed.theguardian.com/embed/video/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
 
 		return $html;
 	}

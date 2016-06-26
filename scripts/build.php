@@ -175,7 +175,8 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	 || strpos($html, 'media.mtvnservices.com') !== false
 	 || $siteId === 'cnn'
 	 || $siteId === 'gist'
-	 || $siteId === 'mailru')
+	 || $siteId === 'mailru'
+	 || $siteId === 'theguardian')
 	{
 		// Capture the PHP source for this template
 		$regexp = '(if\\(\\$tb===0\\)\\{?(.*?)\\}?elseif\\(\\$tb===)s';

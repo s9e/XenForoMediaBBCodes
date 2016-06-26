@@ -1297,6 +1297,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'<div data-s9e-mediaembed="ted" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//embed.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html"></iframe></div></div>'
 			),
 			array(
+				'theguardian',
+				'commentisfree/video/2016/jun/22/eu-referendum-welcome-to-the-divided-angry-kingdom-video',
+				'',
+				'<div data-s9e-mediaembed="theguardian" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//embed.theguardian.com/embed/video/commentisfree/video/2016/jun/22/eu-referendum-welcome-to-the-divided-angry-kingdom-video" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+			),
+			array(
 				'twitch',
 				'channel=minigolf2000',
 				'',
