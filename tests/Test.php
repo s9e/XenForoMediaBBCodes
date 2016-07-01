@@ -737,11 +737,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://livestream.com/ccscsl/USChessChampionships/videos/83267610',
 				'account_id=3913412;event_id=3933674;video_id=83267610'
 			),
-			array(
-				'livestream',
-				'http://livestre.am/1aHRU',
-				'channel=maps_cp;clip_id=pla_d1501f90-438c-401d-98ae-e96ab34a09ae'
-			),
+//			array(
+//				'livestream',
+//				'http://livestre.am/1aHRU',
+//				'channel=maps_cp;clip_id=pla_d1501f90-438c-401d-98ae-e96ab34a09ae'
+//			),
 			array(
 				'mrctv',
 				'http://dev.mrctv.org/videos/cnn-frets-about-tobacco-companies-color-coding-tricks',
