@@ -799,6 +799,8 @@ class s9e_MediaBBCodes
 	*/
 	public static function wget($url)
 	{
+		$url = preg_replace('(#.*)s', '', $url);
+
 		// Return the content from the cache if applicable
 		if (isset(self::$cacheDir) && file_exists(self::$cacheDir))
 		{
