@@ -800,7 +800,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'sportsnet',
 				'http://www.sportsnet.ca/videos/shows/tim-and-sid-video/',
-				'(4\\d+001)',
+				'(\\d+001)',
 				'assertRegexp'
 			),
 			array(
