@@ -654,7 +654,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'hudl',
 				'http://www.hudl.com/v/CVmja',
-				'athlete=2122944;highlight=206727383'
+				'athlete=2122944;highlight=5721c090dfe23b2d68a2283b'
 			),
 			array(
 				'hulu',
@@ -1172,9 +1172,9 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'hudl',
-				'athlete=2067184;highlight=163744377',
+				'athlete=2067184;highlight=5721c090dfe23b2d68a2283b',
 				'',
-				'<div data-s9e-mediaembed="hudl" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.hudl.com/embed/athlete/2067184/highlights/163744377" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+				'<div data-s9e-mediaembed="hudl" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.hudl.com/embed/athlete/2067184/highlights/5721c090dfe23b2d68a2283b" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'imgur',
