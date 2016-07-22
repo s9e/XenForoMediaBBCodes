@@ -931,7 +931,7 @@ This pack contains the definitions for [b]' . count($sitenames) . ' media sites[
 
 The BBCodes definitions are based on [url="https://github.com/s9e/TextFormatter"]the s9e\TextFormatter library[/url], and more specifically its [url="https://github.com/s9e/TextFormatter/tree/master/src/Plugins/MediaEmbed"]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
 
-This add-on is released under [url="http://en.wikipedia.org/wiki/MIT_License"]The MIT License[/url]. Redistribution is allowed and [b]encouraged[/b]. [color=#fff]This add-on is free, open source and available on GitHub. If you paid for it, you\'ve been swindled.[/color]
+This add-on is released under [url="http://en.wikipedia.org/wiki/MIT_License"]The MIT License[/url]. Redistribution is allowed as per the license terms. [color=#fff]This add-on is free, open source and available on GitHub. If you paid for it, you\'ve been swindled.[/color]
 [url="https://travis-ci.org/s9e/XenForoMediaBBCodes"][img]https://travis-ci.org/s9e/XenForoMediaBBCodes.png?branch=master&' . $version . '[/img][/url] [url="https://coveralls.io/r/s9e/XenForoMediaBBCodes"][img]https://coveralls.io/repos/s9e/XenForoMediaBBCodes/badge.png?' . $version . '[/img][/url]
 
 [SIZE=6][FONT=Arial][B]How to remove the branding[/B][/FONT][/SIZE]
