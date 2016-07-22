@@ -487,7 +487,7 @@ if (isset($linkText))
 	));
 	$modification->appendChild($dom->createElement(
 		'replace',
-		' | <a class="concealed" href="' . $addonUrl . '" title="Media BBCodes provided by ' . $addonTitle . ' ' . $version . '">' . $linkText . '</a>$0'
+		' | <a class="concealed" href="' . $addonUrl . '" title="Media BBCodes provided by ' . $addonTitle . ' v' . $version . '">' . $linkText . '</a>$0'
 	));
 
 	$option = $optiongroups->appendChild($dom->createElement('option'));
