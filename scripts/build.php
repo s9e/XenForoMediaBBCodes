@@ -181,7 +181,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 		// Capture the PHP source for this template
 		$regexp = '(if\\(\\$tb===0\\)\\{?(.*?)\\}?elseif\\(\\$tb===)s';
 
-		if (!preg_match($regexp, $configurator->getRenderer()->source, $m))
+		if (!preg_match($regexp, $configurator->rendering->getRenderer()->source, $m))
 		{
 			die('Could not match ' . $site['name'] . " renderer\n");
 		}
