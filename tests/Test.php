@@ -623,6 +623,16 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'googleplus',
+				'https://plus.google.com/+JacekMiłaszewski/posts/HJEFk3SX1sL',
+				'name=JacekMi%C5%82aszewski;pid=HJEFk3SX1sL'
+			),
+			array(
+				'googleplus',
+				'https://plus.google.com/+JacekMi%C5%82aszewski/posts/HJEFk3SX1sL',
+				'name=JacekMi%C5%82aszewski;pid=HJEFk3SX1sL'
+			),
+			array(
+				'googleplus',
 				'https://plus.google.com/106189723444098348646/posts/V8AojCoTzxV',
 				'oid=106189723444098348646;pid=V8AojCoTzxV'
 			),
