@@ -674,12 +674,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'imgur',
 				'http://imgur.com/a/9UGCL',
-				'id=a%2F9UGCL;type=album'
+				'a/9UGCL'
 			),
 			array(
 				'imgur',
 				'http://i.imgur.com/u7Yo0Vy.gifv',
-				'height=389;id=u7Yo0Vy;type=gifv;width=915'
+				'u7Yo0Vy'
 			),
 			array(
 				'imgur',
@@ -1190,31 +1190,31 @@ class Test extends PHPUnit_Framework_TestCase
 				'imgur',
 				'AsQ0K3P',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#AsQ0K3P" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#AsQ0K3P"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=9UGCL;type=album',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" scrolling="no" src="//imgur.com/a/9UGCL/embed" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#a/9UGCL"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=a/9UGCL;type=album',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" scrolling="no" src="//imgur.com/a/9UGCL/embed" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#a/9UGCL"></iframe>'
 			),
 			array(
 				'imgur',
 				'height=389;id=u7Yo0Vy;type=gifv;width=915',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy"></iframe>'
 			),
 			array(
 				'imgur',
 				'id=u7Yo0Vy;type=gifv',
 				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy" style="border:0;height:550px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy"></iframe>'
 			),
 			array(
 				'gist',
