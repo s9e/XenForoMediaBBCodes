@@ -794,11 +794,6 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'soundcloud',
-				'https://soundcloud.com/topdawgent/i-1/s-GT9Cd',
-				'id=https%3A%2F%2Fsoundcloud.com%2Ftopdawgent%2Fi-1%2Fs-GT9Cd;secret_token=s-GT9Cd;track_id=168988860'
-			),
-			array(
-				'soundcloud',
 				'https://api.soundcloud.com/tracks/168988860?secret_token=s-GT9Cd',
 				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F168988860;secret_token=s-GT9Cd;track_id=168988860'
 			),
