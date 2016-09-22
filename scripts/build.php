@@ -456,6 +456,23 @@ $modification->appendChild($dom->createElement(
 	'replace',
 	".mfp-iframe-scaler>div[data-s9e-mediaembed]>div>iframe\n{\n\tposition: fixed !important;\n}\n\n"
 ));
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'preg_replace',
+		'description'      => 'Fixes responsive embeds in sonnb XenGallery',
+		'enabled'          => 1,
+		'execution_order'  => 10,
+		'modification_key' => $addonId . '_sonnb_fix',
+		'template'         => 'sonnb_xengallery_photo_view.css'
+	]
+);
+$modification->appendChild($dom->createElement('find', '(^.?)s'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	".video>[data-s9e-mediaembed],.videoHolder>[data-s9e-mediaembed]\n{\n\tmax-width:100%!important;\n}\n\n\$0"
+));
 
 // Prepare the option group
 $optiongroups = $addon->appendChild($dom->createElement('optiongroups'));
