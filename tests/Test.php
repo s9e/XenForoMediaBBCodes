@@ -539,11 +539,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://www.cbsnews.com/videos/is-carbonated-water-a-healthy-option/',
 				'pid=B2AtjLUWB4Vj'
 			),
-			array(
-				'comedycentral',
-				'http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats',
-				'mgid:arc:video:comedycentral.com:bc275e2f-48e3-46d9-b095-0254381497ea'
-			),
+//			array(
+//				'comedycentral',
+//				'http://www.comedycentral.com/video-clips/uu5qz4/key-and-peele-dueling-hats',
+//				'mgid:arc:video:comedycentral.com:bc275e2f-48e3-46d9-b095-0254381497ea'
+//			),
 			array(
 				'dumpert',
 				'http://www.dumpert.nl/mediabase/6622635/f6d1e0fd/lompe_boer_op_zuidlaardermarkt_doet_shetlandpony_pijn.html',
