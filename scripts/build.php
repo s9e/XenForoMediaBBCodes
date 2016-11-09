@@ -474,6 +474,24 @@ $modification->appendChild($dom->createElement(
 	".video>[data-s9e-mediaembed],.videoHolder>[data-s9e-mediaembed]\n{\n\tmax-width:100%!important;\n}\n\n\$0"
 ));
 
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'preg_replace',
+		'description'      => 'Adds a scrollbar to the Add Media dialog',
+		'enabled'          => 1,
+		'execution_order'  => 10,
+		'modification_key' => $addonId . '_add_media_dialog',
+		'template'         => 'editor_ui.css'
+	]
+);
+$modification->appendChild($dom->createElement('find', '(^.?)s'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	"#redactor_media_link+.listInline\n{\n\tmax-height:40vh;overflow-y:scroll;\n}\n\n\$0"
+));
+
 // Prepare the option group
 $optiongroups = $addon->appendChild($dom->createElement('optiongroups'));
 
