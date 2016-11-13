@@ -973,9 +973,9 @@ This add-on is released under [url="http://en.wikipedia.org/wiki/MIT_License"]Th
 
 The add-on displays a small notice in the page footer, alongside XenForo\'s copyright. You can disable this notice from the Admin CP by going to Home > Options > s9e Media Pack. If you do, please consider making a voluntary donation using the PayPal buttons below.
 
-[size=6][font=Arial][b]Installation[/b][/font][/size]
+[size=6][font=Arial][b]Installation / Upgrade[/b][/font][/size]
 
-Unzip the archive, and upload the content of the [font=monospace]upload[/font] folder to your XenForo installation. Then go to your forum\'s Admin CP and install the add-on via the provided [font=monospace]addon-s9e.xml[/font] file.
+Unzip the archive and upload the content of the [font=monospace]upload[/font] folder to your XenForo installation. Then go to your forum\'s Admin CP and install/upgrade the add-on via the provided [font=monospace]addon-s9e.xml[/font] file.
 
 [size=6][font=Arial][b]Configuration[/b][/font][/size]
 
