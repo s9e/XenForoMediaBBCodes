@@ -768,6 +768,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'00000148-7a7d-d0bf-a3ff-7f7d480e0001'
 			),
 			array(
+				'nhl',
+				'http://video.nhl.com/videocenter/console?id=783647',
+				'783647'
+			),
+			array(
+				'nhl',
+				'https://www.nhl.com/video/recap-min-2-ott-1-fot/t-277753022/c-46330703',
+				'c=46330703;t=277753022'
+			),
+			array(
 				'nytimes',
 				'http://movies.nytimes.com/movie/131154/Crooklyn/trailers',
 				'100000003313949'
@@ -1247,6 +1257,18 @@ class Test extends PHPUnit_Framework_TestCase
 				'channel=maps_cp;clip_id=pla_d1501f90-438c-401d-98ae-e96ab34a09ae',
 				'',
 				'<div data-s9e-mediaembed="livestream" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//cdn.livestream.com/embed/maps_cp?layout=4&amp;autoplay=false&amp;clip=pla_d1501f90-438c-401d-98ae-e96ab34a09ae"></iframe></div></div>'
+			),
+			array(
+				'nhl',
+				'783647',
+				'',
+				'<div data-s9e-mediaembed="nhl" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//video.nhl.com/videocenter/embed?playlist=783647"></iframe></div></div>'
+			),
+			array(
+				'nhl',
+				'c=46330703;t=277753022',
+				'',
+				'<div data-s9e-mediaembed="nhl" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//www.nhl.com/video/embed/t-277753022/c-46330703?autostart=false"></iframe></div></div>'
 			),
 			array(
 				'soundcloud',
