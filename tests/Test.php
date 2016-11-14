@@ -864,6 +864,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'archive_id=361358487;channel=minigolf2000'
 			),
 			array(
+				'twitch',
+				'http://www.twitch.tv/twitch/v/29415830?t=17m17s',
+				'channel=twitch;t=17m17s;video_id=29415830'
+			),
+			array(
+				'twitch',
+				'https://clips.twitch.tv/twitch/HorribleWoodpeckerHassanChop',
+				'channel=twitch;clip_id=HorribleWoodpeckerHassanChop'
+			),
+			array(
 				'ustream',
 				'http://www.ustream.tv/channel/ps4-ustream-gameplay',
 				'cid=16234409'
@@ -1335,6 +1345,18 @@ class Test extends PHPUnit_Framework_TestCase
 				'archive_id=361358487;channel=minigolf2000',
 				'',
 				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//player.twitch.tv/?autoplay=false&amp;video=a361358487"></iframe></div></div>',
+			),
+			array(
+				'twitch',
+				'channel=twitch;t=17m17s;video_id=29415830',
+				'',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//player.twitch.tv/?autoplay=false&amp;video=v29415830&amp;time=17m17s"></iframe></div></div>'
+			),
+			array(
+				'twitch',
+				'channel=twitch;clip_id=HorribleWoodpeckerHassanChop',
+				'',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//clips.twitch.tv/embed?autoplay=false&amp;clip=twitch/HorribleWoodpeckerHassanChop"></iframe></div></div>'
 			),
 			array(
 				'ustream',
