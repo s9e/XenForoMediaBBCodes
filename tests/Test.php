@@ -783,6 +783,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'100000003313949'
 			),
 			array(
+				'pinterest',
+				'https://www.pinterest.com/pin/340444053067283362/',
+				'340444053067283362'
+			),
+			array(
+				'pinterest',
+				'https://www.pinterest.com/felipeandresdp/men-watches/',
+				'felipeandresdp/men-watches'
+			),
+			array(
 				'podbean',
 				'http://wendyswordsofwisdom.podbean.com/e/tiffany-stevensons-words-of-wisdom/',
 				'dbn9j-4ede53'
@@ -1279,6 +1289,19 @@ class Test extends PHPUnit_Framework_TestCase
 				'c=46330703;t=277753022',
 				'',
 				'<div data-s9e-mediaembed="nhl" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//www.nhl.com/video/embed/t-277753022/c-46330703?autostart=false"></iframe></div></div>'
+			),
+			array(
+				'pinterest',
+				'340444053067283362',
+				'',
+				''
+			),
+			array(
+				'pinterest',
+				'https://www.pinterest.com/felipeandresdp/men-watches/',
+				'felipeandresdp/men-watches',
+				'',
+				''
 			),
 			array(
 				'soundcloud',

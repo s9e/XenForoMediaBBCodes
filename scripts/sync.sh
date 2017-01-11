@@ -1,6 +1,6 @@
 #!/bin/sh
 cd $(dirname $(dirname $(realpath $0)))
-git submodule update --remote
+composer up s9e/text-formatter
 phpunit || exit
 rm -f releases/*-dev*
 php scripts/build.php "$@"
