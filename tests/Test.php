@@ -783,16 +783,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'100000003313949'
 			),
 			array(
-				'pinterest',
-				'https://www.pinterest.com/pin/340444053067283362/',
-				'340444053067283362'
-			),
-			array(
-				'pinterest',
-				'https://www.pinterest.com/felipeandresdp/men-watches/',
-				'felipeandresdp/men-watches'
-			),
-			array(
 				'podbean',
 				'http://wendyswordsofwisdom.podbean.com/e/tiffany-stevensons-words-of-wisdom/',
 				'dbn9j-4ede53'
@@ -1294,14 +1284,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'pinterest',
 				'340444053067283362',
 				'',
-				''
+				'<iframe data-s9e-mediaembed="pinterest" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/pinterest.min.html#340444053067283362" style="border:0;height:360px;max-width:345px;width:100%"></iframe>'
 			),
 			array(
 				'pinterest',
-				'https://www.pinterest.com/felipeandresdp/men-watches/',
 				'felipeandresdp/men-watches',
 				'',
-				''
+				'<iframe data-s9e-mediaembed="pinterest" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/pinterest.min.html#felipeandresdp/men-watches" style="border:0;height:360px;max-width:730px;width:100%"></iframe>'
 			),
 			array(
 				'soundcloud',
