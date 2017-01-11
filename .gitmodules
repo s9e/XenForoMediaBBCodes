@@ -1,4 +1,0 @@
-[submodule "vendor/s9e/TextFormatter"]
-	path = vendor/s9e/TextFormatter
-	url = https://github.com/s9e/TextFormatter.git
-	branch = master

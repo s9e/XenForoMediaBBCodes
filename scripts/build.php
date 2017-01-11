@@ -9,7 +9,7 @@ include_once __DIR__ . '/../vendor/autoload.php';
 
 if (!isset($addonId))
 {
-	$sitesDir    = __DIR__ . '/../vendor/s9e/TextFormatter/src/Plugins/MediaEmbed/Configurator/sites';
+	$sitesDir    = __DIR__ . '/../vendor/s9e/text-formatter/src/Plugins/MediaEmbed/Configurator/sites';
 	$classFile   = __DIR__ . '/../build/upload/library/s9e/MediaBBCodes.php';
 	$addonFile   = __DIR__ . '/../build/addon-s9e.xml';
 	$addonId     = 's9e';
@@ -933,7 +933,7 @@ if ($addonId !== 's9e')
 // Update the README with the list of supported sites from s9e\TextFormatter
 preg_match(
 	'(<table>.*?</table>)s',
-	file_get_contents(__DIR__ . '/../vendor/s9e/TextFormatter/src/Plugins/MediaEmbed/README.md'),
+	file_get_contents(__DIR__ . '/../vendor/s9e/text-formatter/src/Plugins/MediaEmbed/README.md'),
 	$m
 );
 file_put_contents(
