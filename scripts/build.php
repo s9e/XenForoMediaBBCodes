@@ -5,7 +5,7 @@
 * @license   http://www.opensource.org/licenses/mit-license.php The MIT License
 */
 
-include_once __DIR__ . '/../vendor/s9e/TextFormatter/src/autoloader.php';
+include_once __DIR__ . '/../vendor/autoload.php';
 
 if (!isset($addonId))
 {
