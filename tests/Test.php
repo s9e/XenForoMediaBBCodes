@@ -612,6 +612,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'height=338;id=SereneIllfatedCapybara;width=600'
 			),
 			array(
+				'gifs',
+				'https://j.gifs.com/Y6YZoO.gif',
+				'height=360;id=Y6YZoO;width=360'
+			),
+			array(
 				'googleplus',
 				'https://plus.google.com/+TonyHawk/posts/C5TMsDZJWBd',
 				'name=TonyHawk;pid=C5TMsDZJWBd'
@@ -1177,6 +1182,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=SereneIllfatedCapybara',
 				'',
 				'<div data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:560px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/SereneIllfatedCapybara" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
+			),
+			array(
+				'gifs',
+				'height=360;id=Y6YZoO;width=360',
+				'',
+				'<div data-s9e-mediaembed="gifs" style="display:inline-block;width:100%;max-width:360px"><div style="overflow:hidden;position:relative;padding-bottom:100%"><iframe allowfullscreen="" scrolling="no" src="//gifs.com/embed/Y6YZoO" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'
 			),
 			array(
 				'googleplus',

@@ -107,6 +107,7 @@ class s9e_MediaBBCodes
 		'gametrailers'=>array('GameTrailers','http://www.gametrailers.com/',array('gaming'=>1),'!(?P<id>)gametrailers\\.com/(?:full-episode|review|video)s/!',array(),true,array(array('extract'=>array('!embed/(?P<id>\\d+)!'),'match'=>array('!gametrailers\\.com/(?:full-episode|review|video)s/!')))),
 		'getty'=>array('Getty Images','http://www.gettyimages.com/',array('images'=>1),"!gty\\.im/(?P<id>\\d+)!\n!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?P<id>\\d+)!\n!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?#[-\\w]*picture-id(?P<id>\\d+)$!",array('!gty\\.im/(?P<id>\\d+)!','!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?gettyimages\\.[.\\w]+/detail(?=/).*?/(?P<id>\\d+)!','!(?=.*?[./]g(?:ettyimages\\.(?:c(?:n|o(?:\\.(?>jp|uk)|m(?>\\.au)?))|d[ek]|es|fr|i[et]|nl|pt|[bs]e)|ty\\.im)[:/]).*?#[-\\w]*picture-id(?P<id>\\d+)$!'),true,array(array('extract'=>array('!"height":[ "]*(?P<height>\\d+)!','!"width":[ "]*(?P<width>\\d+)!','!et=(?P<et>[-=\\w]+)!','!sig=(?P<sig>[-=\\w]+)!'),'match'=>array('//'),'url'=>'http://embed.gettyimages.com/preview/{@id}'))),
 		'gfycat'=>array('Gfycat','http://gfycat.com/',array('images'=>1),'!gfycat\\.com/(?P<id>\\w+)!',array('!gfycat\\.com/(?P<id>\\w+)!'),true,array(array('extract'=>array('!video:height" content="(?P<height>\\d+)!','!video:width" content="(?P<width>\\d+)!'),'match'=>array('//'),'url'=>'http://gfycat.com/{@id}'))),
+		'gifs'=>array('Gifs.com','https://gifs.com/',array('images'=>1),'!gifs\\.com/(?:gif/)?(?P<id>\\w+)!',array('!gifs\\.com/(?:gif/)?(?P<id>\\w+)!'),true,array(array('extract'=>array('!meta property="og:image:width" content="(?P<width>\\d+)!','!meta property="og:image:height" content="(?P<height>\\d+)!'),'match'=>array('//'),'url'=>'https://gifs.com/gif/{@id}'))),
 		'gist'=>array('GitHub Gist (via custom iframe)','https://gist.github.com/',array('misc'=>1),'!gist\\.github\\.com/(?P<id>(?:\\w+/)?[\\da-f]+(?:/[\\da-f]+)?)!',array('!gist\\.github\\.com/(?P<id>(?:\\w+/)?[\\da-f]+(?:/[\\da-f]+)?)!')),
 		'globalnews'=>array('Global News','http://globalnews.ca/',array('.ca'=>1,'news'=>1),'!globalnews\\.ca/video/(?P<id>\\d+)!',array('!globalnews\\.ca/video/(?P<id>\\d+)!'),7=>'<div data-s9e-mediaembed="globalnews" style="display:inline-block;width:100%;max-width:560px"><div style="overflow:hidden;position:relative;padding-bottom:67.321428571429%"><iframe allowfullscreen="" scrolling="no" src="//globalnews.ca/video/embed/{$id}/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>'),
 		'gofundme'=>array('GoFundMe','http://www.gofundme.com/',array('fundraising'=>1),'@gofundme\\.com/(?P<id>\\w+)(?![^#?])@',array('@gofundme\\.com/(?P<id>\\w+)(?![^#?])@'),7=>'<div data-s9e-mediaembed="gofundme" style="display:inline-block;width:100%;max-width:258px"><div style="overflow:hidden;position:relative;padding-bottom:131.00775193798%"><object data="//funds.gofundme.com/Widgetflex.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"/><param name="flashvars" value="page={$id}"/></object></div></div>'),
@@ -1160,6 +1161,15 @@ class s9e_MediaBBCodes
 		$vars += array('height' => 315, 'id' => null, 'width' => 560);
 
 		$html='<div data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;';if($vars['width']>0)$html.='padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%';$html.='"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
+
+		return $html;
+	}
+
+	public static function renderGifs($vars)
+	{
+		$vars += array('height' => 360, 'id' => null, 'width' => 640);
+
+		$html='<div data-s9e-mediaembed="gifs" style="display:inline-block;width:100%;max-width:'.htmlspecialchars($vars['width'],2).'px"><div style="overflow:hidden;position:relative;';if($vars['width']>0)$html.='padding-bottom:'.htmlspecialchars(100*$vars['height']/$vars['width'],2).'%';$html.='"><iframe allowfullscreen="" scrolling="no" src="//gifs.com/embed/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></div></div>';
 
 		return $html;
 	}
