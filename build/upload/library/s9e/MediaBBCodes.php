@@ -768,7 +768,7 @@ class s9e_MediaBBCodes
 		$methodName = 'render' . ucfirst($siteId);
 		if (method_exists(__CLASS__, $methodName))
 		{
-			$html = call_user_func(__CLASS__ . '::' . $methodName, $vars);
+			$html = @call_user_func(__CLASS__ . '::' . $methodName, $vars);
 		}
 		else
 		{
