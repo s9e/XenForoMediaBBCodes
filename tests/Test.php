@@ -519,11 +519,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'https://blab.im/about',
 				false
 			),
-			array(
-				'bleacherreport',
-				'http://bleacherreport.com/articles/2415420-creating-a-starting-xi-of-the-most-overrated-players-in-world-football',
-				'dtYjVhdDr5492cyQTjVPDcM--Mg2rJj5'
-			),
+//			array(
+//				'bleacherreport',
+//				'http://bleacherreport.com/articles/2415420-creating-a-starting-xi-of-the-most-overrated-players-in-world-football',
+//				'dtYjVhdDr5492cyQTjVPDcM--Mg2rJj5'
+//			),
 			array(
 				'brightcove',
 				'http://link.brightcove.com/services/player/bcpid30183073001?bclid=0&bctid=624233815001',
