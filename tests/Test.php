@@ -98,7 +98,7 @@ class Test extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* @requires PHP 5.6
+	* @requires PHP 7.1
 	*/
 	public function testBuild()
 	{
