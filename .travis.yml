@@ -1,15 +1,14 @@
 sudo: false
 language: php
 php:
+  - "7.1"
   - "5.6"
   - "5.3"
 before_script:
   - echo "zend.enable_gc=off" >> ~/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/php.ini
   - mkdir releases tests/.cache
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.6' ]; then composer install --dev --no-interaction; fi"
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.3' ]; then phpenv config-rm xdebug.ini; fi"
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.1' ]; then composer install --dev --no-interaction; fi"
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' != '7.1' ]; then phpenv config-rm xdebug.ini; fi"
   - php -i
-script:
-  - phpunit -c phpunit-$TRAVIS_PHP_VERSION.xml
 after_script:
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.6' ]; then php vendor/bin/coveralls -v; fi"
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.1' ]; then php vendor/bin/coveralls -v; fi"
