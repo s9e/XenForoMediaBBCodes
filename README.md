@@ -5,3 +5,4 @@ Media BB Codes for XenForo, imported from [s9e\TextFormatter](https://github.com
 
 ## Supported sites
 
+A list of supported sites and URL types can be found at http://s9etextformatter.readthedocs.io/Plugins/MediaEmbed/Sites/

@@ -930,24 +930,6 @@ if ($addonId !== 's9e')
 	return;
 }
 
-// Update the README with the list of supported sites from s9e\TextFormatter
-preg_match(
-	'(<table>.*?</table>)s',
-	file_get_contents(__DIR__ . '/../vendor/s9e/text-formatter/src/Plugins/MediaEmbed/README.md'),
-	$m
-);
-file_put_contents(
-	__DIR__ . '/../README.md',
-	preg_replace_callback(
-		'(<table>.*?</table>)s',
-		function () use ($m)
-		{
-			return $m[0];
-		},
-		file_get_contents(__DIR__ . '/../README.md')
-	)
-);
-
 if (!file_exists(__DIR__ . '/../releases') || !empty($_SERVER['TRAVIS']))
 {
 	return;
@@ -962,7 +944,7 @@ exec('advzip -z4 ../releases/XenForoMediaBBCodes-' . $version . '.zip');
 $readme =
 '[center][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][/center]
 
-This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url="https://github.com/s9e/XenForoMediaBBCodes"]its GitHub page[/url].
+This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url="http://s9etextformatter.readthedocs.io/Plugins/MediaEmbed/Sites/"]this page[/url].
 
 The BBCodes definitions are based on [url="https://github.com/s9e/TextFormatter"]the s9e\TextFormatter library[/url], and more specifically its [url="https://github.com/s9e/TextFormatter/tree/master/src/Plugins/MediaEmbed"]MediaEmbed[/url] plugin. The BBCodes are designed for performance: the media site is only accessed once during posting, and only if absolutely necessary.
 
