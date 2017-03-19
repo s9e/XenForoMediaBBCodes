@@ -1196,7 +1196,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('gid' => null, 'id' => null);
 
-		$html='<iframe data-s9e-mediaembed="googlesheets" allowfullscreen="" scrolling="no" src="https://docs.google.com/spreadsheet/ccc?key='.htmlspecialchars($vars['id'],2).'&amp;widget=true&amp;headers=false&amp;rm=minimal#gid='.htmlspecialchars($vars['gid'],2).'" style="border:0;height:500px;resize:vertical;width:100%"></iframe>';
+		$html='<iframe data-s9e-mediaembed="googlesheets" allowfullscreen="" scrolling="no" src="https://docs.google.com/spreadsheets/d/'.htmlspecialchars($vars['id'],2).'/pubhtml?widget=true&amp;headers=false#gid='.htmlspecialchars($vars['gid'],2).'" style="border:0;height:500px;resize:vertical;width:100%"></iframe>';
 
 		return $html;
 	}
