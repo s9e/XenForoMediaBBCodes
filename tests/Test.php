@@ -507,7 +507,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'bbcnews',
 				'http://www.bbc.com/news/business-29149086',
-				'business-29149086'
+				'av/business-29149086/what-is-alibaba-in-60-seconds'
 			),
 			array(
 				'blab',
@@ -752,11 +752,6 @@ class Test extends PHPUnit_Framework_TestCase
 //				'http://livestre.am/1aHRU',
 //				'channel=maps_cp;clip_id=pla_d1501f90-438c-401d-98ae-e96ab34a09ae'
 //			),
-			array(
-				'mrctv',
-				'http://dev.mrctv.org/videos/cnn-frets-about-tobacco-companies-color-coding-tricks',
-				'55537'
-			),
 			array(
 				'msnbc',
 				'http://www.msnbc.com/ronan-farrow-daily/watch/thats-no-moon--300512323725',
