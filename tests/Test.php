@@ -795,17 +795,17 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'soundcloud',
 				'http://api.soundcloud.com/tracks/98282116',
-				'id=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F98282116;track_id=98282116'
+				'id=tracks%2F98282116;track_id=98282116'
 			),
 			array(
 				'soundcloud',
 				'https://soundcloud.com/andrewbird/three-white-horses',
-				'https://soundcloud.com/andrewbird/three-white-horses'
+				'andrewbird/three-white-horses'
 			),
 			array(
 				'soundcloud',
 				'https://api.soundcloud.com/tracks/168988860?secret_token=s-GT9Cd',
-				'id=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F168988860;secret_token=s-GT9Cd;track_id=168988860'
+				'id=tracks%2F168988860;secret_token=s-GT9Cd;track_id=168988860'
 			),
 			array(
 				'sportsnet',
