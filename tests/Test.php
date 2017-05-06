@@ -800,7 +800,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'soundcloud',
 				'https://soundcloud.com/andrewbird/three-white-horses',
-				'andrewbird/three-white-horses'
+				'id=andrewbird%2Fthree-white-horses;track_id=59509713'
 			),
 			array(
 				'soundcloud',
