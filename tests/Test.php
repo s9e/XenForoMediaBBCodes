@@ -507,7 +507,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'bbcnews',
 				'http://www.bbc.com/news/business-29149086',
-				'av/business-29149086/what-is-alibaba-in-60-seconds'
+				'av/business-29149086/alibaba-and-jack-ma-in-60-seconds'
 			),
 			array(
 				'blab',
