@@ -1052,7 +1052,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'mode' => null);
 
-		$html='';if($vars['mode']==='album')$html.='<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="//www.audiomack.com/embed4-album/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:340px;max-width:900px;width:100%"></iframe>';else$html.='<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="//www.audiomack.com/embed4/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:110px;max-width:900px;width:100%"></iframe>';
+		$html='';if($vars['mode']==='album')$html.='<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="https://www.audiomack.com/embed/album/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:400px;max-width:900px;width:100%"></iframe>';else$html.='<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="https://www.audiomack.com/embed/song/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:252px;max-width:900px;width:100%"></iframe>';
 
 		return $html;
 	}

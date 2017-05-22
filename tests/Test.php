@@ -1063,13 +1063,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'audiomack',
 				'id=hz-global/double-a-side-vol3;mode=album',
 				'',
-				'<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="//www.audiomack.com/embed4-album/hz-global/double-a-side-vol3" style="border:0;height:340px;max-width:900px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="https://www.audiomack.com/embed/album/hz-global/double-a-side-vol3" style="border:0;height:400px;max-width:900px;width:100%"></iframe>'
 			),
 			array(
 				'audiomack',
 				'id=random-2/buy-the-world-final-1;mode=song',
 				'',
-				'<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="//www.audiomack.com/embed4/random-2/buy-the-world-final-1" style="border:0;height:110px;max-width:900px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="https://www.audiomack.com/embed/song/random-2/buy-the-world-final-1" style="border:0;height:252px;max-width:900px;width:100%"></iframe>'
 			),
 			array(
 				'bandcamp',
