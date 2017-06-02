@@ -614,7 +614,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'gifs',
 				'https://j.gifs.com/Y6YZoO.gif',
-				'height=360;id=Y6YZoO;width=360'
+				'height=200;id=Y6YZoO;width=200'
 			),
 			array(
 				'googleplus',
