@@ -869,6 +869,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'channel=twitch;clip_id=HorribleWoodpeckerHassanChop'
 			),
 			array(
+				'twitch',
+				'https://clips.twitch.tv/AcceptableCooperativeYogurtTwitchRPG',
+				'clip_id=AcceptableCooperativeYogurtTwitchRPG'
+			),
+			array(
 				'ustream',
 				'http://www.ustream.tv/channel/ps4-ustream-gameplay',
 				'cid=16234409'
@@ -1364,6 +1369,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'channel=twitch;clip_id=HorribleWoodpeckerHassanChop',
 				'',
 				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//clips.twitch.tv/embed?autoplay=false&amp;clip=twitch/HorribleWoodpeckerHassanChop"></iframe></div></div>'
+			),
+			array(
+				'twitch',
+				'clip_id=AcceptableCooperativeYogurtTwitchRPG',
+				'',
+				'<div data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><div style="overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//clips.twitch.tv/embed?autoplay=false&amp;clip=AcceptableCooperativeYogurtTwitchRPG"></iframe></div></div>'
 			),
 			array(
 				'ustream',
