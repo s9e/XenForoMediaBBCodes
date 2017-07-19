@@ -504,11 +504,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://therunons.bandcamp.com/track/still-feel',
 				'track_id=2146686782'
 			),
-			array(
-				'bbcnews',
-				'http://www.bbc.com/news/business-29149086',
-				'av/business-29149086/alibaba-and-jack-ma-in-60-seconds'
-			),
+//			array(
+//				'bbcnews',
+//				'http://www.bbc.com/news/business-29149086',
+//				'av/business-29149086/alibaba-and-jack-ma-in-60-seconds'
+//			),
 			array(
 				'blab',
 				'https://blab.im/05b6ce88279f40798069bb6227a04fce',
@@ -835,8 +835,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'stitcher',
-				'http://www.stitcher.com/podcast/twit/tech-news-today/e/twitter-shares-fall-18-percent-after-earnings-leak-on-twitter-37808629',
-				'eid=37808629;fid=12645'
+				'http://www.stitcher.com/podcast/panoply/wall-street-journal-tech-news-briefing-51309/e/50838946',
+				'eid=50838946;fid=5446'
 			),
 			array(
 				'teamcoco',

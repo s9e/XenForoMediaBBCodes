@@ -25,8 +25,13 @@
 			if (canBeLazyLoaded(iframe))
 			{
 				lazyIframes.push(iframe);
-				iframe.contentWindow.location.replace('data:text/html,');
+				var onload = iframe.getAttribute('onload');
+				if (iframe.hasAttribute('onload') && onload.indexOf('data-lazy') < 0)
+				{
+					iframe.setAttribute('onload', "if(!hasAttribute('data-lazy')){" + onload + '}');
+				}
 				iframe.setAttribute('data-lazy', '');
+				iframe.contentWindow.location.replace('data:text/html,');
 			}
 		}
 	}
