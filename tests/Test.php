@@ -890,8 +890,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'vidme',
-				'https://vid.me/Ogt',
-				'Ogt'
+				'https://vid.me/rxMHW',
+				'rxMHW'
 			),
 			array(
 				'vox',
