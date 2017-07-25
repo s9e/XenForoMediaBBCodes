@@ -454,7 +454,7 @@ setAttributes(
 $modification->appendChild($dom->createElement('find', '(^)'));
 $modification->appendChild($dom->createElement(
 	'replace',
-	".mfp-iframe-scaler>div[data-s9e-mediaembed]>div>iframe\n{\n\tposition: fixed !important;\n}\n\n"
+	".mfp-iframe-scaler>span[data-s9e-mediaembed]>span>iframe\n{\n\tposition: fixed !important;\n}\n\n"
 ));
 $modification  = $modifications->appendChild($dom->createElement('modification'));
 setAttributes(
