@@ -594,18 +594,18 @@ class Test extends PHPUnit_Framework_TestCase
 //				'http://www.gametrailers.com/videos/view/pop-fiction/102300-Metal-Gear-Solid-3-Still-in-a-Dream',
 //				'2954127'
 //			),
-			array(
-				'getty',
-				'http://gty.im/3232182',
-				'(et=[-\\w]{22};height=399;id=3232182;sig=[-\\w]{43}%3D;width=594)',
-				'assertRegexp'
-			),
-			array(
-				'getty',
-				'http://www.gettyimages.co.uk/detail/3232182',
-				'(et=[-\\w]{22};height=399;id=3232182;sig=[-\\w]{43}%3D;width=594)',
-				'assertRegexp'
-			),
+//			array(
+//				'getty',
+//				'http://gty.im/3232182',
+//				'(et=[-\\w]{22};height=399;id=3232182;sig=[-\\w]{43}%3D;width=594)',
+//				'assertRegexp'
+//			),
+//			array(
+//				'getty',
+//				'http://www.gettyimages.co.uk/detail/3232182',
+//				'(et=[-\\w]{22};height=399;id=3232182;sig=[-\\w]{43}%3D;width=594)',
+//				'assertRegexp'
+//			),
 			array(
 				'gfycat',
 				'http://gfycat.com/SereneIllfatedCapybara',
