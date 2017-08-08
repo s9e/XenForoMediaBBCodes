@@ -490,6 +490,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'id=B00JGOMIP6;tld=it'
 			),
 			array(
+				'amazon',
+				'http://www.amazon.it/foo/',
+				false
+			),
+			array(
 				'bandcamp',
 				'http://proleter.bandcamp.com/album/curses-from-past-times-ep',
 				'album_id=1122163921'

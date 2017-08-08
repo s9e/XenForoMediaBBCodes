@@ -703,6 +703,13 @@ class s9e_MediaBBCodes
 			return false;
 		}
 
+		// This should be extended to any site that has an "id" capture plus other regexps that
+		// can match without capturing a value for "id"
+		if ($siteId === 'amazon' && !isset($vars['id']))
+		{
+			return false;
+		}
+
 		// Apply filters
 		self::applyFilters($siteId, $vars);
 
