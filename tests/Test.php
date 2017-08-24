@@ -812,11 +812,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://api.soundcloud.com/tracks/98282116',
 				'id=tracks%2F98282116;track_id=98282116'
 			),
-			array(
-				'soundcloud',
-				'https://soundcloud.com/andrewbird/three-white-horses',
-				'id=andrewbird%2Fthree-white-horses;track_id=59509713'
-			),
+//			array(
+//				'soundcloud',
+//				'https://soundcloud.com/andrewbird/three-white-horses',
+//				'id=andrewbird%2Fthree-white-horses;track_id=59509713'
+//			),
 			array(
 				'soundcloud',
 				'https://api.soundcloud.com/tracks/168988860?secret_token=s-GT9Cd',
