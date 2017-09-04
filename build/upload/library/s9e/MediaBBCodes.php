@@ -1140,7 +1140,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'type' => null);
 
-		$html='<iframe data-s9e-mediaembed="facebook" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/facebook.min.html#'.htmlspecialchars($vars['type'].$vars['id'],2).'" style="border:0;height:360px;max-width:640px;width:100%"></iframe>';
+		$html='';if($vars['type']==='video')$html.='<span data-s9e-mediaembed="facebook" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fv%2Fvideos%2F'.htmlspecialchars($vars['id'],2).'%2F&amp;show_text=0&amp;width=640" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>';else$html.='<iframe data-s9e-mediaembed="facebook" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/facebook.min.html#'.htmlspecialchars($vars['id'],2).'" style="border:0;height:360px;max-width:640px;width:100%"></iframe>';
 
 		return $html;
 	}
