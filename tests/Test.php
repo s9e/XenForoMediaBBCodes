@@ -784,11 +784,6 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'nhl',
-				'http://video.nhl.com/videocenter/console?id=783647',
-				'783647'
-			),
-			array(
-				'nhl',
 				'https://www.nhl.com/video/recap-min-2-ott-1-fot/t-277753022/c-46330703',
 				'c=46330703;t=277753022'
 			),
@@ -1291,15 +1286,9 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'nhl',
-				'783647',
-				'',
-				'<span data-s9e-mediaembed="nhl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//video.nhl.com/videocenter/embed?playlist=783647"></iframe></span></span>'
-			),
-			array(
-				'nhl',
 				'c=46330703;t=277753022',
 				'',
-				'<span data-s9e-mediaembed="nhl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//www.nhl.com/video/embed/t-277753022/c-46330703?autostart=false"></iframe></span></span>'
+				'<span data-s9e-mediaembed="nhl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://www.nhl.com/video/embed/t-277753022/c-46330703?autostart=false"></iframe></span></span>'
 			),
 			array(
 				'pinterest',
