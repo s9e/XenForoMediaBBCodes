@@ -793,6 +793,26 @@ class Test extends PHPUnit_Framework_TestCase
 				'100000003313949'
 			),
 			array(
+				'orfium',
+				'https://www.orfium.com/album/24371/everybody-loves-kanye-totom/',
+				'album_id=24371'
+			),
+			array(
+				'orfium',
+				'https://www.orfium.com/live-set/614763/foof-no-lights-5-foof/',
+				'set_id=614763'
+			),
+			array(
+				'orfium',
+				'https://www.orfium.com/playlist/511651/electronic-live-sessions-creamtronic/',
+				'playlist_id=511651'
+			),
+			array(
+				'orfium',
+				'https://www.orfium.com/track/625367/the-ambience-of-the-goss-vistas/',
+				'track_id=625367'
+			),
+			array(
 				'podbean',
 				'http://wendyswordsofwisdom.podbean.com/e/tiffany-stevensons-words-of-wisdom/',
 				'dbn9j-4ede53'
@@ -1289,6 +1309,30 @@ class Test extends PHPUnit_Framework_TestCase
 				'c=46330703;t=277753022',
 				'',
 				'<span data-s9e-mediaembed="nhl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://www.nhl.com/video/embed/t-277753022/c-46330703?autostart=false"></iframe></span></span>'
+			),
+			array(
+				'orfium',
+				'album_id=24371',
+				'',
+				'<iframe data-s9e-mediaembed="orfium" allowfullscreen="" scrolling="no" src="https://www.orfium.com/embedded/album/24371" style="border:0;height:550px;max-width:900px;width:100%"></iframe>'
+			),
+			array(
+				'orfium',
+				'set_id=614763',
+				'',
+				'<iframe data-s9e-mediaembed="orfium" allowfullscreen="" scrolling="no" src="https://www.orfium.com/embedded/live-set/614763" style="border:0;height:275px;max-width:900px;width:100%"></iframe>'
+			),
+			array(
+				'orfium',
+				'playlist_id=511651',
+				'',
+				'<iframe data-s9e-mediaembed="orfium" allowfullscreen="" scrolling="no" src="https://www.orfium.com/embedded/playlist/511651" style="border:0;height:275px;max-width:900px;width:100%"></iframe>'
+			),
+			array(
+				'orfium',
+				'track_id=625367',
+				'',
+				'<iframe data-s9e-mediaembed="orfium" allowfullscreen="" scrolling="no" src="https://www.orfium.com/embedded/track/625367" style="border:0;height:275px;max-width:900px;width:100%"></iframe>'
 			),
 			array(
 				'pinterest',
