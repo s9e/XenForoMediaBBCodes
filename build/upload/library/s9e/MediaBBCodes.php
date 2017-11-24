@@ -915,7 +915,7 @@ class s9e_MediaBBCodes
 
 			foreach ($callbacks as $callback)
 			{
-				$vars[$varName] = $callback($vars[$varName]);
+				$vars[$varName] = call_user_func($callback, $vars[$varName]);
 			}
 		}
 	}
