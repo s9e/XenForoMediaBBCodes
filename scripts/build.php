@@ -35,8 +35,9 @@ if (isset($_SERVER['argv'][1]))
 // Set up the MediaEmbed plugin
 $configurator = new s9e\TextFormatter\Configurator;
 $configurator->rendering->engine = 'PHP';
-$configurator->rendering->engine->forceEmptyElements = false;
-$configurator->rendering->engine->useEmptyElements   = false;
+$configurator->rendering->engine->enableQuickRenderer = false;
+$configurator->rendering->engine->forceEmptyElements  = false;
+$configurator->rendering->engine->useEmptyElements    = false;
 $configurator->rendering->engine->serializer->branchTableThreshold = PHP_INT_MAX;
 $configurator->MediaEmbed->sitesDir = $sitesDir;
 
@@ -179,7 +180,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	 || $siteId === 'theguardian')
 	{
 		// Capture the PHP source for this template
-		$regexp = '(if\\(\\$tb===0\\)\\{?(.*?)\\}?elseif\\(\\$tb===)s';
+		$regexp = '(switch\\(\\$node->nodeName\\)\\{[^:]+:(.*?)break;)s';
 
 		$configurator->rendering->getRenderer();
 		$source = file_get_contents($configurator->rendering->engine->lastFilepath);
@@ -350,6 +351,10 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 			if (isset($attribute['preFilter']))
 			{
 				$filters[$attribute->getName()][] = (string) $attribute['preFilter'];
+			}
+			if (isset($attribute['type']))
+			{
+				$filters[$attribute->getName()][] = $className . '::filter' . ucfirst($attribute['type']);
 			}
 			if (isset($attribute['postFilter']))
 			{

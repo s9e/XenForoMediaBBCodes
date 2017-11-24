@@ -991,7 +991,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'youtube',
 				'http://www.youtube.com/watch?v=wZZ7oFKsKzY&t=1h23m45s',
-				'h=1;id=wZZ7oFKsKzY;m=23;s=45'
+				'id=wZZ7oFKsKzY;t=5025'
+			),
+			array(
+				'youtube',
+				'http://www.youtube.com/watch?v=wZZ7oFKsKzY&t=1234',
+				'id=wZZ7oFKsKzY;t=1234'
 			),
 		);
 	}
@@ -1428,13 +1433,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'ustream',
 				'cid=16234409',
 				'',
-				'<span data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.ustream.tv/embed/16234409?html5ui" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//www.ustream.tv/embed/16234409?html5ui"></iframe></span></span>'
 			),
 			array(
 				'ustream',
 				'vid=40688256',
 				'',
-				'<span data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.ustream.tv/embed/recorded/40688256?html5ui" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//www.ustream.tv/embed/recorded/40688256?html5ui"></iframe></span></span>'
 			),
 			array(
 				'xboxclips',

@@ -120,7 +120,7 @@ class s9e_MediaBBCodes
 		'humortvnl'=>array('HumorTV','http://humortv.vara.nl/pg.2.pg-home.html',array('.nl'=>1,'entertainment'=>1),'!humortv\\.vara\\.nl/\\w+\\.(?P<id>[-.\\w]+)\\.html!',array('!humortv\\.vara\\.nl/\\w+\\.(?P<id>[-.\\w]+)\\.html!'),7=>'<span data-s9e-mediaembed="humortvnl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//humortv.vara.nl/embed.{$id}.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'ign'=>array('IGN','http://www.ign.com/videos/',array('gaming'=>1),'!(?P<id>https?://.*?ign\\.com/videos/.+)!i',array('!(?P<id>https?://.*?ign\\.com/videos/.+)!i'),7=>'<span data-s9e-mediaembed="ign" style="display:inline-block;width:100%;max-width:468px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.196581%"><iframe allowfullscreen="" scrolling="no" src="//widgets.ign.com/video/embed/content.html?url={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'imdb'=>array('IMDb','http://www.imdb.com/',array('movies'=>1),'!imdb\\.com/[/\\w]+/vi(?P<id>\\d+)!',array('!imdb\\.com/[/\\w]+/vi(?P<id>\\d+)!'),7=>'<span data-s9e-mediaembed="imdb" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.imdb.com/video/imdb/vi{$id}/imdb/embed?autoplay=false&amp;width=640" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
-		'imgur'=>array('Imgur','http://imgur.com/',array('images'=>1),"@imgur\\.com/(?!r/|user/)(?:gallery/|t/[^/]+/)?(?P<id>(?:a/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@\n@(?P<id>)imgur\\.com/(?:gallery/|t/[^/]+/)\\w@",array('@imgur\\.com/(?!r/|user/)(?:gallery/|t/[^/]+/)?(?P<id>(?:a/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@'),true,array(array('extract'=>array('!image\\s*:\\s*.*?"is_(?P<type>album)":true!','!<div id="(?P<type>album)-!','!class="(?P<type>album)-image!'),'match'=>array('@imgur\\.com/(?:gallery/|t/[^/]+/)\\w@')))),
+		'imgur'=>array('Imgur','http://imgur.com/',array('images'=>1),"@imgur\\.com/(?!r/|user/)(?:gallery/|t/[^/]+/)?(?P<id>(?:a/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@\n@(?P<id>)imgur\\.com/(?:gallery/|t/[^/]+/)\\w@",array('@imgur\\.com/(?!r/|user/)(?:gallery/|t/[^/]+/)?(?P<id>(?:a/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@'),true,array(array('extract'=>array('!image\\s*:\\s*.*?"is_(?P<type>album)":true!','!<div id="(?P<type>album)-!','!class="(?P<type>album)-image!'),'match'=>array('@imgur\\.com/(?:gallery/|t/[^/]+/)\\w@'))),null,array('type'=>array('s9e_MediaBBCodes::filterAlnum'))),
 		'indiegogo'=>array('Indiegogo','http://www.indiegogo.com/',array('fundraising'=>1),'!indiegogo\\.com/projects/(?P<id>[-\\w]+)!',array('!indiegogo\\.com/projects/(?P<id>[-\\w]+)!'),7=>'<span data-s9e-mediaembed="indiegogo" style="display:inline-block;width:100%;max-width:222px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200.45045%"><iframe allowfullscreen="" scrolling="no" src="//www.indiegogo.com/project/{$id}/embedded" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'instagram'=>array('Instagram','http://instagram.com/',array('social'=>1),'!instagram\\.com/p/(?P<id>[-\\w]+)!',array('!instagram\\.com/p/(?P<id>[-\\w]+)!'),7=>'<iframe data-s9e-mediaembed="instagram" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/instagram.min.html#{$id}" style="border:0;height:640px;max-width:640px;width:100%"></iframe>'),
 		'internetarchive'=>array('Internet Archive','https://archive.org/',array('misc'=>1),'!(?P<id>)archive\\.org/details/!',array(),true,array(array('extract'=>array('!meta property="twitter:player" content="https://archive.org/embed/(?P<id>[^/"]+)!','!meta property="og:video:width" content="(?P<width>\\d+)!','!meta property="og:video:height" content="(?P<height>\\d+)!'),'match'=>array('!archive\\.org/details/!')))),
@@ -133,13 +133,13 @@ class s9e_MediaBBCodes
 		'livecap'=>array('LiveCap','https://www.livecap.tv/',array('gaming'=>1),'!(?=.*?[./]livecap\\.tv[:/]).*?livecap.tv/[st]/(?P<channel>\\w+)/(?P<id>\\w+)!',array('!(?=.*?[./]livecap\\.tv[:/]).*?livecap.tv/[st]/(?P<channel>\\w+)/(?P<id>\\w+)!'),true),
 		'liveleak'=>array('LiveLeak','http://www.liveleak.com/',array('videos'=>1),'!liveleak\\.com/view\\?i=(?P<id>[a-f_0-9]+)!',array('!liveleak\\.com/view\\?i=(?P<id>[a-f_0-9]+)!'),7=>'<span data-s9e-mediaembed="liveleak" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.liveleak.com/ll_embed?i={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'livestream'=>array('Livestream','http://new.livestream.com/',array('livestreaming'=>1,'videos'=>1),'((?P<id>)(?=.*?[./]livestre(?>\\.a|am\\.co)m[:/]).*?)',array('!livestream\\.com/accounts/(?P<account_id>\\d+)/events/(?P<event_id>\\d+)!','!/videos/(?P<video_id>\\d+)!','!original\\.livestream\\.com/(?P<channel>\\w+)/video\\?clipId=(?P<clip_id>[-\\w]+)!'),true,array(array('extract'=>array('!accounts/(?P<account_id>\\d+)/events/(?P<event_id>\\d+)!'),'match'=>array('//')),array('extract'=>array('!//original\\.livestream\\.com/(?P<channel>\\w+)/video/(?P<clip_id>[-\\w]+)!'),'match'=>array('!livestre.am!')))),
-		'mailru'=>array('Mail.Ru','http://my.mail.ru/',array('.ru'=>1),'!(?P<id>)my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!',array(),true,array(array('extract'=>array('!mail\\.ru/video/(?P<id>[/\\w]+)\\.html!'),'match'=>array('!my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!')))),
+		'mailru'=>array('Mail.Ru','http://my.mail.ru/',array('.ru'=>1),'!(?P<id>)my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!',array(),true,array(array('extract'=>array('!"itemId": ?"?(?P<id>\\d+)!'),'match'=>array('!my\\.mail\\.ru/\\w+/\\w+/video/\\w+/\\d!')))),
 		'medium'=>array('Medium','https://medium.com/',array('blogging'=>1),'!medium\\.com/[^/]*/(?:[-\\w]+-)?(?P<id>[\\da-f]+)!',array('!medium\\.com/[^/]*/(?:[-\\w]+-)?(?P<id>[\\da-f]+)!')),
 		'metacafe'=>array('Metacafe','http://www.metacafe.com/',array('videos'=>1),'!metacafe\\.com/watch/(?P<id>\\d+)!',array('!metacafe\\.com/watch/(?P<id>\\d+)!'),7=>'<span data-s9e-mediaembed="metacafe" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.metacafe.com/embed/{$id}/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'mixcloud'=>array('Mixcloud','http://www.mixcloud.com/',array('music'=>1),'@mixcloud\\.com/(?!categories|tag)(?P<id>[-\\w]+/[^/&]+)/@',array('@mixcloud\\.com/(?!categories|tag)(?P<id>[-\\w]+/[^/&]+)/@'),7=>'<span data-s9e-mediaembed="mixcloud" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:100%"><iframe allowfullscreen="" scrolling="no" src="//www.mixcloud.com/widget/iframe/?feed=http%3A%2F%2Fwww.mixcloud.com%2F{$id}%2F&amp;embed_type=widget_standard" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'mlb'=>array('MLB','http://mlb.com/video/',array('sports'=>1),"#mlb\\.com/[\\w/]*/v(?P<id>\\d+)#\n#mlb\\.com/r/video\\?content_id=(?P<id>\\d+)#",array('#mlb\\.com/[\\w/]*/v(?P<id>\\d+)#','#mlb\\.com/r/video\\?content_id=(?P<id>\\d+)#'),7=>'<span data-s9e-mediaembed="mlb" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//m.mlb.com/shared/video/embed/embed.html?content_id={$id}&amp;width=640&amp;height=360" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'mrctv'=>array('MRCTV','http://www.mrctv.org/',array('misc'=>1),'!(?P<id>)mrctv\\.org/videos/.!',array(),true,array(array('extract'=>array('!mrctv\\.org/embed/(?P<id>\\d+)!'),'match'=>array('!mrctv\\.org/videos/.!'))),'<span data-s9e-mediaembed="mrctv" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://www.mrctv.org/embed/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
-		'msnbc'=>array('MSNBC','http://www.msnbc.com/watch',array('news'=>1),"@(?P<id>)msnbc\\.com/[-\\w]+/watch/@\n@(?P<id>)on\\.msnbc\\.com/.@",array(),true,array(array('extract'=>array('@guid="?(?P<id>\\w+)@'),'match'=>array('@msnbc\\.com/[-\\w]+/watch/@','@on\\.msnbc\\.com/.@'))),'<span data-s9e-mediaembed="msnbc" style="display:inline-block;width:100%;max-width:635px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:69.291339%"><iframe allowfullscreen="" scrolling="no" src="//player.theplatform.com/p/2E2eJC/EmbeddedOffSite?guid={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
+		'msnbc'=>array('MSNBC','http://www.msnbc.com/watch',array('news'=>1),"@(?P<id>)msnbc\\.com/[-\\w]+/watch/@\n@(?P<id>)on\\.msnbc\\.com/.@",array(),true,array(array('extract'=>array('@property="nv:videoId" content="(?P<id>\\w+)@','@guid="?(?P<id>\\w+)@'),'match'=>array('@msnbc\\.com/[-\\w]+/watch/@','@on\\.msnbc\\.com/.@'))),'<span data-s9e-mediaembed="msnbc" style="display:inline-block;width:100%;max-width:635px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:69.291339%"><iframe allowfullscreen="" scrolling="no" src="//player.theplatform.com/p/2E2eJC/EmbeddedOffSite?guid={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'natgeochannel'=>array('National Geographic Channel','http://channel.nationalgeographic.com/',array('misc'=>1),'@channel\\.nationalgeographic\\.com/(?P<id>[-/\\w]+/videos/[-\\w]+)@',array('@channel\\.nationalgeographic\\.com/(?P<id>[-/\\w]+/videos/[-\\w]+)@'),7=>'<span data-s9e-mediaembed="natgeochannel" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//channel.nationalgeographic.com/{$id}/embed/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'natgeovideo'=>array('National Geographic Video','http://video.nationalgeographic.com/',array('documentaries'=>1),'@(?P<id>)video\\.nationalgeographic\\.com/(?:tv|video)/\\w@',array(),true,array(array('extract'=>array('@guid="(?P<id>[-\\w]+)"@'),'match'=>array('@video\\.nationalgeographic\\.com/(?:tv|video)/\\w@'))),'<span data-s9e-mediaembed="natgeovideo" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//player.d.nationalgeographic.com/players/ngsvideo/share/?guid={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'nbcnews'=>array('NBC News','http://www.nbcnews.com/video/',array('news'=>1),'!nbcnews\\.com/(?:widget/video-embed/|video/[-\\w]+?-)(?P<id>\\d+)!',array('!nbcnews\\.com/(?:widget/video-embed/|video/[-\\w]+?-)(?P<id>\\d+)!'),7=>'<span data-s9e-mediaembed="nbcnews" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.nbcnews.com/widget/video-embed/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
@@ -196,7 +196,7 @@ class s9e_MediaBBCodes
 		'xboxdvr'=>array('Xbox DVR','http://xboxdvr.com/',array('gaming'=>1),'!xboxdvr\\.com/gamer/(?P<user>[^/]+)/video/(?P<id>\\d+)!',array('!xboxdvr\\.com/gamer/(?P<user>[^/]+)/video/(?P<id>\\d+)!'),true),
 		'yahooscreen'=>array('Yahoo! Screen','https://screen.yahoo.com/',array('movies'=>1),'!screen\\.yahoo\\.com/(?:[-\\w]+/)?(?P<id>[-\\w]+)\\.html!',array('!screen\\.yahoo\\.com/(?:[-\\w]+/)?(?P<id>[-\\w]+)\\.html!'),7=>'<span data-s9e-mediaembed="yahooscreen" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://screen.yahoo.com/{$id}.html?format=embed" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'youku'=>array('Youku','http://www.youku.com/',array('.cn'=>1),'!youku\\.com/v(?:_show|ideo)/id_(?P<id>\\w+)!',array('!youku\\.com/v(?:_show|ideo)/id_(?P<id>\\w+)!'),7=>'<span data-s9e-mediaembed="youku" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:62.5%;padding-bottom:calc(56.25% + 40px)"><iframe allowfullscreen="" scrolling="no" src="https://players.youku.com/embed/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
-		'youtube'=>array('YouTube','http://www.youtube.com/',array('livestreaming'=>1,'videos'=>1),"!youtube\\.com/(?:watch.*?v=|v/|attribution_link.*?v%3D)(?P<id>[-\\w]+)!\n!youtu\\.be/(?P<id>[-\\w]+)!\n@(?P<id>)(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?:(?P<t>\\d+)(?![\\dhm])|(?:(?P<h>\\d+)h)?(?:(?P<m>\\d+)m)?(?:(?P<s>\\d+)s)?)@\n!(?P<id>)(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?P<list>[-\\w]+)!\n!(?P<id>)(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?/shared\\?ci=!",array('!youtube\\.com/(?:watch.*?v=|v/|attribution_link.*?v%3D)(?P<id>[-\\w]+)!','!youtu\\.be/(?P<id>[-\\w]+)!','@(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?:(?P<t>\\d+)(?![\\dhm])|(?:(?P<h>\\d+)h)?(?:(?P<m>\\d+)m)?(?:(?P<s>\\d+)s)?)@','!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?P<list>[-\\w]+)!'),true,array(array('extract'=>array('!/vi/(?P<id>[-\\w]+)!'),'match'=>array('!/shared\\?ci=!')))),
+		'youtube'=>array('YouTube','http://www.youtube.com/',array('livestreaming'=>1,'videos'=>1),"!youtube\\.com/(?:watch.*?v=|v/|attribution_link.*?v%3D)(?P<id>[-\\w]+)!\n!youtu\\.be/(?P<id>[-\\w]+)!\n@(?P<id>)(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?P<t>\\d[\\dhms]*)@\n!(?P<id>)(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?P<list>[-\\w]+)!\n!(?P<id>)(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?/shared\\?ci=!",array('!youtube\\.com/(?:watch.*?v=|v/|attribution_link.*?v%3D)(?P<id>[-\\w]+)!','!youtu\\.be/(?P<id>[-\\w]+)!','@(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?[#&?]t=(?P<t>\\d[\\dhms]*)@','!(?=.*?[./]youtu(?>\\.be|be\\.com)[:/]).*?&list=(?P<list>[-\\w]+)!'),true,array(array('extract'=>array('!/vi/(?P<id>[-\\w]+)!'),'match'=>array('!/shared\\?ci=!'))),null,array('t'=>array('s9e_MediaBBCodes::filterTimestamp'))),
 		'zippyshare'=>array('Zippyshare audio files','http://www.zippyshare.com/',array('file sharing'=>1),'!(?P<id>)(?=.*?[./]zippyshare\\.com[:/]).*?/v/!',array(),true,array(array('extract'=>array('!file=(?P<file>\\w+)&amp;server=(?P<server>\\d+)!'),'match'=>array('!/v/!'))))
 	);
 
@@ -772,6 +772,17 @@ class s9e_MediaBBCodes
 			}
 		}
 
+		// Live-patch the old h/m/s for backward compatibility
+		if ($siteId === 'youtube' && !isset($vars['t']))
+		{
+			$vars += ['h' => 0, 'm' => 0, 's' => 0];
+			$vars['t'] = intval($vars['h']) * 3600 + intval($vars['m']) * 60 + intval($vars['s']);
+			if (!$vars['t'])
+			{
+				unset($vars['t']);
+			}
+		}
+
 		// Prepare the HTML
 		$methodName = 'render' . ucfirst($siteId);
 		if (method_exists(__CLASS__, $methodName))
@@ -1047,6 +1058,35 @@ class s9e_MediaBBCodes
 		return preg_replace($match, $replace, $html);
 	}
 
+	/**
+	* Filter an alnum value
+	*
+	* @param  string $attrValue
+	* @return string
+	*/
+	protected static function filterAlnum($attrValue)
+	{
+		return (preg_match('(^[a-z0-9]+$)Di', $attrValue)) ? $attrValue : '';
+	}
+
+	/**
+	* Filter a timestamp value
+	*
+	* @param  string $attrValue
+	* @return string
+	*/
+	protected static function filterTimestamp($attrValue)
+	{
+		if (preg_match('/^(?=\\d)(?:(\\d+)h)?(?:(\\d+)m)?(?:(\\d+)s)?$/D', $attrValue, $m))
+		{
+			$m += [0, 0, 0, 0];
+
+			return intval($m[1]) * 3600 + intval($m[2]) * 60 + intval($m[3]);
+		}
+
+		return (is_numeric($attrValue)) ? $attrValue : '';
+	}
+
 	public static function renderAmazon($vars)
 	{
 		$vars += array('id' => null, 'tld' => null);
@@ -1060,7 +1100,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'mode' => null);
 
-		$html='';if($vars['mode']==='album')$html.='<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="https://www.audiomack.com/embed/album/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:400px;max-width:900px;width:100%"></iframe>';else$html.='<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no" src="https://www.audiomack.com/embed/song/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:252px;max-width:900px;width:100%"></iframe>';
+		$html='<iframe data-s9e-mediaembed="audiomack" allowfullscreen="" scrolling="no"';if($vars['mode']==='album')$html.=' src="https://www.audiomack.com/embed/album/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:400px;max-width:900px;width:100%"';else$html.=' src="https://www.audiomack.com/embed/song/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:252px;max-width:900px;width:100%"';$html.='></iframe>';
 
 		return $html;
 	}
@@ -1096,7 +1136,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'pid' => null);
 
-		$html='<span data-s9e-mediaembed="cbsnews" style="display:inline-block;width:100%;max-width:640px">';if(isset($vars['pid']))$html.='<span style="display:block;overflow:hidden;position:relative;padding-bottom:62.1875%;padding-bottom:calc(56.25% + 38px)"><object data="//www.cbsnews.com/common/video/cbsnews_player.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid='.htmlspecialchars($vars['pid'],2);else$html.='<span style="display:block;overflow:hidden;position:relative;padding-bottom:62.5%;padding-bottom:calc(56.25% + 40px)"><object data="//i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="si=254&amp;contentValue='.htmlspecialchars($vars['id'],2);$html.='"></object></span>';$html.='</span>';
+		$html='<span data-s9e-mediaembed="cbsnews" style="display:inline-block;width:100%;max-width:640px"><span';if(isset($vars['pid']))$html.=' style="display:block;overflow:hidden;position:relative;padding-bottom:62.1875%;padding-bottom:calc(56.25% + 38px)"><object data="//www.cbsnews.com/common/video/cbsnews_player.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="pType=embed&amp;si=254&amp;pid='.htmlspecialchars($vars['pid'],2);else$html.=' style="display:block;overflow:hidden;position:relative;padding-bottom:62.5%;padding-bottom:calc(56.25% + 40px)"><object data="//i.i.cbsi.com/cnwk.1d/av/video/cbsnews/atlantis2/cbsnews_player_embed.swf" style="height:100%;left:0;position:absolute;width:100%" type="application/x-shockwave-flash" typemustmatch=""><param name="allowfullscreen" value="true"><param name="flashvars" value="si=254&amp;contentValue='.htmlspecialchars($vars['id'],2);$html.='"></object>';$html.='</span></span>';
 
 		return $html;
 	}
@@ -1150,7 +1190,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null);
 
-		$html='<span data-s9e-mediaembed="gametrailers" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="';if((strpos($vars['id'],'mgid:')===0))$html.='//media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2);else$html.='//embed.gametrailers.com/embed/'.htmlspecialchars($vars['id'],2).'?embed=1&amp;suppressBumper=1';$html.='"></iframe></span></span>';
+		$html='<span data-s9e-mediaembed="gametrailers" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//';if((strpos($vars['id'],'mgid:')===0))$html.='media.mtvnservices.com/embed/'.htmlspecialchars($vars['id'],2);else$html.='embed.gametrailers.com/embed/'.htmlspecialchars($vars['id'],2).'?embed=1&amp;suppressBumper=1';$html.='"></iframe></span></span>';
 
 		return $html;
 	}
@@ -1240,7 +1280,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null, 'video' => null);
 
-		$html='';if(isset($vars['video']))$html.='<span data-s9e-mediaembed="kickstarter" style="display:inline-block;width:100%;max-width:480px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:75%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/video.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>';else$html.='<span data-s9e-mediaembed="kickstarter" style="display:inline-block;width:100%;max-width:220px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:190.909091%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/card.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>';
+		$html='<span data-s9e-mediaembed="kickstarter"';if(isset($vars['video']))$html.=' style="display:inline-block;width:100%;max-width:480px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:75%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/video.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span>';else$html.=' style="display:inline-block;width:100%;max-width:220px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:190.909091%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/'.htmlspecialchars($vars['id'],2).'/widget/card.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span>';$html.='</span>';
 
 		return $html;
 	}
@@ -1258,7 +1298,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('account_id' => null, 'channel' => null, 'clip_id' => null, 'event_id' => null, 'video_id' => null);
 
-		$html='<span data-s9e-mediaembed="livestream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="';if(isset($vars['clip_id']))$html.='//cdn.livestream.com/embed/'.htmlspecialchars($vars['channel'],2).'?layout=4&amp;autoplay=false&amp;clip='.htmlspecialchars($vars['clip_id'],2);else{$html.='//livestream.com/accounts/'.htmlspecialchars($vars['account_id'],2).'/events/'.htmlspecialchars($vars['event_id'],2);if(isset($vars['video_id']))$html.='/videos/'.htmlspecialchars($vars['video_id'],2);$html.='/player?autoPlay=false';}$html.='"></iframe></span></span>';
+		$html='<span data-s9e-mediaembed="livestream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//';if(isset($vars['clip_id']))$html.='cdn.livestream.com/embed/'.htmlspecialchars($vars['channel'],2).'?layout=4&amp;autoplay=false&amp;clip='.htmlspecialchars($vars['clip_id'],2);else{$html.='livestream.com/accounts/'.htmlspecialchars($vars['account_id'],2).'/events/'.htmlspecialchars($vars['event_id'],2);if(isset($vars['video_id']))$html.='/videos/'.htmlspecialchars($vars['video_id'],2);$html.='/player?autoPlay=false';}$html.='"></iframe></span></span>';
 
 		return $html;
 	}
@@ -1267,7 +1307,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('id' => null);
 
-		$html='<span data-s9e-mediaembed="mailru" style="display:inline-block;width:100%;max-width:560px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:61.071429%"><iframe allowfullscreen="" scrolling="no" src="//videoapi.my.mail.ru/videos/embed/'.htmlspecialchars($vars['id'],2).'.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>';
+		$html='<span data-s9e-mediaembed="mailru" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://my.mail.ru/video/embed/'.htmlspecialchars($vars['id'],2).'" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>';
 
 		return $html;
 	}
@@ -1393,7 +1433,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('channel' => null, 'clip_id' => null, 't' => null, 'video_id' => null);
 
-		$html='<span data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="';if(isset($vars['clip_id'])){$html.='//clips.twitch.tv/embed?autoplay=false&amp;clip=';if(isset($vars['channel']))$html.=htmlspecialchars($vars['channel'],2).'/';$html.=htmlspecialchars($vars['clip_id'],2);}else{$html.='//player.twitch.tv/?autoplay=false&amp;';if(isset($vars['video_id']))$html.='video=v'.htmlspecialchars($vars['video_id'],2);else$html.='channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['t']))$html.='&amp;time='.htmlspecialchars($vars['t'],2);}$html.='"></iframe></span></span>';
+		$html='<span data-s9e-mediaembed="twitch" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//';if(isset($vars['clip_id'])){$html.='clips.twitch.tv/embed?autoplay=false&amp;clip=';if(isset($vars['channel']))$html.=htmlspecialchars($vars['channel'],2).'/';$html.=htmlspecialchars($vars['clip_id'],2);}else{$html.='player.twitch.tv/?autoplay=false&amp;';if(isset($vars['video_id']))$html.='video=v'.htmlspecialchars($vars['video_id'],2);else$html.='channel='.htmlspecialchars($vars['channel'],2);if(isset($vars['t']))$html.='&amp;time='.htmlspecialchars($vars['t'],2);}$html.='"></iframe></span></span>';
 
 		return $html;
 	}
@@ -1402,7 +1442,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('cid' => null, 'vid' => null);
 
-		$html='<span data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%">';if(isset($vars['vid']))$html.='<iframe allowfullscreen="" scrolling="no" src="//www.ustream.tv/embed/recorded/'.htmlspecialchars($vars['vid'],2);else$html.='<iframe allowfullscreen="" scrolling="no" src="//www.ustream.tv/embed/'.htmlspecialchars($vars['cid'],2);$html.='?html5ui" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe>';$html.='</span></span>';
+		$html='<span data-s9e-mediaembed="ustream" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//www.ustream.tv/embed/';if(isset($vars['vid']))$html.='recorded/'.htmlspecialchars($vars['vid'],2);else$html.=htmlspecialchars($vars['cid'],2);$html.='?html5ui"></iframe></span></span>';
 
 		return $html;
 	}
@@ -1436,9 +1476,9 @@ class s9e_MediaBBCodes
 
 	public static function renderYoutube($vars)
 	{
-		$vars += array('h' => null, 'id' => null, 'list' => null, 'm' => null, 's' => null, 't' => null);
+		$vars += array('id' => null, 'list' => null, 't' => null);
 
-		$html='<span data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="background:url(https://i.ytimg.com/vi/'.htmlspecialchars($vars['id'],2).'/hqdefault.jpg) 50% 50% / cover;border:0;height:100%;left:0;position:absolute;width:100%" src="https://www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['list']))$html.='?list='.htmlspecialchars($vars['list'],2);if(isset($vars['t'])||isset($vars['h'])||isset($vars['m'])){if(isset($vars['list']))$html.='&amp;';else$html.='?';$html.='start=';if(isset($vars['t']))$html.=htmlspecialchars($vars['t'],2);elseif(isset($vars['h'])&&isset($vars['m'])&&isset($vars['s']))$html.=htmlspecialchars($vars['h']*3600+$vars['m']*60+$vars['s'],2);elseif(isset($vars['h'])&&isset($vars['m']))$html.=htmlspecialchars($vars['h']*3600+$vars['m']*60,2);elseif(isset($vars['h'])&&isset($vars['s']))$html.=htmlspecialchars($vars['h']*3600+$vars['s'],2);elseif(isset($vars['h']))$html.=htmlspecialchars($vars['h']*3600,2);elseif(isset($vars['m'])&&isset($vars['s']))$html.=htmlspecialchars($vars['m']*60+$vars['s'],2);elseif(isset($vars['m']))$html.=htmlspecialchars($vars['m']*60,2);}$html.='"></iframe></span></span>';
+		$html='<span data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="background:url(https://i.ytimg.com/vi/'.htmlspecialchars($vars['id'],2).'/hqdefault.jpg) 50% 50% / cover;border:0;height:100%;left:0;position:absolute;width:100%" src="https://www.youtube.com/embed/'.htmlspecialchars($vars['id'],2);if(isset($vars['list']))$html.='?list='.htmlspecialchars($vars['list'],2);if(isset($vars['t'])){if(isset($vars['list']))$html.='&amp;';else$html.='?';$html.='start='.htmlspecialchars($vars['t'],2);}$html.='"></iframe></span></span>';
 
 		return $html;
 	}
