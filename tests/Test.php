@@ -789,8 +789,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'nytimes',
-				'http://movies.nytimes.com/movie/131154/Crooklyn/trailers',
-				'100000003313949'
+				'https://www.nytimes.com/video/movies/100000005543607/trailer-coco.html',
+				'100000005543607'
 			),
 			array(
 				'orfium',
