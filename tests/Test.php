@@ -582,12 +582,12 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'facebook',
 				'https://www.facebook.com/FacebookDevelopers/posts/10151471074398553',
-				'10151471074398553'
+				'id=10151471074398553;type=post;user=FacebookDevelopers'
 			),
 			array(
 				'facebook',
 				'https://www.facebook.com/ign/videos/10153762113196633/',
-				'id=10153762113196633;type=video'
+				'id=10153762113196633;type=video;user=ign'
 			),
 			array(
 				'foratv',
@@ -690,11 +690,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'imgur',
 				'https://imgur.com/AsQ0K3P',
 				'AsQ0K3P'
-			),
-			array(
-				'imgur',
-				'https://imgur.com/t/current_events/0I30l',
-				'id=0I30l;type=album'
 			),
 			array(
 				'imgur',
@@ -820,7 +815,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'reddit',
 				'http://www.reddit.com/r/xenforo/comments/2synou/xenforo_144_released/cnua3uz',
-				'path=%2Fr%2Fxenforo%2Fcomments%2F2synou%2Fxenforo_144_released%2Fcnua3uz'
+				'xenforo/comments/2synou/xenforo_144_released/cnua3uz'
 			),
 			array(
 				'soundcloud',
@@ -845,23 +840,13 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'spotify',
-				'spotify:track:5JunxkcjfCYcY7xJ29tLai',
-				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai'
-			),
-			array(
-				'spotify',
-				'spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe',
-				'uri=spotify%3Atrackset%3APREFEREDTITLE%3A5Z7ygHQo02SUrFmcgpwsKW%2C1x6ACsKV4UdWS2FMuPFUiT%2C4bi73jCM02fMpkI11Lqmfe'
-			),
-			array(
-				'spotify',
 				'http://open.spotify.com/user/ozmoetr/playlist/4yRrCWNhWOqWZx5lmFqZvt',
-				'path=user%2Fozmoetr%2Fplaylist%2F4yRrCWNhWOqWZx5lmFqZvt'
+				'user/ozmoetr/playlist/4yRrCWNhWOqWZx5lmFqZvt'
 			),
 			array(
 				'spotify',
 				'https://play.spotify.com/album/5OSzFvFAYuRh93WDNCTLEz',
-				'path=album%2F5OSzFvFAYuRh93WDNCTLEz'
+				'album/5OSzFvFAYuRh93WDNCTLEz'
 			),
 			array(
 				'stitcher',
@@ -917,11 +902,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'ustream',
 				'http://www.ustream.tv/recorded/40688256',
 				'vid=40688256'
-			),
-			array(
-				'vidme',
-				'https://vid.me/rxMHW',
-				'rxMHW'
 			),
 			array(
 				'vox',
@@ -1238,36 +1218,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'<span data-s9e-mediaembed="hudl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.hudl.com/embed/athlete/2067184/highlights/5721c090dfe23b2d68a2283b" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
-				'imgur',
-				'AsQ0K3P',
-				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;max-width:100%;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#AsQ0K3P"></iframe>'
-			),
-			array(
-				'imgur',
-				'id=9UGCL;type=album',
-				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;max-width:100%;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#a/9UGCL"></iframe>'
-			),
-			array(
-				'imgur',
-				'id=a/9UGCL;type=album',
-				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;max-width:100%;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#a/9UGCL"></iframe>'
-			),
-			array(
-				'imgur',
-				'height=389;id=u7Yo0Vy;type=gifv;width=915',
-				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;max-width:100%;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy"></iframe>'
-			),
-			array(
-				'imgur',
-				'id=u7Yo0Vy;type=gifv',
-				'',
-				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;max-width:100%;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#u7Yo0Vy"></iframe>'
-			),
-			array(
 				'gist',
 				'foo/123',
 				'',
@@ -1365,27 +1315,15 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'spotify',
-				'uri=spotify%3Atrack%3A5JunxkcjfCYcY7xJ29tLai',
-				'',
-				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:track:5JunxkcjfCYcY7xJ29tLai"></iframe></span></span>'
-			),
-			array(
-				'spotify',
-				'uri=spotify%3Atrackset%3APREFEREDTITLE%3A5Z7ygHQo02SUrFmcgpwsKW%2C1x6ACsKV4UdWS2FMuPFUiT%2C4bi73jCM02fMpkI11Lqmfe',
-				'',
-				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"></iframe></span></span>'
-			),
-			array(
-				'spotify',
 				'path=user%2Fozmoetr%2Fplaylist%2F4yRrCWNhWOqWZx5lmFqZvt',
 				'',
-				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt"></iframe></span></span>'
+				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:user:ozmoetr:playlist:4yRrCWNhWOqWZx5lmFqZvt" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'spotify',
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
 				'',
-				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz"></iframe></span></span>'
+				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:120%"><iframe allowfullscreen="" scrolling="no" src="https://embed.spotify.com/?view=coverart&amp;uri=spotify:album:5OSzFvFAYuRh93WDNCTLEz" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'ted',

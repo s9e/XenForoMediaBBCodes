@@ -348,17 +348,15 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 		$filters = array();
 		foreach ($site->attributes->children() as $attribute)
 		{
-			if (isset($attribute['preFilter']))
+			if (isset($attribute['filterChain']))
 			{
-				$filters[$attribute->getName()][] = (string) $attribute['preFilter'];
-			}
-			if (isset($attribute['type']))
-			{
-				$filters[$attribute->getName()][] = $className . '::filter' . ucfirst($attribute['type']);
-			}
-			if (isset($attribute['postFilter']))
-			{
-				$filters[$attribute->getName()][] = (string) $attribute['postFilter'];
+				$attrName = $attribute->getName();
+				$callback = (string) $attribute['filterChain'];
+				if ($callback[0] === '#')
+				{
+					$callback = $className . '::filter' . ucfirst(substr($callback, 1));
+				}
+				$filters[$attrName] = [$callback];
 			}
 		}
 
