@@ -542,7 +542,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'cbsnews',
 				'http://www.cbsnews.com/videos/is-carbonated-water-a-healthy-option/',
-				'pid=B2AtjLUWB4Vj'
+				'is-carbonated-water-a-healthy-option'
 			),
 //			array(
 //				'comedycentral',
