@@ -121,7 +121,7 @@ class s9e_MediaBBCodes
 		'humortvnl'=>array('HumorTV','http://humortv.vara.nl/pg.2.pg-home.html',array('.nl'=>1,'entertainment'=>1),'!humortv\\.vara\\.nl/\\w+\\.(?P<id>[-.\\w]+)\\.html!',array('!humortv\\.vara\\.nl/\\w+\\.(?P<id>[-.\\w]+)\\.html!'),7=>'<span data-s9e-mediaembed="humortvnl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//humortv.vara.nl/embed.{$id}.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'ign'=>array('IGN','http://www.ign.com/videos/',array('gaming'=>1),'!(?P<id>https?://.*?ign\\.com/videos/.+)!i',array('!(?P<id>https?://.*?ign\\.com/videos/.+)!i'),7=>'<span data-s9e-mediaembed="ign" style="display:inline-block;width:100%;max-width:468px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.196581%"><iframe allowfullscreen="" scrolling="no" src="//widgets.ign.com/video/embed/content.html?url={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'imdb'=>array('IMDb','http://www.imdb.com/',array('movies'=>1),'!imdb\\.com/[/\\w]+/vi(?P<id>\\d+)!',array('!imdb\\.com/[/\\w]+/vi(?P<id>\\d+)!'),7=>'<span data-s9e-mediaembed="imdb" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.imdb.com/video/imdb/vi{$id}/imdb/embed?autoplay=false&amp;width=640" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
-		'imgur'=>array('Imgur','http://imgur.com/',array('images'=>1),'@imgur\\.com/(?!r/|user/)(?:t/[^/]+/)?(?P<id>(?:a/|gallery/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@',array('@imgur\\.com/(?!r/|user/)(?:t/[^/]+/)?(?P<id>(?:a/|gallery/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@'),7=>'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" data-s9e-livepreview-ignore-attrs="style" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#{$id}" style="border:0;height:450px;max-width:100%;width:568px"></iframe>'),
+		'imgur'=>array('Imgur','http://imgur.com/',array('images'=>1),'@imgur\\.com/(?!r/|user/)(?:t/[^/]+/)?(?P<id>(?:a/|gallery/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@',array('@imgur\\.com/(?!r/|user/)(?:t/[^/]+/)?(?P<id>(?:a/|gallery/)?\\w+)(?!\\w|\\.(?:pn|jp)g)@')),
 		'indiegogo'=>array('Indiegogo','http://www.indiegogo.com/',array('fundraising'=>1),'!indiegogo\\.com/projects/(?P<id>[-\\w]+)!',array('!indiegogo\\.com/projects/(?P<id>[-\\w]+)!'),7=>'<span data-s9e-mediaembed="indiegogo" style="display:inline-block;width:100%;max-width:222px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200.45045%"><iframe allowfullscreen="" scrolling="no" src="//www.indiegogo.com/project/{$id}/embedded" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'instagram'=>array('Instagram','http://instagram.com/',array('social'=>1),'!instagram\\.com/p/(?P<id>[-\\w]+)!',array('!instagram\\.com/p/(?P<id>[-\\w]+)!'),7=>'<iframe data-s9e-mediaembed="instagram" allowfullscreen="" data-s9e-livepreview-ignore-attrs="style" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/instagram.min.html#{$id}" style="border:0;height:640px;max-width:640px;width:100%"></iframe>'),
 		'internetarchive'=>array('Internet Archive','https://archive.org/',array('misc'=>1),'!(?P<id>)archive\\.org/details/!',array(),true,array(array('extract'=>array('!meta property="twitter:player" content="https://archive.org/embed/(?P<id>[^/"]+)!','!meta property="og:video:width" content="(?P<width>\\d+)!','!meta property="og:video:height" content="(?P<height>\\d+)!'),'match'=>array('!archive\\.org/details/!'))),null,array('height'=>array('s9e_MediaBBCodes::filterUint'),'width'=>array('s9e_MediaBBCodes::filterUint'))),
@@ -168,6 +168,7 @@ class s9e_MediaBBCodes
 		'streamable'=>array('Streamable','http://streamable.com/',array('videos'=>1),'!streamable\\.com/(?P<id>\\w+)!',array('!streamable\\.com/(?P<id>\\w+)!'),7=>'<span data-s9e-mediaembed="streamable" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//streamable.com/e/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'teamcoco'=>array('Team Coco','http://teamcoco.com/',array('entertainment'=>1),"!teamcoco\\.com/video/(?P<id>\\d+)!\n!(?P<id>)teamcoco\\.com/video/.!",array('!teamcoco\\.com/video/(?P<id>\\d+)!'),true,array(array('extract'=>array('!"id":(?P<id>\\d+)!'),'match'=>array('!teamcoco\\.com/video/.!'))),'<span data-s9e-mediaembed="teamcoco" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:64.84375%"><iframe allowfullscreen="" scrolling="no" src="//teamcoco.com/embed/v/{$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'ted'=>array('TED Talks','http://www.ted.com/',array('presentations'=>1),'#ted\\.com/(?P<id>(?:talk|playlist)s/[-\\w]+(?:\\.html)?)(?![-\\w]|/transcript)#i',array('#ted\\.com/(?P<id>(?:talk|playlist)s/[-\\w]+(?:\\.html)?)(?![-\\w]|/transcript)#i')),
+		'telegram'=>array('Telegram','https://telegram.org/',array('social'=>1),'@(?=.*?[./]t\\.me[:/]).*?//t.me/(?!addstickers/|joinchat/)(?P<id>\\w+/\\d+)@',array('@(?=.*?[./]t\\.me[:/]).*?//t.me/(?!addstickers/|joinchat/)(?P<id>\\w+/\\d+)@')),
 		'theatlantic'=>array('The Atlantic Video','http://www.theatlantic.com/video/',array('news'=>1),'!theatlantic\\.com/video/index/(?P<id>\\d+)!',array('!theatlantic\\.com/video/index/(?P<id>\\d+)!'),7=>'<span data-s9e-mediaembed="theatlantic" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.theatlantic.com/video/iframe/{$id}/" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
 		'theguardian'=>array('The Guardian','http://www.theguardian.com/video',array('news'=>1),'!theguardian\\.com/(?P<id>\\w+/video/[-/\\w]+)!',array('!theguardian\\.com/(?P<id>\\w+/video/[-/\\w]+)!')),
 		'theonion'=>array('The Onion','http://www.theonion.com/video/',array('entertainment'=>1),'!theonion\\.com/video/[-\\w]+[-,](?P<id>\\d+)!',array('!theonion\\.com/video/[-\\w]+[-,](?P<id>\\d+)!'),7=>'<span data-s9e-mediaembed="theonion" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.theonion.com/video_embed/?id={$id}" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'),
@@ -1291,6 +1292,15 @@ class s9e_MediaBBCodes
 		return $html;
 	}
 
+	public static function renderImgur($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/imgur.min.html#'.htmlspecialchars($vars['id'],2).'" style="border:0;height:450px;max-width:100%;width:568px"></iframe>';
+
+		return $html;
+	}
+
 	public static function renderInternetarchive($vars)
 	{
 		$vars += array('height' => 360, 'id' => null, 'width' => 640);
@@ -1422,6 +1432,15 @@ class s9e_MediaBBCodes
 		$vars += array('id' => null);
 
 		$html='<span data-s9e-mediaembed="ted" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//embed.ted.com/'.htmlspecialchars($vars['id'],2);if((strpos($vars['id'],'.html')===false))$html.='.html';$html.='"></iframe></span></span>';
+
+		return $html;
+	}
+
+	public static function renderTelegram($vars)
+	{
+		$vars += array('id' => null);
+
+		$html='<iframe data-s9e-mediaembed="telegram" allowfullscreen="" onload="window.addEventListener(\'message\',function(e){if(e.source===contentWindow)style.height=e.data});contentWindow.postMessage(\'\',\'https://s9e.github.io\')" scrolling="no" src="https://s9e.github.io/iframe/telegram.min.html#'.htmlspecialchars($vars['id'],2).'" style="border:0;height:96px;max-width:500px;width:100%"></iframe>';
 
 		return $html;
 	}

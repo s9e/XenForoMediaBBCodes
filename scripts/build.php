@@ -176,7 +176,9 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	 || strpos($html, 'media.mtvnservices.com') !== false
 	 || $siteId === 'cnn'
 	 || $siteId === 'gist'
+	 || $siteId === 'imgur'
 	 || $siteId === 'mailru'
+	 || $siteId === 'telegram'
 	 || $siteId === 'theguardian')
 	{
 		// Capture the PHP source for this template
