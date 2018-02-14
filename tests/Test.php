@@ -693,11 +693,6 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'imgur',
-				'https://m.imgur.com/t/funny/PZWhzCQ',
-				'PZWhzCQ'
-			),
-			array(
-				'imgur',
 				'http://imgur.com/r/animals',
 				false
 			),
