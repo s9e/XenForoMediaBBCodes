@@ -846,7 +846,7 @@ $modification->appendChild($dom->createElement(
 	'.bbCodeQuote iframe, .bbCodeQuote [data-s9e-mediaembed],'
 ));
 
-// Make the CSS that applies to iframes in quotes apply to their wrapper too
+// Expand embeds inside of expanded quote blocks
 $modification  = $modifications->appendChild($dom->createElement('modification'));
 setAttributes(
 	$modification,
@@ -867,6 +867,30 @@ $modification->appendChild($dom->createElement(
 	{
 		max-height: none;
 		max-width:  none;
+	}
+
+'
+));
+
+// Un-position iframes inside of collapsed quote blocks
+$modification  = $modifications->appendChild($dom->createElement('modification'));
+setAttributes(
+	$modification,
+	[
+		'action'           => 'preg_replace',
+		'description'      => 'Un-positions iframes inside of collapsed quote blocks',
+		'enabled'          => 1,
+		'execution_order'  => 1,
+		'modification_key' => $addonId . '_quote_collapsed_css',
+		'template'         => 'bb_code.css'
+	]
+);
+$modification->appendChild($dom->createElement('find', '(^)'));
+$modification->appendChild($dom->createElement(
+	'replace',
+	'.quoteContainer:not(.expanded) [data-s9e-mediaembed] iframe
+	{
+		position: unset !important;
 	}
 
 '

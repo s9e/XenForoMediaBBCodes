@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201803080" version_string="20180308" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201803230" version_string="20180323" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
   <bb_code_media_sites/>
   <phrases>
     <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
@@ -73,7 +73,7 @@ $0</replace>
     </modification>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>
-      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack v20180308"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
+      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack v20180323"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
     </modification>
     <modification action="preg_replace" description="Defers the loading of embedded content" enabled="0" execution_order="10" modification_key="s9e_lazy_loading" template="ad_thread_view_below_messages">
       <find>(^)</find>
@@ -90,6 +90,15 @@ $0</replace>
 	{
 		max-height: none;
 		max-width:  none;
+	}
+
+</replace>
+    </modification>
+    <modification action="preg_replace" description="Un-positions iframes inside of collapsed quote blocks" enabled="1" execution_order="1" modification_key="s9e_quote_collapsed_css" template="bb_code.css">
+      <find>(^)</find>
+      <replace>.quoteContainer:not(.expanded) [data-s9e-mediaembed] iframe
+	{
+		position: unset !important;
 	}
 
 </replace>
