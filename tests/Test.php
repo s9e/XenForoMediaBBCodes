@@ -1037,7 +1037,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'amazon',
 				'B002MUC0ZY',
 				'',
-				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=US&amp;ad_type=product_link&amp;tracking_id=-20&amp;marketplace=amazon&amp;region=US&amp;asins=B002MUC0ZY&amp;show_border=true&amp;link_opens_in_new_window=true"></iframe></span></span>'
+				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=US&amp;ad_type=product_link&amp;tracking_id=&amp;marketplace=amazon&amp;region=US&amp;asins=B002MUC0ZY&amp;show_border=true&amp;link_opens_in_new_window=true"></iframe></span></span>'
 			),
 			array(
 				'amazon',
@@ -1066,13 +1066,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'amazon',
 				'id=B00JGOMIP6;tld=it',
 				'',
-				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t=_"></iframe></span></span>'
+				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t="></iframe></span></span>'
 			),
 			array(
 				'amazon',
 				'id=B002MUC0ZY;tld=com',
 				'',
-				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=Com&amp;ad_type=product_link&amp;tracking_id=-20&amp;marketplace=amazon&amp;region=Com&amp;asins=B002MUC0ZY&amp;show_border=true&amp;link_opens_in_new_window=true"></iframe></span></span>'
+				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=Com&amp;ad_type=product_link&amp;tracking_id=&amp;marketplace=amazon&amp;region=Com&amp;asins=B002MUC0ZY&amp;show_border=true&amp;link_opens_in_new_window=true"></iframe></span></span>'
 			),
 			array(
 				'audiomack',
@@ -1207,16 +1207,22 @@ class Test extends PHPUnit_Framework_TestCase
 				'<iframe data-s9e-mediaembed="googleplus" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:240px;max-width:450px;width:100%" src="https://s9e.github.io/iframe/googleplus.min.html#106189723444098348646/posts/V8AojCoTzxV"></iframe>'
 			),
 			array(
+				'gist',
+				'foo/123',
+				'',
+				'<iframe data-s9e-mediaembed="gist" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="" src="https://s9e.github.io/iframe/gist.min.html#foo/123" style="border:0;height:180px;width:100%"></iframe>'
+			),
+			array(
 				'hudl',
 				'athlete=2067184;highlight=5721c090dfe23b2d68a2283b',
 				'',
 				'<span data-s9e-mediaembed="hudl" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.hudl.com/embed/athlete/2067184/highlights/5721c090dfe23b2d68a2283b" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
-				'gist',
-				'foo/123',
+				'imgur',
+				'id=jhEHi;type=album',
 				'',
-				'<iframe data-s9e-mediaembed="gist" allowfullscreen="" onload="var a=Math.random();window.addEventListener(\'message\',function(b){if(b.data.id==a)style.height=b.data.height+\'px\'});contentWindow.postMessage(\'s9e:\'+a,\'https://s9e.github.io\')" scrolling="" src="https://s9e.github.io/iframe/gist.min.html#foo/123" style="border:0;height:180px;width:100%"></iframe>'
+				'<iframe data-s9e-mediaembed="imgur" allowfullscreen="" onload="var b=Math.random();window.addEventListener(\'message\',function(a){a.data.id==b&amp;&amp;(style.height=a.data.height+\'px\',style.width=a.data.width+\'px\')});contentWindow.postMessage(\'s9e:\'+b,\'https://s9e.github.io\')" scrolling="no" style="border:0;height:450px;max-width:100%;width:568px" src="https://s9e.github.io/iframe/imgur.min.html#a/jhEHi"></iframe>'
 			),
 			array(
 				'kickstarter',
