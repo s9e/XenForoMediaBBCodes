@@ -6,7 +6,7 @@
 			top    = -50,
 			bottom = innerHeight + 100;
 
-		return (rect.top > top && rect.top < bottom) || (rect.bottom > top && rect.bottom < bottom);
+		return (rect.bottom > top && rect.top < bottom && rect.width);
 	}
 
 	function setFlag()
@@ -56,6 +56,7 @@
 
 	addEventListener('scroll', setFlag);
 	addEventListener('resize', setFlag);
+	addEventListener('click', setFlag);
 
 	setInterval(
 		function ()
