@@ -530,11 +530,6 @@ class Test extends PHPUnit_Framework_TestCase
 //				'dtYjVhdDr5492cyQTjVPDcM--Mg2rJj5'
 //			),
 			array(
-				'brightcove',
-				'http://link.brightcove.com/services/player/bcpid30183073001?bclid=0&bctid=624233815001',
-				'bckey=AQ%7E%7E%2CAAAABvb_NGE%7E%2CDMkZt2E6wO3dFlbHM7HTX1y1bVRDHLp_;bcpid=1065729157001;bctid=624233815001'
-			),
-			array(
 				'cbsnews',
 				'http://www.cbsnews.com/video/watch/?id=50156501n',
 				'50156501'
@@ -847,11 +842,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'stitcher',
 				'http://www.stitcher.com/podcast/panoply/wall-street-journal-tech-news-briefing-51309/e/50838946',
 				'eid=50838946;fid=5446'
-			),
-			array(
-				'teamcoco',
-				'http://teamcoco.com/video/serious-jibber-jabber-a-scott-berg-full-episode',
-				'73784'
 			),
 			array(
 				'tinypic',
