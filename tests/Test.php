@@ -905,11 +905,6 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'vk',
-				'http://vk.com/newmusicvideos?z=video-13895667_161988074',
-				'hash=de860a8e4fbe45c9;oid=-13895667;vid=161988074'
-			),
-			array(
-				'vk',
 				'http://vk.com/video_ext.php?oid=121599878&id=165723901&hash=e06b0878046e1d32',
 				'hash=e06b0878046e1d32;oid=121599878;vid=165723901'
 			),
