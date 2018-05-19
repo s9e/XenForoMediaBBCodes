@@ -1,6 +1,6 @@
 {
 	"require-dev": {
-		"s9e/text-formatter":     "dev-master",
-		"satooshi/php-coveralls": "*"
+		"s9e/text-formatter":          "dev-master",
+		"php-coveralls/php-coveralls": "*"
 	}
 }
