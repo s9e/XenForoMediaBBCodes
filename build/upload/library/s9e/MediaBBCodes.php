@@ -1502,7 +1502,7 @@ class s9e_MediaBBCodes
 	{
 		$vars += array('hash' => null, 'oid' => null, 'vid' => null);
 
-		$html='<span data-s9e-mediaembed="vk" style="display:inline-block;width:100%;max-width:607px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:59.308072%"><iframe allowfullscreen="" scrolling="no" src="//vk.com/video_ext.php?oid='.htmlspecialchars($vars['oid'],2).'&amp;id='.htmlspecialchars($vars['vid'],2).'&amp;hash='.htmlspecialchars($vars['hash'],2).'&amp;hd=1" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>';
+		$html='<span data-s9e-mediaembed="vk" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//vk.com/video_ext.php?oid='.htmlspecialchars($vars['oid'],2).'&amp;id='.htmlspecialchars($vars['vid'],2).'&amp;hash='.htmlspecialchars($vars['hash'],2).'&amp;hd=1" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>';
 
 		return $html;
 	}
