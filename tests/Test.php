@@ -514,16 +514,6 @@ class Test extends PHPUnit_Framework_TestCase
 //				'http://www.bbc.com/news/business-29149086',
 //				'av/business-29149086/alibaba-and-jack-ma-in-60-seconds'
 //			),
-			array(
-				'blab',
-				'https://blab.im/05b6ce88279f40798069bb6227a04fce',
-				'05b6ce88279f40798069bb6227a04fce'
-			),
-			array(
-				'blab',
-				'https://blab.im/about',
-				false
-			),
 //			array(
 //				'bleacherreport',
 //				'http://bleacherreport.com/articles/2415420-creating-a-starting-xi-of-the-most-overrated-players-in-world-football',
