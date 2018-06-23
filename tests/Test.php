@@ -1041,7 +1041,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'amazon',
 				'id=B00JGOMIP6;tld=it',
 				'',
-				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=FFFFFF&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;p=8&amp;l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t="></iframe></span></span>'
+				'<span data-s9e-mediaembed="amazon" style="display:inline-block;width:100%;max-width:120px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:200%"><iframe allowfullscreen="" scrolling="no" style="border:0;height:100%;left:0;position:absolute;width:100%" src="//ws-eu.assoc-amazon.com/widgets/cm?l=as1&amp;f=ifr&amp;asins=B00JGOMIP6&amp;o=29&amp;t="></iframe></span></span>'
 			),
 			array(
 				'amazon',
