@@ -182,7 +182,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 	 || $siteId === 'theguardian')
 	{
 		// Capture the PHP source for this template
-		$regexp = '(switch\\(\\$node->nodeName\\)\\{[^:]+:(.*?)break;)s';
+		$regexp = '(switch\\(\\$node->nodeName\\)\\{[^:]+:(.*?)break;case\'br\')s';
 
 		$configurator->rendering->getRenderer();
 		$source = file_get_contents($configurator->rendering->engine->lastFilepath);
