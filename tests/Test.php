@@ -651,11 +651,11 @@ class Test extends PHPUnit_Framework_TestCase
 //				'http://college.healthguru.com/content/video/watch/100502/handling-heartache',
 //				'RX'
 //			),
-			array(
-				'hudl',
-				'http://www.hudl.com/athlete/2067184/highlights/163744377',
-				'athlete=2067184;highlight=163744377'
-			),
+//			array(
+//				'hudl',
+//				'http://www.hudl.com/athlete/2067184/highlights/163744377',
+//				'athlete=2067184;highlight=163744377'
+//			),
 			array(
 				'hudl',
 				'http://www.hudl.com/v/CVmja',
