@@ -656,11 +656,11 @@ class Test extends PHPUnit_Framework_TestCase
 //				'http://www.hudl.com/athlete/2067184/highlights/163744377',
 //				'athlete=2067184;highlight=163744377'
 //			),
-			array(
-				'hudl',
-				'http://www.hudl.com/v/CVmja',
-				'athlete=2122944;highlight=5721c090dfe23b2d68a2283b'
-			),
+//			array(
+//				'hudl',
+//				'http://www.hudl.com/v/CVmja',
+//				'athlete=2122944;highlight=5721c090dfe23b2d68a2283b'
+//			),
 			array(
 				'hulu',
 				'http://www.hulu.com/watch/484180',
