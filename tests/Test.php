@@ -574,11 +574,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'https://www.facebook.com/ign/videos/10153762113196633/',
 				'id=10153762113196633;type=video;user=ign'
 			),
-			array(
-				'foratv',
-				'http://fora.tv/2009/07/30/Marijuana_Economics',
-				'9677'
-			),
 //			array(
 //				'gametrailers',
 //				'http://www.gametrailers.com/videos/view/pop-fiction/102300-Metal-Gear-Solid-3-Still-in-a-Dream',
@@ -700,12 +695,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'internetarchive',
 				'https://archive.org/details/Olympics2002_2',
 				'height=240;id=Olympics2002_2;width=320'
-			),
-			array(
-				'khl',
-				'http://video.khl.ru/quotes/251257',
-				'(^free_\\w+_hd/q251257/\\w+/\\d+$)',
-				'assertRegexp'
 			),
 			array(
 				'kickstarter',
