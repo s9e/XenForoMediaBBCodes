@@ -142,6 +142,7 @@ foreach (glob($sitesDir . '/*.xml') as $siteFile)
 
 	$configurator->tags->clear();
 	$template = (string) $configurator->MediaEmbed->add($siteId)->template;
+	$template = preg_replace('( data-s9e-livepreview-[-\\w]+=".*?")', '', $template);
 
 	$config = array(
 		KEY_HTML  => null,
