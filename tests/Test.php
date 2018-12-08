@@ -656,11 +656,11 @@ class Test extends PHPUnit_Framework_TestCase
 //				'http://www.hudl.com/v/CVmja',
 //				'athlete=2122944;highlight=5721c090dfe23b2d68a2283b'
 //			),
-			array(
-				'hulu',
-				'http://www.hulu.com/watch/484180',
-				'zPFCgxncn97IFkqEnZ-kRA'
-			),
+//			array(
+//				'hulu',
+//				'http://www.hulu.com/watch/484180',
+//				'zPFCgxncn97IFkqEnZ-kRA'
+//			),
 			array(
 				'imgur',
 				'http://imgur.com/a/9UGCL',
@@ -1139,13 +1139,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'gfycat',
 				'height=338;id=SereneIllfatedCapybara;width=600',
 				'',
-				'<span data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:600px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.333333333333%"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/SereneIllfatedCapybara" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:600px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:63.666666666667%;padding-bottom:calc(56.333333333333% + 44px)"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/ifr/SereneIllfatedCapybara" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'gfycat',
 				'id=SereneIllfatedCapybara',
 				'',
-				'<span data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/iframe/SereneIllfatedCapybara" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="gfycat" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:63.125%;padding-bottom:calc(56.25% + 44px)"><iframe allowfullscreen="" scrolling="no" src="//gfycat.com/ifr/SereneIllfatedCapybara" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'gifs',
