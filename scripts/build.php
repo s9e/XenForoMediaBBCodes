@@ -974,7 +974,9 @@ exec('kzip -r -y ../releases/XenForoMediaBBCodes-' . $version . '.zip addon-s9e.
 exec('advzip -z4 ../releases/XenForoMediaBBCodes-' . $version . '.zip');
 
 $readme =
-'[center][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][/center]
+'[B]This add-on is for XenForo 1.x. For XenForo 2.x, install [URL=https://xenforo.com/community/resources/s9e-media-sites.5973/]the s9e/MediaSites add-on[/URL].[/B]
+
+[center][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6P6985GT2DLGL"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ABGFV5AGE98AG"][img]https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif[/img][/url][/center]
 
 This pack contains the definitions for [b]' . count($sitenames) . ' media sites[/b]: ' . implode(', ', $sitenames) . '. The complete list with examples of supported URLs can be found on [url="http://s9etextformatter.readthedocs.io/Plugins/MediaEmbed/Sites/"]this page[/url].
 
