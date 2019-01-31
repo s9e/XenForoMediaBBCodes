@@ -839,8 +839,8 @@ class Test extends PHPUnit_Framework_TestCase
 //			),
 			array(
 				'tumblr',
-				'http://mrbenvey.tumblr.com/post/104191225637',
-				'did=5f3b4bc6718317df9c2b1e77c20839ab94f949cd;id=104191225637;key=uFhWDPKj-bGU0ZlDAnUyxg;name=mrbenvey'
+				'https://staff.tumblr.com/post/180624227620/',
+				'did=0812d9593fe9183968a4da76d8c4528d52324f67;id=180624227620;key=r_BTLFg8QzTPUMVSbe3vbg;name=staff'
 			),
 			array(
 				'twitch',
