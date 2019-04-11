@@ -1,7 +1,7 @@
 #!/bin/sh
 cd $(dirname $(dirname $(realpath $0)))
 composer up s9e/text-formatter
-phpunit --no-coverage || exit
+vendor/bin/phpunit --no-coverage || exit
 rm -f releases/*-dev*
 php scripts/build.php "$@"
 php scripts/generateTagsPage.php

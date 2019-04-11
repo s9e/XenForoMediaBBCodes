@@ -1,6 +1,7 @@
 {
 	"require-dev": {
 		"s9e/text-formatter":          "dev-master",
-		"php-coveralls/php-coveralls": "*"
+		"php-coveralls/php-coveralls": "*",
+		"phpunit/phpunit":             "^5.7"
 	}
 }
