@@ -818,6 +818,9 @@ class s9e_MediaBBCodes
 			}
 		}
 
+		// Re-apply filters
+		self::applyFilters($siteId, $vars);
+
 		// Prepare the HTML
 		$methodName = 'render' . ucfirst($siteId);
 		if (method_exists(__CLASS__, $methodName))
@@ -951,6 +954,11 @@ class s9e_MediaBBCodes
 			foreach ($callbacks as $callback)
 			{
 				$vars[$varName] = call_user_func($callback, $vars[$varName]);
+				if ($vars[$varName] === false)
+				{
+					unset($vars[$varName]);
+					break;
+				}
 			}
 		}
 	}
