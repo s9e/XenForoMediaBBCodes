@@ -13,7 +13,7 @@ else
 	$url .= 'new/.json?';
 }
 
-$url .= 'limit=35';
+$url .= 'limit=500';
 
 $response = json_decode(file_get_contents($url), true);
 foreach ($response['data']['children'] as $child)

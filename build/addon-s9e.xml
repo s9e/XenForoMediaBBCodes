@@ -1,4 +1,4 @@
-<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="201904110" version_string="20190411" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
+<addon addon_id="s9e" title="s9e Media Pack" url="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" version_id="202004149" version_string="20200415-dev" install_callback_class="s9e_MediaBBCodes" install_callback_method="install" uninstall_callback_class="s9e_MediaBBCodes" uninstall_callback_method="uninstall">
   <bb_code_media_sites/>
   <phrases>
     <phrase title="option_group_s9e" version_id="1" version_string="1">s9e Media Pack</phrase>
@@ -73,7 +73,7 @@ $0</replace>
     </modification>
     <modification action="str_replace" description="Adds a link back to s9e Media Pack" enabled="1" execution_order="10" modification_key="s9e_footer" template="footer">
       <find>{xen:phrase extra_copyright}</find>
-      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack v20190411"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
+      <replace> | &lt;a class="concealed" href="https://xenforo.com/community/resources/s9e-media-bbcodes-pack.2476/" title="Media BBCodes provided by s9e Media Pack v20200415-dev"&gt;Media embeds by s9e&lt;/a&gt;$0</replace>
     </modification>
     <modification action="preg_replace" description="Defers the loading of embedded content" enabled="0" execution_order="10" modification_key="s9e_lazy_loading" template="ad_thread_view_below_messages">
       <find>(^)</find>
@@ -113,7 +113,7 @@ hide=I do not want to display a link to this add-on</edit_format_params>
       <relation group_id="s9e" display_order="1"/>
     </option>
     <option option_id="s9e_media_tags" edit_format="checkbox" data_type="array" can_backup="1" validation_class="s9e_MediaBBCodes" validation_method="updateTags">
-      <default_value>a:25:{s:3:".bg";i:1;s:3:".ca";i:1;s:3:".cn";i:1;s:3:".nl";i:1;s:3:".ru";i:1;s:3:".tr";i:1;s:8:"blogging";i:1;s:13:"documentaries";i:1;s:9:"documents";i:1;s:13:"entertainment";i:1;s:11:"fundraising";i:1;s:6:"gaming";i:1;s:6:"gossip";i:1;s:6:"health";i:1;s:6:"images";i:1;s:13:"livestreaming";i:1;s:4:"misc";i:1;s:6:"movies";i:1;s:5:"music";i:1;s:4:"news";i:1;s:8:"podcasts";i:1;s:13:"presentations";i:1;s:6:"social";i:1;s:6:"sports";i:1;s:6:"videos";i:1;}</default_value>
+      <default_value>a:25:{s:3:".bg";i:1;s:3:".ca";i:1;s:3:".cn";i:1;s:3:".nl";i:1;s:3:".ru";i:1;s:3:".tr";i:1;s:8:"blogging";i:1;s:13:"documentaries";i:1;s:9:"documents";i:1;s:13:"entertainment";i:1;s:11:"fundraising";i:1;s:6:"gaming";i:1;s:6:"gossip";i:1;s:6:"images";i:1;s:13:"livestreaming";i:1;s:4:"misc";i:1;s:6:"movies";i:1;s:5:"music";i:1;s:4:"news";i:1;s:7:"podcast";i:1;s:8:"podcasts";i:1;s:13:"presentations";i:1;s:6:"social";i:1;s:6:"sports";i:1;s:6:"videos";i:1;}</default_value>
       <edit_format_params>.bg=.bg
 .ca=.ca
 .cn=.cn
@@ -127,13 +127,13 @@ entertainment=Entertainment
 fundraising=Fundraising
 gaming=Gaming
 gossip=Gossip
-health=Health
 images=Images
 livestreaming=Livestreaming
 misc=Misc
 movies=Movies
 music=Music
 news=News
+podcast=Podcast
 podcasts=Podcasts
 presentations=Presentations
 social=Social

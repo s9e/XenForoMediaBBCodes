@@ -716,16 +716,16 @@ class Test extends PHPUnit_Framework_TestCase
 				'http://bunkerbuddies.libsyn.com/interstellar-w-brandie-posey',
 				'3521244'
 			),
-			array(
-				'livecap',
-				'https://www.livecap.tv/s/esl_sc2/uZoEz6RR1eA',
-				'channel=esl_sc2;id=uZoEz6RR1eA'
-			),
-			array(
-				'livecap',
-				'https://www.livecap.tv/t/riotgames/uLxUzBTBs7u',
-				'channel=riotgames;id=uLxUzBTBs7u'
-			),
+//			array(
+//				'livecap',
+//				'https://www.livecap.tv/s/esl_sc2/uZoEz6RR1eA',
+//				'channel=esl_sc2;id=uZoEz6RR1eA'
+//			),
+//			array(
+//				'livecap',
+//				'https://www.livecap.tv/t/riotgames/uLxUzBTBs7u',
+//				'channel=riotgames;id=uLxUzBTBs7u'
+//			),
 //			array(
 //				'livestream',
 //				'http://livestream.com/ccscsl/USChessChampionships/videos/83267610',
@@ -739,7 +739,7 @@ class Test extends PHPUnit_Framework_TestCase
 			array(
 				'msnbc',
 				'http://www.msnbc.com/ronan-farrow-daily/watch/thats-no-moon--300512323725',
-				'n_farrow_moon_140709_257794'
+				'mmvo300512323725'
 			),
 			array(
 				'natgeovideo',
@@ -826,11 +826,6 @@ class Test extends PHPUnit_Framework_TestCase
 				'stitcher',
 				'http://www.stitcher.com/podcast/panoply/wall-street-journal-tech-news-briefing-51309/e/50838946',
 				'eid=50838946;fid=5446'
-			),
-			array(
-				'tinypic',
-				'http://tinypic.com/player.php?v=29x86j9&s=8',
-				'id=29x86j9;s=8'
 			),
 //			array(
 //				'traileraddict',
@@ -1079,7 +1074,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'cnn',
 				'tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn',
 				'',
-				'<span data-s9e-mediaembed="cnn" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//edition.cnn.com/video/api/embed.html#/video/tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="cnn" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//fave.api.cnn.io/v1/fav/?video=tv/2015/06/09/airplane-yoga-rachel-crane-ts-orig.cnn&amp;customer=cnn&amp;edition=international&amp;env=prod" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'democracynow',
@@ -1201,12 +1196,12 @@ class Test extends PHPUnit_Framework_TestCase
 				'',
 				'<span data-s9e-mediaembed="kickstarter" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//www.kickstarter.com/projects/1869987317/wish-i-was-here-1/widget/video.html" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
-			array(
-				'livecap',
-				'channel=esl_sc2;id=uZoEz6RR1eA',
-				'',
-				'<span data-s9e-mediaembed="livecap" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://www.livecap.tv/s/embed/esl_sc2/uZoEz6RR1eA" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
-			),
+//			array(
+//				'livecap',
+//				'channel=esl_sc2;id=uZoEz6RR1eA',
+//				'',
+//				'<span data-s9e-mediaembed="livecap" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="https://www.livecap.tv/s/embed/esl_sc2/uZoEz6RR1eA" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+//			),
 			array(
 				'livestream',
 				'account_id=12014794;event_id=3788876;video_id=77576437',
@@ -1277,13 +1272,13 @@ class Test extends PHPUnit_Framework_TestCase
 				'spotify',
 				'path=user%2Fozmoetr%2Fplaylist%2F4yRrCWNhWOqWZx5lmFqZvt',
 				'',
-				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:100%"><iframe allow="encrypted-media" allowfullscreen="" scrolling="no" src="https://open.spotify.com/embed/user/ozmoetr/playlist/4yRrCWNhWOqWZx5lmFqZvt" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:320px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:125%;padding-bottom:calc(100% + 80px)"><iframe allow="encrypted-media" allowfullscreen="" scrolling="no" src="https://open.spotify.com/embed/user/ozmoetr/playlist/4yRrCWNhWOqWZx5lmFqZvt" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'spotify',
 				'path=album%2F5OSzFvFAYuRh93WDNCTLEz',
 				'',
-				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:400px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:100%"><iframe allow="encrypted-media" allowfullscreen="" scrolling="no" src="https://open.spotify.com/embed/album/5OSzFvFAYuRh93WDNCTLEz" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="spotify" style="display:inline-block;width:100%;max-width:320px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:125%;padding-bottom:calc(100% + 80px)"><iframe allow="encrypted-media" allowfullscreen="" scrolling="no" src="https://open.spotify.com/embed/album/5OSzFvFAYuRh93WDNCTLEz" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'ted',
@@ -1343,7 +1338,7 @@ class Test extends PHPUnit_Framework_TestCase
 				'xboxclips',
 				'id=508269a4-6f05-4b3e-a66a-fe4e91e92000;user=Soulshifted',
 				'',
-				'<span data-s9e-mediaembed="xboxclips" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//xboxclips.com/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000/embed" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
+				'<span data-s9e-mediaembed="xboxclips" style="display:inline-block;width:100%;max-width:560px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" scrolling="no" src="//gameclips.io/Soulshifted/508269a4-6f05-4b3e-a66a-fe4e91e92000/embed" style="border:0;height:100%;left:0;position:absolute;width:100%"></iframe></span></span>'
 			),
 			array(
 				'xboxdvr',
