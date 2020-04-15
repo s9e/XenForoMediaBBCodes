@@ -603,7 +603,7 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'globalnews',
-				'https://globalnews.ca/video/rd/350539843530/',
+				'https://globalnews.ca/video/1647385/mark-channels-his-70s-look/',
 				'1647385'
 			),
 			array(
@@ -713,8 +713,8 @@ class Test extends PHPUnit_Framework_TestCase
 			),
 			array(
 				'libsyn',
-				'http://bunkerbuddies.libsyn.com/interstellar-w-brandie-posey',
-				'3521244'
+				'https://pexlives.libsyn.com/the-ark-in-space-ep4-commentary-with-el-and-jack',
+				'8994194'
 			),
 //			array(
 //				'livecap',
@@ -822,11 +822,11 @@ class Test extends PHPUnit_Framework_TestCase
 				'https://play.spotify.com/album/5OSzFvFAYuRh93WDNCTLEz',
 				'album/5OSzFvFAYuRh93WDNCTLEz'
 			),
-			array(
-				'stitcher',
-				'http://www.stitcher.com/podcast/panoply/wall-street-journal-tech-news-briefing-51309/e/50838946',
-				'eid=50838946;fid=5446'
-			),
+//			array(
+//				'stitcher',
+//				'http://www.stitcher.com/podcast/panoply/wall-street-journal-tech-news-briefing-51309/e/50838946',
+//				'eid=50838946;fid=5446'
+//			),
 //			array(
 //				'traileraddict',
 //				'http://www.traileraddict.com/muppets-most-wanted/super-bowl-tv-spot',
