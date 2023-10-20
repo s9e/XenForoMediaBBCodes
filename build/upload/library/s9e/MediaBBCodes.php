@@ -1314,9 +1314,9 @@ class s9e_MediaBBCodes
 
 	public static function renderFacebook($vars)
 	{
-		$vars += array('id' => null, 'pfbid' => null, 'type' => null);
+		$vars += array('id' => null, 'pfbid' => null, 'type' => null, 'user' => null);
 
-		$html='<iframe data-s9e-mediaembed="facebook" allowfullscreen="" loading="lazy" onload="let c=new MessageChannel;c.port1.onmessage=e=&gt;this.style.height=e.data+\'px\';this.contentWindow.postMessage(\'s9e:init\',\'*\',[c.port2])" scrolling="no" style="border:0;height:360px;max-width:640px;width:100%" src="https://s9e.github.io/iframe/2/facebook.min.html#';if(isset($vars['id']))$html.=htmlspecialchars($vars['type'].$vars['id'],2);else$html.='pfbid'.htmlspecialchars($vars['pfbid'],2);$html.='"></iframe>';
+		$html='<iframe data-s9e-mediaembed="facebook" allowfullscreen="" loading="lazy" onload="let c=new MessageChannel;c.port1.onmessage=e=&gt;this.style.height=e.data+\'px\';this.contentWindow.postMessage(\'s9e:init\',\'*\',[c.port2])" scrolling="no" style="border:0;height:360px;max-width:640px;width:100%" src="https://s9e.github.io/iframe/2/facebook.min.html#';if(isset($vars['id'])){if(isset($vars['user']))$html.=htmlspecialchars($vars['user'],2).'/';else$html.=htmlspecialchars($vars['type'],2);$html.=htmlspecialchars($vars['id'],2);}else$html.='pfbid'.htmlspecialchars($vars['pfbid'],2);$html.='"></iframe>';
 
 		return $html;
 	}

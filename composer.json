@@ -1,6 +1,6 @@
 {
 	"require-dev": {
 		"s9e/text-formatter":          "dev-master",
-		"phpunit/phpunit":             "*"
+		"phpunit/phpunit":             "^9.5"
 	}
 }
