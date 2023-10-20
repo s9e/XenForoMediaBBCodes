@@ -39,6 +39,7 @@ $configurator->rendering->engine->enableQuickRenderer = false;
 $configurator->rendering->engine->forceEmptyElements  = false;
 $configurator->rendering->engine->useEmptyElements    = false;
 $configurator->rendering->engine->serializer->branchTableThreshold = PHP_INT_MAX;
+$configurator->rendering->engine->serializer->convertor->features['php80'] = false;
 $configurator->MediaEmbed->sitesDir = $sitesDir;
 
 // Load the PHP file and remove the renderers
